@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+<script src="1.js"></script>
+<script>
+    new Ajax().ajax({
+        type: 'get',
+        url: 'ajax.php?c=123',      // 如果是get方式并且url包含参数，其参数会被data替代
+        // data: 'c=456',           // data参数格式可以为字符串或对象
+        // data: {c: 456},
+        dataType: 'json',
+        async: false,
+        success: function(data, status, xhr){
+            console.log(data);
+        },
+        error: function(xhr, status){
+            console.log(xhr);
+        }
+    });
+    new Ajax().ajax({
+        type: 'post',
+        url: 'ajax.php?c=123',      // 如果是get方式并且url包含参数，其参数会被data替代
+        data: 'c=456',              // data参数格式可以为字符串或对象
+        // data: {c: 456},
+        dataType: 'text',
+        success: function(data, status, xhr){
+            console.log(data);
+        },
+        error: function(xhr, status){
+            console.log(xhr);
+        }
+    });
+</script>
+</body>
+</html>

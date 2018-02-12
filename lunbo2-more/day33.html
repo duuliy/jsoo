@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 微软雅黑;
+        }
+        #banner{
+            /*width: 100%;*/
+            height: 480px;
+            margin-top: 50px;
+            margin-left: 250px;
+        }
+        figure{
+            /*position: relative;*/
+            width: 800px;
+            height: 480px;
+            position: absolute;
+        }
+        figure>img{
+            position: absolute;
+            /*top: 0;*/
+            /*left: 0;*/
+            width: 100%;
+            /*z-index: 989;*/
+            height: 100%;
+        }
+        /*按钮*/
+        #dianji{
+            margin-top: 160px;
+            position: absolute;
+            margin-left: 350px;
+        }
+        .btn1{
+            position: absolute;
+            z-index: 990;
+            background-color: black;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+
+        }
+        .btn2{
+            position: absolute;
+            z-index: 990;
+            background-color: black;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 40px;
+        }
+        .btn3{
+            position: absolute;
+            z-index: 990;
+            background-color: black;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 80px;
+        }
+        .btn4{
+            position: absolute;
+            z-index: 990;
+            background-color: black;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 120px;
+        }
+        .btn5{
+            position: absolute;
+            z-index: 990;
+            background-color: black;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 160px;
+        }
+    </style>
+</head>
+<body>
+<div id="dianji">
+    <div class="btn btn1"></div>
+    <div class="btn btn2"></div>
+    <div class="btn btn3"></div>
+    <div class="btn btn4"></div>
+    <div class="btn btn5"></div>
+    <div class="btn btn6"></div>
+</div>
+<div id="banner">
+    <figure>
+        <img src="images/banner1.jpg" ondragstart="return false;" alt=""/>
+        <figcaption></figcaption>
+    </figure>
+    <figure>
+        <img src="images/banner2.jpg" ondragstart="return false;" alt=""/>
+        <figcaption></figcaption>
+    </figure>
+    <figure>
+        <img src="images/banner3.jpg" ondragstart="return false;" alt=""/>
+        <figcaption></figcaption>
+    </figure>
+    <figure>
+        <img src="images/banner4.jpg" ondragstart="return false;" alt=""/>
+        <figcaption></figcaption>
+    </figure>
+    <figure>
+        <img src="images/banner5.jpg" ondragstart="return false;" alt=""/>
+        <figcaption></figcaption>
+    </figure>
+</div>
+<script src="jquery-2.1.3.js"></script>
+<script src="day3.js"></script>
+<script>
+    window.onload = slide.init ({
+        toggle:"fade"      //horizontal(水平)，vertical（垂直），fade（透明度）
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery-2.1.3.js"></script>
+<script>
+    var mydata=[
+        {stu_name:"张三",stu_age:15},
+        {stu_name:"李四",stu_age:25},
+        {stu_name:"王五",stu_age:55},
+    ];
+    var chdata=['name','age'];
+    function changdo(mydata,chdata) {
+        var arr=[];
+        if(typeof mydata==="object"){
+            for(var i=0;i<mydata.length;i++){
+                var obj = {};
+                var myda = Object.keys(mydata[i]);
+//                console.log(myda)
+//                console.log(mydata[i].stu_name)
+                for(var k in myda){
+                    obj[chdata[k]] = mydata[i][myda[k]];
+//                    console.log(obj[chdata[k]])
+                }
+                arr.push(obj);
+            }
+        }
+//        console.log(arr)
+        return arr
+    }
+    changdo(mydata,chdata)
+</script>
+</body>
+</html>
