@@ -1,0 +1,19 @@
+/*垂直居中*/
+.verticalAlign{ vertical-align:middle; display:inline-block; height:100%; margin-left:-1px;}
+
+.xcConfirm .xc_layer{position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #666666; opacity: 0.5; z-index: 2147000000;}
+.xcConfirm .popBox{position: fixed; left: 50%; top: 50%; background-color: #ffffff; z-index: 2147000001; width: 276px; height: 154px; margin-left: -140px; margin-top: -80px; color: black;}
+.xcConfirm .popBox .ttBox{height: 30px; line-height: 30px; padding: 6px 15px 6px 24px; border-bottom: solid 1px #eef0f1;background-color: #fafafa
+}
+.xcConfirm .popBox .ttBox .tt{font-size: 14px; display: block; float: left; height: 30px; position: relative;}
+.xcConfirm .popBox .ttBox .clsBtn{display: block; cursor: pointer; width: 12px; height: 12px; position: absolute; top: 15px; right: 15px; background: url(../img/chahao.png) no-repeat;}
+.xcConfirm .popBox .txtBox{ height: 65px; margin-left: 24px; overflow: hidden;}
+/*.xcConfirm .popBox .txtBox .bigIcon{float: left; margin-right: 20px; width: 48px; height: 48px; background-image: url(../img/icons.png); background-repeat: no-repeat; background-position: 48px 0;}*/
+.xcConfirm .popBox .txtBox p{ height: 84px; margin-top: 16px; overflow-x: hidden; overflow-y: auto;}
+.xcConfirm .popBox .txtBox p input{width: 160px; height: 16px; border: solid 1px #eef0f1; font-size: 14px; margin-top: 6px;}
+/*.xcConfirm .popBox .btnArea{border-top: solid 1px #eef0f1;}*/
+.xcConfirm .popBox .btnGroup{float: right;}
+.xcConfirm .popBox .btnGroup .sgBtn{margin-top: 0px; margin-right: 15px;}
+.xcConfirm .popBox .sgBtn{display: block; cursor: pointer; float: left; width: 60px; height: 30px; line-height: 30px; text-align: center; color: #FFFFFF; border-radius: 2px;}
+.xcConfirm .popBox .sgBtn.ok{background-color: #0095d9; color: #FFFFFF;font-size: 14px}
+.xcConfirm .popBox .sgBtn.cancel{background-color: #546a79; color: #FFFFFF;}
