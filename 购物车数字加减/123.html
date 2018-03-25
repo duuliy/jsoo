@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input[type=number] {
+            -moz-appearance:textfield;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .min{
+            width: 26px;
+            height: 26px;
+            background-color: #f9f9f9;
+            border:1px solid #d6d6d6;
+            text-align: center;
+            display: inline-block;
+        }
+        .add{
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            background-color: #f9f9f9;
+            border:1px solid #d6d6d6;
+            text-align: center;
+        }
+        .text_box{
+            height: 24px;
+            width: 56px;
+        }
+    </style>
+</head>
+<body>
+<table id="tab">
+    <tr>
+        <td>
+            <span>单价:</span><span class="price">50.00</span>
+            <input  name="" type="button" value="-" />
+            <div class="min">
+                <img src="images/webCert_Consult/reduce.png" alt="">
+            </div>
+            <input class="text_box" name="" type="number" value="" placeholder="1"/>
+            <div class="add">
+                <img src="images/webCert_Consult/icon10.png" alt="">
+            </div>
+            <input class="add" name="" type="button" value="+" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>单价:</span><span class="price">20.00</span>
+            <input class="min" name="" type="button" value="-" />
+            <input class="text_box" name="" type="number" value="" placeholder="0"/>
+            <input class="add" name="" type="button" value="+" />
+        </td>
+    </tr>
+</table>
+<p>总价：<label id="total"></label></p>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script>
+    $(function() {
+        $(".add").click(function() {
+            var t = $(this).parent().find('input[class*=text_box]');
+            if(t.val()==""||undefined||null){
+                t.val(0);
+            }
+            t.val(parseInt(t.val()) + 1)
+            setTotal();
+        })
+        $(".min").click(function() {
+            var t = $(this).parent().find('input[class*=text_box]');
+            if(t.val()==""||undefined||null){
+                t.val(0);
+            }
+            t.val(parseInt(t.val()) - 1)
+            if(parseInt(t.val()) < 0) {
+                t.val(0);
+            }
+            setTotal();
+        })
+        $(".text_box").keyup(function(){
+            var t = $(this).parent().find('input[class*=text_box]');
+            if(parseInt(t.val())==""||undefined||null || isNaN(t.val())) {
+                t.val(0);
+            }
+            setTotal();
+        })
+        function setTotal() {
+            var s = 0;
+            $("#tab td").each(function() {
+                var t = $(this).find('input[class*=text_box]').val();
+                var p = $(this).find('span[class*=price]').text();
+                if(parseInt(t)==""||undefined||null || isNaN(t) || isNaN(parseInt(t))){
+                    t=0;
+                }
+                s += parseInt(t) * parseFloat(p);
+            });
+            $("#total").html(s.toFixed(2));
+        }
+        setTotal();
+    })
+</script>
+</body>
+</html>

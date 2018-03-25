@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>星星评价</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style type="text/css">
+        .xingbox{clear: both;padding-top:10px;text-align: center;color: #999999;padding-top: 5px;width: 100%;}
+        .xingbox .starscore{
+            margin: 0 auto 0 15%;
+            width: 100%;
+        }
+        .xingbox .starscore i {
+                width: 10%;
+                height:30px;
+                display: block;
+                background: url("appraise_star@2x.png") no-repeat; 
+                float: left;
+                background-size:30px;
+                display: inline;
+                margin:0px 2% 0 2%;
+            }
+        .xingbox .starscore i.onred {
+            background: url("appraise_star_fill@2x.png") no-repeat; 
+            background-size:30px;
+        }
+        .text{clear: both;padding-top: 15px;}
+    </style>
+</head>
+<body>
+    <div class="xingbox">
+        <div class="starscore sstar" data-score="5">
+            <i class="onred" data-index="4" ></i>
+            <i data-index="1"></i>
+            <i data-index="2"></i>
+            <i data-index="3"></i>
+            <i data-index="4"></i>
+        </div>
+        <p class="text"></p>
+    </div>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">
+        $(function(){$(".starscore").BindStars();})
+    </script>
+</body>
+</html>
