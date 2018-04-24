@@ -1,0 +1,23 @@
+<!DOCTYPE  HTML>
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>time</title>
+
+    <script type="text/javascript">
+        //通过javascript的日期对象来得到当前的日期，并输出。
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        var day = date.getDate();
+        var hour =date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+
+        document.write("今天是:"+year+"年/"+month+"月/"+day+"日"+"星期"+day+"  "+hour+":"+minute+":"+second);
+
+    </script>
+</head>
+<body>
+</body>
+</html>
