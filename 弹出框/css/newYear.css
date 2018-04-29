@@ -1,0 +1,258 @@
+#newYear img {
+    max-width: initial;
+}
+#newYear_warp img{
+    max-width: initial;
+}
+.newYear_left{
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    margin-top: -338px;
+    margin-left: -833px;
+}
+.newYear_right{
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    margin-top: -338px;
+    margin-left: 630px;
+}
+#newYear_warp{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom:0px;
+    z-index: 999;
+    /*display: none;*/
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+}
+.newYear_middle{
+
+}
+.newYear_imgone{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    cursor: pointer;
+    margin-top: -210px;
+    margin-left: 320px;
+}
+.newYear_imgt{
+    position: absolute;
+    top: 50%;
+    transition: transform .5s;
+    /*animation:mymove_F .3s infinite;*/
+    /*-webkit-animation:mymove_F .3s infinite; !*Safari and Chrome*!*/
+    /*-moz-animation:mymove_F .3s infinite;*/
+    left: 50%;
+    z-index: 999;
+    margin-top: -380px;
+    margin-left: -220px;
+}
+.newYear_imgtit{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    margin-top: -48px;
+    margin-left: -110px;
+}
+.newYear_imgtwo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: .5s linear;
+    animation:mymove_C 2s infinite;
+    transform-origin:100% 0%;
+    margin-top: -158px;
+    margin-left: -325px;
+ }
+.newYear_imgthree{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -258px;
+    margin-left: -340px;
+}
+.newYear_imgfour{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: .5s linear;
+    animation:mymove_D 2s infinite;
+    transform-origin:100% 0%;
+    margin-top: -148px;
+    margin-left: 275px;
+}
+.newYear_imgfive{
+    width:230px;
+    height:185px;
+    background-image: url("../images/Newyear/leo01.png");
+    position:absolute;
+    animation:mymove 1s infinite;
+    -webkit-animation:mymove 1s infinite; /*Safari and Chrome*/
+    -moz-animation:mymove 1s infinite;
+    top: 50%;
+    left: 50%;
+    margin-top: 48px;
+    margin-left: 115px;
+}
+
+
+@keyframes mymove
+{
+    85% {
+        background-image: url("../images/Newyear/leo01.png");
+    }
+    100% {
+        background-image: url("../images/Newyear/leo02.png");
+    }
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+    85% {
+        background-image: url("../images/Newyear/leo01.png");
+    }
+    100%  {
+        background-image: url("../images/Newyear/leo02.png");
+    }
+}
+
+@-moz-keyframes mymove /*Safari and Chrome*/
+{
+    85% {
+        background-image: url("../images/Newyear/leo01.png");
+    }
+    100% {
+        background-image: url("../images/Newyear/leo02.png");
+    }
+}
+
+/*@keyframes mymove_F*/
+/*{*/
+    /*85% {*/
+        /*margin-left: -222px;*/
+    /*}*/
+    /*100% {*/
+        /*margin-left: -220px;*/
+    /*}*/
+/*}*/
+
+
+@keyframes mymove_C
+{
+    50% {
+        transform:rotate(3deg);
+    }
+    100% {
+
+    }
+}
+@-webkit-keyframes mymove_C /*Safari and Chrome*/
+{
+    50% {
+        transform:rotate(3deg);
+    }
+    100% {
+
+    }
+}
+
+@-moz-keyframes mymove_C /*Safari and Chrome*/
+{
+    50% {
+        transform:rotate(3deg);
+    }
+    100% {
+
+    }
+}
+@keyframes mymove_D
+{
+    50% {
+        transform:rotate(4deg);
+    }
+    100% {
+        /*transform:rotate(3deg);*/
+    }
+}
+@-webkit-keyframes mymove_D /*Safari and Chrome*/
+{
+    50% {
+        transform:rotate(4deg);
+    }
+    100% {
+        /*transform:rotate(3deg);*/
+    }
+}
+
+@-moz-keyframes mymove_D /*Safari and Chrome*/
+{
+    50% {
+        transform:rotate(4deg);
+    }
+    100% {
+        /*transform:rotate(3deg);*/
+    }
+}
+/*文字*/
+.newYear_imgsix{
+    position: absolute;
+    z-index: 9999;
+    margin-left: 170px;
+    margin-top: 3px;
+    height: 104px;
+    width: 10px;
+    top: 50%;
+    left: 50%;
+}
+.content_3{
+    position: absolute;
+    z-index: 9999;
+    margin-left: -145px;
+    top: 50%;
+    left: 50%;
+    float:left;
+    width: 320px;
+    font-size: 12px;
+    line-height: 19px;
+}
+.content_3 p{
+    font-size: 12px;
+    color: #781710!important;
+}
+.content_3{height:113px;
+    /*border:1px dashed #26beff; */
+    padding:0 10px; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;}
+/*.content_3 p:nth-child(3n+0){color:#26beff;}*/
+/*h2{font-size:22px; line-height:25px; font-weight:normal; color:#26beff; margin:10px 0;}*/
+/*h3{font-size:26px; line-height:30px; font-weight:normal; color:#777; margin:10px 0;}*/
+.mCustomScrollBox .mCSB_draggerContainer{
+    /*display: none;*/
+}
+.mCustomScrollBox:hover .mCSB_draggerContainer{
+    display: block;
+}
+.mCSB_dragger_bar{
+    /*width: 8px;*/
+    /*height: 30px;*/
+    /*background-color: white;*/
+    /*background: url("img/scrollicon.png");*/
+    display: none;
+}
+.mCSB_dragger{
+    width: 5px;
+    height: 24px;
+    /*background-color: white;*/
+    background: url("../images/Newyear/scrollicon.png");
+}
+.mCSB_draggerContainer{
+    width: 12px;
+}
