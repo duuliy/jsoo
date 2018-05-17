@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3d旋转木马轮播</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+        .section{
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            margin: auto;
+            perspective: 10000px;
+            transform-origin: 50% 50%;
+            cursor: pointer;
+        }
+        .img-box{
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform .5s ease-in-out;
+        }
+        img{
+            width: 300px;
+            height: 300px;
+            display: block;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="section">
+    <div class="img-box" id="img-box">
+        <img src="milk.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="1s.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="2.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="mildk.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="1.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="2g.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="milk.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="1g.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+        <img src="2g.jpg" alt="" oncontextmenu="return false;" onselectstart="return false;" >
+    </div>
+</div>
+</body>
+<script>
+    window.onload = function(){
+        var imgs = document.querySelectorAll("img");
+        //一共9张图片  图片宽度的一半 与 三角形中线构成一个直角三角形 直角边与斜边的夹角  是 360/图片的个数/2  用正切算出直角边
+        //直角边就是 每张图片应该 translateZ() 的值  构成一个 360°
+        var r = Math.round( (imgs[0].width /2 ) / Math.tan( (360/imgs.length/2 ) / 180 * Math.PI ) ) + 30;
+        for( var i = 0; i< imgs.length; i++ ){
+            imgs[i].style.transform = 'rotateY('+ (360/imgs.length)*i +'deg) translateZ('+ r +'px)'
+        }
+        var img_box = document.getElementById("img-box");
+        var rotate = 0;
+        img_box.onclick = function(e){
+            var screen_width = document.body.clientWidth / 2 ;
+            var pageX = e.pageX,
+                img_rotate = 360/imgs.length;
+            if( pageX>screen_width ){
+                rotate += img_rotate;
+            }else{
+                rotate -= img_rotate;
+            }
+            this.style.transform = 'rotateY('+rotate+'deg)';
+        }
+    }
+</script>
+</html>
