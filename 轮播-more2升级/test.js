@@ -224,7 +224,13 @@
         }
 
     }
-
+    Duuliy.init=function(ele,opts){
+        // var that =this;
+        // ele.each(function(){
+            new Duuliy(ele,opts);           //  重用，每次 new
+            // new Duuliy("#banner",opts);
+        // })
+    }
 
     window['Duuliy'] = Duuliy;
 })(jQuery)
