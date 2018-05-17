@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <title>document</title>
+    <style></style>
+</head>
+<body>
+
+</body>
+
+<script>
+
+
+//先说第一层
+//js基本类型都是深拷贝，即完全独立。而引用数据类型都是浅拷贝，即引用地址指向堆的同一位置。
+
+
+const testObj = {
+  name: "duuliy",
+  info: ["屌丝", "码畜"]
+};
+
+/**
+ * 第一种深拷贝
+ * 缺点: 丢失原型链
+ */
+
+ const copyObj = JSON.parse(JSON.stringify(testObj));
+
+ const copyObj2=testObj;
+
+ console.log(copyObj);
+
+//copyObj由于是深拷贝 引用指向不同的地址。而copyObj2是浅拷贝，引用指向相同地点
+copyObj.info[0] = "码农"
+copyObj2.info[0] = "cc"
+console.log(copyObj.info);     //[ '码农', '码畜' ]
+console.log(testObj.info);     //[ '屌丝', '码畜' ]
+console.log(copyObj2.info); 
+
+// ***嵌套形深浅拷贝***
+
+var arr1=[1,2,3];
+var arr2=["a","b","c"];
+
+var Arr=arr1.concat(arr2);
+
+console.log(Arr)   //[1, 2, 3, "a", "b", "c"]
+
+arr1[0]="cc";
+console.log(arr1)  //["cc", 2, 3]
+console.log(Arr)  //[1, 2, 3, "a", "b", "c"]
+
+//此时证明concat为深拷贝
+
+var arr3=[{"a":1,"b":2,"c":3}]
+var arr4=[{"d":4,"e":5,"f":6}]
+
+var Arr2=arr3.concat(arr4);
+
+console.log(Arr2) //Array[2]0: Objecta: "cc"b: 2c: 3__proto__: Object__defineGetter__: __defineGetter__()__defineSetter__: __defineSetter__()__lookupGetter__: __lookupGetter__()__lookupSetter__: __lookupSetter__()constructor: Object()hasOwnProperty: hasOwnProperty()isPrototypeOf: isPrototypeOf()propertyIsEnumerable: propertyIsEnumerable()toLocaleString: toLocaleString()toString: toString()valueOf: valueOf()get __proto__: __proto__()set __proto__: __proto__()1: Objectd: 4e: 5f: 6__proto__: Objectlength: 2__proto__: Array[0]
+
+
+arr3[0].a="cc";
+
+console.log(arr3) ;  //Array[1]0: Objecta: "cc"b: 2c: 3__proto__: Objectlength: 1__proto__: Array[0]
+
+console.log(Arr2) ;  //Array[2]0: Objecta: "cc"b: 2c: 3__proto__: Object1: Objectlength: 2__proto__: Array[0]
+
+//这是怎么回事呢?嵌套多层是深拷贝就得注意了,conncat只深拷贝了一层，而内部的object依然是浅拷贝
+
+</script>
+</html>
