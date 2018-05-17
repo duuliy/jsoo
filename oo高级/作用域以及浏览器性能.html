@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    var foo=function(){};
+    // foo.[[scope]]:   当函数定义时，内部属性就会包含函数被创建的作用域中对象的集合,不可人为调用，只有js引擎使用。
+    // 此时数组[[scope]]内部包含Global Object(GO),全局定义。(数组0下标位置)
+    //  foo.[[Scope]] = {
+//     GO: {
+//         this: window ,
+//         window: ... ,
+//         document: ... ,
+//         ......
+//         a: undefined, // 预编译阶段还不知道a值是多少
+//         foo: function(){...},
+//     }
+// }
+//当函数执行时, 会创建一个叫做执行环境/执行上下文（execution context）的内部对象 ,函数每次执行时的执行环境独一无二 ,包含函数内部执行所需ang
+//此时数组[[scope]]内部包含Global Object(GO)以及 Active Object(AO).foo函数预编译产生AO活动对象，挂载到foo中EC作用域链的最前端(go变为下标2位置)
+// foo.[[Scope]] = {
+//     AO: {
+//         this: window,
+//         arguments: [100,200],
+//         x: 100,
+//         y: 200,
+//         b: undefined,
+//         bar: function(){...}
+//     },
+//     GO: {
+//         this: window ,
+//         window: ... ,
+//         document: ... ,
+//         a: 1,
+//         foo: function(){...},
+//         ......
+//     }
+// }
+//当函数执行完毕，ao销毁
+
+//函数被创建时，这个内部属性就会包含函数被创建的作用域中对象的集合 
+// 这个集合呈链式链接，被称为函数的作用域链 
+
+
+//关于浏览器性能
+// 由于以上原理,js引擎查找作用域链,你的变量在执行环境作用域链的位置越深，读写速度就越慢 
+//在函数中读写局部变量总是最快的，读写全局变量通常最慢 ***
+//当然了，这些额外的性能开销对于优化js引擎（比如chrome的V8 (⊙▽⊙)）来说可能微不足道，甚至可以毫不夸张的说没有性能损失 
+// 但是还是要照顾大多浏览器 
+
+//JavaScript欺骗词法的eval、with与catch及其性能问题
+//其中eval,with最好不使用
+//eval 词法作用域独立，这样其中的声明就无法修改它所在的作用域了
+//with 可能会使变量泄露进全局
+//try catch （没用过）
+
+</script>
+</html>
