@@ -36,7 +36,8 @@
         }
 
         btn_quan.innerHTML=this.span_any;
-        btn_quan.style.marginLeft="-"+btn_quan.offsetWidth/2+"px";
+//         btn_quan.style.marginLeft="-"+btn_quan.offsetWidth/2+"px";
+        this.changeStyle.call(btn_quan,"marginLeft","-"+btn_quan.offsetWidth/2+"px")
         $(".spanlist:first").addClass("on");
         switch(toggle){
             case "fade":
@@ -80,6 +81,10 @@
 
     //为省时间用jq
     Duuliy.prototype={
+        //插曲 位置
+        changeStyle:function(attr,value){
+            this.style[attr] = value;
+        },
         //层级模式
         opacity:function(Imglist,i){
             var ii=Imglist.length-1-i
