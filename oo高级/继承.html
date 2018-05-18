@@ -82,6 +82,8 @@ bb.prototype = new aa();             //将bb 函数的prototype对象 指向 aa�
 bb.prototype.constructor = bb;       //重新改变 prototype对象后  constructor指向 aa  所以要重新还原(深拷贝)
 var cc = new bb();
 cc.sayName();           //赵日天
+	
+//最完美的继承，圣杯模式	
 
 </script>
 </html>
