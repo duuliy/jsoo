@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    //void()
+    // console.log(void 0);     //undefined
+    // console.log(void(0));   //不管void 后面是多少都是 undefined
+    //使用目的就是为了  return undefined
+
+    //call  apply  call 和 apply 都是为了改变某个函数运行时的 context 即上下文而存在的  
+    //猫吃鱼，狗吃肉，奥特曼打小怪兽。
+    //有天狗想吃鱼了
+    //猫.吃鱼.call(狗，鱼)
+    //狗就吃到鱼了
+    //猫成精了，想打怪兽
+    //奥特曼.打小怪兽.call(猫，小怪兽)
+    //就这样记住了
+    function add( a, b ){
+        // console.log(123)
+        alert(a+b);
+    }
+    function sub( a, b ){
+        // console.log(333)
+        alert(a-b);
+    }
+    add.call(sub,5,1)   //sub想调用add的方法或sub继承add的所有方法
+
+
+    function sayName( name ){
+        this.name = name;
+        this.say = function(){
+            alert(this.name);
+        }
+    }
+    function aa( name ,a, b ){
+        sayName.call(this,name);        //继承sayName函数  让aa函数也有say方法  第二个参数是 函数的参数
+        add.apply(this,[a,b])         //apply 第二个参数是数组的方式传递参数
+    }
+    var bb = new aa('duuliy',1,3);
+    bb.say();
+
+    (function(){
+        var duuliy = function (){
+        };
+        duuliy.prototype = {
+          sayName:function( name ){
+              this.say = function(){
+                  alert(name);
+              };
+              this.say();
+          },
+          aa:function(name){
+              this.sayName.call(this.aa,name);   
+          }
+        };
+        window['duuliy'] = duuliy;
+    })();
+        var duuliy = new duuliy();
+        duuliy.sayName('赵日天');
+        duuliy.aa('董小姐');
+
+    //hasOwnProperty isPrototypeOf   instanceof  in
+
+    window.x=1;
+    window.x.y=1;
+    console.log('x' in window);       //true
+    console.log('y' in window);       //true
+    console.log(window.hasOwnProperty("x"))    //true
+    console.log(window.hasOwnProperty("y"))    //false
+
+
+
+    console.log(typeof "typeof");   //string
+    console.log([] instanceof Array); //true   更强大的检测
+
+    window.__proto__.c=6
+    console.log(window.__proto__.hasOwnProperty('c'))  //true  
+
+    
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    <button onclick="aa()">123</button>
+</body>
+<script>
+        // let array = [1,2,3,4,5 ];
+        // //参数通 find()
+        // let findIndex = array.findIndex(function( value, index, arr ){
+        //     return value>2;
+        // })
+        // console.log(findIndex); //下标 2
+// <!-- 
+//     var map = new Map();
+//     map.set('id','2');
+//     map.set('name','赵日天');
+//     map.set('sex','男');
+//     console.log(map)
+//     for(let[id,name,sex] of map){
+//         console.log(key+" "+value);
+//     } -->
+
+    // var gg=true;
+
+    // var time=function(){
+    //     setTimeout(function(){
+    //     console.log(132)
+    //     if(gg){
+    //         setTimeout(arguments.callee,1000)
+    //     }
+    // },1000)}
+
+    // time()
+    // function aa(){
+    //     gg=false;
+    //     console.log(555)
+    //     time=null;
+    //     console.log(time)
+    // }
+
+    // function printObject(obj){ 
+// obj = {"cid":"C0","ctext":"区县"}; 
+// var temp = ""; 
+// for(var i of obj){//用javascript的for/in循环遍历对象的属性 
+// temp += i+":"+obj[i]+"\n"; 
+// // } 
+// console.log(temp);//结果：cid:C0 \n ctext:区县 
+// } 
+
+
+const arr = [1,2,3,"4"]
+
+//去除非数字的value
+// const testArr = arr.filter(value => Object.is(typeof value,"number"))
+
+// console.log(testArr);  //[ 1, 2, 3 ]
+
+//大于2的value
+const testArr2 = arr.filter(value => value > 2)
+console.log(testArr2)
+
+</script>
+</html>
