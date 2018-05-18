@@ -71,6 +71,31 @@ console.log(arr3) ;  //Array[1]0: Objecta: "cc"b: 2c: 3__proto__: Objectlength: 
 console.log(Arr2) ;  //Array[2]0: Objecta: "cc"b: 2c: 3__proto__: Object1: Objectlength: 2__proto__: Array[0]
 
 //这是怎么回事呢?嵌套多层是深拷贝就得注意了,conncat只深拷贝了一层，而内部的object依然是浅拷贝
+    
+//解决办法: 所谓"深拷贝"，就是能够实现真正意义上的数组和对象的拷贝。它的实现并不难，只要递归调用"浅拷贝"就行了。
+
+　function deepCopy(p, c) {
+
+　　　　var c = c || {};
+　　　　for (var i in p) {
+　　　　　　if (typeof p[i] === 'object') {
+　　　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+　　　　　　　　deepCopy(p[i], c[i]);
+　　　　　　} else {
+　　　　　　　　　c[i] = p[i];
+　　　　　　}
+　　　　}
+
+　　　　return c;
+　　}
+
+　　var Doctor = deepCopy(Chinese);
+
+　　Chinese.birthPlaces = ['北京','上海','香港'];
+　　Doctor.birthPlaces.push('厦门');
+
+　　alert(Doctor.birthPlaces); //北京, 上海, 香港, 厦门
+　　alert(Chinese.birthPlaces); //北京, 上海, 香港
 
 </script>
 </html>
