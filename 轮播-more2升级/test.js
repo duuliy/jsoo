@@ -36,8 +36,9 @@
         }
 
         btn_quan.innerHTML=this.span_any;
-//         btn_quan.style.marginLeft="-"+btn_quan.offsetWidth/2+"px";
+        // btn_quan.style.marginLeft="-"+btn_quan.offsetWidth/2+"px";
         this.changeStyle.call(btn_quan,"marginLeft","-"+btn_quan.offsetWidth/2+"px")
+
         $(".spanlist:first").addClass("on");
         switch(toggle){
             case "fade":
@@ -113,12 +114,20 @@
         },
         auto_dio:function(opts){
             var that=this,
-                time;
+                time,
+                start=true;
                 function autoPlay(opts){
-                    time = setInterval(function(){
-                        that.fun1(opts)
-                        that.fun2(opts)
-                    }, opts.time);
+                    // time = setInterval(function(){
+                    //     that.fun1(opts)
+                    //     that.fun2(opts)
+                    // }, opts.time);
+                    time =setTimeout(function(){
+                        if(start){
+                            that.fun1(opts)
+                            that.fun2(opts)
+                            setTimeout(arguments.callee,opts.time)
+                        }
+                    },opts.time);
                 }
                 autoPlay(opts)
             //点击层级
@@ -134,13 +143,18 @@
             }
             $(document).on("click", ".spanlist", function () {
                 var _self=this;
-                clearInterval(time);
+                start=false;
+                // clearTimeout(time);
+                time=null;
                 ondian(opts,_self)
             })
             $(document).on("mouseenter", ".banner_warp", function () {
-                clearInterval(time);
+                // clearTimeout(time);
+                start=false;
+                time=null;
             })
             $(document).on("mouseleave", ".banner_warp", function () {
+                start=true;
                 autoPlay(opts)
             })
         },
@@ -224,6 +238,7 @@
         }
 
     }
+
     Duuliy.init=function(ele,opts){
         // var that =this;
         // ele.each(function(){
@@ -231,6 +246,7 @@
             // new Duuliy("#banner",opts);
         // })
     }
+
 
     window['Duuliy'] = Duuliy;
 })(jQuery)
