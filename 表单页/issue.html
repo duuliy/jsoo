@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智企交易_我要出售</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- css开始 -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="css/header.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+    <!-- css结束 -->
+    <!-- 私有 css 开始 -->
+    <link rel="stylesheet" type="text/css" href="css/issue.css"/>
+    <!-- 私有 css 结束 -->
+</head>
+<body>
+<!--header-->
+<div class="header_full"></div>
+<!--header end-->
+
+
+
+<!--content-->
+<div class="content">
+
+<!--content_title-->
+<div class="cont_title">
+    <h1>我要出售 · 填写企业出售信息</h1>
+    <p>
+        <img src="./images/issue/left.png" alt="">
+        <span>企业买卖上鱼爪网,交易安全更有保障</span>
+        <img src="./images/issue/right.png" alt="">
+    </p>
+</div>
+
+<!--content_main-->
+<div class="cont_main">
+
+    <!--content_cont_left-->
+    <div class="cont_cont_left">
+        <!--content_menu-->
+
+        <div class="cont_menu">
+            <ul>
+                <li class="statuso checked">
+                    <p>
+                        <span>快捷填写</span>
+                        本平台可免费发布信息
+                    </p>
+                </li>
+                <li class="statust">
+                    <p>
+                        <span>详细填写</span>
+                        填写信息越完善,出售成功率越高
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cont_from">
+            <ul class="from_left">
+                <li>
+                    <span class="tit">企业类型: </span>
+                    <div class="select_box">
+
+                        <dl>
+                            <dd>
+                                <span><a href="javascript:;">请选择企业类型</a></span>
+
+                                <div class="select" style="display: none;">
+                                    <!--<a href="javascript:;">全部</a>-->
+                                    <a href="javascript:;">有限责任公司</a>
+                                    <a href="javascript:;">个人独资公司</a>
+                                    <a href="javascript:;">港澳台公司</a>
+                                    <a href="javascript:;">集团公司</a>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <span class="tit">企业名称:</span>
+                    <input class="input1" placeholder="请输入企业名字" type="text"
+                           onfocus="this.style.background='#f7f8fc'"
+                           onblur="this.style.background='white'"
+                           onkeyup="this.value=this.value.replace(/^(([\u4e00-\u9fff]{2,50})|([a-z\.\s\,]{2,50}))$/i)">
+                </li>
+                <li>
+                    <span class="tit">企业区域:</span>
+                    <input class="input1" placeholder="四川省-成都市-金牛区" type="text"
+                           onfocus="this.style.background='#f7f8fc'"
+                           onblur="this.style.background='white'">
+                </li>
+                <li>
+                    <span class="tit">姓<i>姓名</i>名:</span>
+                    <!--<label class="tit">姓<i>姓名</i>名:</label>-->
+                    <input class="input1 inpt" placeholder="请输入姓名" type="text"
+                           onfocus="this.style.background='#f7f8fc'"
+                           onblur="this.style.background='white'"
+                           onkeyup="Verificaname(this)">
+                    <p class="lit rt1">
+                        请输入正确的信息
+                    </p>
+
+                </li>
+                <li>
+                    <span class="tit">电<i>姓名</i>话:</span>
+                    <input class="input1 inpt" placeholder="请输入联系人手机号" type="text"
+                           onfocus="this.style.background='#f7f8fc'"
+                           onblur="this.style.background='white'"
+                           maxlength="11"
+                           onkeyup="Verificaphone(this)">
+                    <p class="lit rt2">
+                        请输入正确的信息
+                    </p>
+                </li>
+                <li>
+                    <span class="tit">验&nbsp; 证&nbsp; 码:</span>
+                    <input class="input1 inptt" placeholder="请输入验证码" type="text"
+                           onfocus="this.style.background='#f7f8fc'"
+                           onblur="this.style.background='white'"
+                           maxlength="6">
+                    <input class="Codebtn btnSendCode" type="button" value="获取验证码"/></p>
+                </li>
+                <li>
+                    <span class="tit titt">留<i>姓名</i>言:</span>
+                    <textarea class="need" placeholder="多行输入"
+                              onfocus="this.style.background='#f7f8fc'"
+                              onblur="this.style.background='white'"></textarea>
+                </li>
+            </ul>
+            <div class="from_right">
+                <div class="introduction">
+                    <p>
+                        <img src="images/issue/conpnyicon.png" alt="">
+                        公司简介
+                    </p>
+                </div>
+
+                <ul class="cont_right_one">
+                    <li>
+                        <span class="tit">企业类型: </span>
+                        <div class="select_box">
+                            <dl>
+                                <dd>
+                                    <span><a href="javascript:;">请选择企业类型</a></span>
+
+                                    <div class="select" style="display: none;">
+                                        <!--<a href="javascript:;">全部</a>-->
+                                        <a href="javascript:;">有限责任公司</a>
+                                        <a href="javascript:;">个人独资公司</a>
+                                        <a href="javascript:;">港澳台公司</a>
+                                        <a href="javascript:;">集团公司</a>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="tit">公司名称:</span>
+                        <input class="input1" placeholder="请输入企业名字" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'">
+                    </li>
+                    <li>
+                        <span class="tittt">企业区域: </span>
+                        <div class="select_box">
+
+                            <dl>
+                                <dd class="dlloo">
+                                    <span><a href="javascript:;">请选择省/直辖市</a></span>
+
+                                    <div class="select" style="display: none;">
+                                        <a href="javascript:;">全部</a>
+                                        <a href="javascript:;">四川</a>
+                                        <a href="javascript:;">北京</a>
+                                        <a href="javascript:;">香港</a>
+                                        <a href="javascript:;">广东</a>
+                                    </div>
+                                </dd>
+                                <dd class="dlltt">
+                                    <span><a href="javascript:;">请选择市/州</a></span>
+
+                                    <div class="select" style="display: none;">
+                                        <a href="javascript:;">成都</a>
+                                        <a href="javascript:;">绵阳</a>
+                                        <a href="javascript:;">德阳</a>
+                                        <a href="javascript:;">达州</a>
+                                    </div>
+                                </dd>
+                                <dd class="dlltt">
+                                    <span><a href="javascript:;">请选择区/县</a></span>
+
+                                    <div class="select" style="display: none;">
+                                        <a href="javascript:;">郫县</a>
+                                        <a href="javascript:;">金牛</a>
+                                        <a href="javascript:;">锦江</a>
+                                        <a href="javascript:;">天府</a>
+                                    </div>
+                                </dd>
+                            </dl>
+
+                        </div>
+                    </li>
+                    <li>
+                        <span class="tittt">所属行业: </span>
+                        <div class="select_box">
+
+                            <dl>
+                                <dd class="dllo">
+                                    <span><a href="javascript:;">请选择公司所属行业</a></span>
+
+                                    <div class="select" style="display: none;">
+                                        <!--<a href="javascript:;">全部</a>-->
+                                        <a href="javascript:;">产品类</a>
+                                        <a href="javascript:;">科技类</a>
+                                        <a href="javascript:;">投资类</a>
+                                        <a href="javascript:;">其他类</a>
+                                    </div>
+                                </dd>
+                                <dd class="dllt">
+                                    <span><a href="javascript:;">请选择企业所属小类</a></span>
+
+                                    <div class="select selelt" style="display: none;">
+                                        <a href="javascript:;">全部</a>
+                                        <!--<a href="javascript:;">有限责任公司</a>-->
+                                        <!--<a href="javascript:;">个人独资公司</a>-->
+                                        <!--<a href="javascript:;">港澳台公司</a>-->
+                                        <!--<a href="javascript:;">集团公司</a>-->
+                                    </div>
+                                </dd>
+                            </dl>
+
+                            <!--<dl class="dllt">-->
+                                <!--<dd>-->
+                                    <!--<span><a href="javascript:;">请选择公司所属行业</a></span>-->
+
+                                    <!--<div class="select" style="display: none;">-->
+                                        <!--&lt;!&ndash;<a href="javascript:;">全部</a>&ndash;&gt;-->
+                                        <!--<a href="javascript:;">有限责任公司</a>-->
+                                        <!--<a href="javascript:;">个人独资公司</a>-->
+                                        <!--<a href="javascript:;">港澳台公司</a>-->
+                                        <!--<a href="javascript:;">集团公司</a>-->
+                                    <!--</div>-->
+                                <!--</dd>-->
+                            <!--</dl>-->
+                        </div>
+                    </li>
+                    <li>
+                        <span class="tit">成立日期:</span>
+                        <input class="input1" placeholder="请输入企业成立日期" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'">
+                    </li>
+                    <li>
+                        <span class="tit">注册资本:</span>
+                        <input class="input1 inpt" placeholder="请输入注册资本" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'"
+                               onkeyup="Verificamoney(this)">
+                        <span class="tit">万元/人民币</span>
+                        <p class="lit rt3">
+                            请输入正确的信息
+                        </p>
+                    </li>
+                    <li>
+                        <span class="tit">实缴资本:</span>
+                        <input class="input1 inpt" placeholder="请输入实缴资本" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'"
+                               onkeyup="Verificamoney(this)">
+                        <span class="tit">万元/人民币</span>
+                        <p class="lit rt4">
+                            请输入正确的信息
+                        </p>
+                    </li>
+                    <li class="upload">
+
+                        <span class="expain"><b>营业执照: </b>&nbsp; &nbsp; 请上传营业执照图片，丰富真实的图片信息将加速企业的出售</span>
+
+                        <div class="pic_upload">
+                            <div class="fileupload">
+                                <span>添加图片</span>
+
+                                <input onchange="fileChange(this);" type="file" name="file" class="upPic_btn">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="introduction">
+                    <p>
+                        <img src="images/issue/conpnyicon.png" alt="">
+                        公司现状
+                    </p>
+                </div>
+
+                <ul class="cont_right_one">
+                    <li>
+                        <div class="info_sign">
+                            <span class="tittt">纳税类型：</span>
+
+                            <div class="radio_inp">
+                                <span class="radio radio_checked">小规模</span>
+                                <span class="radio">一般纳税人</span>
+                                <span class="radio">出口退税人</span>
+                                <span class="radio">未核税</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="info_sign">
+                            <span class="tittt">是否申领发票：</span>
+
+                            <div class="radio_inp">
+                                <span class="radio radio_checked">是</span>
+                                <span class="radio">否</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="info_sign">
+                            <span class="tittt">有无网银：</span>
+
+                            <div class="radio_inp">
+                                <span class="radio radio_checked">是</span>
+                                <span class="radio">否</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="info_sign">
+                            <span class="tittt">银行账户：</span>
+
+                            <div class="radio_inp">
+                                <span class="radio radio_checked">已开基本户</span>
+                                <span class="radio">未开基本户</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="tit">法人姓名:</span>
+                        <input class="input1 inpt" placeholder="请输入您的企业法人姓名" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'"
+                               onkeyup="Verificaname(this)">
+                        <p class="lit rt5">
+                            请输入正确的信息
+                        </p>
+                    </li>
+                    <li>
+                        <span class="tit titt">经营范围:</span>
+                        <textarea class="need" placeholder="经营范围很重要，请与营业执照上的经营范围保持统一(不要错写或漏写)"
+                                  onfocus="this.style.background='#f7f8fc'"
+                                  onblur="this.style.background='white'"></textarea>
+                    </li>
+                    <li>
+                        <span class="tit titt">其他信息:</span>
+                        <textarea class="need" placeholder="这里尽可能多的描述您公司的优势,很大几率增加成交率呦"
+                                  onfocus="this.style.background='#f7f8fc'"
+                                  onblur="this.style.background='white'"></textarea>
+                    </li>
+                    <li>
+                        <span class="tit">出售价格:</span>
+                        <input class="input1 inpt" placeholder="请输入出售价格" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'"
+                               onkeyup="Verificamoney(this)">
+                        <span class="tit">万元/人民币</span>
+                        <p class="lit rt6">
+                            请输入正确的信息
+                        </p>
+                    </li>
+                    <li>
+                        <span class="tit">联&nbsp; 系&nbsp; 人:</span>
+                        <input class="input1 inptt" placeholder="请输入联系人姓名" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'"
+                               onkeyup="Verificaname(this)">
+                        <p class="lit rt7">
+                            请输入正确的信息
+                        </p>
+                    </li>
+                    <li>
+                        <span class="tit">手机号码:</span>
+                        <input class="input1 inpt" placeholder="请输入联系人手机号码" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'"
+                               onkeyup="Verificaphone(this)">
+                        <p class="lit rt8">
+                            请输入正确的信息
+                        </p>
+                    </li>
+                    <li>
+                        <span class="tit">验&nbsp; 证&nbsp; 码:</span>
+                        <input class="input1 inptt" placeholder="请输入验证码" type="text"
+                               onfocus="this.style.background='#f7f8fc'"
+                               onblur="this.style.background='white'"
+                               maxlength="6">
+                        <input class="Codebtn btnSendCode" type="button" value="获取验证码"/></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="cont_foot">
+                <p>
+                    <img src="images/issue/starts.png" alt="">
+                    上述信息如有不符，包含欠税款、滞纳金、罚款、黑名单等情况而产生的一切费用，将由老股东自行承担。</p>
+                <ul>
+                    <li class="Submission">
+                        提&nbsp;交
+                    </li>
+                    <li class="ContacVice">
+                        联系客服
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--content_pro_right-->
+<div class="cont_pro_right">
+    <div class="cont_pro_right_tit">
+        <p>常见问题</p>
+    </div>
+        <ul>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    如何在鱼爪网购买公司啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                </a>?
+            </li>
+        </ul>
+</div>
+
+</div>
+
+
+
+<!--footer-->
+<div class="footer_full"></div>
+<!--footer end-->
+
+<!-- js开始 -->
+<!--<script type="text/javascript" src="../plugins/jquery-1.7.2.min.js"></script>-->
+<!--<script type="text/javascript" src="../plugins/zTool/zTool.js"></script>-->
+<!--<script type="text/javascript" src="../plugins/wow/wow.min.js"></script>-->
+<!--<script type="text/javascript" src="js/public.js"></script>-->
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/issue.js"><!--当前页面的公共文件入口--></script>
+<script type="text/javascript">
+    //为了方便管理，前端引入公共的html片段，后台人员开发中，请删除此设置，请使用php包含方式
+//    zTool.include($(".footer_full"),"footer.html"); // 加载 Footer
+</script>
+<!-- js结束 -->
+</body>
+</html>

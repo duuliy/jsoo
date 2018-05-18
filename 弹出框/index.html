@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>易店无忧首页</title>
+    <link rel="stylesheet" type="text/css" href="css/newYear.css"/><!--新年放假样式-->
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/><!--样式重置-->
+    <link rel="stylesheet" type="text/css" href="css/common.css"/><!--公用部分，头部底部-->
+    <link rel="stylesheet" type="text/css" href="css/floatBar.css"/><!--右侧工具栏+底部联系客服-->
+    <link rel="stylesheet" type="text/css" href="css/index.css"/><!--首页页面样式，一定要在继上边的css之后引用-->
+    <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" /><!--新年放假样式-->
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="js/dotdotdot.js"></script>
+    <script type="text/javascript" src="js/countUp.min.js"></script><!--数字动态加载-->
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/floatcroll.js"></script><!--有侧边栏就要引入-->
+    <script type="text/javascript" src="js/Newyear.js"></script><!--新年放假样式-->
+
+    <script type="text/javascript">
+        $(function () {
+            /*省略号*/
+            $('.letter').dotdotdot({
+                wrap: 'letter',
+                after: 'a'
+            });
+            /*优品网店推荐*/
+            $(".goods_list > li").hover(function () {
+                $(this).addClass("on");
+                $(this).siblings().removeClass("on");
+                // 溢出时显示省略号
+                $(this).find('.letter').dotdotdot({
+                    wrap: 'letter'
+                });
+            }, function () {
+                $(this).removeClass("on");
+                $(".goods_list > li:first-child").addClass("on");
+            });
+            /*固定搜索框*/
+            var searHeight = $('.head_search').offset().top;
+            $(document).scroll(function () {
+                var iScrollTop = $(document).scrollTop();
+                if (iScrollTop > searHeight) {
+                    $('.head_search').addClass('fixedtop');
+                } else {
+                    $('.head_search').removeClass('fixedtop');
+                }
+            });
+            /*陪同*/
+            $(".funlink a").hover(function () {
+                $(this).addClass("on");
+                $(this).siblings().removeClass("on");
+            }, function () {
+                $(this).removeClass("on");
+                $(".funlink a:first-child").addClass("on");
+            });
+        });
+    </script>
+</head>
+<body>
+<!--==========头部================-->
+<div class="header_wrap">
+    <div class="header_tp">
+        <div class="header_cter">
+            <div class="header_welcome">
+                <span>易店无忧股权代码（<a href="" target="_blank">101311</a>）</span>
+                <a href="" class="signlink">登录</a>
+                <a href="" class="reglink">注册</a>
+            </div>
+            <ul class="header_func">
+                <li class="li01"><a href="#">我要出售网店</a></li>
+                <li class="li02"><a href="#">联系客服</a></li>
+                <li class="li03"><a href="#">帮助中心</a></li>
+                <li class="li04"><a href="#">投诉举报</a></li>
+                <li class="li05"><a href="javascript:;">关注微信<img class="wechat" src="images/common/erweima_1.png" alt=""></a></li>
+                <li class="li06"><a href="#">电话：400-006-1351</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="header_mid">
+        <div class="logo">
+            <div class="mid">
+                <a href="">
+                    <img src="images/common/logo.png" alt="">
+                    <img class="logo_expain" src="images/common/logo_expain.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="search_box">
+            <div class="head_search">
+                <div class="sm_logo"><a href=""><img src="images/common/logo.png" alt=""></a></div>
+                <form name="" action="" method="">
+                    <div class="fl searchform">
+                        <input type="text" class="fl inp" placeholder="您可以搜天猫、淘宝、京东和其他网店的相应关键词">
+                        <input type="button" class="fl button">
+                    </div>
+                </form>
+            </div>
+            <div class="headerm">
+                <ul><!--需要特别标注就加on-->
+                    <li><span>热门搜索：</span></li>
+                    <li class="on"><a href="#">全球购</a></li>
+                    <li><a href="#">企业店铺</a></li>
+                    <li><a href="#">家具</a></li>
+                    <li><a href="#">成人用品</a></li>
+                    <li class="on"><a href="#">童装</a></li>
+                    <li><a href="#">京东</a></li>
+                    <li><a href="#">内衣</a></li>
+                </ul>
+                <a class="more" href="">更多>></a>
+            </div>
+        </div>
+        <a href="" class="sell_btn">我要出售网店</a>
+    </div>
+    <div class="header_nav">
+        <ul class="menu_wrap">
+            <li>
+                <a href="#">全部类目</a>
+                <ul class="pull_down">
+                    <li class="pull_sign pull_sign01">
+                        <div class="pull_tab">
+                            <a class="sm_link" href=""><i class="tall"></i>天猫商城</a>
+
+                            <div class="links">
+                                <a href="">旗 舰 店</a>
+                                <a href="">专 营 店</a>
+                                <a href="">专 卖 店</a>
+                                <a href="">R 商 标</a>
+                                <a href="">TM 商标</a>
+                                <a href="">供销平台</a>
+                            </div>
+                        </div>
+                        <div class="pull_cont">
+                            <div class="hotstag">
+                                <div class="tit">热门</div>
+                                <div class="cont">
+                                    <a href="">女装旗舰店</a>
+                                    <a href="">天猫国际</a>
+                                    <a href="">游戏专营店</a>
+                                    <a href="">已过年审</a>
+                                    <a href="">成人用品</a>
+                                    <a href="">美容护理</a>
+                                    <a href="">滋补专营店</a>
+                                </div>
+                            </div>
+                            <ul class="filtrate">
+                                <li>
+                                    <div class="title"><span class="filter_icon1">类目：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类目</a></span>
+                                        <span><a href="">服饰鞋包</a></span>
+                                        <span><a href="">美容护理</a></span>
+                                        <span><a href="">3C数码</a></span>
+                                        <span><a href="">游戏话费</a></span>
+                                        <span><a href="">母婴用品</a></span>
+                                        <span><a href="">户外运动</a></span>
+                                        <span><a href="">家装家饰</a></span>
+                                        <span><a href="">食品保健</a></span>
+                                        <span><a href="">家居用品</a></span>
+                                        <span><a href="">珠宝首饰</a></span>
+                                        <span><a href="">生活服务</a></span>
+                                        <span><a href="">汽车配件</a></span>
+                                        <span><a href="">书籍音像</a></span>
+                                        <span><a href="">玩乐收藏</a></span>
+                                        <span><a href="">其他行业</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon2">类型：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类型</a></span>
+                                        <span><a href="">旗舰店</a></span>
+                                        <span><a href="">专营店</a></span>
+                                        <span><a href="">专卖店</a></span>
+                                        <span><a href="">供销平台</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">商标：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限商标</a></span>
+                                        <span><a href="">R商标</a></span>
+                                        <span><a href="">TM商标</a></span>
+                                        <span><a href="">授权商标</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">地区：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限地区</a></span>
+                                        <span><a href="">华东地区</a></span>
+                                        <span><a href="">华北地区</a></span>
+                                        <span><a href="">华南地区</a></span>
+                                        <span><a href="">华中地区</a></span>
+                                        <span><a href="">东北地区</a></span>
+                                        <span><a href="">更多地区</a></span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="recom_goods">
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="pull_sign pull_sign02">
+                        <div class="pull_tab">
+                            <a class="sm_link" href=""><i class="taobao"></i>淘宝网店</a>
+
+                            <div class="links">
+                                <a href="">旗 舰 店</a>
+                                <a href="">专 营 店</a>
+                                <a href="">专 卖 店</a>
+                                <a href="">R 商 标</a>
+                                <a href="">TM 商标</a>
+                                <a href="">供销平台</a>
+                            </div>
+                        </div>
+                        <div class="pull_cont">
+                            <div class="hotstag">
+                                <div class="tit">热门</div>
+                                <div class="cont">
+                                    <a href="">淘宝网店</a>
+                                    <a href="">天猫国际</a>
+                                    <a href="">游戏专营店</a>
+                                    <a href="">已过年审</a>
+                                    <a href="">成人用品</a>
+                                    <a href="">美容护理</a>
+                                    <a href="">滋补专营店</a>
+                                </div>
+                            </div>
+                            <ul class="filtrate">
+                                <li>
+                                    <div class="title"><span class="filter_icon1">类目：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类目</a></span>
+                                        <span><a href="">服饰鞋包</a></span>
+                                        <span><a href="">美容护理</a></span>
+                                        <span><a href="">3C数码</a></span>
+                                        <span><a href="">游戏话费</a></span>
+                                        <span><a href="">母婴用品</a></span>
+                                        <span><a href="">户外运动</a></span>
+                                        <span><a href="">家装家饰</a></span>
+                                        <span><a href="">食品保健</a></span>
+                                        <span><a href="">家居用品</a></span>
+                                        <span><a href="">珠宝首饰</a></span>
+                                        <span><a href="">生活服务</a></span>
+                                        <span><a href="">汽车配件</a></span>
+                                        <span><a href="">书籍音像</a></span>
+                                        <span><a href="">玩乐收藏</a></span>
+                                        <span><a href="">其他行业</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon2">类型：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类型</a></span>
+                                        <span><a href="">旗舰店</a></span>
+                                        <span><a href="">专营店</a></span>
+                                        <span><a href="">专卖店</a></span>
+                                        <span><a href="">供销平台</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">商标：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限商标</a></span>
+                                        <span><a href="">R商标</a></span>
+                                        <span><a href="">TM商标</a></span>
+                                        <span><a href="">授权商标</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">地区：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限地区</a></span>
+                                        <span><a href="">华东地区</a></span>
+                                        <span><a href="">华北地区</a></span>
+                                        <span><a href="">华南地区</a></span>
+                                        <span><a href="">华中地区</a></span>
+                                        <span><a href="">东北地区</a></span>
+                                        <span><a href="">更多地区</a></span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="recom_goods">
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="pull_sign pull_sign03">
+                        <div class="pull_tab">
+                            <a class="sm_link" href=""><i class="jd"></i>京东商城</a>
+
+                            <div class="links">
+                                <a href="">旗 舰 店</a>
+                                <a href="">专 营 店</a>
+                                <a href="">专 卖 店</a>
+                                <a href="">R 商 标</a>
+                                <a href="">TM 商标</a>
+                                <a href="">供销平台</a>
+                            </div>
+                        </div>
+                        <div class="pull_cont">
+                            <div class="hotstag">
+                                <div class="tit">热门</div>
+                                <div class="cont">
+                                    <a href="">京东商城</a>
+                                    <a href="">天猫国际</a>
+                                    <a href="">游戏专营店</a>
+                                    <a href="">已过年审</a>
+                                    <a href="">成人用品</a>
+                                    <a href="">美容护理</a>
+                                    <a href="">滋补专营店</a>
+                                </div>
+                            </div>
+                            <ul class="filtrate">
+                                <li>
+                                    <div class="title"><span class="filter_icon1">类目：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类目</a></span>
+                                        <span><a href="">服饰鞋包</a></span>
+                                        <span><a href="">美容护理</a></span>
+                                        <span><a href="">3C数码</a></span>
+                                        <span><a href="">游戏话费</a></span>
+                                        <span><a href="">母婴用品</a></span>
+                                        <span><a href="">户外运动</a></span>
+                                        <span><a href="">家装家饰</a></span>
+                                        <span><a href="">食品保健</a></span>
+                                        <span><a href="">家居用品</a></span>
+                                        <span><a href="">珠宝首饰</a></span>
+                                        <span><a href="">生活服务</a></span>
+                                        <span><a href="">汽车配件</a></span>
+                                        <span><a href="">书籍音像</a></span>
+                                        <span><a href="">玩乐收藏</a></span>
+                                        <span><a href="">其他行业</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon2">类型：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类型</a></span>
+                                        <span><a href="">旗舰店</a></span>
+                                        <span><a href="">专营店</a></span>
+                                        <span><a href="">专卖店</a></span>
+                                        <span><a href="">供销平台</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">商标：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限商标</a></span>
+                                        <span><a href="">R商标</a></span>
+                                        <span><a href="">TM商标</a></span>
+                                        <span><a href="">授权商标</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">地区：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限地区</a></span>
+                                        <span><a href="">华东地区</a></span>
+                                        <span><a href="">华北地区</a></span>
+                                        <span><a href="">华南地区</a></span>
+                                        <span><a href="">华中地区</a></span>
+                                        <span><a href="">东北地区</a></span>
+                                        <span><a href="">更多地区</a></span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="recom_goods">
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="pull_sign pull_sign04">
+                        <div class="pull_tab">
+                            <a class="sm_link" href=""><i class="mg"></i>蘑菇街网店</a>
+
+                            <div class="links">
+                                <a href="">旗 舰 店</a>
+                                <a href="">专 营 店</a>
+                                <a href="">专 卖 店</a>
+                                <a href="">R 商 标</a>
+                                <a href="">TM 商标</a>
+                                <a href="">供销平台</a>
+                            </div>
+                        </div>
+                        <div class="pull_cont">
+                            <div class="hotstag">
+                                <div class="tit">热门</div>
+                                <div class="cont">
+                                    <a href="">蘑菇街网店</a>
+                                    <a href="">天猫国际</a>
+                                    <a href="">游戏专营店</a>
+                                    <a href="">已过年审</a>
+                                    <a href="">成人用品</a>
+                                    <a href="">美容护理</a>
+                                    <a href="">滋补专营店</a>
+                                </div>
+                            </div>
+                            <ul class="filtrate">
+                                <li>
+                                    <div class="title"><span class="filter_icon1">类目：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类目</a></span>
+                                        <span><a href="">服饰鞋包</a></span>
+                                        <span><a href="">美容护理</a></span>
+                                        <span><a href="">3C数码</a></span>
+                                        <span><a href="">游戏话费</a></span>
+                                        <span><a href="">母婴用品</a></span>
+                                        <span><a href="">户外运动</a></span>
+                                        <span><a href="">家装家饰</a></span>
+                                        <span><a href="">食品保健</a></span>
+                                        <span><a href="">家居用品</a></span>
+                                        <span><a href="">珠宝首饰</a></span>
+                                        <span><a href="">生活服务</a></span>
+                                        <span><a href="">汽车配件</a></span>
+                                        <span><a href="">书籍音像</a></span>
+                                        <span><a href="">玩乐收藏</a></span>
+                                        <span><a href="">其他行业</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon2">类型：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类型</a></span>
+                                        <span><a href="">旗舰店</a></span>
+                                        <span><a href="">专营店</a></span>
+                                        <span><a href="">专卖店</a></span>
+                                        <span><a href="">供销平台</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">商标：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限商标</a></span>
+                                        <span><a href="">R商标</a></span>
+                                        <span><a href="">TM商标</a></span>
+                                        <span><a href="">授权商标</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">地区：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限地区</a></span>
+                                        <span><a href="">华东地区</a></span>
+                                        <span><a href="">华北地区</a></span>
+                                        <span><a href="">华南地区</a></span>
+                                        <span><a href="">华中地区</a></span>
+                                        <span><a href="">东北地区</a></span>
+                                        <span><a href="">更多地区</a></span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="recom_goods">
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="pull_sign pull_sign05">
+                        <div class="pull_tab">
+                            <a class="sm_link" href=""><i class="other"></i>其他网店</a>
+
+                            <div class="links">
+                                <a href="">旗 舰 店</a>
+                                <a href="">专 营 店</a>
+                                <a href="">专 卖 店</a>
+                                <a href="">R 商 标</a>
+                                <a href="">TM 商标</a>
+                                <a href="">供销平台</a>
+                            </div>
+                        </div>
+                        <div class="pull_cont">
+                            <div class="hotstag">
+                                <div class="tit">热门</div>
+                                <div class="cont">
+                                    <a href="">其他网店</a>
+                                    <a href="">天猫国际</a>
+                                    <a href="">游戏专营店</a>
+                                    <a href="">已过年审</a>
+                                    <a href="">成人用品</a>
+                                    <a href="">美容护理</a>
+                                    <a href="">滋补专营店</a>
+                                </div>
+                            </div>
+                            <ul class="filtrate">
+                                <li>
+                                    <div class="title"><span class="filter_icon1">类目：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类目</a></span>
+                                        <span><a href="">服饰鞋包</a></span>
+                                        <span><a href="">美容护理</a></span>
+                                        <span><a href="">3C数码</a></span>
+                                        <span><a href="">游戏话费</a></span>
+                                        <span><a href="">母婴用品</a></span>
+                                        <span><a href="">户外运动</a></span>
+                                        <span><a href="">家装家饰</a></span>
+                                        <span><a href="">食品保健</a></span>
+                                        <span><a href="">家居用品</a></span>
+                                        <span><a href="">珠宝首饰</a></span>
+                                        <span><a href="">生活服务</a></span>
+                                        <span><a href="">汽车配件</a></span>
+                                        <span><a href="">书籍音像</a></span>
+                                        <span><a href="">玩乐收藏</a></span>
+                                        <span><a href="">其他行业</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon2">类型：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限类型</a></span>
+                                        <span><a href="">旗舰店</a></span>
+                                        <span><a href="">专营店</a></span>
+                                        <span><a href="">专卖店</a></span>
+                                        <span><a href="">供销平台</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">商标：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限商标</a></span>
+                                        <span><a href="">R商标</a></span>
+                                        <span><a href="">TM商标</a></span>
+                                        <span><a href="">授权商标</a></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><span class="filter_icon3">地区：</span></div>
+                                    <div class="cont">
+                                        <span><a class="on" href="">不限地区</a></span>
+                                        <span><a href="">华东地区</a></span>
+                                        <span><a href="">华北地区</a></span>
+                                        <span><a href="">华南地区</a></span>
+                                        <span><a href="">华中地区</a></span>
+                                        <span><a href="">东北地区</a></span>
+                                        <span><a href="">更多地区</a></span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="recom_goods">
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="title letter"><img src="images/common/logo_tall.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="detail">
+                                            <div class="descr">
+                                                <div>
+                                                    <span>主营类目</span>
+
+                                                    <p>美容护理</p>
+                                                </div>
+                                                <div>
+                                                    <span>商城类型</span>
+
+                                                    <p>旗舰店</p>
+                                                </div>
+                                            </div>
+                                            <div class="price">￥<span>984,000</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="on"><a href="#">首页</a></li>
+            <li><a href="#">天猫转让</a></li>
+            <li><a href="#">淘宝网店</a></li>
+            <li><a href="#">京东转让</a></li>
+            <li class="sty_sm"><a href="#">网店拍卖（免佣金）</a></li>
+            <li class="sty_sm"><a href="#">企业店铺<i class="icon icon_new"></i></a></li>
+            <li class="sty_sm"><a href="#">蘑菇街转让</a></li>
+            <li class="sty_sm"><a href="#">其他网店</a></li>
+            <li class="sty_sm"><a href="#">商城代入驻<i class="icon icon_hot"></i></a></li>
+            <li class="sty_sm"><a href="#">网店估价</a></li>
+        </ul>
+    </div>
+</div>
+<!--==========轮播================-->
+<div class="home_mainpart_wrap">
+    <div id="newYear">
+        <div class="newYear_left">
+            <img src="images/Newyear/Left.png" alt="">
+        </div>
+        <div class="newYear_right">
+            <img src="images/Newyear/Right.png" alt="">
+        </div>
+    </div>
+    <div class="home_slide">
+        <div class="hd">
+            <ul></ul>
+        </div>
+        <div class="bd">
+            <ul>
+                <li><a href="#" style="background-image:url(images/index/banner.jpg)"></a></li>
+                <li><a href="#" style="background-image:url(images/index/banner.jpg)"></a></li>
+                <li><a href="#" style="background-image:url(images/index/banner.jpg)"></a></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(".home_slide").slide({
+            titCell: ".hd ul",
+            mainCell: ".bd ul",
+            effect: "fade",
+            autoPlay: true,
+            autoPage: true,
+            trigger: "click",
+            interTime: 3500,
+            delayTime: 500
+        });
+    </script>
+    <div class="home_mainpart">
+        <div class="home_notice">
+            <div class="notice_mid">
+                <a class="sellbtn" href="">我要卖网店</a>
+                <ul class="btn_cter">
+                    <li class="li01">
+                        <a href="">联系客服</a>
+                    </li>
+                    <li class="li02">
+                        <a href="">网店估价</a>
+                    </li>
+                    <li class="li03">
+                        <a href="">帮助中心</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="notice_before">
+                <a class="user_box" href="">
+                    <img src="images/index/user_pic.png" alt="">
+
+                    <div class="user_info">
+                        <span>hi，亲爱的亲爱的亲爱的亲爱的</span>
+
+                        <p>夜深了~少熬夜</p>
+                    </div>
+                </a>
+
+                <div class="login_btn_box">
+                    <a href="###" class="login">请登录</a>
+                    <a href="###" class="register">免费注册</a>
+                </div>
+                <div class="informbox">
+                    <div class="notice">
+                        <div class="tit"><a class="more" href="">更多</a></div>
+                        <ul class="cont">
+                            <li><a href="">激情1212现金壕礼邀您领现金壕礼邀您领现金壕礼邀您领</a><i class="hot"></i></li>
+                            <li><a href="">公司乔迁通告</a></li>
+                            <li><a href="">易店无忧祝大家双节快乐</a></li>
+                            <li><a href="">备战双11，购店享好礼</a></li>
+                            <li><a href="">易店无忧祝大家七夕节快乐</a></li>
+                        </ul>
+                    </div>
+                    <div class="check_staff">
+                        <input type="text" placeholder="输入QQ/电话验证真假客服">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sundry">
+            <div class="video">
+                <a href="">
+                    <img src="images/index/video_bg.png" alt="">
+
+                    <div class="text">
+                        <div class="p1">四分钟看懂易店无忧</div>
+                        <div class="p2">Propagandist video</div>
+                    </div>
+                    <div class="playbtn">立即播放</div>
+                </a>
+            </div>
+            <div class="daiyan">
+                <a href="">
+                    <img src="images/index/daiyan_bg.png" alt="">
+
+                    <div class="expain">
+                        <div class="p1">赵奕欢倾情代言易店无忧</div>
+                    </div>
+                </a>
+            </div>
+            <div class="about">
+                <a href="">
+                    <img src="images/index/about_bg.png" alt="">
+
+                    <div class="expain">
+                        <div class="p1">走进易店无忧</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--==========主题内容================-->
+<div class="main_wrap">
+    <div class="side1">
+        <ul class="safeguard">
+            <li class="li01">
+                <a href="">
+                    <div class="text">
+                        <div class="p1">资金保障</div>
+                        <div class="p2">交易期间全程托管资金担保<br>保障买卖双方权益</div>
+                    </div>
+                </a>
+            </li>
+            <li class="li02">
+                <a href="">
+                    <div class="text">
+                        <div class="p1">资金保障</div>
+                        <div class="p2">交易期间全程托管资金担保<br>保障买卖双方权益</div>
+                    </div>
+                </a>
+            </li>
+            <li class="li03">
+                <a href="">
+                    <div class="text">
+                        <div class="p1">资金保障</div>
+                        <div class="p2">交易期间全程托管资金担保<br>保障买卖双方权益</div>
+                    </div>
+                </a>
+            </li>
+            <li class="li04">
+                <a href="">
+                    <div class="text">
+                        <div class="p1">资金保障</div>
+                        <div class="p2">交易期间全程托管资金担保<br>保障买卖双方权益</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="dynamic">
+            <div class="tit">昨日动态数据</div>
+            <div class="bd">
+                <ul>
+                    <li>
+                        <div class="cont">
+                            <div><span id="one1">8,560,250.00</span>交易金额（元）</div>
+                            <div><span id="one2">5,523</span>交易数量（个）</div>
+                            <div><span id="one3">11,260</span>新增网店（个）</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cont">
+                            <div><span id="two1">18,560,250.00</span>交易金额（元）</div>
+                            <div><span id="two2">5,123</span>交易数量（个）</div>
+                            <div><span id="two3">11,260</span>新增网店（个）</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cont">
+                            <div><span id="three1">118,560,250.00</span>交易金额（元）</div>
+                            <div><span id="three2">5,423</span>交易数量（个）</div>
+                            <div><span id="three3">13,260</span>新增网店（个）</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="dyn_arrow">
+                <a class="prev" href="javascript:void(0)"></a>
+                <a class="next" href="javascript:void(0)"></a>
+            </div>
+        </div>
+        <div class="dynscroll">
+            <div class="tit">交易快报</div>
+            <div class="bd">
+                <ul>
+                    <li>
+                        <div class="username">yi***51</div>
+                        <div class="price">以<span>￥5800.00</span>购得：</div>
+                        <div class="what"><span>淘宝网店</span>[华东地区女鞋旗舰店新店低价出售，华东地区女鞋旗舰店新店低价出售，无扣分无贷款]</div>
+                        <div class="date">4分钟前</div>
+                    </li>
+                    <li>
+                        <div class="username">182***51</div>
+                        <div class="price">以<span>￥23800.00</span>购得：</div>
+                        <div class="what"><span>天猫旗舰店</span>[华东地区女鞋旗舰店新店低价出售，华东地区女鞋旗舰店新店低价出售，无扣分无贷款]</div>
+                        <div class="date">54分钟前</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var options = {
+                useEasing: true,
+                useGrouping: true,
+                separator: ',',
+                decimal: '.',
+                prefix: '',
+                suffix: ''
+            };
+            var demo1 = new CountUp("one1", 0, 85602500, 0, 2, options);
+            var demo2 = new CountUp("one2", 0, 5523, 0, 2, options);
+            var demo3 = new CountUp("one3", 0, 11260, 0, 2, options);
+            var demo4 = new CountUp("two1", 0, 85602500, 0, 2, options);
+            var demo5 = new CountUp("two2", 0, 5523, 0, 2, options);
+            var demo6 = new CountUp("two3", 0, 11260, 0, 2, options);
+            var demo7 = new CountUp("three1", 0, 85602500, 0, 2, options);
+            var demo8 = new CountUp("three2", 0, 5523, 0, 2, options);
+            var demo9 = new CountUp("three3", 0, 11260, 0, 2, options);
+            function startone() {
+                demo1.reset();
+                demo2.reset();
+                demo3.reset();
+                demo1.start();
+                demo2.start();
+                demo3.start();
+            }
+            function starttwo() {
+                demo4.reset();
+                demo5.reset();
+                demo6.reset();
+                demo4.start();
+                demo5.start();
+                demo6.start();
+            }
+            function startthree() {
+                demo7.reset();
+                demo8.reset();
+                demo9.reset();
+                demo7.start();
+                demo8.start();
+                demo9.start();
+            }
+            jQuery(".dynamic").slide({
+                mainCell: ".bd ul",
+                autoPage: true,
+                effect: "topLoop",
+                autoPlay: true,
+                vis: 1,
+                delayTime: 500,
+                startFun: function (i, c) {
+                    var syn_text = '';
+                    if (i == 0) {
+                        syn_text = '昨日动态数据';
+                        startone();
+                    } else if (i == 1) {
+                        syn_text = '本月动态数据';
+                        starttwo();
+                    } else if (i == 2) {
+                        syn_text = '历史动态数据';
+                        startthree();
+                    }
+                    $(".dynamic .tit").html(syn_text);
+
+                }
+            });
+            jQuery(".dynscroll").slide({
+                mainCell: ".bd ul",
+                autoPage: true,
+                effect: "fade",
+                autoPlay: true,
+                vis: 1,
+                delayTime: 1000
+            });
+        </script>
+    </div>
+    <div class="side2">
+        <div class="major_tit">
+            <div class="major_link">
+                <a href="">
+                    <div class="p1">今日大牌网店推荐</div>
+                    <div class="p2">优选品牌授权网店商城</div>
+                </a>
+            </div>
+            <div class="major_espc">
+                <a href="">
+                    <div class="img">
+                        <div class="mid"><img src="images/index/major_espc_logo.png" alt=""></div>
+                    </div>
+                    <div class="expain">施耐德电气授权专营店</div>
+                </a>
+            </div>
+        </div>
+        <div class="major_cont">
+            <ul>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo01.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克耐克耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo02.png" alt=""></div>
+                        </div>
+                        <div class="expain">[欧迪芬]单价:15w-175w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo03.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo04.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo05.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo06.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo07.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo08.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo09.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo10.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo11.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <div class="mid"><img src="images/index/major_logo12.png" alt=""></div>
+                        </div>
+                        <div class="expain">[耐克]单价:25w-560w</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="side3">
+        <div class="high_goods">
+            <div class="tit">
+                <a href="">
+                    <div class="p1">优品网店推荐</div>
+                    <div class="p2">最新优质的网店转让资源</div>
+                </a>
+            </div>
+            <ul class="goods_list">
+                <li class="on">
+                    <div class="goods_link">
+                        <div class="biglink">
+                            <a href="">天猫商城</a>
+                        </div>
+                        <div class="smlink">
+                            <a href="">女装旗舰店</a>
+                            <a href="">化妆品专营店</a>
+                            <a href="">生活服务</a>
+                            <a href="">全球购</a>
+                            <a href="">虚拟充值</a>
+                            <a href="">天猫供销平台</a>
+                        </div>
+                    </div>
+                    <div class="goods_show">
+                        <div class="goods_box">
+                            <ul>
+                                <li class="li01">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li02">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li03">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li04">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="goods_link">
+                        <div class="biglink">
+                            <a href="">淘宝网店</a>
+                        </div>
+                        <div class="smlink">
+                            <a href="">女装旗舰店</a>
+                            <a href="">化妆品专营店</a>
+                            <a href="">生活服务</a>
+                            <a href="">全球购</a>
+                            <a href="">虚拟充值</a>
+                            <a href="">天猫供销平台</a>
+                        </div>
+                    </div>
+                    <div class="goods_show">
+                        <div class="goods_box">
+                            <ul>
+                                <li class="li01">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li02">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li03">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li04">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="goods_link">
+                        <div class="biglink">
+                            <a href="">京东商城</a>
+                        </div>
+                        <div class="smlink">
+                            <a href="">女装旗舰店</a>
+                            <a href="">化妆品专营店</a>
+                            <a href="">生活服务</a>
+                            <a href="">全球购</a>
+                            <a href="">虚拟充值</a>
+                            <a href="">天猫供销平台</a>
+                        </div>
+                    </div>
+                    <div class="goods_show">
+                        <div class="goods_box">
+                            <ul>
+                                <li class="li01">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li02">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li03">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li04">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="goods_link">
+                        <div class="biglink">
+                            <a href="">蘑菇街网店</a>
+                        </div>
+                        <div class="smlink">
+                            <a href="">女装旗舰店</a>
+                            <a href="">化妆品专营店</a>
+                            <a href="">生活服务</a>
+                            <a href="">全球购</a>
+                            <a href="">虚拟充值</a>
+                            <a href="">天猫供销平台</a>
+                        </div>
+                    </div>
+                    <div class="goods_show">
+                        <div class="goods_box">
+                            <ul>
+                                <li class="li01">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li02">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li03">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li04">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="goods_link">
+                        <div class="biglink">
+                            <a href="">其他网店</a>
+                        </div>
+                        <div class="smlink">
+                            <a href="">女装旗舰店</a>
+                            <a href="">化妆品专营店</a>
+                            <a href="">生活服务</a>
+                            <a href="">全球购</a>
+                            <a href="">虚拟充值</a>
+                            <a href="">天猫供销平台</a>
+                        </div>
+                    </div>
+                    <div class="goods_show">
+                        <div class="goods_box">
+                            <ul>
+                                <li class="li01">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li02">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li03">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                                <li class="li04">
+                                    <a href="">
+                                        <div class="title letter"><img src="images/index/tall_logo.png" alt="">江浙沪地区个人护理旗舰店盈利中店铺营业额过百万续签考核达标参加双十一考核达标参加双十一考核达标参加双十一
+                                        </div>
+                                        <div class="stag">
+                                            <p><span>网店类型：淘宝旗舰店</span></p>
+
+                                            <p><span>店铺等级：3冠<img src="images/index/grade_01.png" alt=""></span></p>
+                                        </div>
+                                        <div class="price">￥<span>984,650</span></div>
+
+                                    </a>
+
+                                    <div class="connect"><a href="">联系客服</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="side4">
+        <div class="transfer">
+            <div class="p1">专属陪同过户，交易路上您不孤单</div>
+            <div class="p2">全国<span>168</span>城，交易金额满8万即享专属陪同过户</div>
+            <div class="funlink">
+                <a class="on" href="">预约陪同专员</a>
+                <a href="">陪同城市查询</a>
+            </div>
+        </div>
+        <ul class="serverbox">
+            <li>
+                <a href="">
+                    <div class="img"><img src="images/index/server01.jpg" alt=""></div>
+                    <div class="serv_info">
+                        <div class="servname">胡正</div>
+                        <div class="servarea">
+                            <span>成都分公司</span>
+
+                            <p>adviser</p>
+                        </div>
+                        <div class="serv_conect"><span>预约TA</span></div>
+                        <div class="qq_tel">
+                            <div>
+                                <span>QQ：</span>
+
+                                <p>2850330526</p>
+                            </div>
+                            <div>
+                                <span>tel：</span>
+
+                                <p>400006135</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <div class="img"><img src="images/index/server02.jpg" alt=""></div>
+                    <div class="serv_info">
+                        <div class="servname">陈华帮</div>
+                        <div class="servarea">
+                            <span>北京总部</span>
+
+                            <p>adviser</p>
+                        </div>
+                        <div class="serv_conect"><span>预约TA</span></div>
+                        <div class="qq_tel">
+                            <div>
+                                <span>QQ：</span>
+
+                                <p>2850330526</p>
+                            </div>
+                            <div>
+                                <span>tel：</span>
+
+                                <p>400006135</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <div class="img"><img src="images/index/server03.jpg" alt=""></div>
+                    <div class="serv_info">
+                        <div class="servname">尧廷</div>
+                        <div class="servarea">
+                            <span>杭州分公司</span>
+
+                            <p>adviser</p>
+                        </div>
+                        <div class="serv_conect"><span>预约TA</span></div>
+                        <div class="qq_tel">
+                            <div>
+                                <span>QQ：</span>
+
+                                <p>2850330526</p>
+                            </div>
+                            <div>
+                                <span>tel：</span>
+
+                                <p>400006135</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <div class="img"><img src="images/index/server04.jpg" alt=""></div>
+                    <div class="serv_info">
+                        <div class="servname">文璐</div>
+                        <div class="servarea">
+                            <span>广州分公司</span>
+
+                            <p>adviser</p>
+                        </div>
+                        <div class="serv_conect"><span>预约TA</span></div>
+                        <div class="qq_tel">
+                            <div>
+                                <span>QQ：</span>
+
+                                <p>2850330526</p>
+                            </div>
+                            <div>
+                                <span>tel：</span>
+
+                                <p>400006135</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="side5">
+        <div class="advante">
+            <ul>
+                <li class="li01">
+                    <a href="">
+                        <div class="p1"><span>更专业</span>一对一专属陪同</div>
+                        <div class="p2 letter">我们易店无忧网店转让服务平台是专业提供网店转让的电子......</div>
+                    </a>
+                </li>
+                <li class="li02">
+                    <a href="">
+                        <div class="p1"><span>更安心</span>三方当面交易</div>
+                        <div class="p2 letter">商务交易平台，主要提供淘宝网店转让、拍拍网店转让......</div>
+                    </a>
+                </li>
+                <li class="li03">
+                    <a href="">
+                        <div class="p1"><span>更省心</span>当面流程指导</div>
+                        <div class="p2 letter">及其他网店转让交易服务，公司以第三方担保交易的......</div>
+                    </a>
+                </li>
+                <li class="li04">
+                    <a href="">
+                        <div class="p1"><span>更快速</span>分歧异议处理</div>
+                        <div class="p2 letter">模式为广大B2B商家们提供了有效的服务，并以"帮助电商......</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="side6">
+        <div class="sale_show">
+            <div class="sale_des">
+                <a href="">
+                    <div class="p1">售后采访</div>
+                    <div class="p2">真实讲述交易后心得，还原网店转让的故事!</div>
+                    <div class="people">
+                        <div class="img">
+                            <img src="images/index/sale_pic01.png" alt="">
+                        </div>
+                        <div class="img_info">
+                            <div class="name">丽丽 /</div>
+                            <div class="what">网店卖家</div>
+                            <div class="when">第<span>20170917</span>期</div>
+                        </div>
+                    </div>
+                    <div class="p3">纵然有海峡阻隔众多牵绊 我心依旧是中国心</div>
+                    <div class="p4 letter">自明朝以来，台湾就是归属于大中华，台湾是中国不可分割的重要一份子。本文的主人公便是来自台湾的客户。“
+                        虽有海水阻隔，但我们的心永远在大陆这里是我们的根。”
+                    </div>
+                    <div class="p5">了解详情</div>
+                </a>
+
+                <div class="after_more"><a href="">往期采访</a></div>
+            </div>
+            <ul class="sale_list">
+                <li>
+                    <a href="">
+                        <div class="tit">90后女王，玩转淘宝不一样的风采玩转淘宝不一样的风采</div>
+                        <div class="date">第<span>20171019</span>期</div>
+                        <div class="more"><span>MORE +</span></div>
+                        <div class="img">
+                            <img src="images/index/sale_pic01.png" alt="">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="tit">90后女王，玩转淘宝不一样的风采玩转淘宝不一样的风采</div>
+                        <div class="date">第<span>20171019</span>期</div>
+                        <div class="more"><span>MORE +</span></div>
+                        <div class="img">
+                            <img src="images/index/sale_pic01.png" alt="">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="tit">90后女王，玩转淘宝不一样的风采玩转淘宝不一样的风采</div>
+                        <div class="date">第<span>20171019</span>期</div>
+                        <div class="more"><span>MORE +</span></div>
+                        <div class="img">
+                            <img src="images/index/sale_pic01.png" alt="">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="tit">90后女王，玩转淘宝不一样的风采玩转淘宝不一样的风采</div>
+                        <div class="date">第<span>20171019</span>期</div>
+                        <div class="more"><span>MORE +</span></div>
+                        <div class="img">
+                            <img src="images/index/sale_pic01.png" alt="">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--==========底部================-->
+<div class="footer">
+    <div class="footer_top">
+        <div class="main clearfix">
+            <div class="footer_top_left fl">
+                <ul class="footer_lists clearfix">
+                    <li class="footer_list fl">
+                        <h3>帮助中心</h3>
+                        <img src="images/common/footer_1.png" alt=""/>
+                        <a href="javascript:;">转让流程</a>
+                        <a href="javascript:;">购买流程</a>
+                        <a href="javascript:;">收费标准</a>
+                        <a href="javascript:;">网站地图</a>
+                    </li>
+                    <li class="footer_list fl">
+                        <h3>充值提现</h3>
+                        <img src="images/common/footer_1.png" alt=""/>
+                        <a href="javascript:;">充值方式</a>
+                        <a href="javascript:;">提现方式</a>
+                        <a href="javascript:;">服务费说明</a>
+                    </li>
+                    <li class="footer_list fl">
+                        <h3>安全保障</h3>
+                        <img src="images/common/footer_1.png" alt=""/>
+                        <a href="javascript:;">合同流程</a>
+                        <a href="javascript:;">担保交易</a>
+                        <a href="javascript:;">合同法律效力</a>
+                    </li>
+                    <li class="footer_list fl">
+                        <h3>客服中心</h3>
+                        <img src="images/common/footer_1.png" alt=""/>
+                        <a href="javascript:;">帮助中心</a>
+                        <a href="javascript:;">建议中心</a>
+                        <a href="javascript:;">在线问答</a>
+                    </li>
+                    <li class="footer_list fl">
+                        <h3>关于我们</h3>
+                        <img src="images/common/footer_1.png" alt=""/>
+                        <a href="javascript:;">公司简介</a>
+                        <a href="javascript:;">商务合作</a>
+                        <a href="javascript:;">网店资讯</a>
+                        <a href="javascript:;">诚聘英才</a>
+                    </li>
+                </ul>
+                <div class="logo_lists">
+                    <a href="javascript:;"><img src="images/common/logo_1.png" alt=""/></a>
+                    <a href="javascript:;"><img src="images/common/logo_2.png" alt=""/></a>
+                    <a href="javascript:;"><img src="images/common/logo_3.png" alt=""/></a>
+                    <a href="javascript:;"><img src="images/common/logo_4.png" alt=""/></a>
+                    <a href="javascript:;"><img src="images/common/logo_5.png" alt=""/></a>
+                    <a href="javascript:;"><img src="images/common/logo_6.png" alt=""/></a>
+                    <a href="javascript:;"><img src="images/common/logo_7.png" alt=""/></a>
+                </div>
+            </div>
+            <div class="footer_top_right fr">
+                <img src="images/common/yidian_1.png" alt="" class="yidian_logo"/>
+
+                <p class="yidian_site">公司分部覆盖电商主要城市<br/>
+                    目前由成都总部至设立杭州、广州、北京分公司<br/>
+                    武汉、福州目前已在筹建中，敬请期待</p>
+
+                <div class="erweima_box">
+                    <img src="images/common/erweima_1.png" alt=""/>
+
+                    <p>关注易店无忧微信公众号</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_mid">
+        <div class="main clearfix">
+            <div class="footer_mid_left fl">
+                <p class="footer_please">商务合作请联系</p>
+
+                <div class="footer_contact">
+                    <span><img src="images/common/contact_1.png" alt=""/><a href="javascript:;" class="footer_name">yidianwuyou@qq.com</a></span>
+                    <span><img src="images/common/contact_2.png" alt=""/><a href="javascript:;" class="footer_name">
+                        400-006-1351</a></span>
+                </div>
+            </div>
+            <div class="footer_mids fl">
+                <p class="footer_please">常年法律顾问</p>
+
+                <p class="footer_name">四川矩衡律师事务所 </p>
+            </div>
+            <div class="footer_mid_right fl">
+                <p class="footer_please">商务合作请联系</p>
+
+                <div class="footer_contact">
+                    <span><img src="images/common/contact_2.png" alt=""/><a href="javascript:;"
+                                                                            class="footer_change">400-006-1351<i
+                            class="footer_name">转</i> 8</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_bottom">
+        <div class="main">
+            <p class="footer_copy">Copyright 2013-2018 成都易拉冠网络科技有限公司 版权所有 蜀ICP备13011205号 易店无忧淘宝店铺转让平台
+                www.yidian51.com</p>
+
+            <div class="footer_link clearfix">
+                <span class="footer_link_name fl">友情链接：</span>
+
+                <p class="link_lists fl">
+                    <a href="javascript:;">淘宝店铺转让</a>
+                    <a href="javascript:;">淘宝网店估价 </a>
+                    <a href="javascript:;">淘宝店铺装修 </a>
+                    <a href="javascript:;"> 免费模板 </a>
+                    <a href="javascript:;">免费淘宝模板 </a>
+                    <a href="javascript:;">淘宝开店 </a>
+                    <a href="javascript:;">一件代发 </a>
+                    <a href="javascript:;">淘宝店铺 </a>
+                    <a href="javascript:;">装修教程 </a>
+                    <a href="javascript:;">淘宝助理 </a>
+                    <a href="javascript:;">微信公众号交易 </a>
+                    <a href="javascript:;">彪马 </a>
+                    <a href="javascript:;">重庆二手房网 </a>
+                    <a href="javascript:;">运动鞋 </a>
+                    <a href="javascript:;">淘宝大学 </a>
+                    <a href="javascript:;">南京房产网 </a>
+                    <a href="javascript:;">买房 </a>
+                    <a href="javascript:;">梦芭莎 </a>
+                    <a href="javascript:;">创业投资 </a>
+                    <a href="javascript:;">好团网 </a>
+                    <a href="javascript:;">服装批发市场 </a>
+                    <a href="javascript:;">服装资讯 </a>
+                    <a href="javascript:;">聚橙网 </a>
+                    <a href="javascript:;">网站转让 </a>
+                    <a href="javascript:;">没得比 </a>
+                    <a href="javascript:;">阿迪达斯三叶草 </a>
+                    <a href="javascript:;">黔南天气预报 </a>
+                    <a href="javascript:;">美瞳 </a>
+                    <a href="javascript:;">1626潮牌 </a>
+                    <a href="javascript:;">电商erp</a>
+                    <a href="javascript:;">论文发表 </a>
+                    <a href="javascript:;">销售技巧培训 </a>
+                    <a href="javascript:;">商标转让 </a>
+                    <a href="javascript:;">法律法规 </a>
+                    <a href="javascript:;" class="link_more">申请友链>> </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--==========右侧工具栏================-->
+<div class="right_tools_compareItem">
+    <!--==========右侧工具栏================-->
+    <div class="floatBar floatBar_compare">
+        <ul>
+            <li class="li01">
+                <a href=""><i></i><span class="floatBar_compare_span">我的易店无忧</span></a>
+            </li>
+            <li class="li02">
+                <!--超过4个就加exceed-->
+                <a href="javascript:;"><i></i><span>加入对比</span><em class="binum" id="msg_compare">5</em></a>
+            </li>
+            <li class="li03">
+                <a href="">
+                    <i></i>
+		                <span>
+		                    <img src="images/common/erweima_1.png" width="110" alt="">
+		                    <b>关注微信</b>
+		                </span>
+                </a>
+            </li>
+            <li class="li04">
+                <a href=""><i></i><span>咨询中心</span></a>
+            </li>
+            <li class="li05">
+                <a href=""><i></i><span>客服真假验证</span></a>
+            </li>
+            <li class="li06">
+                <a href=""><i></i><span>联系客服</span></a>
+            </li>
+            <li class="li07">
+                <a href=""><i></i><span>投诉建议</span></a>
+            </li>
+            <li class="li08">
+                <a href="javascript:;"><i></i><span>返回顶部</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="right_compareItem item">
+        <div class="right_compareItem_title">
+            <div class="back_arrow"></div>
+            <div><span class="shop_compare_span">店铺对比</span></div>
+            <div class="wrap_close_btn">
+                <img src="images/list_compare/close33.png">
+            </div>
+        </div>
+        <!-- 右边的目录提要 -->
+        <!-- 前面4个是对比的商品，下面是对比的btn -->
+        <ul class="compare_goods_catalogue">
+            <li class="every_goods_catalogue every_goods_catalogue_js">
+                <img class="icon_t_mall" src="images/list_compare/JDicon.png">
+
+                <div class="every_goods_catalogue_content">
+                    <a href="" class="every_goods_wrap_span"><span>江浙沪地区家居家居布艺旗舰店动态</span></a>
+
+                    <p class="every_goods_different">商品类型 : 专营店</p>
+
+                    <p class="every_goods_different">商品类目 : 3C数码</p>
+
+                    <p>产品价格 : <span class="compare_span">￥85605元</span></p>
+                </div>
+                <i class="icon_close_btn"></i>
+            </li>
+            <li class="every_goods_catalogue every_goods_catalogue_js">
+                <img class="icon_t_mall" src="images/list_compare/JDicon.png">
+
+                <div class="every_goods_catalogue_content">
+                    <a href="" class="every_goods_wrap_span"><span>江浙沪地区家居家居布艺旗舰店动态</span></a>
+
+                    <p class="every_goods_different">商品类型 : 专营店</p>
+
+                    <p class="every_goods_different">商品类目 : 3C数码</p>
+
+                    <p>产品价格 : <span class="compare_span">￥85605元</span></p>
+                </div>
+                <i class="icon_close_btn"></i>
+            </li>
+            <li class="every_goods_catalogue every_goods_catalogue_js">
+                <img class="icon_t_mall" src="images/list_compare/JDicon.png">
+
+                <div class="every_goods_catalogue_content">
+                    <a href="" class="every_goods_wrap_span"><span>江浙沪地区家居家居布艺旗舰店动态</span></a>
+
+                    <p class="every_goods_different">商品类型 : 专营店</p>
+
+                    <p class="every_goods_different">商品类目 : 3C数码</p>
+
+                    <p>产品价格 : <span class="compare_span">￥85605元</span></p>
+                </div>
+                <i class="icon_close_btn"></i>
+            </li>
+            <li class="every_goods_catalogue every_goods_catalogue_js">
+                <img class="icon_t_mall" src="images/list_compare/JDicon.png">
+
+                <div class="every_goods_catalogue_content">
+                    <a href="" class="every_goods_wrap_span"><span>江浙沪地区家居家居布艺旗舰店动态</span></a>
+
+                    <p class="every_goods_different">商品类型 : 专营店</p>
+
+                    <p class="every_goods_different">商品类目 : 3C数码</p>
+
+                    <p>产品价格 : <span class="compare_span">￥85605元</span></p>
+                </div>
+                <i class="icon_close_btn"></i>
+            </li>
+            <li class="last_border">
+                <div class="compare_goods_btn">
+                    <span>开始对比</span>
+                </div>
+                <span class="compare_choose_intro">最多选择四个</span>
+                <i>清空
+                    <img src="images/list_compare/clear_btn.png">
+                </i>
+            </li>
+        </ul>
+        <!-- 推荐店铺 -->
+        <div class="commend_goods">
+            <!-- 推荐店铺title -->
+            <div class="right_compareItem_title commend_store">
+                <div class="back_arrow recommendBackArrow"></div>
+                <div class="wrapShopSpan"><span class="shop_compare_span1">推荐店铺</span></div>
+            </div>
+            <!-- 推荐的店铺 -->
+            <ul class="compare_goods_catalogue recommend_store1">
+                <li class="every_goods_catalogue catalogue_recommend">
+                    <img class="icon_t_mall" src="images/list_compare/JDicon.png">
+
+                    <div class="every_goods_catalogue_content">
+                        <a href="" class="every_goods_wrap_span"><span>江浙沪地区家居家居布艺旗舰店动态</span></a>
+
+                    </div>
+                    <div class="wrapCompare_rec">
+                        <span class="commend_span">￥85605元</span>
+                        <a href="javascript:;" class="add_compare add_compare_recommend">
+                            <i class="add_recommend_icon"></i>
+                            对比
+                        </a>
+                    </div>
+                </li>
+                <li class="every_goods_catalogue catalogue_recommend">
+                    <img class="icon_t_mall" src="images/list_compare/JDicon.png">
+
+                    <div class="every_goods_catalogue_content">
+                        <a href="" class="every_goods_wrap_span"><span>江浙沪地区家居家居布艺旗舰店动态</span></a>
+
+                    </div>
+                    <div class="wrapCompare_rec">
+                        <span class="commend_span">￥85605元</span>
+                        <a href="javascript:;" class="add_compare add_compare_recommend">
+                            <i class="add_recommend_icon"></i>
+                            对比
+                        </a>
+                    </div>
+                </li>
+                <li class="last_border">
+                    <div class="compare_goods_btn recommendBtn">
+                        <span>换一批</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!--==========底部悬浮================-->
+<div class="supension">
+    <div class="supension_btn">
+        <span>顾问咨询</span>
+    </div>
+    <div class="supension_con">
+        <div class="main clearfix supension_main">
+            <div class="supension_img fl"><img src="images/common/supension_2.png" alt=""/></div>
+            <div class="suspension_slide fl">
+                <div class="hd"></div>
+                <div class="bd supension_bd">
+                    <ul class="supension_lists">
+                        <li class="supension_list">
+                            <ul class="supension_bd_lists clearfix">
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="supension_list">
+                            <ul class="supension_bd_lists clearfix">
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li class="supension_bd_list fl">
+                                    <dl class="supension_dl clearfix">
+                                        <dt class="supension_dt fl">
+                                            <img src="images/common/supension_person.png" alt=""/>
+                                        </dt>
+                                        <dd class="supension_dd fl">
+                                            <p class="supension_consult">
+                                                <span class="supension_title">顾问</span>
+                                                <i class="supension_name">蔡双霜</i>
+                                            </p>
+
+                                            <p class="supension_consult">
+                                                <span class="supension_title">QQ</span>
+                                                <i class="supension_name">3004651680</i>
+                                            </p>
+                                            <a href="javascript:;" class="supension_contact">
+                                                立即联系
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <a href="javascript:;" class="prev supension_prev"></a>
+                <a href="javascript:;" class="prev supension_next"></a>
+                <span class="supension_c"></span>
+            </div>
+            <a class="supension_close " href="javascript:;"></a>
+            <a class="supension_more " href="javascript:;"></a>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            // 底部通栏轮播
+            jQuery(".suspension_slide").slide({
+                mainCell: ".supension_lists",
+                effect: "fade"
+            });
+        })
+    </script>
+</div>
+<!--==========真假客服验证================-->
+<div class="pop_verify">
+    <form id="verifySer">
+        <div class="pop_verify_hd"><span class="fl tit">客服真假验证</span><a href="javascript:;" class="fr close"></a></div>
+        <div class="pop_verify_bd">
+            <ul>
+                <li>
+                    <input name="verify" type="text" class="inp" placeholder="输入您需要验证的QQ号和手机号"/>
+                </li>
+                <li>
+                    <input onclick="verifySer();" type="button" class="btn" value="立即验证"/>
+                </li>
+            </ul>
+        </div>
+        <div class="pop_verify_ft">
+            <p class="t1" id="verify">您验证的号码： <strong>4000061351</strong> 为真客服！</p>
+
+            <p class="t2"><img id="imgurl"
+                               src="http://www.yidian51.com/static/edition_201510/images/pop_verify_true.png"/></p>
+
+            <p class="t3" id="verify_1">此客服为真客服，请放心交易<br/>
+                如有疑问，请咨询客服电话：400-006-1351</p>
+        </div>
+    </form>
+</div>
+<div id="darkbg"></div>
+<!--==========新年活动================-->
+<!--<div id="newYear">-->
+    <!--<div class="newYear_left">-->
+        <!--<img src="images/Newyear/Left.png" alt="">-->
+    <!--</div>-->
+    <!--<div class="newYear_right">-->
+        <!--<img src="images/Newyear/Right.png" alt="">-->
+    <!--</div>-->
+<!--</div>-->
+<div id="newYear_warp">
+    <div class="newYear_middle">
+        <img src="images/Newyear/cancel.png" class="newYear_imgone" alt="">
+        <img src="images/Newyear/title.png" class="newYear_imgt" alt="">
+        <img src="images/Newyear/title2018.png" class="newYear_imgtit" alt="">
+        <img src="images/Newyear/popupLeft.png" id="newYear_Imgtwo" class="newYear_imgtwo" alt="">
+        <img src="images/Newyear/popup.png" class="newYear_imgthree" alt="">
+        <img src="images/Newyear/popupRight.png" class="newYear_imgfour" alt="">
+        <div class="newYear_imgfive"></div>
+        <img src="images/Newyear/scroll.png" class="newYear_imgsix" alt="">
+        <!--<img src="images/Newyear/Leo01.png" class="newYear_imgfive" alt="">-->
+        <!--<img src="images/Newyear/Leo02.png" class="newYear_imgfive" alt="">-->
+        </div>
+    <div class="content_3 content">
+
+        <p>尊敬的客户朋友们:</p>
+
+        <p>&nbsp; &nbsp; &nbsp; &nbsp;我们怀着感恩的心情向您致以诚挚的谢意,易店无忧所取得的每一点进步都离不开您的关注和支持,您的理解信任是我们进步的动力. </p>
+
+        <p>&nbsp; &nbsp; &nbsp; &nbsp;春节在即，为了不影响您的业务开展，根据《国务院办公厅关于2018年部分节假日安排通知》相关内容，结合实际情况，我司将放假安排公示如下：
+        </p>
+
+        <p>&nbsp; &nbsp; &nbsp; &nbsp;2月8日起易店无忧开始春节休假，休假时长共计15天。2月23日（正月初八）正式上班。请您根据自身情况安排节前节后的业务需求。如有不便之处，敬请谅解!
+        </p>
+
+        <p>&nbsp; &nbsp; &nbsp; &nbsp;值此佳节之际，鱼爪全体同仁恭祝您新年新气象，狗年福运旺！
+            易店无忧全体  敬上</p>
+
+
+    </div>
+    </div>
+
+
+<!--<script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script>-->
+
+<!-- custom scrollbars plugin -->
+
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+</body>
+</html>
