@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+    // total必需,初始值或者计算结束后的返回值。。。 currentValue必需。当前元素..
+    //currentIndex 当前元素的索引...arr当前元素所属的数组对象... initialValue传递给函数的初始值
+    const _Array = [['duu','li'],['y',"!"]]
+    const _newArray = _Array.reduce((prev,next)=> prev.concat(next))   //reduce累加  concat合并  好东西!
+    console.log(_newArray); // ["duu", "li", "y", "!"]
+
+    const wages = [{
+        name:'duuliy',
+        wage:9.9
+    },{
+        name:'老王',
+        wage:10 
+    }]
+    const allWage = wages.reduce((number,{wage})=>{
+        return number+=wage
+    },0)
+    console.log(allWage);
+    
+    const covers = [{
+        id:1,
+        cover:"react16.jpg"
+    },{ 
+        id:2,
+        cover:"vue2.4.2.png"
+    }]
+    covers.forEach((item)=>{
+        const cover = item.cover
+        // console.log(item.cover)
+        item.cover = cover.replace(/(.*)(\.(jpg|jpeg|png))$/,'$1-beta$2')       //这里做了个倒序
+    })
+    console.log(covers); //Array[2]  cover:"react16-beta.jpg" id:1  
+
+    const newCovers = covers.reduce((arr,next)=>{
+        const {cover} = next
+        const newCover = cover.replace(/(.*)(\.(jpg|jpeg|png))$/,'$1-beta$2')
+        arr.push({
+            ...next,
+            cover:newCover
+        })
+        return arr
+    },[])
+    console.log(newCovers);
+</script>
+</html>

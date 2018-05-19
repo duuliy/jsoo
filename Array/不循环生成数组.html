@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h4>不循环生成n个数组 下标与值相等</h4>
+</body>
+<script>
+    //1
+    const arr1 = [...new Array(10)].map((v, i) => i)
+    console.log(arr1)
+    //2
+    const arr2 = new Array(10).fill().map((v, i) => i)
+    // console.log(arr2)
+    //3
+    const arr3 = Array.from({ length: 10 }).map((v, i) => i)
+    // console.log(arr3)
+    //4
+    const arr4 = [...new Array(10).keys()]
+    //  console.log(arr4)
+    //5
+    const arr5 = Object.keys(Array.from({ length: 10 }))    //传化json
+    // console.log(arr5)
+</script>
+
+</html>
