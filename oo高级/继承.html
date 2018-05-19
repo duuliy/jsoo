@@ -1,92 +1,4 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 
-</body>
-<script>
-//第一种   call()   或apply()
-
-
-    //第二个例子
-    function changeStyle( attr,value ){
-        this.style[attr] = value;
-    }
-    var test = document.getElementById('test');
-//    changeStyle('width','200px')      //此时报错  this指向window  window没有  style属性
-    //此时如果test这个div要调用changeStyle方法可以使用call或者apply
-    changeStyle.call(test,'width','200px');
-    console.log(test.style.width);//200px  此时调用成功
-
-    //第三个例子
-    function fartherName(){
-       console.log( this.farther.name );
-    }
-    var people1 ={
-        farther:{
-            name:"duuliy"
-        },
-        fartherwho:fartherName
-    };
-    var people2 ={
-        farther:{
-            name:"赵日天"
-        },
-        fartherwho:fartherName
-    };
-    people1.fartherwho();     //duuliy
-    people2.fartherwho();     //赵日天
-    [people1,people2].map(function(value,i){
-        fartherName.call(value)
-//        value.fartherwho();
-    })
-    console.log('==========================')
-    //第四个例子
-    function Hi ( name ) {
-        this.name = name;
-    }
-    Hi.prototype.sayHi = function(){       //Hi  的原型声明一个sayHi方法
-        console.log(`你好${this.name}`)
-    }
-    let H = new Hi('duuliy')
-    function Sex (sex) {
-        this.sex = sex;
-        Hi.call(this,arguments)          //继承 Hi  现在Sex就有 sayHi的方法了
-    }
-    Sex.prototype.saySex = function(){
-        console.log(`我是${this.sex}孩籽`)
-    }
-    let S = new Sex('男')
-    H.sayHi();     //你好，duuliy
-    S.saySex();    //我是男孩子
-    S.sayHi();
-
-
-
-
-//第二种  prototype 模式
-function aa(){
-	this.name = "赵日天";
-}
-function bb(){
-	this.sayName = function(){
-		alert(this.name);
-	}
-}
-bb.prototype = new aa();             //将bb 函数的prototype对象 指向 aa的实例    
-bb.prototype.constructor = bb;       //重新改变 prototype对象后  constructor指向 aa  所以要重新还原(深拷贝)
-var cc = new bb();
-cc.sayName();           //赵日天
-
-</script>
-</html>
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,4 +88,4 @@ cc.sayName();           //赵日天
 
 </script>
 </html>
->>>>>>> 2c7da21cefca1adbb7f7bfba7560df54720ed219
+
