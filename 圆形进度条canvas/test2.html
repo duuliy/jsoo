@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>圆形进度条</title>
+    <style>
+     *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+        .dd{
+            float:left;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="dd">
+        <canvas class="canvas" data-setting='{"rotate":"0.8","text":"投资中","bgColor":"#FFDCDA","color":"#F9655A","time":8}'></canvas>
+    </div>
+    <div class="dd">
+        <canvas class="canvas" data-setting='{"rotate":"0.5","text":"收益中","bgColor":"#D8FFD8","color":"#6ED4AC","time":15}'></canvas>
+    </div>
+    <div class="dd">
+        <canvas class="canvas" data-setting='{"rotate":"0.15","text":"审核中","bgColor":"#62c9ff","color":"#C298D2","time":20}'></canvas>
+    </div>
+</div>
+<script src="../jquery-1.7.2.min.js"></script>
+<script>
+    $(function(){
+        duuliy.init($(".dd"));
+    });
+    (function($){
+        var _t;
+        var duuliy = function(element){
+            var settings = element.find("canvas").data("setting"),
+                rotate = settings.rotate,
+                text= settings.text,
+                bgColor= settings.bgColor,
+                color = settings.color,
+                node = element.find("canvas").get(0),
+                time=settings.time ? settings.time :20;
+                this.loadCanvas(node,rotate,text,bgColor,color,time);
+               _t = this;
+        };
+        duuliy.prototype = {
+            draw:function(node,rotate,text,bgColor,color){
+                var canvas = node;
+                canvas.width = 150;
+                canvas.height = 150;
+                var duu = canvas.getContext("2d");
+                duu.clearRect(0,0,canvas.width,canvas.height);
+                duu.save();
+                duu.beginPath();
+                duu.arc(70,70,50,0,Math.PI*2,false);
+                duu.lineWidth=8;
+                duu.strokeStyle=bgColor;
+                duu.stroke();
+                duu.closePath();
+                //文字
+                duu.font="14px Microsoft YaHei";
+                duu.textAlign="center";
+                duu.fillText(text+(rotate.toFixed(2))+"%",72,75);
+                //进度条
+                duu.beginPath();
+                duu.strokeStyle=color;
+                duu.lineWidth=8;
+                duu.arc(70,70,50,-(Math.PI/2),(Math.PI*2*rotate) - (Math.PI/2) ,false);
+                duu.stroke();
+                duu.restore();
+            },
+            loadCanvas:function(node,thisRotate,text,bgColor,color,time){
+                var rotate=0;
+                var r = setInterval(function(){
+                    if(rotate>thisRotate){
+                        clearInterval(r);
+                    }else{
+                        rotate += 0.01;
+                        _t.draw(node,rotate,text,bgColor,color);
+                    }
+                },time)
+            }
+        };
+        duuliy.init = function(element){
+            var _this_ = this;
+            element.each(function(){
+                new _this_($(this));
+            })
+        };
+        window['duuliy'] = duuliy;
+    })(jQuery)
+
+</script>
+</body>
+</html>
