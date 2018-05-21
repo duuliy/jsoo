@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" manifest="test.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>manifest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+
+</head>
+<body>
+    
+<h1>要在node环境中做测试</h1>
+<h1>manifest demo</h1>
+<img src="banner1.jpg" alt="">
+<img src="banner2.jpg" alt="">
+<img src="banner3.jpg" alt="">
+</body>
+
+<script src="test.js"></script>
+<script>
+
+//     //当前文档对应的applicationCache对象
+// window.applicationCache
+
+// //当前缓存所处的状态，为0～5的整数值，分别对应一个状态，并分别对应一个常量
+// window.applicationCache.status
+
+// window.applicationCache.UNCACHED === 0    //未缓存，比如一个页面没有制定缓存清单，其状态就是UNCACHED
+// window.applicationCache.IDLE === 1 //空闲，缓存清单指定的文件已经全部被页面缓存，此时状态就是IDLE
+// window.applicationCache.CHECKING === 2 //页面正在检查当前离线缓存是否需要更新
+// window.applicationCache.DOWNLOADING === 3 //页面正在下载需要更新的缓存文件
+// window.applicationCache.UPDATEREADY === 4  //页面缓存更新完毕
+// window.applicationCache.OBSOLETE === 5  //缓存过期，比如页面检查缓存是否过期时，发现服务器上的.manifest文件被删掉了
+
+// //常用API，在后面会稍详细介绍
+// window.applicationCache.update()  //update方法调用时，页面会主动与服务器通信，检查页面当前的缓存是否为最新的，如不是，则下载更新后的资源
+// window.applicationCache.swapCache()  //updateready后，更新到最新的应用缓存
+
+window.applicationCache.onupdateready=function(){          //监听是否跟新
+    window.location.reload()  //更新后强制刷新
+}
+
+</script>
+</html>

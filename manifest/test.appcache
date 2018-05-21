@@ -1,0 +1,15 @@
+CACHE MANIFEST
+
+CACHE:
+# v1.0  
+test.html
+banner1.jpg
+banner2.jpg
+
+NETWORK:
+banner3.jpg
+
+SETTINGS:
+prefer-online
+
+# hash: a81ac32a629f01b23424263b27ba2be51a03c45ca2d8fa21ab627f1c152db682
