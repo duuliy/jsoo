@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        canvas{
+            border:1px solid blue;
+        }
+        #imageBox{
+            position:relative;
+            display:inline-block;
+        }
+        #cutBox{
+            width:200px;
+            height:200px;
+            border:2px solid red;
+            position:absolute;
+            top:50px;
+            left:50px;
+        }
+        #imgShow{
+            display:inline-block;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <input type="file" id="uploadImg">
+    <h1>图片节点</h1>
+    <img src="" alt="" id="imgnode" style="display:none">
+</div>
+<div id="imageBox">
+    <canvas width="500" height="500" id="myCanvas"></canvas>
+    <div id="cutBox"></div>
+</div>
+
+<div id="imgShow">
+    <h1>预览</h1>
+    <canvas id="newCanvas" width="200" height="200"></canvas>
+    <button onclick="saveimage()">保存图片</button>
+</div>
+
+<script src="jquery-1.7.2.min.js"></script>
+<script>
+    //1.获取到Canvas上下文 -》画笔
+    var ctx = $("#myCanvas")[0].getContext("2d");
+
+    $("#uploadImg").change(function(){
+    //   console.log($("#uploadImg")[0].value)
+//      $("#imgnode").attr("src",$("#uploadImg")[0].value)  //浏览器不允许访问本地资源
+      var reader = new FileReader()
+      reader.readAsDataURL($("#uploadImg")[0].files[0]);
+      reader.onload=function(){      //"读取成功时触发
+        // console.log(this);
+        $("#imgnode")[0].src=this.result;
+        $("#imgnode")[0].onload=function(){
+//            1.3种参数
+//          1.图片节点 2.画布X坐标 3.画布Y坐标
+//           ctx.drawImage($("#imgnode")[0],50,100)
+//          2. 5个参数
+//          1.img元素节点 2.画布X坐标 3.画布Y坐标 4.宽度 5.高度
+//          ctx.drawImage($("#imgnode")[0],0,0,50,50)
+//          ctx.drawImage($("#imgnode")[0],50,0,50,50)
+//          ctx.drawImage($("#imgnode")[0],100,0,50,50)
+//          ctx.drawImage($("#imgnode")[0],200,50,50,50)
+//          ctx.drawImage($("#imgnode")[0],200,80,50,50)
+//          ctx.drawImage($("#imgnode")[0],200,150,50,50)
+//          ctx.drawImage($("#imgnode")[0],600,50,50,50)
+
+//          3. 9个参数
+//          1.img元素节点 2.切割起点X坐标 3.切割起点Y坐标
+//          4.切割宽度  5.切割高度
+//          6.画布X坐标 7.画布Y坐标 8.宽度 9.高度
+
+//          ctx.drawImage($("#imgnode")[0],50,100,200,200,0,0,400,400)
+          ctx.drawImage($("#imgnode")[0],0,0,500,500);
+        }
+      }
+    })
+
+    $("#cutBox").mousedown(function(e){
+      var clickE = e;
+      var positionleft = $("#cutBox").position().left   //自身(0,0)距离父级div左边的位置
+      var positiontop = $("#cutBox").position().top    //自身(0,0)距离父级div顶部的位置
+      // console.log(clickE.offsetY);  //  鼠标相对父级div按下的坐标
+      // console.log(positiontop)
+        //  console.log(clickE.clientX);//  鼠标相对窗口div按下的坐标
+      $(this).mousemove(function(e){
+        var currentE = e;
+        // console.log(currentE.clientX);//  相对窗口div按下的坐标
+        $(this).css({
+//          left: currentE.clientX-$("#cutBox").offset().left - clickE.offsetX +"px",
+//          top: currentE.clientY-$("#cutBox").offset().top - clickE.offsetY +"px"
+//          top: currentE.clientY - clickE.offsetY + "px"
+          left:currentE.clientX - clickE.clientX + positionleft + "px",
+          top:currentE.clientY - clickE.clientY + positiontop + "px"
+        })
+      })
+    })
+
+    $(document).mouseup(function(){
+      $("#cutBox").off("mousemove")
+      var newpositionleft = $("#cutBox").position().left
+      var newpositiontop = $("#cutBox").position().top
+//      获取红框框里面的像素数据，1.起始坐标left2.起始坐标right3.宽200，4.高200
+      var imagedata = ctx.getImageData(newpositionleft,newpositiontop,200,200)
+    //   console.log(imagedata)
+      var newctx = $("#newCanvas")[0].getContext("2d");
+      //在newctx内部：2.起始坐标0，3.起始坐标0
+      newctx.putImageData(imagedata,0,0)
+    })
+
+    function saveimage(){
+        //把canves转成图片
+      var imageDataUrl = $("#newCanvas")[0].toDataURL();   //result部分  (地址+base64)
+      console.log(imageDataUrl);
+      $.ajax({
+        type:"POST",
+        url:"uploadCanvas.do",
+        data:{
+          imagedata: imageDataUrl
+        },
+        success:function(data){
+          console.log(data)
+        }
+      })
+    }
+</script>
+</body>
+</html>
