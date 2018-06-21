@@ -64,7 +64,7 @@
 
         //删除loading动画
         delete:function( ele ){
-            ele.remove();
+            ele.remove() ;
         },
 
         selectImg:function( options ){
