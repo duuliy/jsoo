@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .friendList {
+            width: inherit;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            /* //总体 */
+            &::-ms-scrollbar {  
+                width: 8px;
+                height: 20px;
+            }
+            /* //上下按钮 */
+            &::-ms-scrollbar-button {
+                display: none;
+            }
+            /* //滚动槽 */
+            &::-ms-scrollbar-track {
+                background: @track;
+                height: 10px;
+            }
+            /* //滑块 */
+            &::-ms-scrollbar-thumb {
+                width: 8px;
+                height: 20px;
+                background: rgba(197, 208, 223, 1);
+                border-radius: 3px;
+            }
+
+            &::-webkit-scrollbar {
+                width: 8px;
+                height: 20px;
+            }
+            &::-webkit-scrollbar-button {
+                display: none;
+            }
+            &::-webkit-scrollbar-track {
+                background: @track;
+                height: 10px;
+            }
+            &::-webkit-scrollbar-thumb {
+                width: 8px;
+                height: 20px;
+                background: rgba(197, 208, 223, 1);
+                border-radius: 3px;
+            }
+            &::-moz-scrollbar {
+                width: 8px;
+                height: 20px;
+            }
+            &::-moz-scrollbar-button {
+                display: none;
+            }
+
+            &::-moz-scrollbar-track {
+                background: @track;
+                height: 10px;
+            }
+            &::-moz-scrollbar-thumb {
+                width: 8px;
+                height: 20px;
+                background: rgba(197, 208, 223, 1);
+                border-radius: 3px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="friendList">
+        <FriendList :name='group_name' :num='group_num' v-for='item in 20'></FriendList>
+    </div>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        var div = $("form").find("div");
+        div.mouseover(function (e) {
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            var _this = $(this);
+            if (target.nodeName.toLowerCase() == 'li') {
+                _this.find('li').css('display', 'block');
+                _this.find('li').click(function () {
+                    var li = $(this);
+                    _this.find('.active').text(li.text());
+                });
+            }
+            _this.mouseout(function (e) {
+                var event = e || window.event;
+                var target = event.target || event.srcElement;
+                if (target.nodeName.toLowerCase() == 'li')
+                    _this.find('li').not('.active').css('display', 'none');
+            });
+        });
+    });
+</script>
+
+</html>
