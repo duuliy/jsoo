@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul li {
+            border: 1px solid red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+<body>
+    <ul id="ulItem" onclick="events()">
+        <li data-value="something">
+            <span>title</span>
+            <span>data</span>
+            <span>data</span>
+        </li>
+        <li data-value="something">
+            <span>data</span>
+            <span>data</span>
+            <span>data</span>
+        </li>
+        <li data-value="something"></li>
+        <li data-value="something"></li>
+    </ul>
+    <script>
+
+        var ulItem = document.getElementById("ulItem");
+        ulItem.onclick = function (e) {
+            if (e.target.tagName == 'LI') {
+                console.log(e.target);
+            }
+        }
+    </script>
+</body>
+
+</html>
