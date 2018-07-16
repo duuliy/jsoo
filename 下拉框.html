@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>statistics test</title>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .select_box {
+            width: 147px;
+            height: 34px;
+            background: linear-gradient(180deg, rgba(75, 89, 107, 1), rgba(51, 61, 75, 1));
+            position: relative;
+            float: left;
+            margin-right: 50px;
+        }
+
+        .select_box span {
+            display: inline-block;
+            width: 200px;
+            height: 36px;
+            line-height: 36px;
+            cursor: pointer;
+            color: white;
+            text-indent: 10px;
+        }
+
+        .select_box .span_aa {
+            color: #C36;
+        }
+
+        .select_box ul {
+            width: 145px;
+            position: absolute;
+            top: 34px;
+            border: 1px solid rgba(75, 89, 107, 1);
+            display: none;
+            background: #fff;
+        }
+
+        .select_box li {
+            cursor: pointer;
+            line-height: 34px;
+            text-indent: 10px;
+        }
+
+        .select_box li:hover {
+            background: rgb(223, 227, 231);
+            /* color: #fff; */
+        }
+
+        .select_box font {
+            position: absolute;
+            right: 10px;
+            top:15px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid white;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="select_box">
+        <font></font>
+        <span>中文</span>
+        <ul>
+            <li>English</li>
+            <li>选项2</li>
+            <li>选项3</li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
+<script src='./jquery-1.7.2.min.js'></script>
+<script type="text/javascript">
+    $(function () {
+        var s_title = $(".select_box span");
+        var s_select = $(".select_box li");
+
+        s_title.click(function (e) {
+            // $(this).addClass("span_aa");  //可以试试
+            $(this).next("ul").show();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+
+
+        s_select.click(function () {
+            var s_text = $(this).html();
+            var s_title_2 = $(this).parent('ul').prev("span");
+            s_title_2.html(s_text).removeClass("span_aa");
+            $(this).parent('ul').hide();
+        });
+
+
+
+        $(document).click(function () {
+            // s_title.removeClass("span_aa");
+            $(".select_box ul").hide();
+        });
+
+
+
+    });
+</script>
