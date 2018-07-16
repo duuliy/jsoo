@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>clipboard示例</title>
+    <style>
+        .sss {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <span class="hleft" v-on:click="copyLink(data.url,'text')">复制链接</span>
+    <textarea id="text">{{data.url}}</textarea> -->
+
+    <!-- <input id="demoInput" value="hello world"  maxlength="0" onfocus="this.blur();"> -->
+    <textarea id="demoInput" onfocus="this.blur();">{{data.url}}</textarea>
+    <button id="btn">点我复制</button>
+
+    <select name="" class="sellang">
+        <option value="中文">中文</option>
+        <option value="English">English</option>
+    </select>
+
+    <div class="sss">
+        555
+    </div>
+    <input type="button" value="随机生成4位数" onclick="f1()">
+    <script>
+        const sss = document.querySelector('.sss');
+        sss.setAttribute('style', 'background-Color: red');
+
+
+        const btn = document.querySelector('#btn');
+        btn.addEventListener('click', () => {
+            const input = document.querySelector('#demoInput');
+            input.select();
+            if (document.execCommand('copy')) {
+                document.execCommand('copy');
+                console.log('复制成功');
+            }
+        })
+
+        // copyToClipBoard:function(s,id){ //复制到剪切板
+        // 	if(document.execCommand){
+        // 		var e=document.getElementById(id);
+        // 		e.select();
+        // 		document.execCommand("Copy");
+        // 		return true;
+        // 	}
+        // 	if(window.clipboardData){
+        //         window.clipboardData.setData("Text", s);
+        //         return true;
+        //     }
+        // 	return false;
+        // },
+
+//4位随机数
+        // function f1(){
+        //     var arr_4=new Array()
+        //     function getRandom(min,max)                                                 //开始取数
+        //         {                                                                                       
+        //                                                                                 //随机数
+        //             var random = Math.random()*(max-min)+min;
+        //                                                                         //向下取整
+        //             random = Math.floor(random);
+        //             if(arr_4.length < 4)                         //判断数组长度
+        //             {   
+        //                 for(i=0;i<=arr_4.length;i++)             //遍历数组。
+        //                 {
+        //                     if(random==arr_4[i])                    //比较随机数
+        //                     {   
+        //                         break;
+        //                     }
+        //                     else                               
+        //                     {
+        //                         if(i==arr_4.length)
+        //                         {arr_4.push(random);break;}
+        //                     }
+        //                 };
+        //                 getRandom(0,10);
+        //             }
+
+        //         }
+
+        //         getRandom(0,10);        //随机取0-9
+        //     console.log(arr_4)
+        //     }
+
+
+        function colors() {
+            const allcolors = [
+                "#669AF1",
+                "#54CFE1",
+                "#50D18D",
+                "#E1A754",
+                "#E16454",
+                "#5464E1",
+                "#7C54E1",
+                "#B556EC",
+                "#589ABF",
+                "#2F66C0",
+                "#DF5F8F",
+                "#75A922",
+                "#A87AA3",
+                "#BA311F",
+                "#0013A4",
+                "#2CB5AD",
+                "#7274A5",
+                "#196896",
+                "#E9D600",
+                "#EA045A",
+                "#AFC824",
+                "#7E3C77",
+                "#873126",
+                "#3A9986",
+                "#798ACA",
+                "#454BB6"
+            ];
+            let num = Math.floor(Math.random() * 25) + 1;
+            if (num >= 0 && num <= 25) {
+                return allcolors[num];
+            } else {
+                return colors();
+            }
+        }
+        // console.log(colors())
+        // 颜色生产方法1(只有这里才可以作为多维)
+        function f1(){
+
+            let colorArr = new Array();
+            function getColors() {
+                let rand=colors();
+
+              if (colorArr.length < 4) {
+                for (let i = 0; i <= colorArr.length; i++) {
+                  if (colors() == colorArr[i]) {
+                    break;
+                  } else {
+                    if (i == colorArr.length) {
+                      colorArr.push(rand);
+                      break;
+                    }
+                  }
+                }
+                getColors();
+              }
+            //   console.log(colorArr)
+            //   return colorArr;
+            }
+            getColors();
+            console.log(colorArr)
+        }
+// 颜色生产方法2
+        // let array = [];
+        // const setA = () => {
+        //     if (array.length < 4) {
+        //         let ran = (Math.random() * 10).toFixed(0);
+        //         array.includes(ran) ? setA() : array.push(ran);
+        //         setA();
+        //     }
+        // }
+        // setA()
+        // console.log(array)
+// 颜色生产方法3
+        // const random=(num=0)=>{
+        //     let resultArr=[];
+        //     while(true){
+        //         let randomNum=Math.ceil(Math.random()*6);
+        //         resultArr.push(randomNum)
+        //         resultArr=Array.from(new Set(resultArr));
+        //         let len=resultArr.length;
+        //         if(len===num){return resultArr}
+        //     }
+        // }
+        // console.log(random(4))
+    </script>
+</body>
+
+</html>
