@@ -39,7 +39,7 @@
                             endTime = new Date(options.endTime).getTime(),
                             time = endTime - date;
                     if(time<=0){
-                        clearInterval(timeSet);
+                        clearInterval(timeSet) ;
                         alert("时间到");
                         return;
                     }
