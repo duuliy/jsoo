@@ -11,8 +11,8 @@
 
 </body>
 <script>
-    var foo=function(){};
-    // foo.[[scope]]:   当函数定义时，内部属性就会包含函数被创建的作用域中对象的集合,不可人为调用，只有js引擎使用。
+    var foo =function(){};
+    // foo.[[scope]]:   当函数定义时，内部属性就会包含函数被创建的作用域中对象的集合,不可人为调用，只有js引擎 使用。
     // 此时数组[[scope]]内部包含Global Object(GO),全局定义。(数组0下标位置)
     //  foo.[[Scope]] = {
 //     GO: {
@@ -29,7 +29,7 @@
 // foo.[[Scope]] = {
 //     AO: {
 //         this: window,
-//         arguments: [100,200],
+//         arguments: [100,200] ,
 //         x: 100,
 //         y: 200,
 //         b: undefined,
