@@ -26,7 +26,7 @@
 // }
 //当函数执行时, 会创建一个叫做执行环境/执行上下文（execution context）的内部对象 ,函数每次执行时的执行环境独一无二 ,包含函数内部执行所需ang
 //此时数组[[scope]]内部包含Global Object(GO)以及 Active Object(AO).foo函数预编译产生AO活动对象，挂载到foo中EC作用域链的最前端(go变为下标2位置)
-// foo.[[Scope]] = {
+// foo.[[Scope]] =  {
 //     AO: {
 //         this: window,
 //         arguments: [100,200] ,
