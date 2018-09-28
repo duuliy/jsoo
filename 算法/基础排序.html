@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基础排序</title>
+</head>
+
+<body>
+    <script>
+        /*----------------------------------------------冒泡算法------------------------------------------------*/
+        Array.prototype.Bubble = function () {
+            for (let i = 0; i < this.length - 1; i++) {
+                for (let j = i + 1; j < this.length; j++) {
+                    if (this[i] > this[j]) {
+                        [this[i], this[j]] = [this[j], this[i]]
+                    }
+                }
+            }
+            return this
+        }
+
+        let arr1 = [1, 1, 9, 5, 5, 45, 5, 46, 54, 24, 624, 56, 12, 15, 156, 1, 561, 56, 156, 49, 8];
+        console.log(arr1.Bubble())
+
+        /*----------------------------------------------选择排序 ------------------------------------------------*/
+
+        Array.prototype.Select = function () {
+            let length = this.length,
+                indexMin;
+            for (let i = 0; i < length - 1; i++) {
+                indexMin = i;
+                for (let j = i; j < length; j++) {
+                    if (this[j] < this[indexMin]) {
+                        indexMin = j;
+                    }
+                }
+                if (i !== indexMin) {
+                    [this[i], this[indexMin]] = [this[indexMin], this[i]];
+                }
+            }
+            return this
+        }
+
+        let arr2 = [1000, 1, 59, 55, 5, 445, 57, 46, 54, 24, 624, 56, 12, 15, 156, 1, 561, 56, 156, 49, 8];
+        console.log(arr2.Select())
+
+        /*----------------------------------------------插入排序 ------------------------------------------------*/
+        var insertSort = arr => {
+            let length = arr.length,
+                j, temp;
+            for (var i = 1; i < length; i++) {
+                j = i;
+                temp = arr[i];
+                while (j > 0 && arr[j - 1] > temp) {
+                    arr[j] = arr[j - 1];
+                    j--;
+                }
+                arr[j] = temp;
+            }
+        };
+
+        Array.prototype.Insert = function () {
+            let length = this.length,
+                j, temp;
+            for (let i = 1; i < length; i++) {
+                j = i;
+                temp = this[i];
+                while (j > 0 && this[j - 1] > temp) {
+                    this[j] = this[j - 1];
+                    j--;
+                }
+                this[j] = temp;
+            }
+            return this;
+        }
+
+
+        let arr3 = [3000, 1, 59, 55, 5, 445, 57, 56, 12, 15, 156, 1, 561, 56, 156, 49, 8];
+        console.log(arr3.Insert())
+
+
+        /*----------------------------------------------基本排序比较 ------------------------------------------------*/
+        //插入(每次内循环赋值)快于选择(每次外循环赋值)快于冒泡(每次达到条件内循环赋值，外循环每次赋值)
+        //前者比较很容易理解，后者比较插入循环的次数最少
+        //时间复杂度：1000为基数，多次得出  冒泡两倍于选择，选择比插入多一点点
+
+
+        //去重最优方式
+        Array.prototype.unique2 = function () {
+            this.sort(); //先排序
+            var res = [this[0]];
+            for (var i = 1; i < this.length; i++) {
+                if (this[i] !== res[res.length - 1]) {
+                    res.push(this[i]);
+                }
+            }
+            return res;
+        }
+        var arr = [1, 'a', 'a', 'b', 'd', 'e', 'e', 1, 0]
+        // console.log(arr.unique2());
+    </script>
+</body>
+
+</html>
