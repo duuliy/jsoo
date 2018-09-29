@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>高级算法</title>
+</head>
+
+<body>
+    <script>
+        //斐波那契数列。效率极差。很多次递归被重复计算
+        //0,1,1,2,3,5,8,13,21,34,55...
+        const recurFib = n => {
+            if (n < 2) {
+                return n
+            }
+            return recurFib(n - 1) + recurFib(n - 2)
+        }
+
+        //综合选择排序 记录已计算过的 新算法
+        //eg:1
+        function dynFib(n) {
+            var val = [];
+            for (var i = 0; i <= n; ++i) {
+                val[i] = 0;
+            }
+            if (n === 1 || n === 2) {
+                return 1;
+            } else {
+                val[1] = 1;
+                val[2] = 2;
+                for (var i = 3; i <= n; ++i) {
+                    val[i] = val[i - 1] + val[i - 2];
+                }
+                return val[n - 1];
+            }
+        }
+
+
+        //eg:2  不使用数组的方式
+        function iterFib(n) {
+            var last = 1;
+            var nextLast = 1;
+            var result = 1;
+            for (var i = 2; i < n; ++i) {
+                result = last + nextLast;
+                nextLast = last;
+                last = result;
+            }
+            return result;
+        }
+
+
+
+        //背包问题  动态规划   贪心算法  以后在弄（尴尬）
+    </script>
+</body>
+
+</html>
