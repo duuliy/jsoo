@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>检索算法</title>
+</head>
+
+<body>
+    <script>
+        //检索方式分2种，顺序查找和二分查找。顺序查找不作解释
+        /*----------------------------------------------二分查找 ------------------------------------------------*/
+        //查找元素在数组的位置，跟1-100猜地雷游戏一样，每次从中间砍断
+        const twoPoints = (arr, num) => {
+            let upper = arr.length - 1,
+                lower = 0,
+                mid;
+            while (lower <= upper) {
+                mid = Math.floor((upper + lower) / 2);
+                if (arr[mid] < num) {
+                    lower = mid + 1;
+                } else if (arr[mid] > num) {
+                    upper = mid - 1;
+                } else {
+                    return mid
+                }
+            }
+            return void(666)
+        }
+        let arr = [],
+            num = 8;
+        for (let i = 0; i < 200; i++) {
+            arr.push(Math.round(Math.random() * 30 + 1))
+        }
+        console.log(twoPoints(arr, num))
+
+        //二分查找查找字母(不精确，有问题)           （只能说用于多次使用，所以才排序，否则暴力查找就好）
+
+        function binSearch(arr, data) {
+            var upperBound = arr.length - 1;
+            var lowerBound = 0;
+            while (lowerBound <= upperBound) {
+                var mid = Math.floor((upperBound + lowerBound) / 2);
+                if (arr[mid] < data) {   //此时字母进行隐式强制类型转换
+                    lowerBound = mid + 1;
+                } else if (arr[mid] > data) {
+                    upperBound = mid - 1;
+                } else {
+                    return mid;
+                }
+            }
+            return -1;
+        }
+
+        function insertionsort(arr) {                       //插入排序
+            var temp, inner;
+            for (var outer = 1; outer <= arr.length - 1; ++outer) {
+                temp = arr[outer];
+                inner = outer;
+                while (inner > 0 && (arr[inner - 1] >= temp)) {
+                    arr[inner] = arr[inner - 1];
+                    --inner;
+                }
+                arr[inner] = temp;
+            }
+        }
+
+
+
+        // var words = Read("C:\Users\zyh\Desktop\test\算法\words.txt").split(" ");  //仅在服务端可用
+
+        var wordss =`The nationalism of Hamilton was undemocratic. The democracy of Jefferson was,  in the beginning, provincial. The historic mission of uniting nationalism and  
+            democracy was in the course of time given to new leaders from a region beyond  the mountains, peopled by men and women from all sections and free from those  
+            state traditions which ran back to the early days of colonization. The voice  of the democratic nationalism nourished in the West was heard when Clay of  Kentucky
+             advocated his American system of protection for industries; when  Jackson of Tennessee condemned nullification in a ringing proclamation that  has taken its place 
+             among the great American state papers; and when Lincoln  of Illinois, in a fateful hour, called upon a bewildered people to meet the  supreme test whether this was a
+              nation destined to survive or to perish. And  it will be remembered that Lincoln'
+        s party chose
+        for its banner that earlier device--Republican--which Jefferson had made a sign of power.The "rail splitter"
+        from Illinois united the nationalism of Hamilton with the democracy of Jefferson, and his appeal was clothed in
+            the simple language of the people, not in the sonorous rhetoric which Webster learned in the schools.`
+        let words=wordss.split(" ");
+        insertionsort(words);
+        console.log(words)
+        var word = "The";
+        var start = new Date().getTime();
+        var position = binSearch(words, word);
+        var stop = new Date().getTime();
+        var elapsed = stop - start;
+        if (position >= 0) {
+            console.log(" 单词 " + word + " 被找的位置在： " + position + "。");
+            console.log(" 二分查找消耗了 " + elapsed + " 毫秒。");
+        } else {
+            console.log(word + " 这个单词没有出现在这个文件内容中。");
+        }
+    </script>
+</body>
+
+</html>
