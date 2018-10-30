@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //运算符就是直接进行二进制运算, 因此速度会非常快. 但是对于JavaScript来说, 执行环境一般接触不到硬件.
+        // let num = 10;
+        // let num2 = ~num;
+
+        // // ~num 效果同下
+        // // num2 = -num - 1;
+
+        // console.log(num2); // -11
+
+        //用二进制表示3，然后向左移动3位，高位移出(舍弃)，低位的空位补零。
+        // let num = 3;
+        // let num2 = num << 3;
+
+        // // 效果同下
+        // // num2 = num * 4;
+
+        // console.log(num2); // 8
+        
+        //低位移出(舍弃)，高位的空位补符号位，即正数补零，负数补1。
+        // let num = 1;
+        // let num2 = num >> 1;
+
+        // // 效果同下
+        // // num2 = num / 4;
+
+        // console.log(num2) // 3
+
+        //无符号运算符由 ( >>> ) 符号表示, 对于正数无符号右位移运算符跟无符号右位移
+        //运算符规则相同; 负数时会出现无限大的数值, 所以决定使用无符号右位移运算符
+        //时一定要小心.
+    </script>
+</body>
+
+</html>
