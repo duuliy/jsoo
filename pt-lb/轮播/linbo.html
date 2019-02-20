@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <style>
+        *{margin:0;padding:0}
+        #slide{position:absolute;height:300px;width:260px;color:#FA8E93;overflow:hidden;border:1px solid #ccc}
+        #slide p{height:34px;line-height:34px;overflow:hidden}
+        #slide span{float:right}
+        #slide2{border: 1px solid red}
+    </style>
+</head>
+<body>
+
+<div id="slide">
+    <div id="slide1">
+        <p><span>领取了烈焰双11礼包</span>1、dqx5***</p>
+        <p><span>领取了烈焰双11礼包</span>2、s376***</p>
+        <p><span>领取了街机三国双11礼包</span>3、sdk1***</p>
+        <p><span>领取了烈火战神双11礼包</span>4、说好〃不沋伤</p>
+        <p><span>领取了街机三国双11礼包</span>5、说好〃不沋伤</p>
+        <p><span>领取了烈焰双11礼包</span>6、gao6***</p>
+        <p><span>领取了街机三国双11礼包</span>7、ando***</p>
+        <p><span>领取了街机三国双11礼包</span>8、6813***</p>
+        <p><span>领取了烈焰双11礼包</span>9、lais***</p>
+    </div>
+    <div id=slide2></div>
+</div>
+
+<script>
+    var speed=40
+    var slide=document.getElementById("slide");
+    var slide2=document.getElementById("slide2");
+    var slide1=document.getElementById("slide1");
+    slide2.innerHTML=slide1.innerHTML
+    function Marquee(){
+        if(slide2.offsetTop-slide.scrollTop<=0)
+            slide.scrollTop-=slide1.offsetHeight
+        else{
+            slide.scrollTop++
+        }
+    }
+    var MyMar=setInterval(Marquee,speed)
+    slide.onmouseover=function(){clearInterval(MyMar)}
+    slide.onmouseout=function(){MyMar=setInterval(Marquee,speed)}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <style>
+        .recordList{
+            height: 100px;
+            overflow:hidden;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="recordList"> 
+    <ul class="tpl-rotate-recordList" style="margin-top: 0px;"> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜187****5204获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜137****1372获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜156****0276获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜139****9856获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜136****0580获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜136****0580获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜138****8118获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜136****5555获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜136****0580获得1000RBM 
+    </li> 
+    <li class="tpl-rotate-recordList-item"> 
+    恭喜136****0580获得1000RBM 
+    </li> 
+    </ul> 
+    </div>
+     
+    <script src="jquery-1.7.2.min.js"></script>
+<script>
+   /*自动轮换xuyw*/
+var AutoScroll = function(a) { 
+    $(a).find("ul:first").animate( { 
+            marginTop : "-20px"
+        }, 500, function() { 
+            console.log( $(this))
+            $(this).css( { 
+                marginTop : "0px"
+                }).find("li:first").appendTo(this) 
+                          }) 
+    } 
+    setInterval('AutoScroll(".recordList")', 2000)   
+// if ($(".recordList ul li").length > 0) 
+//      { 
+//        setInterval('AutoScroll(".recordList")', 2000) 
+//      } else { 
+//        $(".recordList").hide() 
+//      }
+
+</script>
+
+</body>
+</html>

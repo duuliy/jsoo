@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 微软雅黑;
+            font-family: 'iconfont';
+        }
+        @font-face {
+            font-family: 'iconfont';
+            src: url('work/font_tsvkxihvrqm8ia4i/iconfont.woff');
+        }
+        #warp{
+            width: 980px;
+            height: 334px;
+            /*border: 1px solid red;*/
+            overflow: hidden;
+        }
+        .picture{
+            width: 8000px;
+            height: 334px;
+        }
+        img{
+            float: left;
+            width: 980px;
+            height: 334px;
+            -webkit-transition: all .3s linear;
+        }
+        .btn{
+            font-size: 80px;
+            position: absolute;
+            color: white;
+            cursor: pointer;
+        }
+        .left{
+            margin-top: -200px;
+        }
+        .right{
+            margin-top: -200px;
+            margin-left: 900px;
+        }
+    </style>
+</head>
+<body>
+<div id="warp">
+    <div class="picture">
+        <img src="work/images/1.jpg" class="item1" alt=""/>
+        <img src="work/images/2.jpg" alt=""/>
+        <img src="work/images/3.jpg" alt=""/>
+        <img src="work/images/4.jpg" alt=""/>
+        <img src="work/images/5.jpg" alt=""/>
+        <img src="work/images/6.jpg" alt=""/>
+        <img src="work/images/7.jpg" alt=""/>
+        <img src="work/images/8.jpg" class="item8" alt=""/>
+    </div>
+</div>
+<div class="btn left" onclick="pre()">&#xe61f;</div>
+<div class="btn right" onclick="move()">&#xe661;</div>
+<script src="jquery.min.js"></script>
+<script>
+    var content=document.getElementsByClassName("picture");
+    var list =document.getElementsByTagName("img");
+    var cc=setInterval(next,1000);
+
+    function pre(){
+        clearInterval(cc);
+        content[0].insertBefore(list[7],content[0].firstChild);
+        list[0].style.marginLeft="-980px";
+        setTimeout(function() {
+            list[0].style.marginLeft = "0px";
+        },500)
+    }
+    function move() {
+        clearInterval(cc);
+        next();
+
+    }
+    function next(){
+        list[0].style.marginLeft="-980px";
+        setTimeout(function(){
+            list[0].style.marginLeft="0px";
+            content[0].appendChild(list[0]);
+        },500)
+    }
+//    content[0].onmouseover=function () {
+//        clearInterval(cc);
+//    };
+//    content[0].onmouseout=function () {
+//        cc=setInterval(next,1000);
+//
+//    }
+</script>
+</body>
+</html>

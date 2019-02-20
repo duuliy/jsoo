@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #back{
+            background-image: url("image/timg0.jpg");
+            width: 800px;
+            height: 412px;
+            overflow: hidden;
+            background-size:100% 100%;
+        }
+        .title{
+            width: 800px;
+            height: 75px;
+            background-color: rgba(0, 0, 0, 0.59);
+            margin-top: 230px;
+            color: white;
+            text-align: center;
+            line-height: 75px;
+        }
+        .warp{
+            width: 800px;
+            height: 110px;
+            background-color: rgb(0, 0, 0);
+        }
+        .main{
+            width: 666px;
+            height: 111px;
+            margin-left: 50px;
+            overflow: hidden;
+        }
+        .content{
+            width: 900px;
+            height: 100px;
+        }
+        .con{
+            width: 100px;
+            height: 100px;
+            border: 1px solid white;
+            position: absolute;
+            margin-left: 10px;
+        }
+        .con:before{
+            content:"\25B2";
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            margin-left: 40px;
+            margin-top: -21px;
+        }
+        .content>img{
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin-left: 10px;
+            -webkit-transition: all .3s linear;
+        }
+        .btn{
+            font-size: 20px;
+            color: white;
+            position: absolute;
+            cursor: pointer;
+        }
+        .left{
+            margin-top: -70px;
+            margin-left: 10px;
+        }
+        .right{
+            margin-top: -70px;
+            margin-left: 740px;
+        }
+    </style>
+</head>
+<body>
+<div id="back">
+    <div class="title">
+        <h2>1111</h2>
+    </div>
+    <div class="warp">
+        <div class="main">
+            <div class="con"></div>
+            <div class="content">
+                <img src="image/timg0.jpg" onclick="mtclick(this)" alt="">
+                <img src="image/timg1.jpg" onclick="mtclick(this)" alt="">
+                <img src="image/timg2.jpg" onclick="mtclick(this)" alt="">
+                <img src="image/timg3.jpg" onclick="mtclick(this)" alt="">
+                <img src="image/timg4.jpg" onclick="mtclick(this)" alt="">
+                <img src="image/timg5.jpg" onclick="mtclick(this)" alt="">
+                <img src="image/timg6.jpg" onclick="mtclick(this)" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="btn left" onclick="pre()"> << </div>
+    <div class="btn right" onclick="next()"> >> </div>
+</div>
+<script>
+    var mycon=document.getElementsByClassName("content");
+    var myimg =document.getElementsByTagName("img");
+    var myback=document.getElementById("back");
+    function mtclick(obj) {
+//        点谁变谁
+        for(var i=0;i<myimg.length-1;i++){
+            if(obj==myimg[i]){
+                myback.style.background ="url("+myimg[i].getAttribute('src')+")";
+                myback.style.backgroundSize="cover";
+                g=i;
+            }
+        }
+//        点谁变第一
+        for(var j=g-1;j>=0;j--){
+            myimg[0].style.marginLeft="-110px";
+            setTimeout(function(){
+                myimg[0].style.marginLeft="10px";
+                mycon[0].appendChild(myimg[0]);
+            },200)
+        }
+    }
+//    左
+    function pre(){
+        mycon[0].insertBefore(myimg[6],mycon[0].firstChild);
+        myimg[0].style.marginLeft="-110px";
+        setTimeout(function() {
+            myimg[0].style.marginLeft = "10px";
+        },200);
+        myback.style.backgroundImage ="url("+myimg[0].getAttribute('src')+")";
+    }
+//    右
+    function next(){
+        myimg[0].style.marginLeft="-110px";
+        setTimeout(function(){
+            myimg[0].style.marginLeft="10px";
+            mycon[0].appendChild(myimg[0]);
+            myback.style.backgroundImage ="url("+myimg[0].getAttribute('src')+")";
+        },200)
+    }
+</script>
+</body>
+</html>

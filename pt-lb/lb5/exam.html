@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 微软雅黑;
+        }
+        .banner{
+            /*background-image: url("images/london(1).jpg");*/
+            /*background-size: 100% 100%;*/
+            /*background-position: center;*/
+            /*width: 100%;*/
+            height: 500px;
+
+        }
+        .image{
+            position: relative;
+        }
+        .image>img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /*width: 1000px;*/
+            z-index: 989;
+            height: 750px;
+        }
+        .imagelist{
+            position: absolute;
+            z-index: 990;
+            color: white;
+            margin-top: 200px ;
+            margin-left: 300px;
+        }
+        #dianji{
+            margin-top: 260px;
+            position: absolute;
+            margin-left: 150px;
+        }
+        .btn1{
+            position: absolute;
+            z-index: 990;
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+
+        }
+        .btn2{
+            position: absolute;
+            z-index: 990;
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 40px;
+        }
+        .btn3{
+            position: absolute;
+            z-index: 990;
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 80px;
+        }
+        .btn4{
+            position: absolute;
+            z-index: 990;
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 120px;
+        }
+        .btn5{
+            position: absolute;
+            z-index: 990;
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 160px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div id="dianji">
+        <div class="btn btn1"></div>
+        <div class="btn btn2"></div>
+        <div class="btn btn3"></div>
+        <div class="btn btn4"></div>
+        <div class="btn btn5"></div>
+    </div>
+    <div class="banner">
+        <div class="image imgone">
+            <div class="imagelist">
+                <h2>
+                    We're more than 13,000 <br>
+                    spefjksdhbfk, working across <br>
+                    90+ disciplines in more than <br>
+                    35 countries. <br>
+                </h2>
+                <p>
+                    - Explore our are as of exspfjskgvbfkdo jhgjhgjhg jhgjhgjhg jhgjhghjg
+                </p>
+                <div class="yuan">
+                    <div class="shuang">
+                        <span>&#xe662;</span>
+                        <span>&#xe662;</span>
+
+                    </div>
+                </div>
+            </div>
+            <img src="images/shaping_better_world_placeholder(1).jpg" alt="">
+        </div>
+        <div class="image imgotwo">
+            <img src="images/stadium(1).jpg" alt="">
+        </div>
+        <div class="image imgthree">
+            <img src="images/ove-clouds-homepage-1920x1077(1).jpg" alt="">
+        </div>
+        <div class="image imgfour">
+            <img src="images/sydneyhq(1).jpg" alt="">
+        </div>
+        <div class="image imgfive">
+            <img src="images/london(1).jpg" alt="">
+        </div>
+
+    </div>
+</header>
+<script src="../../jquery.min.js"></script>
+<script>
+    setInterval(timer,2000);
+    function timer() {
+        imgs=$(".image");
+        imgs.eq(4).stop().fadeOut(500,function () {
+            $(this).show().prependTo(".banner")
+        });
+    }
+    $(".btn").click(function () {
+        imgs=$(".image");
+        imgs_len=$(".image").length;
+        clearInterval(timer);
+        for(var i=0;i<=imgs_len;i++){
+            if(this==$(".btn")[i]){
+                imgs.eq(i).fadeIn().siblings().fadeOut();
+                $(this).css("background-color","orange").siblings().css("background-color","white");
+            }
+        }
+
+    });
+</script>
+</body>
+</html>

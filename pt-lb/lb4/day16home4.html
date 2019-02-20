@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'iconfont';
+        }
+        @font-face{
+            font-family: 'iconfont';
+            src: url('font_065xzwh35adlhaor/iconfont.woff');
+        }
+        .warp{
+            width: 100%;
+            height: 270px;
+            background-image: url("images/index_slide_con01.png");
+            background-color: orangered;
+            overflow: hidden;
+            -webkit-transition: all 0.3s linear;
+        }
+        .menu{
+            margin-top: 240px;
+            margin-left: 360px;
+        }
+        .menu>ul>li{
+            list-style: none;
+            float: left;
+            width:142px;
+            height: 48px;
+            background-color: rgba(255,255,255,0.7);
+            color: orangered;
+            text-align: center;
+            line-height: 28px;
+            border: 1px solid orangered;
+            font-size: 30px;
+            -webkit-transition: all 0.3s linear;
+        }
+    </style>
+</head>
+<body>
+<div class="warp">
+    <div class="menu">
+        <ul>
+            <li onclick="change(this)">&#xe691;</li>
+            <li onclick="change(this)">&#xe603;</li>
+            <li onclick="change(this)">&#xe60b;</li>
+            <li onclick="change(this)">&#xe60a;</li>
+            <li onclick="change(this)">&#xe67f;</li>
+        </ul>
+    </div>
+</div>
+<script>
+    function  change(obj) {
+        var liobj= obj.parentNode.getElementsByTagName("li");
+        var objwarp=document.getElementsByClassName("warp");
+        for(var i=0;i<=liobj.length-1;i++){
+            if (obj!=liobj[i]){
+                liobj[i].style.marginTop="0px"
+            }
+        }
+        if(obj.style.marginTop==""){
+            obj.style.marginTop="0px";
+        }
+        if(obj.style.marginTop=="0px"){
+            obj.style.marginTop="-20px";
+        }else if(obj.style.marginTop=="-20px"){
+            obj.style.marginTop="0px";
+        }
+        if(liobj[0]==obj){
+            objwarp[0].style.backgroundImage="url(images/index_slide_con01.png)"
+
+        }else if(liobj[1]==obj){
+            objwarp[0].style.backgroundImage="url(images/index_slide_con02.png)"
+        }else if(liobj[2]==obj){
+            objwarp[0].style.backgroundImage="url(images/index_slide_con03.png)"
+        }else if(liobj[3]==obj){
+            objwarp[0].style.backgroundImage="url(images/index_slide_con04.png)"
+        }else if(liobj[4]==obj){
+            objwarp[0].style.backgroundImage="url(images/index_slide_con05.png)"
+        }
+    }
+</script>
+</body>
+</html>
