@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <!-- 插值绑定 -->
+        <p>{{name}}</p>
+        <!-- 指令绑定 -->
+        <p k-text='name'></p>
+        <p>{{age}}</p>
+        <p>{{doubleAge}}</p>
+        <!-- 双向绑定 -->
+        <input type="text" k-model='name'>
+        <!-- 事件处理 -->
+        <button @click='changeName'>duuliy++</button>
+        <div k-html='html'></div>
+    </div>
+    <script src='./compile.js'></script>
+    <script src='./kvue.js'></script>
+    <script>
+        const duuliy=new KVue({
+            el:'#app',
+            data:{
+                name:'I am duuliy',
+                age:12,
+                html:"<button>无用按钮</button>"
+           },
+           created(){  //生命周期的实现
+               console.log('开始啦');
+               setTimeout(()=>{
+                   this.name='我是测试'
+                //    console.log(this);
+               },1000)
+            //    console.log(this);
+           },
+           methods:{
+               changeName(){
+                   this.name='你好,duuliy';
+                   this.age=666
+               }
+           }
+        })
+    </script>
+</body>
+</html>
