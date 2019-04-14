@@ -102,7 +102,7 @@ class Compile{
         node.textContent=value
     }
 
-    //事件处理
+    //事件处 理
     eventHandler(node,vm,exp,dir){
         let fn=vm.$options.methods && vm.$options.methods[exp]
         if(dir && fn){
