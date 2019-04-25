@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const getlist=()=>{
+            console.log(666)
+        }
+
+        const reset2=(a='bb')=>{
+            
+          const obj = {}
+          obj[a]={
+              gg:''
+          }
+        //   func()
+      }
+
+      //函数n-1次以及之前都只会把之前的参数作为闭包的形式保存下来 n次才会执行函数  叫柯里化
+      const reset=(a=1)=>(b=2)=>(func=getlist)=>{
+        console.log(a+b)
+        func()
+      }
+
+      reset(3)(4)()
+    </script>
+</body>
+</html>
