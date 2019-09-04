@@ -33,24 +33,32 @@
         
         
 //         实现：
-        function multi() {
-    // debugger
-    var args = Array.prototype.slice.call(arguments);
-    // console.log(args);
-	var fn = function() {
+        function sum2(x){
+    debugger
+    // console.log(...arguments)
+    var args =[...arguments];
+    if (arguments.length !==1) {
+      return args.reduce((v,i)=>v+i)
+    } else { 
+    //   return function(arg) { 
+    //     var newArgs = arg+args[0]
+    //     // var newArgs2=[newArgs.reduce((v,i)=>v+i)]
+    //     // console.log(newArgs2)
+    //     return sum2.apply(this, newArgs);
+    //     //   return newArgs.reduce((v,i)=>v+i)
+    //     };
+    var fn = function() {
         var newArgs = args.concat(Array.prototype.slice.call(arguments));
-        // console.log(newArgs);
         return multi.apply(this, newArgs);
     }
-    fn.toString = function() {
-        return args.reduce(function(a, b) {
-            return a + b;
-        })
-    }
+    fn.add = args.reduce((a, b)=>a + b)
+    
     return fn;
+    }
 }
 
-console.log(multi(2)(3));
+console.log(sum2(2,3,4));
+console.log(sum2(2)(3)(4));
 
     </script>
 </body>
