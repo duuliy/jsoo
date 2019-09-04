@@ -30,6 +30,28 @@
       reset(3)(4)()
         
         //项目中可以做到暂时缓存数据，让参数更加清晰（最好是以类别来区分，枚举在ts中使用也是极好的啊）
+        
+        
+//         实现：
+        function multi() {
+    // debugger
+    var args = Array.prototype.slice.call(arguments);
+    // console.log(args);
+	var fn = function() {
+        var newArgs = args.concat(Array.prototype.slice.call(arguments));
+        // console.log(newArgs);
+        return multi.apply(this, newArgs);
+    }
+    fn.toString = function() {
+        return args.reduce(function(a, b) {
+            return a + b;
+        })
+    }
+    return fn;
+}
+
+console.log(multi(2)(3));
+
     </script>
 </body>
 </html>
