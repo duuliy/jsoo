@@ -32,34 +32,34 @@
         //项目中可以做到暂时缓存数据，让参数更加清晰（最好是以类别来区分，枚举在ts中使用也是极好的啊）
         
         
-//         实现：
-        function sum2(x){
-    debugger
-    // console.log(...arguments)
-    var args =[...arguments];
-    if (arguments.length !==1) {
-      return args.reduce((v,i)=>v+i)
-    } else { 
-    //   return function(arg) { 
-    //     var newArgs = arg+args[0]
-    //     // var newArgs2=[newArgs.reduce((v,i)=>v+i)]
-    //     // console.log(newArgs2)
-    //     return sum2.apply(this, newArgs);
-    //     //   return newArgs.reduce((v,i)=>v+i)
-    //     };
-    var fn = function() {
-        var newArgs = args.concat(Array.prototype.slice.call(arguments));
-        return multi.apply(this, newArgs);
-    }
-    fn.add = args.reduce((a, b)=>a + b)
-    
+//         兼容两种实现：
+      function add5(x){
+    let args =[...arguments]
+    if (arguments.length !==1) return args.reduce((v,i)=>v+i)
+    let fn = (m)=> add5(x+m);
+    fn.toString = () => x
     return fn;
-    }
+    
 }
 
-console.log(sum2(2,3,4));
-console.log(sum2(2)(3)(4));
+console.log(add5(2)(3)(4)(5));
+console.log(add5(2,3,4,5));
 
+        //         单独实现：
+        function sum55(x){
+    let args =[...arguments]
+
+    let fn = function() {
+      let newArgs = args.concat([...arguments]);
+      return sum55.apply(this,newArgs)
+    }
+    fn.toString = () => args.reduce((a, b) =>a + b)
+      
+    return fn;
+    
+}
+
+console.log(sum55(2)(3)(4)(5));
     </script>
 </body>
 </html>
