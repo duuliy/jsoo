@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="关键字1,关键字2" />
+    <meta name="Description" content="描述信息" />
+    <title>循环滚动</title>
+    <!--CSS/JS-->
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+            display: block;
+        }
+
+        #scrollBox {
+            height: 150px;
+            width: 300px;
+            margin: 100px auto;
+            background: #f09;
+            overflow: hidden;
+        }
+
+        #scrollBox #con1,
+        #con2 {
+            width: 280px;
+            float: left;
+        }
+
+        #scrollBox li {
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--div-->
+    <div id="scrollBox">
+        <ul id="con1">
+            <li>李华 中了10块钱
+            <li>
+            <li>Leo 中了一个手机
+            <li>
+            <li>刘明 中了一块毛巾
+            <li>
+            <li>ll 中了保温杯
+            <li>
+            <li>nice 中了100块钱红包
+            <li>
+            <li>108 中了20元优惠券
+            <li>
+            <li>ok 中了100块钱
+            <li>
+        </ul>
+        <ul id="con2"></ul>
+    </div>
+    <script type="text/javascript" src="test.js"></script>
+    <script type="text/javascript">
+        var area = document.getElementById('scrollBox');
+        var con1 = document.getElementById('con1');
+        var con2 = document.getElementById('con2');
+        con2.innerHTML = con1.innerHTML;
+        function scrollUp() {
+            if (area.scrollTop >= con1.offsetHeight) {
+                area.scrollTop = 0;
+            } else {
+                area.scrollTop++
+            }
+        }
+        var time = 50;
+        var mytimer = setInterval(scrollUp, time);
+        copyMouse(area).over(function(){
+            console.log(666)
+            clearInterval(mytimer);
+        }).out(()=>{
+            console.log(777)
+            mytimer = setInterval(scrollUp, time)
+        })
+    </script>
+</body>
+
+</html>
