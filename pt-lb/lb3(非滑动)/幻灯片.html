@@ -1,166 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            font-family: 微软雅黑;
-            font-size: 0;
-        }
-        .window>img:nth-of-type(1){
-            position: absolute;
-            top: 0;
-            left: 100px;
-            width: 1000px;
-            height: 500px;
-        }
-        .window>img:nth-of-type(2){
-            position: absolute;
-            top: 0;
-            left: 100px;
-            width: 1000px;
-            height: 500px;
-        }
-        .window>img:nth-of-type(3){
-            position: absolute;
-            top: 0;
-            left: 100px;
-            width: 1000px;
-            height: 500px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 微软雅黑;
+      font-size: 0;
+    }
+
+    .window>img:nth-of-type(1) {
+      position: absolute;
+      top: 0;
+      left: 100px;
+      width: 1000px;
+      height: 500px;
+    }
+
+    .window>img:nth-of-type(2) {
+      position: absolute;
+      top: 0;
+      left: 100px;
+      width: 1000px;
+      height: 500px;
+    }
+
+    .window>img:nth-of-type(3) {
+      position: absolute;
+      top: 0;
+      left: 100px;
+      width: 1000px;
+      height: 500px;
+    }
+  </style>
 </head>
+
 <body>
-<!--<div>123</div>-->
-<!--<div>123</div>-->
-<!--<div>123</div>-->
-<div class="window">
+  <!--<div>123</div>-->
+  <!--<div>123</div>-->
+  <!--<div>123</div>-->
+  <div class="window">
     <img src="img/timg.jpg" alt="">
     <img src="img/timg%20(1).jpg" alt="">
     <img src="img/timg%20(2).jpg" alt="">
-</div>
-<script src="../../jquery.min.js"></script>
-<script>
-    setInterval(function () {
-        imgs=$(".window img");
-        imgs.eq(2).stop().fadeOut(500,function () {
-            $(this).show().prependTo(".window");
-        });
-    },1000)
+  </div>
+  <script src="../../jquery.min.js"></script>
+  <script>
+    setInterval( function () {
+      imgs = $( ".window img" );
+      imgs.eq( 2 ).stop().fadeOut( 500, function () {
+        $( this ).show().prependTo( ".window" );
+      } );
+    }, 1000 )
 
 
-//    基本闭包
+    //    基本闭包（其中赋值引用不会消失）  将函数内部和函数外部连接起来的桥梁 原理就是作用域链。
 
-//    function a() {
-//        function b() {
-//            var bb=22;
-//            document.write(aa)
-//        }
-//        var aa=11;
-//        return b;
-//    }
-//    var cc=a();
-//    cc();
+    //     function makeFunc() {
+    //     var num= 0;
+    //     function displayName() {
+    //         alert(++num);
+    //     }
+    //     return displayName;
+    // }
 
-//最难闭包
-////执行出来10个10，因为在a()中function会在dome[j]执行时才去找i的值,然而此时a()中for在a()中已经执行完毕。每次执行到i=10时，才结束for，arr的堆中的值是10。
-//    function a() {
-//        var arr=[];
-//        for(var i=0;i<10;i++){
-//            arr[i]=function () {
-//                document.write(i+" ") //当dome[1]执行时，i=10,因为地址指向堆中的i在demo[0]中已经为10，不执行for循环了，dome[2,3,4...]之后同理。
-//            }
-//        }
-//        return arr;
-//    }
-//
-//    var dome=a();
-//    for(var j=0;j<10;j++){
-//        dome[j](); //此时才去找documen.write中i的值是多少，此时为10。
-//    }
+    // var myFunc = makeFunc();  //这里赋值引用不回被垃圾回收。
+    // myFunc();
+    // myFunc();
+    // myFunc(); //...  每次执行都会+1
 
-//    立即执行函数+最难闭包出来0到9。只有这种解决办法才能出现在闭包中的0到9.
-//function a() {
-//    var arr=[];
-//    for(var i=0;i<10;i++){
-//        (function (j) {           //立即执行，执行后销毁，剩下0到9的返回值。
-//            arr[j]=function () {        //但此函数不是立即执行函数，所以不会立即执行。
-//                document.write(j+" ")
-//            }
-//        }(i));
-//    }
-//    return arr;
-//}o
-//
-//var dome=a();
-//for(var j=0;j<10;j++){
-//  a  dome[j]();
-//}b
+    //最难闭包
+    ////执行出来10个10，因为在a()中function会在dome[j]执行时才去找i的值,然而此时a()中for在a()中已经执行完毕。每次执行到i=10时，才结束for，arr的堆中的值是10。
+    //    function a() {
+    //        var arr=[];
+    //        for(var i=0;i<10;i++){
+    //            arr[i]=function () {
+    //                document.write(i+" ") //当dome[1]执行时，i=10,因为地址指向堆中的i在demo[0]中已经为10，不执行for循环了，dome[2,3,4...]之后同理。
+    //            }
+    //        }
+    //        return arr;
+    //    }
+    //
+    //    var dome=a();
+    //    for(var j=0;j<10;j++){
+    //        dome[j](); //此时才去找documen.write中i的值是多少，此时为10。
+    //    }
 
-//    包装类
-//    var str="abc";
-//    str+=1;
-//    var test=typeof (str);
-//    if(test.length==6){
-//        test.sign="123";
-//    }
-//    console.log(test.sign);
-//题目1
-//    var obj={name:"a"};
-//    var obj1=obj;
-//    obj={name:"b"};
-//    console.log(obj);
-//    console.log(obj1);
-//题目2
-//    Person.prototype.name="sun";
-//    function Person() {
-//
-//    }
-//    var person=new Person();
-//    Person.prototype={
-//        name:"yyy"
-//    }
-//    console.log(person.name)
+    //    立即执行函数+最难闭包出来0到9。只有这种解决办法才能出现在闭包中的0到9.
+    //function a() {
+    //    var arr=[];
+    //    for(var i=0;i<10;i++){
+    //        (function (j) {           //立即执行，执行后销毁，剩下0到9的返回值。
+    //            arr[j]=function () {        //但此函数不是立即执行函数，所以不会立即执行。
+    //                document.write(j+" ")
+    //            }
+    //        }(i));
+    //    }
+    //    return arr;
+    //}o
+    //
+    //var dome=a();
+    //for(var j=0;j<10;j++){
+    //  a  dome[j]();
+    //}b
 
-//    call用法
-//    function Wheel(wheelsize,style){
-//        this.wheelsize=wheelsize;
-//        this.style=style;
-//    }
-//
-//function Model(height,width){
-//    this.height=height;
-//    this.width=width;
-//}
-//function Car(wheelsize,style,height,width){
-//    Wheel.call(this,wheelsize,style);
-//    Model.call(this,height,width);
-//}
-//var car=new Car(100,"花里胡哨",500,300);
+    //    包装类
+    //    var str="abc";
+    //    str+=1;
+    //    var test=typeof (str);
+    //    if(test.length==6){
+    //        test.sign="123";
+    //    }
+    //    console.log(test.sign);
+    //题目1
+    //    var obj={name:"a"};
+    //    var obj1=obj;
+    //    obj={name:"b"};
+    //    console.log(obj);
+    //    console.log(obj1);
+    //题目2
+    //    Person.prototype.name="sun";
+    //    function Person() {
+    //
+    //    }
+    //    var person=new Person();
+    //    Person.prototype={
+    //        name:"yyy"
+    //    }
+    //    console.log(person.name)
+
+    //    call用法
+    //    function Wheel(wheelsize,style){
+    //        this.wheelsize=wheelsize;
+    //        this.style=style;
+    //    }
+    //
+    //function Model(height,width){
+    //    this.height=height;
+    //    this.width=width;
+    //}
+    //function Car(wheelsize,style,height,width){
+    //    Wheel.call(this,wheelsize,style);
+    //    Model.call(this,height,width);
+    //}
+    //var car=new Car(100,"花里胡哨",500,300);
     //圣杯模式
-//    function  inheri(target,origin) {
-//        function F(){ }
-//        F.prototype=origin.prototype;
-//        target.prototype=new F();
-//        target.prototype.constuctor=target; //重点。不设此处 target的constuctor构造函数默认为father（）。设置此处可使它归位target。
-//        target.prototype.uber=origin.prototype;//继承超类，最终的父级。可有可无。
-//    }
-//    Father.prototype.lastName="deng";
-//    function  Father() {
-//
-//    }
-//    function Son() {
-//
-//    }
-//    inheri(Son,Father);
-//    var son=new Son();
-//    var father=new Father();
-
-
-
-</script>
+    //    function  inheri(target,origin) {
+    //        function F(){ }
+    //        F.prototype=origin.prototype;
+    //        target.prototype=new F();
+    //        target.prototype.constuctor=target; //重点。不设此处 target的constuctor构造函数默认为father（）。设置此处可使它归位target。
+    //        target.prototype.uber=origin.prototype;//继承超类，最终的父级。可有可无。
+    //    }
+    //    Father.prototype.lastName="deng";
+    //    function  Father() {
+    //
+    //    }
+    //    function Son() {
+    //
+    //    }
+    //    inheri(Son,Father);
+    //    var son=new Son();
+    //    var father=new Father();
+  </script>
 </body>
+
 </html>
