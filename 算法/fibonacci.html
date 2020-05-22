@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //  0,1,1,2,3,5,8,13......
+    //  0,1,2,3,4,5,6.7.....
+
+    function fib( n ) {
+      if ( n === 1 || n === 0 ) {
+        return n
+      }
+      return fib( n - 1 ) + fib( n - 2 );
+    }
+
+    //  非递归
+
+    function fibonacci( index ) { //3 =>2
+      if ( index < 2 ) {
+        return index
+      }
+      let oneCe = 0,
+        next = 1
+      for ( let i = 2; i < index; i++ ) { //2 3
+        let temp = oneCe + next
+        oneCe = next
+        next = temp
+      }
+      return next
+    }
+
+    // console.log( fibonacci( 2 ) )
+    // console.log( fibonacci( 3 ) )
+    // console.log( fibonacci( 4 ) )
+    // console.log( fibonacci( 5 ) )
+    // console.log( fibonacci( 6 ) )
+    // console.log( fibonacci( 7 ) )
+    // console.log( fibonacci( 8 ) )
+    // console.log( fibonacci( 9 ) )
+    // console.log( fibonacci( 10 ) )
+  </script>
+
+</body>
+
+</html>
