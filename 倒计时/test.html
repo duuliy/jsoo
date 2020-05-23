@@ -1,85 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        body{
-            font-family: "Microsoft YaHei", Arial;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", Arial;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-<div id="timeBox">
+  <div id="timeBox">
     <span>-</span>天
     <span>-</span>时t
     <span>-</span>分
     <span>-</span>秒
-</div>
-<div id="timeBox2">
+  </div>
+  <div id="timeBox2">
     <span>-</span>天
     <span>-</span>时
     <span>-</span>分
     <span>-</span>秒
-</div>
+  </div>
 </body>
 <script src="../jquery-1.7.2.min.js"></script>
 <script>
-    (function($){
-        $.fn.Countdown=function(options){
-            var defaults={
-                endTime:"2016/8/21 00:00:00"
-            };
-            var options=$.extend(defaults,options);
-            var timeSet;
-            function setTime(){
-                timeSet = setTimeout(function(){
-                    var date = new Date().getTime(),
-                            endTime = new Date(options.endTime).getTime(),
-                            time = endTime - date;
-                    if(time<=0){
-                        clearInterval(timeSet) ;
-                        alert("时间到");
-                        return;
-                    }
-                    var d = Math.floor(time/ 1000 /60 /60 /24);
-                    time-= d*1000*60*60*24;
-                    var h = Math.floor(time / 1000 / 60 / 60);
-                    time -= h*1000*60 *60;
-                    var m = Math.floor(time / 1000 / 60 );
-                    time -= m*1000*60;
-                    var s = Math.floor(time / 1000 );
-                    if(d<10){
-                        d="0"+d;
-                    }
-                    if(h<10){
-                        h="0"+h;
-                    }
-                    if(m<10){
-                        m="0"+m;
-                    }
-                    if(s<10){
-                        s="0"+s;
-                    }
-                    options.callback( d, h, m, s );
-                    setTime();
-                },1000)
-            }
-            setTime();
-        }
-    })(jQuery);
-    $(function(){
-        $("#timeBox").Countdown();
-        $("#timeBox2").Countdown({
-            endTime:"2116/8/2 18:45:06",
-            callback:function( d, h, m, s ){
-                $('span').eq(0).html(d);
-                $('span').eq(1).html(h);
-                $('span').eq(2).html(m);
-                $('span').eq(3).html(s);
-            }
-        });
-    })
+  ( function ( $ ) {
+    $.fn.Countdown = function ( options ) {
+      var defaults = {
+        endTime: "2016/8/21 00:00:00"
+      };
+      var options = $.extend( defaults, options );
+      var timeSet;
+
+      function setTime() {
+        timeSet = setTimeout( function () {
+          var date = new Date().getTime(),
+            endTime = new Date( options.endTime ).getTime(),
+            time = endTime - date;
+          if ( time <= 0 ) {
+            clearInterval( timeSet );
+            alert( "时间到" );
+            return;
+          }
+          var d = Math.floor( time / 1000 / 60 / 60 / 24 );
+          time -= d * 1000 * 60 * 60 * 24;
+          var h = Math.floor( time / 1000 / 60 / 60 );
+          time -= h * 1000 * 60 * 60;
+          var m = Math.floor( time / 1000 / 60 );
+          time -= m * 1000 * 60;
+          var s = Math.floor( time / 1000 );
+          if ( d < 10 ) {
+            d = "0" + d;
+          }
+          if ( h < 10 ) {
+            h = "0" + h;
+          }
+          if ( m < 10 ) {
+            m = "0" + m;
+          }
+          if ( s < 10 ) {
+            s = "0" + s;
+          }
+          options.callback( d, h, m, s );
+          setTime();
+        }, 1000 )
+      }
+      setTime();
+    }
+  } )( jQuery );
+  $( function () {
+    $( "#timeBox" ).Countdown();
+    $( "#timeBox2" ).Countdown( {
+      endTime: "2116/8/2 18:45:06",
+      callback: function ( d, h, m, s ) {
+        $( 'span' ).eq( 0 ).html( d );
+        $( 'span' ).eq( 1 ).html( h );
+        $( 'span' ).eq( 2 ).html( m );
+        $( 'span' ).eq( 3 ).html( s );
+      }
+    } );
+  } )
+
+  //     当你在setInterval中运行一些函数时，它的工作时间超过timeout->浏览器将被卡住。
+
+  // - 例如，doStuff()需要1500秒。要执行，你执行：setInterval(doStuff，1000);
+  // 1)浏览器运行doStuff()需要1.5秒。被执行;
+  // 2)大约1秒后，它再次尝试运行doStuff()。但之前的doStuff()仍然执行 - >因此浏览器将此运行添加到队列中(在第一次完成后运行)。
+  // 3,4，..)同样添加到下一次迭代的执行队列，但是之前的doStuff()仍然在进行中......
+  // 结果 - 浏览器卡住了。
+
+  // 要防止出现这种情况，最好的方法是在setTimeout中运行setTimeout来模拟setInterval。
+  // 要纠正setTimeout调用之间的超时，您可以使用JavaScript的setInterval技术的自我更正替代方法。
 </script>
+
 </html>
