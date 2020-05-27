@@ -1,72 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        textarea{
-            resize: none;
-        }
-        * {
-            padding: 0;
-            margin: 0;
-        }
-        .radio {
-            display: inline-block;
-        }
-        label {
-            display: inline-block;
-            padding: 10px 10px;
-            line-height: 20px;
-            position: relative;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
-        /*开始*/
-        .radio .option {
-            width: 16.7px;
-            height: 16.7px;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            position: relative;
-        }
-        .option-span {
-            /*position: absolute;*/
-            /*top: 50%;*/
-            /*left: 50%;*/
-            /*width: 6px;*/
-            /*height: 6px;*/
-            /*background: #fff;*/
-            /*border-radius: 50%;*/
-        }
-        .radio input[type="radio"] {
-            display: none;
 
-        }
-        input[type="radio"]:checked+.option{
-            border: 1px solid #57a3f3;
-            background: #57a3f3;
-        }
-    </style>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    textarea {
+      resize: none;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .radio {
+      display: inline-block;
+    }
+
+    label {
+      display: inline-block;
+      padding: 10px 10px;
+      line-height: 20px;
+      position: relative;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    /*开始*/
+    .radio .option {
+      width: 16.7px;
+      height: 16.7px;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .option-span {
+      /*position: absolute;*/
+      /*top: 50%;*/
+      /*left: 50%;*/
+      /*width: 6px;*/
+      /*height: 6px;*/
+      /*background: #fff;*/
+      /*border-radius: 50%;*/
+    }
+
+    .radio input[type="radio"] {
+      display: none;
+
+    }
+
+    input[type="radio"]:checked+.option {
+      border: 1px solid #57a3f3;
+      background: #57a3f3;
+    }
+  </style>
 </head>
+
 <body>
-<div>
+  <div>
     <div class="radio">
-        <label>
-            <input type="radio" name="sex" value="" />
-            <span class="option"><span class="option-span"></span></span><!--优化后的单选框样式-->
-            <span>男</span>
-        </label>
+      <label>
+        <input type="radio" name="sex" value="" />
+        <span class="option"><span class="option-span"></span></span>
+        <!--优化后的单选框样式-->
+        <span>男</span>
+      </label>
     </div>
     <div class="radio">
-        <label>
-            <input type="radio" name="sex" value="" />
-            <span class="option"><span class="option-span"></span></span><!--优化后的单选框样式-->
-            <span>女</span>
-        </label>
+      <label>
+        <input type="radio" name="sex" value="" />
+        <span class="option"><span class="option-span"></span></span>
+        <!--优化后的单选框样式-->
+        <span>女</span>
+      </label>
     </div>
     <textarea name="" id="" cols="30" rows="10"></textarea>
-</div>
+  </div>
 </body>
+
 </html>
