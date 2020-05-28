@@ -41,7 +41,7 @@
          * @param showTime        显示时间
          */
         ljkUpLoadAlert:function(msg, onHideHandler ,title, showTime){
-            title = title ? title : '金珂提示你';
+            title = title ? title : '提示你';
             var $dom = $('<div class="jmcpopup modal" style="display:block"><div class="mask"></div><div class="jmcpopup-wrap modal-wrap ctrl-modal"><div class="modal-title"><h2 class="none">'+title+'</h2></div><table><tr><td><h1 class="none mt20">'+msg+'</h1></td></tr></table></div></div>');
             $('body').append($dom);
 
