@@ -26,6 +26,7 @@
     // console.log(arr1.Bubble())
 
     /*----------------------------------------------选择排序(不稳定) ------------------------------------------------*/
+    //减少冒泡次数
 
     Array.prototype.Select = function () {
       let length = this.length,
@@ -48,6 +49,7 @@
     // console.log(arr2.Select())
 
     /*----------------------------------------------插入排序(稳定) ------------------------------------------------*/
+    //一个个插入，然后和合并后数组排序
     var insertSort = arr => {
       let length = arr.length,
         j, temp;
@@ -95,7 +97,7 @@
       var res = [ this[ 0 ] ];
       console.log( res )
       for ( var i = 1; i < this.length; i++ ) {
-        if ( this[ i ] !== res[ res.length - 1 ] ) {
+        if ( this[ i ] !== res[ res.length - 1 ] ) {  //实际情况这里可以includes判断在不在
           res.push( this[ i ] );
         }
       }

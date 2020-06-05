@@ -19,13 +19,13 @@
                 temp,
                 gap = 1;
             console.time('希尔排序耗时:');
-            while (gap < len / 5) { //动态定义间隔序列
+            while (gap < len / 5) { //动态定义间隔序列 gap 大于每个小插入组
                 gap = gap * 5 + 1;
             }
-            for (gap; gap > 0; gap = Math.floor(gap / 5)) {
+            for (gap; gap > 0; gap = Math.floor(gap / 5)) { //gap 有多少插入组
                 for (var i = gap; i < len; i++) {
                     temp = arr[i];
-                    for (var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+                    for (var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {  //插入组排序
                         arr[j + gap] = arr[j];
                     }
                     arr[j + gap] = temp;
@@ -35,7 +35,7 @@
             return arr;
         }
         var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
-        console.log(shellSort(arr)); //[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]；
+        // console.log(shellSort(arr)); //[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]；
 
         /*----------------------------------------------归并排序 ------------------------------------------------*/
         //时间复杂度O(n log n)
@@ -75,7 +75,7 @@
             return result;
         }
         var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
-        console.log(mergeSort(arr));
+        // console.log(mergeSort(arr));
 
         /*----------------------------------------------快速排序 ------------------------------------------------*/
         //应该是最快的之一了
