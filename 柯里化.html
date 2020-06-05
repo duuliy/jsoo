@@ -11,7 +11,7 @@
 <body>
   <script>
     const getlist = () => {
-      console.log(666)
+      // console.log(666)
     }
 
     const reset2 = (a = 'bb') => {
@@ -25,7 +25,7 @@
 
     //函数n-1次以及之前都只会把之前的参数作为闭包的形式保存下来 n次才会执行函数  叫柯里化
     const reset = (a = 1) => (b = 2) => (func = getlist) => {
-      console.log(a + b)
+      // console.log(a + b)
       func()
     }
 
@@ -34,7 +34,7 @@
     //项目中可以做到暂时缓存数据，让参数更加清晰（最好是以类别来区分，枚举在ts中使用也是极好的啊）
 
 
-    //         兼容两种实现：
+    //         兼容两种实现1：
     function add5(x) {
       let args = [...arguments]
       if (arguments.length !== 1) return args.reduce((v, i) => v + i)
@@ -44,10 +44,10 @@
 
     }
 
-    console.log(add5(2)(3)(4)(5));
-    console.log(add5(2, 3, 4, 5));
+    // console.log(add5(2)(3)(4)(5));
+    // console.log(add5(2, 3, 4, 5));
 
-    //         单独实现：
+    //         兼容两种实现2:
     function sum55(x) {
       let args = [...arguments]
 
@@ -60,8 +60,8 @@
       return fn;
 
     }
-
-    console.log(sum55(2)(3)(4)(5));
+    // console.log(sum55(2, 3, 4, 5));
+    // console.log(sum55(2)(3)(4)(5));
 
     //骚方法实现(看起来不错，实际跑不动):
     const curry = (fn, arr = []) => (...args) => (arg => arg.length === fn.length
