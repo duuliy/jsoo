@@ -2,220 +2,221 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 
 <body>
-    <script>
-        //1.极简promise模型
-        function Promise(fn) {
-            var value = null,
-                callbacks = []; //callbacks为数组，因为可能同时有很多个回调
-            this.then = function (onFulfilled) {
-                callbacks.push(onFulfilled);
-            };
+  <script>
+    //1.极简promise模型
+    function Promise( fn ) {
+      var value = null,
+        callbacks = []; //callbacks为数组，因为可能同时有很多个回调
+      this.then = function ( onFulfilled ) {
+        callbacks.push( onFulfilled );
+      };
 
-            function resolve(value) {
-                callbacks.forEach(function (callback)  {
-                    callback(value);
-                });
-            }
-            fn(resolve);
+      function resolve( value ) {
+        callbacks.forEach( function ( callback ) {
+          callback( value );
+        } );
+      }
+      fn( resolve );
+    }
+    //调用then方法，将想要在Promise异步操作成功时执行的回调放入callbacks队列，其实也就是注册回调函数，可以向观察者模式方向思考；
+    //创建Promise实例时传入的函数会被赋予一个函数类型的参数，即resolve，它接收一个参数value，代表异步操作返回的结果，当一步操作执行成功后，用户会调用resolve方法，这时候其实真正执行的操作是将callbacks队列中的回调一一执行；
+
+    //2.加入延时机制  如果在then方法注册回调之前，resolve函数就执行了（过早执行）
+    function resolve( value ) {
+      setTimeout( function () {
+        callbacks.forEach( function ( callback ) {
+          callback( value );
+        } );
+      }, 0 )
+    }
+    //以保证在resolve执行时，then方法的回调函数已经注册完成.
+    //3.加入状态  pending、fulfilled、rejected。  pending可以转化为fulfilled或rejected并且只能转化一次
+    function Promise( fn ) {
+      var state = 'pending',
+        value = null,
+        callbacks = [];
+      this.then = function ( onFulfilled ) {
+        if ( state === 'pending' ) {
+          callbacks.push( onFulfilled );
+          return this;
         }
-        //调用then方法，将想要在Promise异步操作成功时执行的回调放入callbacks队列，其实也就是注册回调函数，可以向观察者模式方向思考；
-        //创建Promise实例时传入的函数会被赋予一个函数类型的参数，即resolve，它接收一个参数value，代表异步操作返回的结果，当一步操作执行成功后，用户会调用resolve方法，这时候其实真正执行的操作是将callbacks队列中的回调一一执行；
+        onFulfilled( value );
+        return this;
+      };
 
-        //2.加入延时机制  如果在then方法注册回调之前，resolve函数就执行了（过早执行）
-        function resolve(value) {
-            setTimeout(function () {
-                callbacks.forEach(function (callback) {
-                    callback(value);
-                });
-            }, 0)
+      function resolve( newValue ) {
+        value = newValue;
+        state = 'fulfilled';
+        setTimeout( function () {
+          callbacks.forEach( function ( callback ) {
+            callback( value );
+          } );
+        }, 0 );
+      }
+      fn( resolve );
+    }
+    //4.链式Promise    //回调没任何操作或者还是promise对象
+
+    function Promise( fn ) {
+      var state = 'pending',
+        value = null,
+        callbacks = [];
+      this.then = function ( onFulfilled ) {
+        return new Promise( function ( resolve ) {
+          handle( {
+            onFulfilled: onFulfilled || null,
+            resolve: resolve
+          } );
+        } );
+      };
+
+      function handle( callback ) {
+        if ( state === 'pending' ) {
+          callbacks.push( callback );
+          return;
         }
-        //以保证在resolve执行时，then方法的回调函数已经注册完成.
-        //3.加入状态  pending、fulfilled、rejected。  pending可以转化为fulfilled或rejected并且只能转化一次
-        function Promise(fn) {
-            var state = 'pending',
-                value = null,
-                callbacks = [];
-            this.then = function (onFulfilled) {
-                if (state === 'pending') {
-                    callbacks.push(onFulfilled);
-                    return this;
-                }
-                onFulfilled(value);
-                return this;
-            };
-
-            function resolve(newValue) {
-                value = newValue;
-                state = 'fulfilled';
-                setTimeout(function () {
-                    callbacks.forEach(function (callback) {
-                        callback(value);
-                    });
-                }, 0);
-            }
-            fn(resolve);
+        //如果then中没有传递任何东西
+        if ( !callback.onFulfilled ) {
+          callback.resolve( value );
+          return;
         }
-        //4.链式Promise    //回调没任何操作或者还是promise对象
+        var ret = callback.onFulfilled( value );
+        callback.resolve( ret );
+      }
 
-        function Promise(fn) {
-            var state = 'pending',
-                value = null,
-                callbacks = [];
-            this.then = function (onFulfilled) {
-                return new Promise(function (resolve) {
-                    handle({
-                        onFulfilled: onFulfilled || null,
-                        resolve: resolve
-                    });
-                });
-            };
-
-            function handle(callback) {
-                if (state === 'pending') {
-                    callbacks.push(callback);
-                    return;
-                }
-                //如果then中没有传递任何东西
-                if (!callback.onFulfilled) {
-                    callback.resolve(value);
-                    return;
-                }
-                var ret = callback.onFulfilled(value);
-                callback.resolve(ret);
-            }
-
-            function resolve(newValue) {
-                if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-                    var then = newValue.then;
-                    if (typeof then === 'function') { //如果是promise
-                        then.call(newValue, resolve);
-                        return;
-                    }
-                }
-                state = 'fulfilled';
-                value = newValue;
-                setTimeout(function () {
-                    callbacks.forEach(function (callback) {
-                        handle(callback);
-                    });
-                }, 0);
-            }
-            fn(resolve);
+      function resolve( newValue ) {
+        if ( newValue && ( typeof newValue === 'object' || typeof newValue === 'function' ) ) {
+          var then = newValue.then;
+          if ( typeof then === 'function' ) { //如果是promise
+            then.call( newValue, resolve );
+            return;
+          }
         }
+        state = 'fulfilled';
+        value = newValue;
+        setTimeout( function () {
+          callbacks.forEach( function ( callback ) {
+            handle( callback );
+          } );
+        }, 0 );
+      }
+      fn( resolve );
+    }
 
-        //a.then方法中，创建并返回了新的Promise实例，这是串行Promise的基础，并且支持链式调用。
-        //b.handle方法是promise内部的方法。then方法传入的形参onFulfilled以及创建新Promise实例时传入的resolve均被push到当前promise的callbacks队列中，这是衔接当前promise和后邻promise的关键所在（这里一定要好好的分析下handle的作用）。
-        //c.getUserId生成的promise（简称getUserId promise）异步操作成功，执行其内部方法resolve，传入的参数正是异步操作的结果id
-        //d.调用handle方法处理callbacks队列中的回调：getUserJobById方法，生成新的promise（getUserJobById promise）
-        //e.执行之前由getUserId promise的then方法生成的新promise(称为bridge promise)的resolve方法，传入参数为getUserJobById promise。这种情况下，会将该resolve方法传入getUserJobById promise的then方法中，并直接返回。
-        //f.在getUserJobById promise异步操作成功时，执行其callbacks中的回调：getUserId bridge promise中的resolve方法
-        //g.最后执行getUserId bridge promise的后邻promise的callbacks中的回调。
+    //a.then方法中，创建并返回了新的Promise实例，这是串行Promise的基础，并且支持链式调用。
+    //b.handle方法是promise内部的方法。then方法传入的形参onFulfilled以及创建新Promise实例时传入的resolve均被push到当前promise的callbacks队列中，这是衔接当前promise和后邻promise的关键所在（这里一定要好好的分析下handle的作用）。
+    //c.getUserId生成的promise（简称getUserId promise）异步操作成功，执行其内部方法resolve，传入的参数正是异步操作的结果id
+    //d.调用handle方法处理callbacks队列中的回调：getUserJobById方法，生成新的promise（getUserJobById promise）
+    //e.执行之前由getUserId promise的then方法生成的新promise(称为bridge promise)的resolve方法，传入参数为getUserJobById promise。这种情况下，会将该resolve方法传入getUserJobById promise的then方法中，并直接返回。
+    //f.在getUserJobById promise异步操作成功时，执行其callbacks中的回调：getUserId bridge promise中的resolve方法
+    //g.最后执行getUserId bridge promise的后邻promise的callbacks中的回调。
 
-        //5.失败处理（promise流程的错误）
-        //在异步操作失败时，标记其状态为rejected，并执行注册的失败回调:
-        function Promise(fn) {
-            var state = 'pending',
-                value = null,
-                callbacks = [];
-            this.then = function (onFulfilled, onRejected) {
-                return new Promise(function (resolve, reject) {
-                    handle({
-                        onFulfilled: onFulfilled || null,
-                        onRejected: onRejected || null,
-                        resolve: resolve,
-                        reject: reject
-                    });
-                });
-            };
+    //5.失败处理（promise流程的错误）
+    //在异步操作失败时，标记其状态为rejected，并执行注册的失败回调:
+    function Promise( fn ) {
+      var state = 'pending',
+        value = null,
+        callbacks = [];
+      this.then = function ( onFulfilled, onRejected ) {
+        return new Promise( function ( resolve, reject ) {
+          handle( {
+            onFulfilled: onFulfilled || null,
+            onRejected: onRejected || null,
+            resolve: resolve,
+            reject: reject
+          } );
+        } );
+      };
 
-            function handle(callback) {
-                if (state === 'pending') {
-                    callbacks.push(callback);
-                    return;
-                }
-                var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
-                    ret;
-                if (cb === null) {
-                    cb = state === 'fulfilled' ? callback.resolve : callback.reject;
-                    cb(value);
-                    return;
-                }
-                ret = cb(value);
-                callback.resolve(ret);
-            }
-
-            function resolve(newValue) {
-                if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-                    var then = newValue.then;
-                    if (typeof then === 'function') {
-                        then.call(newValue, resolve, reject);
-                        return;
-                    }
-                }
-                state = 'fulfilled';
-                value = newValue;
-                execute();
-            }
-
-            function reject(reason) {
-                state = 'rejected';
-                value = reason;
-                execute();
-            }
-
-            function execute() {
-                setTimeout(function () {
-                    callbacks.forEach(function (callback) {
-                        handle(callback);
-                    });
-                }, 0); //捕获错误的机制也是异步的
-            }
-            fn(resolve, reject);
+      function handle( callback ) {
+        if ( state === 'pending' ) {
+          callbacks.push( callback );
+          return;
         }
-        //6.异常处理(网络异常等等)
-        function handle(callback) {
-            if (state === 'pending') {
-                callbacks.push(callback);
-                return;
-            }
-            var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
-                ret;
-            if (cb === null) {
-                cb = state === 'fulfilled' ? callback.resolve : callback.reject;
-                cb(value);
-                return;
-            }
-            try {
-                ret = cb(value);
-                callback.resolve(ret);
-            } catch (e) {
-                callback.reject(e);
-            }
+        var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
+          ret;
+        if ( cb === null ) {
+          cb = state === 'fulfilled' ? callback.resolve : callback.reject;
+          cb( value );
+          return;
         }
-        
-        
-        //其实还差一个finally()，最终会执行的函数不过也很简单，最后在执行一个这个函数的方法就行了
+        ret = cb( value );
+        callback.resolve( ret );
+      }
 
-        //现在回顾下Promise的实现过程，其主要使用了设计模式中的观察者模式：
+      function resolve( newValue ) {
+        if ( newValue && ( typeof newValue === 'object' || typeof newValue === 'function' ) ) {
+          var then = newValue.then;
+          if ( typeof then === 'function' ) {
+            then.call( newValue, resolve, reject );
+            return;
+          }
+        }
+        state = 'fulfilled';
+        value = newValue;
+        execute();
+      }
 
-//通过Promise.prototype.then和Promise.prototype.catch方法将观察者方法注册到被观察者Promise对象中，同时返回一个新的Promise对象，以便可以链式调用。
-//被观察者管理内部pending、fulfilled和rejected的状态转变，同时通过构造函数中传递的resolve和reject方法以主动触发状态转变和通知观察者。
-        
-        //promise.race(),有一个成就行
-        //promise.all(), 全部成
-        //promise.any(),完成任意一个就行
-        //promise.none(),全部被拒绝
-        //promise.first(),第一个完成，其他被忽略
-        //promise.last(),最后一个完成，其他被忽略
-        //async 出来之前有的一个库  asynquence API   好用
-    </script>
+      function reject( reason ) {
+        state = 'rejected';
+        value = reason;
+        execute();
+      }
+
+      function execute() {
+        setTimeout( function () {
+          callbacks.forEach( function ( callback ) {
+            handle( callback );
+          } );
+        }, 0 ); //捕获错误的机制也是异步的
+      }
+      fn( resolve, reject );
+    }
+    //6.异常处理(网络异常等等)
+    function handle( callback ) {
+      if ( state === 'pending' ) {
+        callbacks.push( callback );
+        return;
+      }
+      var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
+        ret;
+      if ( cb === null ) {
+        cb = state === 'fulfilled' ? callback.resolve : callback.reject;
+        cb( value );
+        return;
+      }
+      try {
+        ret = cb( value );
+        callback.resolve( ret );
+      } catch ( e ) {
+        callback.reject( e );
+      }
+    }
+
+
+    //其实还差一个finally()，最终会执行的函数不过也很简单，最后在执行一个这个函数的方法就行了
+
+    //现在回顾下Promise的实现过程，其主要使用了设计模式中的观察者模式：
+
+    //通过Promise.prototype.then和Promise.prototype.catch方法将观察者方法注册到被观察者Promise对象中，同时返回一个新的Promise对象，以便可以链式调用。
+    //被观察者管理内部pending、fulfilled和rejected的状态转变，同时通过构造函数中传递的resolve和reject方法以主动触发状态转变和通知观察者。
+
+    //promise.race(),有一个成就行
+    //promise.all(), 全部成
+    //promise.any(),完成任意一个就行
+    //promise.none(),全部被拒绝
+    //promise.first(),第一个完成，其他被忽略
+    //promise.last(),最后一个完成，其他被忽略
+    //Promise.allSettled()
+    //async 出来之前有的一个库  asynquence API   好用
+  </script>
 </body>
 
 </html>
