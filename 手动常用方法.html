@@ -165,7 +165,7 @@
         if ( options ) {
           fn.apply( this, arguments )
         }
-        if ( timer ) clearTimeout( timer )
+        if ( timer ) clearTimeout( timer )  //关键步骤
         timer = setTimeout( () => {
           fn.apply( this, arguments )
         }, wait )
@@ -181,7 +181,7 @@
         const now = new Date();
         if ( now - prev > wait ) {
           fn.apply( this, args );
-          prev = new Date();
+          prev = new Date(); //关键步骤
         }
       }
     }
