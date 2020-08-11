@@ -92,6 +92,7 @@
       b: undefined
     })) // Object { b: "undefined"}
     jsonParse("{ x: 5 }") // Object { x: 5} 
+    console.log(jsonParse('{ "age": 20, "name": "jack" }'))
 
     var jsonStr = '{ "age": 20, "name": "jack" }'
     var json = (new Function('return ' + jsonStr))()
@@ -223,6 +224,9 @@
         proto = proto.__proto__;
       }
     }
+
+
+    
   </script>
 </body>
 
