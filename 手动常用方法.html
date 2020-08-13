@@ -167,7 +167,7 @@
     function debounce(fn, wait = 50, options) {
       let timer;
       return function () {
-        if (options) {
+        if (options && !timer) {
           fn.apply(this, arguments)
         }
         if (timer) clearTimeout(timer)  //关键步骤
