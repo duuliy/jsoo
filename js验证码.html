@@ -52,40 +52,41 @@
     <span>验证码:</span><span class="codeBox"></span><input type="text" placeholder="请输入验证码">
     <p><button id="send">确定</button></p>
 </fieldset>
-</body>
 <script>
-    window.onload=function(){
-        random();
-        var send = document.querySelector("#send");
-        send.onclick=function(){
-            var code= document.querySelector(".codeBox").innerHTML;
-            var inputVal= document.querySelector("input");
-            if(inputVal.value.toLocaleLowerCase()===code.toLocaleLowerCase()){           //全部转换为小写
-                alert("正确");
-                inputVal.value="";
-                random();
-            }else{
-                alert("错误");
-                inputVal.value="";
+        window.onload=function(){
+            random();
+            var send = document.querySelector("#send");
+            send.onclick=function(){
+                var code= document.querySelector(".codeBox").innerHTML;
+                var inputVal= document.querySelector("input");
+                if(inputVal.value.toLocaleLowerCase()===code.toLocaleLowerCase()){           //全部转换为小写
+                    alert("正确");
+                    inputVal.value="";
+                    random();
+                }else{
+                    alert("错误");
+                    inputVal.value="";
+                    random();
+                }
+            }
+            document.querySelector(".codeBox").onclick=function(){
                 random();
             }
+        };
+        function random(){
+            var code="";
+            var codeLength=6;      //验证码长度
+            var array=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            for(var i=0; i<codeLength;i++){
+                var arrayNum = Math.floor(Math.random()*array.length-1);     //随机下标
+                code+=array[arrayNum];          //拼成一个字符串
+            }
+           var codeBox = document.querySelector(".codeBox");
+            codeBox.innerHTML=code;
         }
-        document.querySelector(".codeBox").onclick=function(){
-            random();
-        }
-    };
-    function random(){
-        var code="";
-        var codeLength=6;      //验证码长度
-        var array=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-        for(var i=0; i<codeLength;i++){
-            var arrayNum = Math.floor(Math.random()*array.length-1);     //随机下标
-            code+=array[arrayNum];          //拼成一个字符串
-        }
-       var codeBox = document.querySelector(".codeBox");
-        codeBox.innerHTML=code;
-    }
-</script>
+    </script>
+</body>
+
 </html>

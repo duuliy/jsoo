@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -57,7 +58,7 @@
         .select_box font {
             position: absolute;
             right: 10px;
-            top:15px;
+            top: 15px;
             width: 0;
             height: 0;
             border-top: 6px solid white;
@@ -80,40 +81,39 @@
             <li>选项3</li>
         </ul>
     </div>
+    <script src='./jquery-1.7.2.min.js'></script>
+    <script type="text/javascript">
+        $(function () {
+            var s_title = $(".select_box span");
+            var s_select = $(".select_box li");
 
+            s_title.click(function (e) {
+                // $(this).addClass("span_aa");  //可以试试
+                $(this).next("ul").show();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+
+
+            s_select.click(function () {
+                var s_text = $(this).html();
+                var s_title_2 = $(this).parent('ul').prev("span");
+                s_title_2.html(s_text).removeClass("span_aa");
+                $(this).parent('ul').hide();
+            });
+
+
+
+            $(document).click(function () {
+                // s_title.removeClass("span_aa");
+                $(".select_box ul").hide();
+            });
+
+
+
+        });
+    </script>
 </body>
 
 </html>
-<script src='./jquery-1.7.2.min.js'></script>
-<script type="text/javascript">
-    $(function () {
-        var s_title = $(".select_box span");
-        var s_select = $(".select_box li");
-
-        s_title.click(function (e) {
-            // $(this).addClass("span_aa");  //可以试试
-            $(this).next("ul").show();
-            e.stopPropagation();
-            e.preventDefault();
-        });
-
-
-
-        s_select.click(function () {
-            var s_text = $(this).html();
-            var s_title_2 = $(this).parent('ul').prev("span");
-            s_title_2.html(s_text).removeClass("span_aa");
-            $(this).parent('ul').hide();
-        });
-
-
-
-        $(document).click(function () {
-            // s_title.removeClass("span_aa");
-            $(".select_box ul").hide();
-        });
-
-
-
-    });
-</script>

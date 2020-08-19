@@ -31,23 +31,24 @@
 <div contenteditable="true"></div>
 <input type="text">
 <p>你还可以输入<span class="num"></span>个字</p>
-</body>
 <script>
-    function $(id){
-        return document.querySelector(id)
-    }
-    (function num(){
-        var defalutNum= 10;        //默认字数
-        var text =$("div")
-        var num =$(".num")
-        num.innerHTML=defalutNum;
-        text.onkeyup=function(){
-            var length = this.innerHTML.length;
-            var thisNum = defalutNum-length;
-            if(length>defalutNum){
-                num.innerHTML=0;
-                this.innerHTML=this.innerHTML.substr(0,defalutNum)
-            }
+        function $(id){
+            return document.querySelector(id)
         }
-    })()
-</script>
+        (function num(){
+            var defalutNum= 10;        //默认字数
+            var text =$("div")
+            var num =$(".num")
+            num.innerHTML=defalutNum;
+            text.onkeyup=function(){
+                var length = this.innerHTML.length;
+                var thisNum = defalutNum-length;
+                if(length>defalutNum){
+                    num.innerHTML=0;
+                    this.innerHTML=this.innerHTML.substr(0,defalutNum)
+                }
+            }
+        })()
+    </script>
+</body>
+
