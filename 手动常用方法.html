@@ -9,34 +9,38 @@
 </head>
 
 <body>
+  <button onclick='test(5555)'>按钮</button>
   <script>
+    const test =(val) => {
+      console.log(val)
+    }
     //***********************实现一个new操作符***********************************/ 
     // 1.它创建了一个全新的对象。
     // 2.它会被执行 [[Prototype]]（也就是 __proto__）链接.
     // 3.它使 this指向新创建的对象，通过 new创建的每个对象将最终被 [[Prototype]]链接到这个函数的 prototype对象上。
     // 4.如果函数没有返回对象类型 Object(包含 Functoin,Array,Date,RegExg,Error)，那么 new表达式中的函数调用将返回该对象引用(返回this)。
 
-    function New( func ) {
+    function New(func) {
       var res = {};
-      if ( func.prototype !== null ) {
+      if (func.prototype !== null) {
         res.__proto__ = func.prototype;
       }
-      var ret = func.apply( res, Array.prototype.slice.call( arguments, 1 ) );
-      if ( ( typeof ret === "object" || typeof ret === "function" ) && ret !== null ) {
+      var ret = func.apply(res, Array.prototype.slice.call(arguments, 1));
+      if ((typeof ret === "object" || typeof ret === "function") && ret !== null) {
         return ret;
       }
       return res;
     }
 
-    function Car( make ) {
+    function Car(make) {
       this.make = make
       this.make2 = () => {
 
       }
     }
 
-    const car1 = new Car( 'Eagle' )
-    const car2 = New( Car, 'Eagle' )
+    const car1 = new Car('Eagle')
+    const car2 = New(Car, 'Eagle')
     // console.log(car1)
     // console.log(car2)
 
@@ -44,61 +48,62 @@
     //***********************实现一个JSON.stringify***********************************/ 
     // 数组可以直接String(),如果里面没有对象，有对象才拼"{"
 
-    function jsonStringify( obj ) {
+    function jsonStringify(obj) {
       let type = typeof obj;
-      if ( type !== "object" || type === null ) {
-        if ( /string|undefined|function/.test( type ) ) {
+      if (type !== "object" || type === null) {
+        if (/string|undefined|function/.test(type)) {
           obj = '"' + obj + '"';
         }
-        return String( obj );
+        return String(obj);
       } else {
         let json = []
-        arr = ( obj && obj.constructor === Array );
-        for ( let k in obj ) {
-          let v = obj[ k ];
+        arr = (obj && obj.constructor === Array);
+        for (let k in obj) {
+          let v = obj[k];
           let type = typeof v;
-          if ( /string|undefined|function/.test( type ) ) {
+          if (/string|undefined|function/.test(type)) {
             v = '"' + v + '"';
-          } else if ( type === "object" ) {
-            v = jsonStringify( v );
+          } else if (type === "object") {
+            v = jsonStringify(v);
           }
-          json.push( ( arr ? "" : '"' + k + '":' ) + String( v ) );
+          json.push((arr ? "" : '"' + k + '":') + String(v));
         }
-        return ( arr ? "[" : "{" ) + String( json ) + ( arr ? "]" : "}" )
+        return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}")
       }
     }
-    jsonStringify( {
+    jsonStringify({
       x: 5
-    } ) // "{"x":5}" 
-    jsonStringify( [ 1, "false", false ] ) // "[1,"false",false]" 
-    jsonStringify( {
+    }) // "{"x":5}" 
+    jsonStringify([1, "false", false]) // "[1,"false",false]" 
+    jsonStringify({
       b: undefined
-    } ) // "{"b":"undefined"}"
+    }) // "{"b":"undefined"}"
 
 
     //***********************实现一个JSON.parse***********************************/ 
-    function jsonParse( opt ) {
-      return eval( '(' + opt + ')' );
+    function jsonParse(opt) {
+      return eval('(' + opt + ')');
     }
-    jsonParse( jsonStringify( {
+    jsonParse(jsonStringify({
       x: 5
-    } ) ) // Object { x: 5} 
-    jsonParse( jsonStringify( [ 1, "false", false ] ) ) // [1, "false", falsr] 
-    jsonParse( jsonStringify( {
+    })) // Object { x: 5} 
+    jsonParse(jsonStringify([1, "false", false])) // [1, "false", falsr] 
+    jsonParse(jsonStringify({
       b: undefined
-    } ) ) // Object { b: "undefined"}
-    jsonParse( "{ x: 5 }" ) // Object { x: 5} 
+    })) // Object { b: "undefined"}
+    jsonParse("{ x: 5 }") // Object { x: 5} 
+    console.log(jsonParse('{ "age": 20, "name": "jack" }'))
 
     var jsonStr = '{ "age": 20, "name": "jack" }'
-    var json = ( new Function( 'return ' + jsonStr ) )()
+    var json = (new Function('return ' + jsonStr))()
 
     //***********************实现一个call或 apply***********************************/ 
     // Function.prototype  把对象转函数this
 
-    Function.prototype.call2 = function ( content = window ) {
+    Function.prototype.call2 = function (content = window) {
       content.fn = this;
-      let args = [ ...arguments ].slice( 1 );
-      let result = content.fn( ...args );
+      let args = [...arguments].slice(1);
+      let result = content.fn(...args);
       delete content.fn; //是否删除无所谓，不影响结果，删除目的为了避免这步占内存。
       return result; //因为有可能this函数会有返回值return
     }
@@ -106,19 +111,19 @@
       value: 1
     }
 
-    function bar( name, age ) {
-      console.log( name )
-      console.log( age )
-      console.log( this.fn );
+    function bar(name, age) {
+      console.log(name)
+      console.log(age)
+      console.log(this.fn);
       return 555
     }
-    bar.call2( foo, 'black', '18' ) // black 18 1
+    // bar.call2( foo, 'black', '18' ) // black 18 1
 
-    Function.prototype.apply2 = function ( context = window ) {
+    Function.prototype.apply2 = function (context = window) {
       context.fn = this
       let result; // 判断是否有第二个参数 
-      if ( arguments[ 1 ] ) {
-        result = context.fn( ...arguments[ 1 ] )
+      if (arguments[1]) {
+        result = context.fn(...arguments[1])
       } else {
         result = context.fn()
       }
@@ -132,11 +137,11 @@
     // bind后并没有执行
 
 
-    Function.prototype.bind2 = function ( content ) {
+    Function.prototype.bind2 = function (content) {
       const fn = this
-      let args = [ ...arguments ].slice( 1 );
+      let args = [...arguments].slice(1);
       const wrpperFn = () => {
-        fn.apply( content, args );
+        fn.apply(content, args);
       }
       return wrpperFn;
     }
@@ -145,10 +150,10 @@
       value2: 3
     }
 
-    function bar2( name, age ) {
-      console.log( name )
-      console.log( age )
-      console.log( this.value2 );
+    function bar2(name, age) {
+      console.log(name)
+      console.log(age)
+      console.log(this.value2);
     }
     // bar2.bind2( foo2, 'duuliy', 23 )()
 
@@ -159,29 +164,29 @@
     // 假设还差 0.01 秒就到达指定时间，这时又来了一个事件，那么之前的等待作废，需要重新再等待指定时间。
 
     //可以提供一个 options 对象决定如何调用 func 方法， options.leading 与|或 options.trailing 决定延迟前后如何触发。
-    function debounce( fn, wait = 50, options ) {
+    function debounce(fn, wait = 50, options) {
       let timer;
       return function () {
-        if ( options ) {
-          fn.apply( this, arguments )
+        if (options && !timer) {
+          fn.apply(this, arguments)
         }
-        if ( timer ) clearTimeout( timer )
-        timer = setTimeout( () => {
-          fn.apply( this, arguments )
-        }, wait )
+        if (timer) clearTimeout(timer)  //关键步骤
+        timer = setTimeout(() => {
+          fn.apply(this, arguments)
+        }, wait)
       }
     }
 
     // 可以理解为事件在一个管道中传输，加上这个节流阀以后，事件的流速就会减慢。
     // 实际上这个函数的作用就是如此，它可以将一个函数的调用频率限制在一定阈值内，例如 1s，那么 1s 内这个函数一定不会被调用两次
-    function throttle( fn, wait ) {
-      let prev = new Date();
+    function throttle(fn, wait) {
+      let prev = 0;
       return function () {
         const args = arguments;
-        const now = new Date();
-        if ( now - prev > wait ) {
-          fn.apply( this, args );
-          prev = new Date();
+        const now = new Date().valueOf();
+        if (now - prev > wait) {
+          fn.apply(this, args);
+          prev = now; //关键步骤
         }
       }
     }
@@ -190,13 +195,13 @@
     //***********************手写一个JS深拷贝***********************************/
 
 
-    function deepCopy( obj ) {
+    function deepCopy(obj) {
       //判断是否是简单数据类型， 
-      if ( typeof obj === "object" ) {
+      if (typeof obj === "object") {
         //复杂数据类型 
         var result = obj.constructor === Array ? [] : {};
-        for ( let i in obj ) {
-          result[ i ] = typeof obj[ i ] == "object" ? deepCopy( obj[ i ] ) : obj[ i ];
+        for (let i in obj) {
+          result[i] = typeof obj[i] == "object" ? deepCopy(obj[i]) : obj[i];
         }
       } else { //简单数据类型 直接 == 赋值 
         var result = obj;
@@ -208,17 +213,20 @@
     //一直循环向上寻找他隐式原型是否等于另一个的原型
     // ===全等不能用于判断对象{}，函数fn，数组[]等类型  但是可以判断class类,所以这里能===来判断
     // js里面类的实质就是函数
-    function instanceOf( left, right ) {
+    function instanceOf(left, right) {
       let proto = left.__proto__;
       let prototype = right.prototype
-      while ( true ) {
-        if ( proto === null )
+      while (true) {
+        if (proto === null)
           return false
-        if ( proto === prototype )
+        if (proto === prototype)
           return true
         proto = proto.__proto__;
       }
     }
+
+
+    
   </script>
 </body>
 

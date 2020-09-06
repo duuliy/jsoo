@@ -12,8 +12,8 @@
   <script>
     /*----------------------------------------------冒泡算法(稳定)------------------------------------------------*/
     Array.prototype.Bubble = function () {
-      for ( let i = 0; i < this.length - 1; i++ ) {
-        for ( let j = i + 1; j < this.length; j++ ) {
+      for ( let i = 0; i < this.length - 1; i++ ) {  //保证每个下标位置都对比一轮
+        for ( let j = 0; j < this.length-1; j++ ) {
           if ( this[ i ] > this[ j ] ) {
             [ this[ i ], this[ j ] ] = [ this[ j ], this[ i ] ]
           }
@@ -22,8 +22,8 @@
       return this
     }
 
-    let arr1 = [ 1, 1, 9, 5, 5, 45, 5, 46, 54, 24, 624, 56, 12, 15, 156, 1, 561, 56, 156, 49, 8 ];
-    // console.log(arr1.Bubble())
+    let arr1 = [ 2, 1, 9, 5, 5, 45, 5, 46, 54, 24, 624, 56, 12, 15, 156, 561, 56, 156, 49, 8 ];
+    console.log(arr1.Bubble())
 
     /*----------------------------------------------选择排序(不稳定) ------------------------------------------------*/
     //减少冒泡次数
@@ -33,9 +33,9 @@
         indexMin;
       for ( let i = 0; i < length - 1; i++ ) {
         indexMin = i;
-        for ( let j = i; j < length; j++ ) {
+        for ( let j = i; j < length; j++ ) { //i位置获得依次获得最小值无需再排j=i
           if ( this[ j ] < this[ indexMin ] ) {
-            indexMin = j;
+            indexMin = j; //选出最小值
           }
         }
         if ( i !== indexMin ) {
@@ -49,7 +49,7 @@
     // console.log(arr2.Select())
 
     /*----------------------------------------------插入排序(稳定) ------------------------------------------------*/
-    //一个个插入，然后和合并后数组排序
+    //从右插入一个值然后排序
     var insertSort = arr => {
       let length = arr.length,
         j, temp;
@@ -70,7 +70,7 @@
       for ( let i = 1; i < length; i++ ) {
         j = i;
         temp = this[ i ];
-        while ( j > 0 && this[ j - 1 ] > temp ) {
+        while ( j > 0 && this[ j - 1 ] > temp ) {  //n-1次内循环，i左边已排好序，右边依次增加下标位，从右开始while排
           this[ j ] = this[ j - 1 ];
           j--;
         }
@@ -85,7 +85,7 @@
 
 
     /*----------------------------------------------基本排序比较 ------------------------------------------------*/
-    //插入(每次内循环赋值)快于选择(每次外循环赋值)快于冒泡(每次达到条件内循环赋值，外循环每次赋值)
+    //插入快于选择快于冒泡
     //前者比较很容易理解，后者比较插入循环的次数最少
     //时间复杂度：1000为基数，多次得出  冒泡两倍于选择，选择比插入多一点点  平均都是O(n*n)
     //空间复杂度：都是O(1)
@@ -104,7 +104,7 @@
       return res;
     }
     var arr = [ 1, 'a', 'a', 'b', 'd', 'e', 'e', 1, 0 ]
-    console.log( arr.unique2() );
+    // console.log( arr.unique2() );
   </script>
 </body>
 

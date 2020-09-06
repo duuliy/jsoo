@@ -79,30 +79,29 @@
         <FriendList :name='group_name' :num='group_num' v-for='item in 20'></FriendList>
     </div>
 
-</body>
-
-<script>
-    $(document).ready(function () {
-        var div = $("form").find("div");
-        div.mouseover(function (e) {
-            var event = e || window.event;
-            var target = event.target || event.srcElement;
-            var _this = $(this);
-            if (target.nodeName.toLowerCase() == 'li') {
-                _this.find('li').css('display', 'block');
-                _this.find('li').click(function () {
-                    var li = $(this);
-                    _this.find('.active').text(li.text());
-                });
-            }
-            _this.mouseout(function (e) {
+    <script>
+        $(document).ready(function () {
+            var div = $("form").find("div");
+            div.mouseover(function (e) {
                 var event = e || window.event;
                 var target = event.target || event.srcElement;
-                if (target.nodeName.toLowerCase() == 'li')
-                    _this.find('li').not('.active').css('display', 'none');
+                var _this = $(this);
+                if (target.nodeName.toLowerCase() == 'li') {
+                    _this.find('li').css('display', 'block');
+                    _this.find('li').click(function () {
+                        var li = $(this);
+                        _this.find('.active').text(li.text());
+                    });
+                }
+                _this.mouseout(function (e) {
+                    var event = e || window.event;
+                    var target = event.target || event.srcElement;
+                    if (target.nodeName.toLowerCase() == 'li')
+                        _this.find('li').not('.active').css('display', 'none');
+                });
             });
         });
-    });
-</script>
+    </script>
+</body>
 
 </html>
