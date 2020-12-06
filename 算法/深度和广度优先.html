@@ -48,7 +48,6 @@
             let queue = data;
             while (queue.length > 0) {
                 [...queue].forEach((child, i) => {
-                    debugger
                     queue.shift();  //删除后本轮循环(break)queue没变(i===0这轮)，但是下一轮就变了
                     result.push(child.name);
                     child.children && (queue.push(...child.children));
