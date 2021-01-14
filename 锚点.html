@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      height: 100px;
+      overflow-y: scroll;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li id="anchor1">锚点1</li>
+    <li id="anchor2">锚点2</li>
+    <li id="anchor3">锚点3</li>
+    <li id="anchor4">锚点4</li>
+    <div id="6665">锚点5</div>
+    <li id="anchor6">锚点6</li>
+    <li id="anchor7">锚点7</li>
+    <li id="anchor8">锚点8</li>
+    <li id="anchor9">锚点9</li>
+    <li id="anchor10">锚点10</li>
+    <li id="anchor11">锚点11</li>
+    <li id="anchor12">锚点12</li>
+    <li id="anchor13">锚点13</li>
+    <li id="anchor14">锚点14</li>
+    <li id="anchor15">锚点15</li>
+    <li id="anchor16">锚点16</li>
+    <li id="anchor17">锚点17</li>
+    <li id="anchor18">锚点18</li>
+  </ul>
+  <a href="#anchor1">跳至第一个锚点</a>
+  <button onclick='jump("#6665")'>跳至第5个锚点(id不能以数字开头)</button>
+  <button onclick='jump("#anchor6")'>跳至第6个锚点</button>
+</body>
+<script>
+  const jump = (num) => {
+    // window.location.href = num;      // firstAnchor为锚点名称
+
+    // window.location.hash = num; // firstAnchor为锚点名称
+
+    document.querySelector(num).scrollIntoView({
+      behavior: "smooth", // 定义动画过渡效果， "auto"或 "smooth" 之一。默认为 "auto"
+      block: "start", // 定义垂直方向的对齐， "start", "center", "end", 或 "nearest"之一。默认为 "start"
+      inline: "nearest" // 定义水平方向的对齐， "start", "center", "end", 或 "nearest"之一。默认为 "nearest"
+    })
+    // scrollIntoView 主要是滚动效果不理想，只会滚动到可视区域，不一定会到页面正中,建议使用下列代码
+    //  let anchorElement = document.getElementById(anchor);
+
+    // document.querySelector('ul').scrollTo(0, anchorElement.offsetTop - window.innerHeight / 2);
+
+  }
+</script>
+
+</html>
