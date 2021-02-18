@@ -2,63 +2,123 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 
 <body>
-    <script>
-        const data = [
-            {
-                name: 'a',
-                children: [
-                    { name: 'b', children: [{ name: 'e' }] },
-                    { name: 'c', children: [{ name: 'f' }] },
-                    { name: 'd', children: [{ name: 'g' }] },
-                ],
-            },
-            {
-                name: 'a2',
-                children: [
-                    { name: 'b2', children: [{ name: 'e2' }] },
-                    { name: 'c2', children: [{ name: 'f2' }] },
-                    { name: 'd2', children: [{ name: 'g2' }] },
-                ],
-            }
-        ]
+  <script>
+    const data = [
+      {
+        name: 'a',
+        children: [
+          { name: 'b', children: [{ name: 'e' }] },
+          { name: 'c', children: [{ name: 'f' }] },
+        ],
+      },
+      {
+        name: 'a2',
+        children: [
+          { name: 'b2', children: [{ name: 'e2' }] },
+          { name: 'c2', children: [{ name: 'f2' }] },
+        ],
+      }
+    ]
 
-        // 深度遍历, 使用递归
-        function getName(data) {
-            const result = [];
-            data.forEach(item => {
-                const map = data => {
-                    result.push(data.name);
-                    data.children && data.children.forEach(child => map(child));
-                }
-                map(item);
-            })
-            return result.join(',');
+    // 深度遍历，先序
+    // 使用递归
+    function depthFirstPrecedence(data) {
+      const result = [];
+      data.forEach(item => {
+        const map = data => {
+          result.push(data.name);
+          data.children && data.children.forEach(child => map(child));
         }
+        map(item);
+      })
+      return result.join(',');
+    }
 
-        // 广度遍历, 创建一个执行队列, 当队列为空的时候则结束
-        function getName2(data) {
-            let result = [];
-            let queue = data;
-            while (queue.length > 0) {
-                [...queue].forEach((child, i) => {
-                    queue.shift();  //删除后本轮循环(break)queue没变(i===0这轮)，但是下一轮就变了
-                    result.push(child.name);
-                    child.children && (queue.push(...child.children)); //全部拆成一位数组
-                });
-            }
-            return result.join(',');
+    //后序
+    function depthFirstPostscript(data) {
+      const result = [];
+      data.forEach(item => {
+        const map = data => {
+          data.children && data.children.forEach(child => map(child));
+          result.push(data.name);
         }
+        map(item);
+      })
+      return result.join(',');
+    }
 
-        console.log(getName(data))
-        console.log(getName2(data))
-    </script>
+    //中序 仅适用二叉树
+    function depthFirstMiddle(root) {
+      let res = [];
+      // 遍历函数
+      function traversal(root) {
+        if (root !== null) {
+          if (root.left) {
+            // 递归遍历左子树
+            traversal(root.left);
+          };
+          // 访问根节点的值
+          res.push(root.val);
+          if (root.right) {
+            // 递归遍历右子树
+            traversal(root.right);
+          };
+        };
+      };
+      traversal(root);
+      return res;
+    };
+
+    // 使用遍历 先序
+    function depthFirstPrecedence2(data) {
+      let result = [];
+      let node;
+      let queue = [...data];
+      while (node = queue.shift()) {
+        result.push(node.name);
+        node.children && queue.unshift(...node.children);
+      }
+      return result.join(',');
+    }
+
+    // 广度遍历, 创建一个执行队列, 当队列为空的时候则结束
+    // function breadthFirst(data) {
+    //   let result = [];
+    //   let queue = [...data];
+    //   while (queue.length > 0) {
+    //     [...queue].forEach((child, i) => {
+    //       queue.shift();  //删除后本轮循环(break)queue没变(i===0这轮)，但是下一轮就变了
+    //       result.push(child.name);
+    //       child.children && (queue.push(...child.children)); //全部拆成一维数组
+    //     });
+    //   }
+    //   return result.join(',');
+    // }
+
+    //简化
+    function breadthFirst(data) {
+      let result = [];
+      let node;
+      let queue = [...data];
+      while (node = queue.shift()) { //删除后本轮循环(break)queue没变(i===0这轮)，但是下一轮就变了
+        result.push(node.name);
+        node.children && queue.push(...node.children); //全部拆成一维数组
+      }
+      return result.join(',');
+    }
+
+    console.log(depthFirstPrecedence(data))
+    console.log(depthFirstPrecedence2(data))
+    console.log(depthFirstPostscript(data))
+    console.log(breadthFirst(data))
+  </script>
 </body>
 
 </html>
