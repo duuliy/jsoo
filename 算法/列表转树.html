@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let list = [
+      {
+        id: '1-3',
+        title: '节点1-3',
+        parentId: '1'
+      },
+      {
+        id: '1-3-1',
+        title: '节点1-3-1',
+        parentId: '1-3'
+      },
+      {
+        id: '1',
+        title: '节点1',
+        parentId: '',
+      },
+      {
+        id: '1-1',
+        title: '节点1-1',
+        parentId: '1'
+      },
+      {
+        id: '1-2',
+        title: '节点1-2',
+        parentId: '1'
+      },
+      {
+        id: '2',
+        title: '节点2',
+        parentId: ''
+      },
+      {
+        id: '2-1',
+        title: '节点2-1',
+        parentId: '2'
+      }
+    ]
+
+    // 树转列表 只用遍历push  略
+    //列表转树
+
+    // 方法1
+    // var temp = {};
+    // var treeData = [];
+    // for (var i = 0; i < data.length; i++) {
+    //   temp[data[i].id] = data[i];
+    // }
+    // for (var i in temp) {
+    //   if (temp[i].parentId != "") {
+    //     if (!temp[temp[i].parentId].children) {
+    //       temp[temp[i].parentId].children = new Array();
+    //     }
+    //     temp[temp[i].parentId].children.push(temp[i]);
+    //   } else {
+    //     treeData.push(temp[i]);
+    //   }
+    // }
+
+    // 方法2
+    function listToTree(list) {
+      // 浅拷贝info子节点影响list节点的映射,lodash拷贝后则失效
+      let info = list.reduce((map, node) => (map[node.id] = node, node.children = [], map), {})
+      const _list = list.filter(node => {
+        info[node.parentId] && info[node.parentId].children.push(node)
+        return !node.parentId
+      })
+      return _list
+    }
+    // 列表结构转为树结构，就是把所有非根节点放到对应父节点的chilren数组中，然后把根节点提取出来：
+    // 这里首先通过info建立了id => node的映射，因为对象取值的时间复杂度是O(1) ，
+    // 这样在接下来的找寻父元素就不需要再去遍历一次list了，因为遍历寻找父元素时间复杂度是O(n) ，
+    // 并且是在循环中遍历，则总体时间复杂度会变成O(n ^ 2) ，而上述实现的总体复杂度是O(n) 。
+
+    console.log(listToTree(list))
+  </script>
+</body>
+
+</html>
