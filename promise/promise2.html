@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>work版</title>
+</head>
+
+<body>
+  <script>
+
+    function promise(fn) {
+      const PENDING = 'pending'
+      const FULFILLED = 'fulfilled'
+      const REJECTED = 'rejected'
+      let state = PENDING
+      let value = null
+      let callbacks = []
+
+      function handle(callback) {
+        setTimeout(() => {
+          if (state === PENDING) {  //promise里面是io时，把异步丢进队列
+            callbacks.push(callback)
+            return
+          }
+          let cb = state === FULFILLED ? callback.onFulfilled : callback.onRejected,
+            ret
+          if (!cb) {
+            cb = state === FULFILLED ? callback.resolve : callback.reject
+            cb && cb(value)
+            return
+          }
+          ret = cb(value)
+          state === FULFILLED ? callback.resolve(ret) : null
+        }, 0)
+      }
+
+      this.then = function (onFulfilled) {
+        return new promise(function (resolve, reject) {
+          handle({
+            onFulfilled: onFulfilled || null,
+            resolve: resolve,
+            reject: reject
+          })
+        })
+      }
+
+      this.catch = function (onRejected) {
+        return new promise(function (resolve, reject) {
+          handle({
+            onRejected: onRejected || null,
+            resolve: resolve,
+            reject: reject
+          })
+        })
+      }
+
+      function execute() {
+        setTimeout(function () {
+          callbacks.forEach(function (callback) {
+            handle(callback)
+          });
+        }, 0)
+      }
+
+      function resolve(newValue) {
+        state = FULFILLED
+        value = newValue
+        execute()  //promise里面是io时，执行最好
+      }
+
+      function reject(reason) {
+        state = REJECTED
+        value = reason
+        execute()
+      }
+
+      fn(resolve, reject)
+    }
+
+    new promise(function (resolve, reject) {
+      console.log(123)
+      // resolve('成功666')
+      setTimeout(() => {
+        resolve('成功')
+      }, 1000);
+    }).catch().then(res => {
+      console.log(555)
+      return res
+    }).then(res => {
+      console.log(res)
+      // console.log(999)
+    })
+    console.log(222)
+
+  </script>
+</body>
+
+</html>
