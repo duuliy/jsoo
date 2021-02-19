@@ -120,7 +120,7 @@
 
     //5.失败处理（promise流程的错误）
     //在异步操作失败时，标记其状态为rejected，并执行注册的失败回调:
-    function Promise2(fn) {
+    function Promise(fn) {
       var state = 'pending',
         value = null,
         callbacks = [];
@@ -199,17 +199,6 @@
         callback.reject(e);
       }
     }
-
-    new Promise2(function (resolve, reject) {
-      console.log(123)
-      // resolve('成功666')
-      setTimeout(() => {
-        resolve('成功')
-      }, 1000);
-    }).then(res => {
-      console.log(res)
-      return res
-    })
 
     //其实还差一个finally()，最终会执行的函数不过也很简单，最后在执行一个这个函数的方法就行了
 
