@@ -64,10 +64,15 @@
     // console.log(sum55(2)(3)(4)(5));
 
     //骚方法实现(看起来不错，实际跑不动):
-    const curry = (fn, arr = []) => (...args) => (arg => arg.length === fn.length
-      ? fn(...arg)
-      : curry(fn, arg)
-    )([...arr, ...args])
+    const curry = fn => {
+      const len = fn.length;
+      const judge = (...args1) => args1.length >= len ?
+        fn(...args1) : (...args2) => judge(...[...args1, ...args2]);
+      return judge;
+    }
+
+    const plus = curry((a, b, c, d, e) => a + b + c + d + e);
+    console.log(plus(1)(2)(3)(4)(5))
 
   </script>
 </body>

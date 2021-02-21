@@ -17,8 +17,8 @@
     //***********************实现一个new操作符***********************************/ 
     // 1.它创建了一个全新的对象。
     // 2.它会被执行 [[Prototype]]（也就是 __proto__）链接.
-    // 3.它使 this指向新创建的对象，通过 new创建的每个对象将最终被 [[Prototype]]链接到这个函数的 prototype对象上。
-    // 4.如果函数没有返回对象类型 Object(包含 Functoin,Array,Date,RegExg,Error)，那么 new表达式中的函数调用将返回该对象引用(返回this)。
+    // 3.执行构造函数，并把返回值指向全新对象的this上。
+    // 4.如果函数返回值返回对象类型 Object(包含 Functoin,Array,Date,RegExg,Error)，就返回返回值，否则返回全新对象本身。
 
     function New(func) {
       var res = {};
@@ -92,7 +92,7 @@
       b: undefined
     })) // Object { b: "undefined"}
     jsonParse("{ x: 5 }") // Object { x: 5} 
-    console.log(jsonParse('{ "age": 20, "name": "jack" }'))
+    // console.log(jsonParse('{ "age": 20, "name": "jack" }'))
 
     var jsonStr = '{ "age": 20, "name": "jack" }'
     var json = (new Function('return ' + jsonStr))()
@@ -104,20 +104,23 @@
       content.fn = this;
       let args = [...arguments].slice(1);
       let result = content.fn(...args);
-      delete content.fn; //是否删除无所谓，不影响结果，删除目的为了避免这步占内存。
-      return result; //因为有可能this函数会有返回值return
+      delete content.fn; 
+      return result;
     }
     var foo = {
       value: 1
     }
 
     function bar(name, age) {
-      console.log(name)
-      console.log(age)
-      console.log(this.fn);
-      return 555
+      this.name=name
+      this.age=age
     }
-    // bar.call2( foo, 'black', '18' ) // black 18 1
+    bar.call2( foo, 'black', '18' ) 
+    console.log(foo) // black 18 1
+    //一样效果
+    // foo.fn=bar
+    // foo.fn('black', '18')
+    // console.log(foo) 
 
     Function.prototype.apply2 = function (context = window) {
       context.fn = this
@@ -127,7 +130,7 @@
       } else {
         result = context.fn()
       }
-      delete context.fn()
+      delete context.fn
       return result
     }
 
