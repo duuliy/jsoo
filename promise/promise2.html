@@ -58,11 +58,9 @@
       }
 
       function execute() {
-        setTimeout(function () {
-          callbacks.forEach(function (callback) {
-            handle(callback)
-          });
-        }, 0)
+        callbacks.forEach(function (callback) {
+          handle(callback)
+        })
       }
 
       function resolve(newValue) {
@@ -85,7 +83,7 @@
       // resolve('成功666')
       setTimeout(() => {
         resolve('成功')
-      }, 1000);
+      }, 0);
     }).catch().then(res => {
       console.log(555)
       return res
