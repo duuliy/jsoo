@@ -13,28 +13,29 @@
     /*----------------------------------------------希尔排序 ------------------------------------------------*/
     //时间复杂度O(n log n)
     //空间复杂度O(1)
+    //是简单插入排序的改进版。它与插入排序的不同之处在于，它会优先比较距离较远的元素。希尔排序又叫缩小增量排序。
     //5为基数每次算出连中进行排序
-    function shellSort( arr ) {
+    function shellSort(arr) {
       var len = arr.length,
         temp,
         gap = 1;
-      console.time( '希尔排序耗时:' );
-      while ( gap < len / 5 ) { //动态定义间隔序列 gap 大于每个小插入组
+      console.time('希尔排序耗时:');
+      while (gap < len / 5) { //动态定义间隔序列 gap 大于每个小插入组
         gap = gap * 5 + 1;
       }
-      for ( gap; gap > 0; gap = Math.floor( gap / 5 ) ) { //gap 有多少插入组
-        for ( var i = gap; i < len; i++ ) {
-          temp = arr[ i ];
-          for ( var j = i - gap; j >= 0 && arr[ j ] > temp; j -= gap ) { //插入组排序
-            arr[ j + gap ] = arr[ j ];
+      for (gap; gap > 0; gap = Math.floor(gap / 5)) { //gap 有多少插入组
+        for (var i = gap; i < len; i++) {
+          temp = arr[i];
+          for (var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) { //插入组排序
+            arr[j + gap] = arr[j];
           }
-          arr[ j + gap ] = temp;
+          arr[j + gap] = temp;
         }
       }
-      console.timeEnd( '希尔排序耗时:' );
+      console.timeEnd('希尔排序耗时:');
       return arr;
     }
-    var arr = [ 3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48 ];
+    var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
     // console.log(shellSort(arr)); //[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]；
 
     /*----------------------------------------------归并排序 ------------------------------------------------*/
@@ -43,38 +44,38 @@
     //把数组划分为左右，然后运算，递归以上步骤，然后合并对比，保存一段，最后合并为一个总的。(在使用)
     //js并不适合太深的递归算法，所以用另一种方式实现较好
     //把数组划依次分为左右一小块，然后合并对比，保存一段，最后合并为一个总的。(未使用)
-    function mergeSort( arr ) { //采用自上而下的递归方法
+    function mergeSort(arr) { //采用自上而下的递归方法
       var len = arr.length;
-      if ( len < 2 ) {
+      if (len < 2) {
         return arr;
       }
-      var middle = Math.floor( len / 2 ),
-        left = arr.slice( 0, middle ),
-        right = arr.slice( middle );
-      return merge( mergeSort( left ), mergeSort( right ) );
+      var middle = Math.floor(len / 2),
+        left = arr.slice(0, middle),
+        right = arr.slice(middle);
+      return merge(mergeSort(left), mergeSort(right));
     }
 
-    function merge( left, right ) {
+    function merge(left, right) {
       var result = [];
-      console.time( '归并排序耗时' );
-      while ( left.length && right.length ) {
-        if ( left[ 0 ] <= right[ 0 ] ) {
-          result.push( left.shift() ); //删除第一个并push
+      console.time('归并排序耗时');
+      while (left.length && right.length) {
+        if (left[0] <= right[0]) {
+          result.push(left.shift()); //删除第一个并push
         } else {
-          result.push( right.shift() );
+          result.push(right.shift());
         }
       }
 
-      while ( left.length ) {
-        result.push( left.shift() );
+      while (left.length) {
+        result.push(left.shift());
       }
-      while ( right.length ) {
-        result.push( right.shift() );
+      while (right.length) {
+        result.push(right.shift());
       }
-      console.timeEnd( '归并排序耗时' );
+      console.timeEnd('归并排序耗时');
       return result;
     }
-    var arr = [ 3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48 ];
+    var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
     // console.log(mergeSort(arr));
 
     /*----------------------------------------------快速排序 ------------------------------------------------*/
@@ -87,38 +88,182 @@
 
 
     //直观打印
-    function qSort3( arr ) {
-      if ( arr.length == 0 ) {
+    function qSort3(arr) {
+      if (arr.length == 0) {
         return [];
       }
       var left = [];
       var right = [];
-      var pivot = arr[ 0 ];
-      for ( var i = 1; i < arr.length; i++ ) {  //每次循环把pivot放到正确的下标位置，越往后循环直接减半
-        console.log( " 基准值：" + pivot + " 当前元素：" + arr[ i ] );
-        if ( arr[ i ] < pivot ) {
-          console.log( " 移动 " + arr[ i ] + " 到左边 " );
-          left.push( arr[ i ] );
+      var pivot = arr[0];
+      for (var i = 1; i < arr.length; i++) {  //每次循环把pivot放到正确的下标位置，越往后循环直接减半
+        console.log(" 基准值：" + pivot + " 当前元素：" + arr[i]);
+        if (arr[i] < pivot) {
+          console.log(" 移动 " + arr[i] + " 到左边 ");
+          left.push(arr[i]);
         } else {
-          console.log( " 移动 " + arr[ i ] + " 到右边 " );
-          right.push( arr[ i ] );
+          console.log(" 移动 " + arr[i] + " 到右边 ");
+          right.push(arr[i]);
         }
       }
-      return qSort3( left ).concat( pivot, qSort3( right ) );
+      return qSort3(left).concat(pivot, qSort3(right));
     }
     var a = [];
-    for ( var i = 0; i < 10; ++i ) {
-      a[ i ] = Math.floor( ( Math.random() * 100 ) + 1 );
+    for (var i = 0; i < 10; ++i) {
+      a[i] = Math.floor((Math.random() * 100) + 1);
     }
-    console.log( a );
+    console.log(a);
     console.log();
-    console.log( qSort3( a ) );
+    console.log(qSort3(a));
 
 
-    /*----------------------------------------------桶排序 ------------------------------------------------*/
+    /*----------------------------------------------堆排序 ------------------------------------------------*/
     // 因为js模拟二叉树比较麻烦，所以堆排序的优势用js语言无法体现， 
     // 相对而言C语言的链表在实现上更能表现堆排序，堆排序或许更适合指针类的计算机语言。
     //可用于小数
+    //堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
+
+    var len;   // 因为声明的多个函数都需要数据长度，所以把len设置成为全局变量
+
+    function buildMaxHeap(arr) {  // 建立大顶堆
+      len = arr.length;
+
+      for (var i = Math.floor(len / 2); i >= 0; i--) {
+        heapify(arr, i);
+      }
+    }
+
+    function heapify(arr, i) {    // 堆调整
+      var left = 2 * i + 1,
+        right = 2 * i + 2,
+        largest = i;
+
+      if (left < len && arr[left] > arr[largest]) {
+        largest = left;
+      }
+
+      if (right < len && arr[right] > arr[largest]) {
+        largest = right;
+      }
+
+      if (largest != i) {
+        swap(arr, i, largest);
+        heapify(arr, largest);
+      }
+    }
+
+    function swap(arr, i, j) {
+      var temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+
+    function heapSort(arr) {
+      buildMaxHeap(arr);
+      for (var i = arr.length - 1; i > 0; i--) {
+        swap(arr, 0, i);
+        len--;
+        heapify(arr, 0);
+      }
+      return arr;
+    }
+
+    /*----------------------------------------------计数排序 ------------------------------------------------*/
+    //计数排序不是基于比较的排序算法，其核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。 作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定范围的整数。
+
+    function countingSort(arr, maxValue) {
+      var bucket = new Array(maxValue + 1),
+        sortedIndex = 0;
+
+      arrLen = arr.length,
+        bucketLen = maxValue + 1;
+
+      for (var i = 0; i < arrLen; i++) {
+        if (!bucket[arr[i]]) {
+          bucket[arr[i]] = 0;
+        }
+        bucket[arr[i]]++;
+      }
+      for (var j = 0; j < bucketLen; j++) {
+        while (bucket[j] > 0) {
+          arr[sortedIndex++] = j;
+          bucket[j]--;
+        }
+      }
+      return arr;
+    }
+
+    /*----------------------------------------------桶排序 ------------------------------------------------*/
+    //桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。桶排序 (Bucket sort)的工作的原理：
+    //假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排）
+
+    function bucketSort(arr, bucketSize) {
+      if (arr.length === 0) {
+        return arr;
+      }
+
+      var i;
+      var minValue = arr[0];
+      var maxValue = arr[0];
+      for (i = 1; i < arr.length; i++) {
+        if (arr[i] < minValue) {
+          minValue = arr[i];               // 输入数据的最小值
+        } else if (arr[i] > maxValue) {
+          maxValue = arr[i];               // 输入数据的最大值
+        }
+      }
+      // 桶的初始化
+      var DEFAULT_BUCKET_SIZE = 5;           // 设置桶的默认数量为5
+      bucketSize = bucketSize || DEFAULT_BUCKET_SIZE;
+      var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
+      var buckets = new Array(bucketCount);
+      for (i = 0; i < buckets.length; i++) {
+        buckets[i] = [];
+      }
+      // 利用映射函数将数据分配到各个桶中
+      for (i = 0; i < arr.length; i++) {
+        buckets[Math.floor((arr[i] - minValue) / bucketSize)].push(arr[i]);
+      }
+      arr.length = 0;
+      for (i = 0; i < buckets.length; i++) {
+        insertionSort(buckets[i]);                     // 对每个桶进行排序，这里使用了插入排序（基本排序）
+        for (var j = 0; j < buckets[i].length; j++) {
+          arr.push(buckets[i][j]);
+        }
+      }
+      return arr;
+    }
+    /*----------------------------------------------基数排序 ------------------------------------------------*/
+    //基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。
+    //有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序。最后的次序就是高优先级高的在前，高优先级相同的低优先级高的在前。
+
+    var counter = [];
+    function radixSort(arr, maxDigit) {
+      var mod = 10;
+      var dev = 1;
+
+      for (var i = 0; i < maxDigit; i++, dev *= 10, mod *= 10) {
+        for (var j = 0; j < arr.length; j++) {
+          var bucket = parseInt((arr[j] % mod) / dev);
+          if (counter[bucket] == null) {
+            counter[bucket] = [];
+          }
+          counter[bucket].push(arr[j]);
+        }
+
+        var pos = 0;
+        for (var j = 0; j < counter.length; j++) {
+          var value = null;
+          if (counter[j] != null) {
+            while ((value = counter[j].shift()) != null) {
+              arr[pos++] = value;
+            }
+          }
+        }
+      }
+      return arr;
+    }
+
+
   </script>
 </body>
 
