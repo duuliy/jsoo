@@ -34,7 +34,8 @@
         for (let i = 0; i < 200; i++) {
             arr.push(Math.round(Math.random() * 30 + 1))
         }
-        console.log(twoPoints(arr, num))
+        //arr前提是先排序
+        // console.log(twoPoints([1,8,4,2,9].sort(), num))
 
         //二分查找查找字母(不精确，有问题)           （只能说用于多次使用，所以才排序，否则暴力查找就好）
 
@@ -95,6 +96,7 @@
         } else {
             console.log(word + " 这个单词没有出现在这个文件内容中。");
         }
+        wordss.indexOf('the') //香
         //两篇文章对比 错词对比等等
     </script>
 </body>
