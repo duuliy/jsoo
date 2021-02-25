@@ -2,133 +2,120 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>高级算法</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>高级算法</title>
 </head>
 
 <body>
-    <script>
-        //斐波那契数列。效率极差。很多次递归被重复计算
-        //0,1,1,2,3,5,8,13,21,34,55...
-        const recurFib = n => {
-            if (n < 2) {
-                return n
+  <script>
+    //贪心算法  
+    //   贪心算法每次的选择都是局部最优，当在算法结束的时候，其期望是全局最优才是正确的。
+    //   不过有时，在不同条件与要求下时，最优解的答案可能不止有一个或不一样，而贪婪算法也可以得出一个近似的答案。
+    // 最少硬币找零是给出要找零的钱数，以及可以用硬币的额度数量，找出有多少种找零方法。
+    // 如：美国面额硬币有：1，5，10，25
+    // 我们给36美分的零钱
+
+    //巧：
+    function MinCoinChange2(coins) {
+        var coins = coins.sort(function (a, b) {
+          return b - a;
+        });
+
+        this.makeChange = function (amount) {
+          var change = [],
+            total = 0;
+          for (var i = 0; i < coins.length; i++) {
+            var coin = coins[i];
+            while (total + coin <= amount) {
+              change.push(coin);
+              total += coin;
             }
-            return recurFib(n - 1) + recurFib(n - 2)
+          }
+          return change;
         }
+      }
+      var coin2 = new MinCoinChange2([1, 5, 10, 25]);
+      // console.log(coin2.makeChange(36));
 
-        //综合选择排序 记录已计算过的 新算法
-        //eg:1
-        function dynFib(n) {
-            var val = [];
-            for (var i = 0; i <= n; ++i) {
-                val[i] = 0;
-            }
-            if (n === 1 || n === 2) {
-                return 1;
-            } else {
-                val[1] = 1;
-                val[2] = 2;
-                for (var i = 3; i <= n; ++i) {
-                    val[i] = val[i - 1] + val[i - 2];
-                }
-                return val[n - 1];
-            }
-        }
-
-
-        //eg:2  不使用数组的方式
-        function iterFib(n) {
-            var last = 1;
-            var nextLast = 1;
-            var result = 1;
-            for (var i = 2; i < n; ++i) {
-                result = last + nextLast;
-                nextLast = last;
-                last = result;
-            }
-            return result;
-        }
-
-        //贪心算法  
-        // 最少硬币找零是给出要找零的钱数，以及可以用硬币的额度数量，找出有多少种找零方法。
-        // 如：美国面额硬币有：1，5，10，25
-        // 我们给36美分的零钱
-        function MinCoinChange(coins) {
-            var coins = coins;
-            var cache = {};
-            this.makeChange = function (amount) {
-                var me = this;
-                if (!amount) {
-                    return [];
-                };
-                if (cache[amount]) {
-                    return cache[amount];
-                };
-                var min = [], newMin, newAmount;
-                for (var i = 0; i < coins.length; i++) {
-                    var coin = coins[i];
-                    newAmount = amount - coin;
-                    if (newAmount >= 0) {
-                        newMin = me.makeChange(newAmount);
-                    };
-                    if (newAmount >= 0 && (newMin.length < min.length - 1 || !min.length) && (newMin.length || !newAmount)) {
-                        min = [coin].concat(newMin);
-                    }
-                };
-                return (cache[amount] = min);
-            };
+    function MinCoinChange(coins) {
+      var coins = coins;
+      var cache = {};
+      this.makeChange = function (amount) {
+        var me = this;
+        if (!amount) {
+          return [];
         };
+        if (cache[amount]) {
+          return cache[amount];
+        };
+        var min = [], newMin, newAmount;
+        for (var i = 0; i < coins.length; i++) {
+          a++
+          var coin = coins[i];
+          newAmount = amount - coin;
+          if (newAmount >= 0) {
+            newMin = me.makeChange(newAmount);
+          };
+          if (newAmount >= 0 && (newMin.length < min.length - 1 || !min.length) && (newMin.length || !newAmount)) {
+            min = [coin].concat(newMin);
+          }
+        };
+        return (cache[amount] = min);
+      };
+    };
 
-        var minCoinChange = new MinCoinChange([25, 20, 5, 1]);
-        minCoinChange.makeChange(36)
-
-        // 分治算法  实现大整数相加、相减  求指定整型数组的最大值和最小值。
-        // 把数组分解到只有一个元素或者两个元素的时候，直接比大小返回，然后递归处理并返回结果。
-
-        function divide_conquer(arr, from, to) {
-            if (to - from === 1) {
-                return { "max": Math.max(arr[from], arr[to]), "min": Math.min(arr[from], arr[to]) }
-            } else if (to - from == 0) {
-                return { "max": arr[from], "min": arr[to] }
-            } else {
-                var middle = parseInt(from + (to - from) / 2);
-                var result1 = divide_conquer(arr, from, middle);
-                var result2 = divide_conquer(arr, middle + 1, to);
-                var result = {};
-                if (result1["max"] > result2["max"]) {
-                    result["max"] = result1["max"];
-                } else {
-                    result["max"] = result2["max"];
-                }
-                if (result1["min"] > result2["min"]) {
-                    result["min"] = result2["min"];
-                } else {
-                    result["min"] = result1["min"];
-                }
-                return result;
-            }
+    var minCoinChange = new MinCoinChange([25, 10, 5, 1]);
+    // minCoinChange.makeChange(36)
 
 
+
+    // 分治算法  实现大整数相加、相减  求指定整型数组的最大值和最小值。eg：快速排序和归并排序
+    // 把数组分解到只有一个元素或者两个元素的时候，直接比大小返回，然后递归处理并返回结果。
+
+    function divide_conquer(arr, from, to) {
+      if (to - from === 1) {
+        return { "max": Math.max(arr[from], arr[to]), "min": Math.min(arr[from], arr[to]) }
+      } else if (to - from == 0) {
+        return { "max": arr[from], "min": arr[to] }
+      } else {
+        var middle = parseInt(from + (to - from) / 2);
+        var result1 = divide_conquer(arr, from, middle);
+        var result2 = divide_conquer(arr, middle + 1, to);
+        var result = {};
+        if (result1["max"] > result2["max"]) {
+          result["max"] = result1["max"];
+        } else {
+          result["max"] = result2["max"];
         }
-        var arr = [34, 5, 6, 7111, 7, 8, 889, 9];
-        console.log(divide_conquer(arr, 0, arr.length - 1));
+        if (result1["min"] > result2["min"]) {
+          result["min"] = result2["min"];
+        } else {
+          result["min"] = result1["min"];
+        }
+        return result;
+      }
+
+
+    }
+    var arr = [34, 5, 6, 7111, 7, 8, 889, 9];
+    // console.log(divide_conquer(arr, 0, arr.length - 1));
 
 
         // 动态规划 
         // 名字多高端，就是利用条件优化算法。
-        
-        
-        
-        // 回溯法 相当于深度优先 最普遍的递归
-        
-        
+        // 动态规划与分治算法的区别是，两种算法同样是将较大的问题分解成较小问题，而动态规划对这些较小的问题并不是对原问题明晰的分割，其中一部分是被重复求解的，
+        // 因此动态规划将较小问题的解记录下来，使得在处理较大问题的时候，可以不用重复去处理较小的问题，而是直接利用所记录的较小问题的答案来求解。
+
+
+        // 回溯法 深度优先相当于穷举搜索的巧妙实现，对比蛮力的穷举搜索，回溯算法可以对一些不符合要求的或者是重复的情况进行裁剪，不再对其进行搜索，以减少搜索的工作量提高效率
+
+
         // 分支界限法  分支限界法常以广度优先或以最小耗费（最大效益）优先的方式搜索问题的解空间树。
         // 1按照队列先进先出（FIFO）原则选取下一个结点为扩展结点。
         // 2按照优先队列中规定的优先级选取优先级最高的结点成为当前扩展结点。
-    </script>
+  </script>
 </body>
 
 </html>
