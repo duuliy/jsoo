@@ -62,42 +62,6 @@
     // console.log('后续遍历')
     // PostOrderTraverse(myTree.createTree());
 
-    var postorderTraversal = function (root) {
-      let result = [];
-      let queue = [root];
-      let node;
-      while (node = queue.pop()) {
-
-        result.unshift(node.val);
-        node.left && queue.push(node.left);
-        node.right && queue.push(node.right);
-
-      }
-      return result;
-    };
-    console.log(postorderTraversal(_tree))
-
-  var postorderTraversal3 = function (root) {
-    let nodestack = [];
-    let res = [];
-    if (root === null) {
-      return [];
-    }
-    nodestack.push(root);
-    while (nodestack.length > 0) {
-      let node = nodestack.pop();
-      res.unshift(node.val);
-      if (node.left) {
-        nodestack.push(node.left);
-      }
-      if (node.right) {
-        nodestack.push(node.right);
-      }
-    }
-    return res;
-  }
-   console.log(postorderTraversal3(_tree))
-
   </script>
 </body>
 
