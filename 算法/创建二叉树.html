@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function TreeCode() {
+      let BiTree = function (ele) {
+        this.val = ele;
+        this.left = null;
+        this.right = null;
+      }
+
+      this.createTree = function () {
+        let biTree = new BiTree(1);
+        biTree.left = new BiTree(2);
+        biTree.right = new BiTree(3);
+        biTree.left.left = new BiTree(4);
+        biTree.left.left.left = new BiTree(5);
+        biTree.left.left.right = new BiTree(6);
+        biTree.right.left = new BiTree(7);
+        biTree.right.right = new BiTree(8);
+        biTree.right.left.right = new BiTree(9);
+        return biTree;
+      }
+    }
+
+    //前序遍历
+    function ProOrderTraverse(biTree) {
+      if (biTree == null) return;
+      ProOrderTraverse(biTree.left);
+      ProOrderTraverse(biTree.right);
+    }
+
+    //中序遍历
+    function InOrderTraverse(biTree) {
+      if (biTree == null) return;
+      InOrderTraverse(biTree.left);
+      InOrderTraverse(biTree.right);
+    }
+
+    //后续遍历
+    function PostOrderTraverse(biTree) {
+      if (biTree == null) return;
+      PostOrderTraverse(biTree.left);
+      PostOrderTraverse(biTree.right);
+    }
+
+    let myTree = new TreeCode();
+    const _tree = myTree.createTree()
+    console.log(_tree);
+    // console.log('前序遍历')
+    // ProOrderTraverse(myTree.createTree());
+    // console.log('中序遍历')
+    // InOrderTraverse(myTree.createTree());
+    // console.log('后续遍历')
+    // PostOrderTraverse(myTree.createTree());
+
+    var postorderTraversal = function (root) {
+      let result = [];
+      let queue = [root];
+      let node;
+      while (node = queue.pop()) {
+
+        result.unshift(node.val);
+        node.left && queue.push(node.left);
+        node.right && queue.push(node.right);
+
+      }
+      return result;
+    };
+    console.log(postorderTraversal(_tree))
+
+  var postorderTraversal3 = function (root) {
+    let nodestack = [];
+    let res = [];
+    if (root === null) {
+      return [];
+    }
+    nodestack.push(root);
+    while (nodestack.length > 0) {
+      let node = nodestack.pop();
+      res.unshift(node.val);
+      if (node.left) {
+        nodestack.push(node.left);
+      }
+      if (node.right) {
+        nodestack.push(node.right);
+      }
+    }
+    return res;
+  }
+   console.log(postorderTraversal3(_tree))
+
+  </script>
+</body>
+
+</html>

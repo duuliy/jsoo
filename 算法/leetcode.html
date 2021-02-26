@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.两数之和
+    /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[]}
+   */
+
+    var twoSum = function (nums, target) {
+      const map = {}
+      const len = nums.length
+      for (let i = 0; i < len; i++) {
+        const targetNum = target - nums[i];
+        if (targetNum in map) return [map[targetNum], i]
+        map[nums[i]] = i
+      }
+    };
+
+    // console.log(twoSum([3, 3, 4,1, 2], 6))
+
+    //7. 整数反转
+    /**
+   * @param {number} x
+   * @return {number}
+   */
+    var reverse = function (x) {
+      const max = Math.pow(2, 31) - 1;
+      const min = -Math.pow(2, 31);
+      const sign = Math.sign(x)
+      const y = Math.abs(x).toString().split('').reverse().join('') * sign
+      if ((y > max) || (y < min)) return 0
+      return y
+    };
+
+    // console.log(reverse('123'))
+
+    // 9. 回文数
+    /**
+ * @param {number} x
+ * @return {boolean}
+ */
+    var isPalindrome = function (x) {
+      var str = x.toString() || '';
+      var str1 = str.split('').reverse();
+      var str2 = str1.join('');
+      if (str === str2) {
+        return true
+      } else {
+        return false
+      }
+    };
+
+    // console.log(isPalindrome('121'))
+
+    // 144. 二叉树的前序遍历
+    /**
+   * @param {TreeNode} root
+   * @return {number[]}
+   */
+
+    var preorderTraversal = function (root) {
+      return root ? [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)] : []
+    };
+
+    var preorderTraversal = function (root) {
+      let result = [];
+      let queue = [root];
+      let node;
+      while (node = queue.shift()) {
+        result.push(node.val);
+
+        node.right && queue.unshift(node.right);
+        node.left && queue.unshift(node.left);
+      }
+      return result;
+    };
+
+    // 145. 二叉树的后序遍历
+    /**
+   * @param {TreeNode} root
+   * @return {number[]}
+   */
+    var postorderTraversal = function (root) {
+      return root ? [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val] : []
+    };
+
+    var postorderTraversal = function (root) {
+      let result = [];
+      let queue = [root];
+      let node;
+      while (node = queue.pop()) {
+        result.unshift(node.val);
+
+        node.left && queue.push(node.left);
+        node.right && queue.push(node.right);
+
+      }
+      return result;
+    };
+
+  </script>
+</body>
+
+</html>
