@@ -109,6 +109,85 @@
       return result;
     };
 
+    //13. 罗马数字转整数
+    var romanToInt = function (s) {
+      const arr = s.split('');
+      const obj = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000,
+      }
+      let result = arr.reduce((total, v, i, _arr) => {
+        if (obj[v] < obj[_arr[i + 1]]) {
+          return total - obj[v]
+        }
+        return total + obj[v]
+      }, 0)
+      return result
+    };
+
+    // console.log(romanToInt('IV'))
+
+    //14. 最长公共前缀
+    /**
+   * @param {string[]} strs
+   * @return {string}
+   */
+    var longestCommonPrefix = function (strs) {
+      let minLength = 200
+      let minStr = 200
+      let result = ''
+      strs.forEach((v, i) => {
+        v.length < minLength && (minLength = v.length, minStr = v)
+      })
+
+      for (let i = 0; i < minStr.length; i++) {
+        let boo = true
+        for (let j = 0; j < strs.length; j++) {
+          strs[j][i] !== minStr[i] && (boo = false)
+        }
+
+        if (boo) {
+          result += minStr[i]
+        } else {
+          break;
+        }
+      }
+
+      return result
+    };
+    // console.log(longestCommonPrefix(["reflower", "flow", "flight"]))
+
+    //20. 有效的括号 
+
+    /**  非常不稳定
+ * @param {string} s
+ * @return {boolean}
+ */
+    var isValid = function (s) {
+      const cache = []
+      const map = new Map()
+      map.set("(", ")")
+      map.set("[", "]")
+      map.set("{", "}")
+      for (let i = 0; i < s.length; i++) {
+        if (map.has(s[i])) cache.push(s[i])
+        else {
+          if (cache.length === 0) return false
+          if (map.get(cache[cache.length - 1]) === s[i]) cache.pop()
+          else return false
+        }
+      }
+      if (cache.length) return false
+      return true
+    };
+
+
+
   </script>
 </body>
 
