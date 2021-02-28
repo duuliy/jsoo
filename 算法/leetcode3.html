@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>困难</title>
+</head>
+
+<body>
+  <script>
+
+    //LCP 10. 二叉树任务调度
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    var minimalExecTime = function (root) {
+      let res = execTime(root);
+      return res[0];
+    };
+
+    function execTime(node) {
+      if (node == null) {
+        // [0]执行完当前节点最小耗时，[1]当前node为根的时间串行之和
+        return [0, 0];
+      }
+      // 获取左右子树的值
+      let leftTime = execTime(node.left);
+      let rightTime = execTime(node.right);
+      // 左右子树节点之和
+      let sum = leftTime[1] + rightTime[1];
+      // 当前节点执行完的最小消耗时间
+      let minTime = Math.max(Math.max(leftTime[0], rightTime[0]), sum / 2) + node.val;
+      return [minTime, sum + node.val];
+    }
+
+  </script>
+</body>
+
+</html>

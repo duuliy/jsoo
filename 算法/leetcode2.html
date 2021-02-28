@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中等</title>
+</head>
+<body>
+  <script>
+     // 144. 二叉树的前序遍历
+      /**
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
+
+      var preorderTraversal = function (root) {
+        return root ? [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)] : []
+      };
+
+      var preorderTraversal = function (root) {
+        let result = [];
+        let queue = [root];
+        let node;
+        while (node = queue.shift()) {
+          result.push(node.val);
+
+          node.right && queue.unshift(node.right);
+          node.left && queue.unshift(node.left);
+        }
+        return result;
+      };
+
+      // 145. 二叉树的后序遍历
+      /**
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
+      var postorderTraversal = function (root) {
+        return root ? [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val] : []
+      };
+
+      var postorderTraversal = function (root) {
+        let result = [];
+        let queue = [root];
+        let node;
+        while (node = queue.pop()) {
+          result.unshift(node.val);
+
+          node.left && queue.push(node.left);
+          node.right && queue.push(node.right);
+
+        }
+        return result;
+      };
+  </script>
+</body>
+</html>

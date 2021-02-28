@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>简单</title>
 </head>
 
 <body>
@@ -62,52 +62,6 @@
     };
 
     // console.log(isPalindrome('121'))
-
-    // 144. 二叉树的前序遍历
-    /**
-   * @param {TreeNode} root
-   * @return {number[]}
-   */
-
-    var preorderTraversal = function (root) {
-      return root ? [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)] : []
-    };
-
-    var preorderTraversal = function (root) {
-      let result = [];
-      let queue = [root];
-      let node;
-      while (node = queue.shift()) {
-        result.push(node.val);
-
-        node.right && queue.unshift(node.right);
-        node.left && queue.unshift(node.left);
-      }
-      return result;
-    };
-
-    // 145. 二叉树的后序遍历
-    /**
-   * @param {TreeNode} root
-   * @return {number[]}
-   */
-    var postorderTraversal = function (root) {
-      return root ? [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val] : []
-    };
-
-    var postorderTraversal = function (root) {
-      let result = [];
-      let queue = [root];
-      let node;
-      while (node = queue.pop()) {
-        result.unshift(node.val);
-
-        node.left && queue.push(node.left);
-        node.right && queue.push(node.right);
-
-      }
-      return result;
-    };
 
     //13. 罗马数字转整数
     var romanToInt = function (s) {
@@ -186,7 +140,157 @@
       return true
     };
 
+    // 21. 合并两个有序链表
+    /**
+   * @param {ListNode} l1
+   * @param {ListNode} l2
+   * @return {ListNode}
+   */
+    function ListNode(val, next) {
+      this.val = val
+      this.next = next
+    }
 
+    var mergeTwoLists = function (l1, l2) {
+      const linkedList = new ListNode();
+      let pre = linkedList;
+
+      while (l1 && l2) {
+        if (l1.val >= l2.val) {
+          pre.next = l2;
+          l2 = l2.next;
+        } else {
+          pre.next = l1;
+          l1 = l1.next;
+        }
+        pre = pre.next;
+      }
+
+      pre.next = l1 == null ? l2 : l1;
+
+      return linkedList.next;
+    }
+
+    //26. 删除排序数组中的重复项
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+    var removeDuplicates = function (nums) {
+      for (let i = 0; i < nums.length; i++) {
+        if (nums.indexOf(nums[i]) !== i) {
+          nums.splice(i, 1);
+          i = i - 1;
+        }
+      }
+      return nums.length;
+    };
+
+    //27. 移除元素
+    /**
+   * @param {number[]} nums
+   * @param {number} val
+   * @return {number}
+   */
+    var removeElement = function (nums, val) {
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === val) {
+          nums.splice(i, 1);
+          i = i - 1;
+        }
+      }
+      return nums.length
+    };
+
+    //257. 二叉树的所有路径
+    /**
+   * @param {TreeNode} root
+   * @return {string[]}
+   */
+    var binaryTreePaths = function (root) {
+      let result = []
+      let route = []
+      const recursion = (root) => {
+        if (!root) {
+          return
+        }
+        route.push(root.val);
+        if (!root.left && !root.right) {
+          result.push(route.join('->'))
+          route.pop()
+          return
+        }
+        recursion(root.left)
+        recursion(root.right)
+        route.pop()
+      }
+
+      recursion(root)
+      return result
+    };
+
+    // 617. 合并二叉树
+    /**
+ * @param {TreeNode} rooroot1
+ * @param {TreeNode} rooroot2
+ * @return {TreeNode}
+ */
+    var mergeTrees = function (root1, root2) {
+      if (!root1 && root2) return root1 = root2
+      if (!root1 && !root2) return null
+      if (root1 && root2) root1.val += root2.val
+      root1.left = mergeTrees(root1.left, root2 && root2.left)
+      root1.right = mergeTrees(root1.right, root2 && root2.right)
+      return root1
+    };
+
+    //225. 用队列实现栈
+    var MyStack = function () {
+      this.queue = [];
+      this.prevNum = 0;  //当前队列中的元素数量
+    };
+
+    /**
+     * Push element x onto stack. 
+     * @param {number} x
+     * @return {void}
+     */
+    MyStack.prototype.push = function (x) {
+      let curr = 0;
+      this.queue.push(x);
+      while (curr < this.prevNum) {
+        this.queue.push(this.queue.shift());
+        curr++;
+      };
+      this.prevNum++;
+    };
+
+    /**
+     * Removes the element on top of the stack and returns that element.
+     * @return {number}
+     */
+    MyStack.prototype.pop = function () {
+      if (this.prevNum > 0) {
+        this.prevNum--;
+        return this.queue.shift();
+      };
+    };
+
+    /**
+     * Get the top element.
+     * @return {number}
+     */
+    MyStack.prototype.top = function () {
+      return this.queue[0];
+    };
+
+    /**
+     * Returns whether the stack is empty.
+     * @return {boolean}
+     */
+    MyStack.prototype.empty = function () {
+      return this.prevNum === 0;
+    };
 
   </script>
 </body>
