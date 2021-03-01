@@ -1,58 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>中等</title>
 </head>
+
 <body>
   <script>
-     // 144. 二叉树的前序遍历
-      /**
-     * @param {TreeNode} root
-     * @return {number[]}
-     */
+    // 144. 二叉树的前序遍历
+    /**
+   * @param {TreeNode} root
+   * @return {number[]}
+   */
 
-      var preorderTraversal = function (root) {
-        return root ? [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)] : []
-      };
+    var preorderTraversal = function (root) {
+      return root ? [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)] : []
+    };
 
-      var preorderTraversal = function (root) {
-        let result = [];
-        let queue = [root];
-        let node;
-        while (node = queue.shift()) {
-          result.push(node.val);
+    var preorderTraversal = function (root) {
+      let result = [];
+      let queue = [root];
+      let node;
+      while (node = queue.shift()) {
+        result.push(node.val);
 
-          node.right && queue.unshift(node.right);
-          node.left && queue.unshift(node.left);
+        node.right && queue.unshift(node.right);
+        node.left && queue.unshift(node.left);
+      }
+      return result;
+    };
+
+    // 145. 二叉树的后序遍历
+    /**
+   * @param {TreeNode} root
+   * @return {number[]}
+   */
+    var postorderTraversal = function (root) {
+      return root ? [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val] : []
+    };
+
+    var postorderTraversal = function (root) {
+      let result = [];
+      let queue = [root];
+      let node;
+      while (node = queue.pop()) {
+        result.unshift(node.val);
+
+        node.left && queue.push(node.left);
+        node.right && queue.push(node.right);
+
+      }
+      return result;
+    };
+
+    //2. 两数相加
+
+    //3. 无重复字符的最长子串
+    /**
+ * @param {string} s
+ * @return {number}
+ */
+    var lengthOfLongestSubstring = function (s) {
+      let result = '';
+      let maxLength = 0
+      for (let i = 0; i < s.length; i++) {
+        const index = result.indexOf(s[i])
+        if (index === -1) {
+          result += s[i]
+          maxLength = maxLength < result.length ? result.length : maxLength
+        } else {
+          result = result.substr(index + 1) + s[i]
         }
-        return result;
-      };
+      }
+      return maxLength
+    };
 
-      // 145. 二叉树的后序遍历
-      /**
-     * @param {TreeNode} root
-     * @return {number[]}
+    // 2. 两数相加
+    /**
+     * @param {ListNode} l1
+     * @param {ListNode} l2
+     * @return {ListNode}
      */
-      var postorderTraversal = function (root) {
-        return root ? [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val] : []
-      };
-
-      var postorderTraversal = function (root) {
-        let result = [];
-        let queue = [root];
-        let node;
-        while (node = queue.pop()) {
-          result.unshift(node.val);
-
-          node.left && queue.push(node.left);
-          node.right && queue.push(node.right);
-
-        }
-        return result;
-      };
+    var addTwoNumbers = function (l1, l2) {
+      let dummyHead = new ListNode(-1);
+      let cur = dummyHead;
+      let sum = 0;
+      let carry = 0;
+      while (l1 || l2) {
+        sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry;
+        carry = sum >= 10 ? 1 : 0
+        cur.next = new ListNode(sum % 10);
+        cur = cur.next;
+        l1 && (l1 = l1.next);
+        l2 && (l2 = l2.next);
+      }
+      carry && (cur.next = new ListNode(carry));
+      return dummyHead.next;
+    };  
   </script>
 </body>
+
 </html>
