@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <input id="text" type="text" value="duuliy666" />
+    <button id="send">发送消息</button>
+  </div>
+  <iframe id="receiver" src="http://localhost:5000/postMessage2" width="500" height="60">
+    <p>你的浏览器不支持IFrame。</p>
+  </iframe>
+
+  <script>
+
+    //请始终使用origin和source属性验证发件人的身份
+    window.onload = function () {
+      var receiver = document.getElementById('receiver').contentWindow;
+      var btn = document.getElementById('send');
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var val = document.getElementById('text').value;
+        // receiver.postMessage("Hello " + val + "！", "http://localhost:5000/postMessage");
+        window.frames[0].postMessage("Hello " + val + "！", "http://localhost:5000/postMessage");
+      });
+    }
+
+  </script>
+</body>
+
+</html>
