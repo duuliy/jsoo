@@ -2,95 +2,115 @@
 <html class="no-js">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
 </head>
 
 <body>
 
-    <script>
-        // 1.给定一个字符串，找出其中无重复字符的最长字符串长度
-        let str = 'hhhhddddksdkljsdf大按计划的事别放关键是报废待akk大打开就是复合弓kkssss55589845'
-        const getMaxLength = str => {
-            let result = 0
-            let norepet = ''
-            for (let i = 0; i < str.length; i++) {
-                let index = norepet.indexOf(str[i])
-                if (index === -1) {
-                    norepet = norepet += str[i]
-                    result = result < norepet.length ? norepet.length : result
-                } else {
-                    //当前最长无重复字符串只有首位和末尾相同的可能
-                    norepet = norepet.substr(index + 1) + str[i]
-                }
-            }
-            return result
+  <script>
+    // 1.给定一个字符串，找出其中无重复字符的最长字符串长度
+    let str = 'hhhhddddksdkljsdf大按计划的事别放关键是报废待akk大打开就是复合弓kkssss55589845'
+    const getMaxLength = str => {
+      let result = 0
+      let norepet = ''
+      for (let i = 0; i < str.length; i++) {
+        let index = norepet.indexOf(str[i])
+        if (index === -1) {
+          norepet = norepet += str[i]
+          result = result < norepet.length ? norepet.length : result
+        } else {
+          //当前最长无重复字符串只有首位和末尾相同的可能
+          norepet = norepet.substr(index + 1) + str[i]
         }
+      }
+      return result
+    }
 
-        // console.log(getMaxLength(str))
+    // console.log(getMaxLength(str))
 
-        // 2.实现超出整数存储范围的两个大正整数相加   16
-        let maxA = '15874652148795163518'
-        let maxB = '1587465268879516358'
+    // 2.实现超出整数存储范围的两个大正整数相加   16
+    let maxA = '15874652148795163518'
+    let maxB = '1587465268879516358'
 
-        const getAddTotle = (maxA, maxB) => {
-            let difference = maxA.length - maxB.length
-            if (difference > 0) {
-                maxB = new Array(difference).fill('0').join("") + maxB
-            } else {
-                maxA = new Array(difference).fill('0').join("") + maxA
-            }
-            let maxAArr = maxA.split('')
-            let maxBArr = maxB.split('')
-            let maxLength = maxAArr.length
-            let resultArr = []
-            let saveNum = 0
-            for (let i = maxLength - 1; i >= 0; i--) {
-                let newNum = Number(maxBArr[i]) + Number(maxAArr[i])
-                let newNumStr = newNum.toString()
-                let length = newNum.toString().length
-                resultArr[i] = saveNum
-                if (length === 2) {
-                    saveNum = Number(newNumStr[0])
-                    resultArr[i] = (Number(newNumStr[1])) + resultArr[i]
-                } else {
-                    saveNum = 0
-                    resultArr[i] = (Number(newNumStr)) + resultArr[i]
-                }
-            }
-            return resultArr.join('')
+    const getAddTotle = (maxA, maxB) => {
+      let difference = maxA.length - maxB.length
+      if (difference > 0) {
+        maxB = new Array(difference).fill('0').join("") + maxB
+      } else {
+        maxA = new Array(difference).fill('0').join("") + maxA
+      }
+      let maxAArr = maxA.split('')
+      let maxBArr = maxB.split('')
+      let maxLength = maxAArr.length
+      let resultArr = []
+      let saveNum = 0
+      for (let i = maxLength - 1; i >= 0; i--) {
+        let newNum = Number(maxBArr[i]) + Number(maxAArr[i])
+        let newNumStr = newNum.toString()
+        let length = newNum.toString().length
+        resultArr[i] = saveNum
+        if (length === 2) {
+          saveNum = Number(newNumStr[0])
+          resultArr[i] = (Number(newNumStr[1])) + resultArr[i]
+        } else {
+          saveNum = 0
+          resultArr[i] = (Number(newNumStr)) + resultArr[i]
         }
+      }
+      return resultArr.join('')
+    }
 
-        // 3.计算出字符串中出现次数最多的字符是什么，出现了多少次？
-        let conut = 0, char = ""
-        let langArr = []
+    // 3.计算出字符串中出现次数最多的字符是什么，出现了多少次？
+    let conut = 0, char = ""
+    let langArr = []
 
-        const getNotRepeat = (str) => {
-            langArr = [...new Set(str.split(""))]
-            for (let i = 0; i < langArr.length; i++) {
-                let n = str.split(langArr[i]).length - 1 //出现最多的分割的最多
-                if (conut < n) {
-                    conut = n
-                    char = langArr[i]
-                }
-            }
-            console.log(conut)
-            console.log(char)
+    const getNotRepeat = (str) => {
+      langArr = [...new Set(str.split(""))]
+      for (let i = 0; i < langArr.length; i++) {
+        let n = str.split(langArr[i]).length - 1 //出现最多的分割的最多
+        if (conut < n) {
+          conut = n
+          char = langArr[i]
         }
-        // getNotRepeat('ffffgg')
+      }
+      console.log(conut)
+      console.log(char)
+    }
+    // getNotRepeat('ffffgg')
 
-        // 4."123456789876543212345678987654321..."的第n位是什么？
-        let minK='1234567898765432'
-        const getNtoNum=(n)=> minK.charAt(n%minK.length-1)
+    // 4."123456789876543212345678987654321..."的第n位是什么？
+    let minK = '1234567898765432'
+    const getNtoNum = (n) => minK.charAt(n % minK.length - 1)
+
+    //5.输入一段字符串，遇到重复的压缩成该字符串和出现次数  aabbbc=> a2b3c
+
+    const getCompressStr = str => {
+      let num = 1;
+      let currentStr = str[0]
+      str=str+'g'
+      let res = ''
+      for (let i = 1; i < str.length; i++) {
+        if (currentStr === str[i]) {
+          num++
+        } else {
+          res += num
+          currentStr = str[i]
+          num = 1
+        }
+        if (!res.includes(str[i])) res += str[i]
+      }
+      return res.slice(0,-1)
+    }
+
+    // console.log(getCompressStr('aabbbcccccg'))
 
 
-
-
-    </script>
+  </script>
 </body>
 
 </html>
