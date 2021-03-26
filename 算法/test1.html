@@ -92,7 +92,7 @@
     const getCompressStr = str => {
       let num = 1;
       let currentStr = str[0]
-      str=str+'g'
+      str = str + 'g'
       let res = ''
       for (let i = 1; i < str.length; i++) {
         if (currentStr === str[i]) {
@@ -104,10 +104,73 @@
         }
         if (!res.includes(str[i])) res += str[i]
       }
-      return res.slice(0,-1)
+      return res.slice(0, -1)
     }
 
     // console.log(getCompressStr('aabbbcccccg'))
+
+    //6.因式分解
+    const fenjie = num => {
+      let Arr = []
+      const list = new Array(Math.ceil(num / 2)).fill(1).map((v, i) => i + 2)
+
+      const fn = (num) => {
+        for (let i = 0; i < list.length; i++) {
+          if (!(num % list[i])) {
+            Arr.push(list[i])
+            return fn(num / list[i])
+          }
+        }
+      }
+
+      fn(num)
+
+      return Arr
+    }
+
+    // console.log(fenjie(30))
+
+    //查找树路径 难
+
+    const list = [
+      { id: 6 },
+      { id: 2, children: [5] },
+      { id: 13 },
+      { id: 5, children: [10, 11] },
+      { id: 1, children: [2, 3, 4] },
+      { id: 10 },
+      { id: 8, children: [13] },
+      { id: 4, children: [8, 9] },
+      { id: 9 },
+      { id: 3, children: [6, 7] },
+      { id: 11, children: [14] },
+      { id: 14 },
+      { id: 7, children: [12] },
+      { id: 12 }
+    ]
+
+    const getAllRoute = list => {
+      let totalArr = []
+
+      const recursion = (node, currentArr) => {
+        currentArr.push(node.id)
+        if (node.children) {
+          node.children.forEach(v => {
+            const _node = list.find(k => k.id === v)
+            recursion(_node, [...currentArr])
+          })
+        } else {
+          totalArr.push(currentArr)
+        }
+      }
+
+      const node=list.sort((a,b)=>a.id-b.id)[0]
+
+      recursion(node, [])
+      return totalArr
+    }
+
+    // console.log(getAllRoute(list))
 
 
   </script>
