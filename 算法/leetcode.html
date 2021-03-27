@@ -47,19 +47,19 @@
 
     // 9. 回文数
     /**
- * @param {number} x
+ * @param {number} str
  * @return {boolean}
  */
-    var isPalindrome = function (x) {
-      var str = x.toString() || '';
-      var str1 = str.split('').reverse();
-      var str2 = str1.join('');
-      if (str === str2) {
-        return true
-      } else {
-        return false
+    function isPalindrome(str) {
+      var len = str.length
+      var middle = parseInt(len / 2)
+      for (var i = 0; i < middle; i++) {
+        if (str[i] != str[len - i - 1]) {
+          return false
+        }
       }
-    };
+      return true
+    }
 
     // console.log(isPalindrome('121'))
 

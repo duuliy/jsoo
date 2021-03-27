@@ -56,8 +56,6 @@
       return result;
     };
 
-    //2. 两数相加
-
     //3. 无重复字符的最长子串
     /**
  * @param {string} s
@@ -99,7 +97,48 @@
       }
       carry && (cur.next = new ListNode(carry));
       return dummyHead.next;
-    };  
+    };
+
+    //补充: 两数相乘
+
+
+    //5.最长回文数
+    /**
+   * @param {string} s
+   * @return {string}
+   */
+    //O(n*n*n)  很差 
+    var longestPalindrome = function (s) {
+      if (!s || s.length < 2) return s
+
+      let sLength = s.length
+      let maxStr = ''
+      for (let i = 0; i < sLength; i++) {
+        let endIndex = i
+        let str = s[i]
+
+        while (endIndex < sLength) {
+          endIndex++
+          str = s.substring(i, endIndex)
+          if (isPalindrome(str)) {
+            maxStr = maxStr.length >= str.length ? maxStr : str
+          }
+        }
+      }
+
+      return maxStr
+    };
+
+    function isPalindrome(str) {
+      var len = str.length
+      var middle = parseInt(len / 2)
+      for (var i = 0; i < middle; i++) {
+        if (str[i] != str[len - i - 1]) {
+          return false
+        }
+      }
+      return true
+    }
   </script>
 </body>
 
