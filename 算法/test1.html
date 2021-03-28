@@ -42,7 +42,7 @@
       if (difference > 0) {
         maxB = new Array(difference).fill('0').join("") + maxB
       } else {
-        maxA = new Array(difference).fill('0').join("") + maxA
+        maxA = new Array(Math.abs(difference)).fill('0').join("") + maxA
       }
       let maxAArr = maxA.split('')
       let maxBArr = maxB.split('')
@@ -64,6 +64,46 @@
       }
       return resultArr.join('')
     }
+
+    //补充: 超出整数存储范围的两个大正整数相乘 牛逼
+
+    var multiplicationNum = (num1, num2) => {
+      let difference = num1.length - num2.length
+      let minNum, maxNum, minNumArr = []
+      difference > 0 ? (minNum = num2, maxNum = num1) : (minNum = num1, maxNum = num2)
+
+      for (let i = minNum.length - 1; i > -1; i--) {
+        minNumArr.push([minNum[i], (minNum.length - i - 1)])
+      }
+
+      let maxArr = maxNum.split('')
+      let totalArr = []
+
+      minNumArr.forEach(v => {
+        let _maxArr = []
+        for (let i = maxArr.length - 1; i > -1; i--) {
+          const mulNum = (v[0] * maxArr[i]).toString()
+          let saveNum = ''
+          if (mulNum.length === 1) {
+            _maxArr.unshift(Number(mulNum))
+          } else {
+            _maxArr.unshift(Number(mulNum[1]) + Number(saveNum))
+            saveNum = mulNum[0]
+          }
+        }
+
+        for (let j = 0; j < v[1]; j++) {
+          _maxArr.push(0)
+        }
+        totalArr.push(_maxArr)
+      })
+
+      const _totalArr = totalArr.reduce((total, v) => getAddTotle(total, v.join('')), '0')
+
+      return _totalArr
+    }
+
+    console.log(multiplicationNum(maxA, maxB))
 
     // 3.计算出字符串中出现次数最多的字符是什么，出现了多少次？
     let conut = 0, char = ""
@@ -130,7 +170,7 @@
 
     // console.log(fenjie(30))
 
-    //查找树路径 难
+    //7.查找树路径 难
 
     const list = [
       { id: 6 },
@@ -164,7 +204,7 @@
         }
       }
 
-      const node=list.sort((a,b)=>a.id-b.id)[0]
+      const node = list.sort((a, b) => a.id - b.id)[0]
 
       recursion(node, [])
       return totalArr
