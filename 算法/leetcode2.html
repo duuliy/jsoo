@@ -172,13 +172,13 @@
       return area
     };
 
-  // 515. 在每个树行中找最大值
-  /**
-   * @param {TreeNode} root
-   * @return {number[]}
-   */
+    // 515. 在每个树行中找最大值
+    /**
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
 
-   var largestValues = function (root) {
+    var largestValues = function (root) {
       if (!root) return []
       let resultArr = []
       let queue = [root]
@@ -208,26 +208,26 @@
    * @return {number}
    */
     var maxAreaOfIsland = function (grid) {
-        let x = grid.length, y = grid[0].length
-        let max = 0
-        //关键点，上下左右的递归，不知道这点会相当折磨
-        let countArea = (i, j) => {
-          if (i < 0 || i >= x || j < 0 || j >= y || grid[i][j] == 0) return 0
-          grid[i][j] = 0
-          let count = 1
-          count += countArea(i + 1, j)
-          count += countArea(i - 1, j)
-          count += countArea(i, j + 1)
-          count += countArea(i, j - 1)
-          return count
-        }
-        for (let i = 0; i < x; i++) {
-          for (let j = 0; j < y; j++) {
-            if (grid[i][j] == 1) max = Math.max(max, countArea(i, j))
-          }
-        }
-        return max
+      let x = grid.length, y = grid[0].length
+      let max = 0
+      //关键点，上下左右的递归，不知道这点会相当折磨
+      let countArea = (i, j) => {
+        if (i < 0 || i >= x || j < 0 || j >= y || grid[i][j] == 0) return 0
+        grid[i][j] = 0
+        let count = 1
+        count += countArea(i + 1, j)
+        count += countArea(i - 1, j)
+        count += countArea(i, j + 1)
+        count += countArea(i, j - 1)
+        return count
       }
+      for (let i = 0; i < x; i++) {
+        for (let j = 0; j < y; j++) {
+          if (grid[i][j] == 1) max = Math.max(max, countArea(i, j))
+        }
+      }
+      return max
+    }
 
   </script>
 </body>
