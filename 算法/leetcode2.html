@@ -229,6 +229,22 @@
       return max
     }
 
+    // 442. 数组中重复的数据
+    /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+    var findDuplicates = function (nums) {
+      let result = [];
+      let newnums = nums.sort((a, b) => a - b);
+      for (let i = 0; i < newnums.length - 1; i++) {
+        if (newnums[i] == newnums[i + 1]) {
+          result.push(newnums[i]);
+        }
+      }
+      return result;
+    };
+
   </script>
 </body>
 
