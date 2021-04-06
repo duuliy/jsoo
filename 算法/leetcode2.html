@@ -250,21 +250,60 @@
    * @param {number} n
    * @return {number}
    */
-      var integerBreak = function (n) {
-        let arr = []
-        arr[2] = 1
-        arr[3] = 2
-        arr[4] = 4
-        arr[5] = 6
-        arr[6] = 9
+    var integerBreak = function (n) {
+      let arr = []
+      arr[2] = 1
+      arr[3] = 2
+      arr[4] = 4
+      arr[5] = 6
+      arr[6] = 9
 
-        let i = 7
-        for (i; i <= n; i++) {
-          arr[i] = arr[i - 3] * 3
+      let i = 7
+      for (i; i <= n; i++) {
+        arr[i] = arr[i - 3] * 3
+      }
+
+      return arr[n]
+    };
+
+
+    //130. 被围绕的区域
+    /**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+    var solve = function (board) {
+      let m = board.length
+      let n = board[0].length
+
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+          if ((i === 0) || (i === m - 1) || (j === 0) || (j === n - 1) && board[i][j] === 'O') changeBoardImX(i, j)
         }
+      }
 
-        return arr[n]
-      };
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+          if (board[i][j] === -1) {
+            board[i][j] = 'O'
+          } else {
+            board[i][j] = 'X'
+          }
+        }
+      }
+
+      function changeBoardImX(i, j) {
+        if (i < 0 || j < 0 || i >= m || j >= n || board[i][j] === 'X' || board[i][j] === -1) return void (0)
+        board[i][j] = -1
+        changeBoardImX(i + 1, j)
+        changeBoardImX(i - 1, j)
+        changeBoardImX(i, j + 1)
+        changeBoardImX(i, j - 1)
+      }
+
+      return board
+    }
+
 
 
   </script>
