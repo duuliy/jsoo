@@ -22,8 +22,8 @@
       const len = nums.length
       for (let i = 0; i < len; i++) {
         const targetNum = target - nums[i];
-        if (targetNum in map) return [map[targetNum], i]
-        map[nums[i]] = i
+        const index = nums.indexOf(targetNum)
+        if (index !== -1 && index !== i) return [index, i]
       }
     };
 
@@ -292,16 +292,6 @@
       return this.prevNum === 0;
     };
 
-
-    //509. 斐波那契数
-
-    /**
-   * @param {number} n
-   * @return {number}
-   */
-      var fib = function (n) {
-
-      };
 
   </script>
 </body>
