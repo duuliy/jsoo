@@ -12,9 +12,9 @@
   <script>
     // 144. 二叉树的前序遍历
     /**
-   * @param {TreeNode} root
-   * @return {number[]}
-   */
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
 
     var preorderTraversal = function (root) {
       return root ? [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)] : []
@@ -35,9 +35,9 @@
 
     // 145. 二叉树的后序遍历
     /**
-   * @param {TreeNode} root
-   * @return {number[]}
-   */
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
     var postorderTraversal = function (root) {
       return root ? [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val] : []
     };
@@ -58,9 +58,9 @@
 
     //3. 无重复字符的最长子串
     /**
- * @param {string} s
- * @return {number}
- */
+     * @param {string} s
+     * @return {number}
+     */
     var lengthOfLongestSubstring = function (s) {
       let result = '';
       let maxLength = 0
@@ -102,9 +102,9 @@
 
     //5.最长回文数
     /**
-   * @param {string} s
-   * @return {string}
-   */
+     * @param {string} s
+     * @return {string}
+     */
     //O(n*n*n)  很差 
     var longestPalindrome = function (s) {
       if (!s || s.length < 2) return s
@@ -140,9 +140,9 @@
 
     //11. 盛最多水的容器
     /**
-   * @param {number[]} height
-   * @return {number}
-   */
+     * @param {number[]} height
+     * @return {number}
+     */
     //超时
     var maxArea = function (height) {
       let area = 0
@@ -188,7 +188,9 @@
         let max = Number.MIN_SAFE_INTEGER //万万没想到还有负值，这点确实坑
         for (let i = 0; i < len; i++) {
           const node = queue[i]
-          if (node.val > max) { max = node.val }
+          if (node.val > max) {
+            max = node.val
+          }
 
           node.right && queue.push(node.right)
           node.left && queue.push(node.left)
@@ -204,11 +206,12 @@
 
     // 695. 岛屿的最大面积
     /**
-   * @param {number[][]} grid
-   * @return {number}
-   */
+     * @param {number[][]} grid
+     * @return {number}
+     */
     var maxAreaOfIsland = function (grid) {
-      let x = grid.length, y = grid[0].length
+      let x = grid.length,
+        y = grid[0].length
       let max = 0
       //关键点，上下左右的递归，不知道这点会相当折磨
       let countArea = (i, j) => {
@@ -231,9 +234,9 @@
 
     // 442. 数组中重复的数据
     /**
-   * @param {number[]} nums
-   * @return {number[]}
-   */
+     * @param {number[]} nums
+     * @return {number[]}  有点坑，容易误解题意
+     */
     var findDuplicates = function (nums) {
       let result = [];
       let newnums = nums.sort((a, b) => a - b);
@@ -247,9 +250,9 @@
 
     //343. 整数拆分
     /**
-   * @param {number} n
-   * @return {number}  动态规划
-   */
+     * @param {number} n
+     * @return {number}  动态规划
+     */
     var integerBreak = function (n) {
       let arr = []
       arr[2] = 1
@@ -269,9 +272,9 @@
 
     //130. 被围绕的区域
     /**  动态规划
- * @param {character[][]} board
- * @return {void} Do not return anything, modify board in-place instead.
- */
+     * @param {character[][]} board
+     * @return {void} Do not return anything, modify board in-place instead.
+     */
     var solve = function (board) {
       let m = board.length
       let n = board[0].length
@@ -307,16 +310,16 @@
 
     // 198. 打家劫舍 提交很多次，打脑壳
     /**
-   * @param {number} n
-   * @return {number}
-   */
+     * @param {number} n
+     * @return {number}
+     */
     /**  动态规划
-   * @param {number[]} nums
-   * @return {number}
-   */
+     * @param {number[]} nums
+     * @return {number}
+     */
     var rob = function (nums) {
       let len = nums.length
-      let dp = []  //存储当前节点的最大值
+      let dp = [] //存储当前节点的最大值
       dp[0] = nums[0]
       dp[1] = Math.max(nums[0], nums[1])
       if (len === 1) {
@@ -325,7 +328,7 @@
         return dp[1]
       }
       for (let i = 2; i < len; i++) {
-        dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1])  //最小单位的最大值：要么当前值+前2位的储存最大值，要么i-1的最大值
+        dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]) //最小单位的最大值：要么当前值+前2位的储存最大值，要么i-1的最大值
       }
       return dp[len - 1]
     }
@@ -333,10 +336,10 @@
     // 213. 打家劫舍 II 
 
     /** 动态规划
-   * @param {number[]} nums
-   * @return {number}
-   * 
-   */
+     * @param {number[]} nums
+     * @return {number}
+     * 
+     */
 
     //形成环后增加边界情况，要么去头，要么掐尾
     var singleRob = function (nums) {
@@ -368,17 +371,44 @@
 
     // 337. 打家劫舍 III
 
-    /**
-   * @param {TreeNode} root
-   * @return {number}
-   */
+    /** 动态规划，这种题真的很难保证手写正确
+     * @param {TreeNode} root
+     * @return {number} 
+     */
 
-  //  1.本节点以及孙子
-  //  2. 儿子
-  //  3.left和 right 分开考虑
+    //  1.本节点以及孙子
+    //  2. 儿子
+    //  3.left和 right 分开考虑
+    // 虽然超时但是这可能是最好理解的思维方式,debugger看看，注意相互影响的递归就能理解
+    var rob3 = function (root) {
+      if (!root) {
+        return 0;
+      }
 
+      let condition1 = root.val
+      root.left && (condition1 += rob3(root.left.left) + rob3(root.left.right))
+      root.right && (condition1 += rob3(root.right.left) + rob3(root.right.right))
+      const condition2 = rob3(root.left) + rob3(root.right) //虽然没有返回但是每次递归到下一步取得是condition1的值赋给condition2
 
+      return Math.max(condition2, condition1)
+    }
 
+    // const root={
+    //   left:{
+    //     right:{
+    //       val:3
+    //     },
+    //     val:2
+    //   },
+    //   right:{
+    //     right:{
+    //       val:1
+    //     },
+    //     val:3
+    //   },
+    //   val:3
+    // }
+    // console.log(rob3(root))
   </script>
 </body>
 
