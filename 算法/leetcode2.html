@@ -409,6 +409,45 @@
     //   val:3
     // }
     // console.log(rob3(root))
+
+    // 279. 完全平方数 动态转移方程没理解
+    /**
+   * @param {number} n
+   * @return {number}
+   */
+
+   // dp[12]=3  4+4+4
+   // dp[13]=2  4+9
+   // dp[i - j * j] + 1
+
+
+
+    //322. 零钱兑换 
+    /** 动态规划
+   * @param {number[]} coins
+   * @param {number} amount
+   * @return {number}
+   */
+
+  //  dp[120] = Math.min(dp[119] + 1, dp[118] + 1, dp[115] + 1); coint=1,2,5
+  // dp[i] = Math.min(dp[i - coin] + 1, dp[i - coin] + 1, ...)
+    const coinChange = (coins, amount) => {
+      let dp = new Array(amount + 1).fill(Infinity)
+      dp[0] = 0
+      
+      for (let coin of coins) {
+        for (let i = coin; i <= amount; i++) {
+          dp[i] = Math.min(dp[i], dp[i - coin] + 1)
+        }
+      }
+      return dp[amount] === Infinity ? -1 : dp[amount]
+    }
+
+
+
+
+
+
   </script>
 </body>
 
