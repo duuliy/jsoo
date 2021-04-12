@@ -292,6 +292,35 @@
       return this.prevNum === 0;
     };
 
+    
+      // 746. 使用最小花费爬楼梯
+      /** 动态规划
+     * @param {number[]} cost
+     * @return {number}
+     */
+
+    //  1. 0或1开始
+    //  2.min(dp[i]+arr[i+1],dp[i]+arr[i+2])
+
+      var minCostClimbingStairs = function (cost) {
+        let dp=[]
+        let len=cost.length
+        let i=2
+        dp[0] = dp[1] = 0;
+
+        for(i;i<=len;i++){
+          dp[i]=Math.min(dp[i-1] + cost[i - 1], dp[i-2] + cost[i - 2])
+        }
+
+        return dp[i-1]
+      }
+
+
+
+
+      
+
+
 
   </script>
 </body>
