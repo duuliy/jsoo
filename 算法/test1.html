@@ -213,6 +213,59 @@
     // console.log(getAllRoute(list))
 
 
+    //01背包
+    /**
+   *
+   * @param {number[]} w 物品的重量集合
+   * @param {number[]} v 物品的价值集合
+   * @param {number} C 背包容量
+   */
+    //则可以倒排后以v[i]/w[i]的性价比去填充C, 得到最优解(贪心不一定得出最优解)。
+
+    //一种思维：国王装或不装分A，B大臣，A，B大臣分装或不装给CD，EF小臣 ...（大到小）
+    function knapsack01(w, v, C) {
+      let n = w.length - 1;
+      return bestValue(w, v, n, C)
+    }
+
+    function bestValue(w, v, index, c) {
+      if (index < 0 || c <= 0) return 0;
+
+      let max = bestValue(w, v, index - 1, c)
+      if (c >= w[index]) {
+        max = Math.max(
+          // 不装进背包
+          max,
+          // 装进背包
+          v[index] + bestValue(w, v, index - 1, c - w[index])
+        );
+      }
+
+      return max
+    }
+
+    // 第二思维：二维dp动态规划, 先画网格图
+
+    // 1.max(dp[i-1,j], v[i]+dp[C-i,j-1]), 上一行的最大值或当前商品价值+剩余空间价值
+    // 
+
+    var knapsack01 = function (w, v, C) {
+      let dp = new Array(w.length+1).fill(0).map(k => k = new Array(C+1).fill(0))
+      let i=1;
+
+      for (i ; i < w.length; i++) {
+        for (let j = 1; j <= C; j++) {
+          const newVal= w[i] > j ? 0 : v[i] + dp[i - 1][j - w[i]] //装不下时0其实为上一次的值，但以为下面有了，所以可以写0 
+          dp[i][j] = Math.max(dp[i - 1][j], newVal)
+        }
+      }
+
+      return dp[i-1][C]
+
+    }
+
+    // console.log(knapsack01([1, 2, 3], [6, 10, 12], 5))
+
   </script>
 </body>
 
