@@ -323,6 +323,7 @@
  * @return {number}
  */
 
+    // 新增这个数若比次数小，则丢弃之前的和。
     // 1.新增一个数
     // 2.若不新增，从这个数开始重新计数
     var maxSubArray = function (nums) {
@@ -339,7 +340,7 @@
       return Math.max(...dp) 
     }
 
-    // console.log(maxSubArray([-2]))
+    // console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
 
 
 
