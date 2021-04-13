@@ -292,33 +292,58 @@
       return this.prevNum === 0;
     };
 
-    
-      // 746. 使用最小花费爬楼梯
-      /** 动态规划
-     * @param {number[]} cost
-     * @return {number}
-     */
+
+    // 746. 使用最小花费爬楼梯
+    /** 动态规划
+   * @param {number[]} cost
+   * @return {number}
+   */
 
     //  1. 0或1开始
     //  2.min(dp[i]+arr[i+1],dp[i]+arr[i+2])
 
-      var minCostClimbingStairs = function (cost) {
-        let dp=[]
-        let len=cost.length
-        let i=2
-        dp[0] = dp[1] = 0;
+    var minCostClimbingStairs = function (cost) {
+      let dp = []
+      let len = cost.length
+      let i = 2
+      dp[0] = dp[1] = 0;
 
-        for(i;i<=len;i++){
-          dp[i]=Math.min(dp[i-1] + cost[i - 1], dp[i-2] + cost[i - 2])
-        }
-
-        return dp[i-1]
+      for (i; i <= len; i++) {
+        dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2])
       }
 
+      return dp[i - 1]
+    }
+
+
+    //53. 最大子序和  比一般的easy难
+
+    /** 动态规划
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+    // 1.是否要新增一个数
+    // 2.若不新增，从这个数开始重新计数
+    var maxSubArray = function (nums) {
+      let dp = []
+      const len = nums.length
+      dp[0] = nums[0]
+
+      let i = 1
+      for (i; i < len; i++) {
+        dp[i] = Math.max(nums[i], dp[i - 1] + nums[i])
+      }
+
+      // 关键点 ：dp  得到所有连续长串的值
+      return Math.max(...dp) 
+    }
+
+    console.log(maxSubArray([-2]))
 
 
 
-      
+
 
 
 
