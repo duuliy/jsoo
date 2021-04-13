@@ -337,10 +337,24 @@
       }
 
       // 关键点 ：dp  得到所有连续长串的值
-      return Math.max(...dp) 
+      return Math.max(...dp)
     }
 
     // console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+
+    function getMax(nums) {
+      let max = -Infinity;
+      for (let i = 0; i < nums.length; i++) {
+        let sum = nums[i]
+        max = Math.max(sum, max)
+        for (let j = i + 1; j < nums.length; j++) {
+          // 求连续子序列 往上加就行
+          sum += nums[j];
+          max = Math.max(sum, max)
+        }
+      }
+      return max
+    }
 
 
 
