@@ -420,6 +420,16 @@
     // dp[13]=2  4+9
     // dp[i - j * j] + 1
 
+    /**
+   * @param {number} n
+   * @return {number}
+   */
+    var numSquares = function (n) {
+      Math.sqrt(n) % 1 === 0
+
+      const
+    };
+
 
 
     //322. 零钱兑换 
@@ -470,8 +480,8 @@
         let trieNode = next[word[i]]
         if (!trieNode) {
           trieNode = new TrieNode()
-          next[[word[i]]]= trieNode
-          
+          next[[word[i]]] = trieNode
+
         }
         node = trieNode
 
