@@ -357,6 +357,50 @@
     }
 
 
+    // 121. 买卖股票的最佳时机
+
+    /**
+   * @param {number[]} prices
+   * @return {number}
+   */
+    var maxProfit = function (prices) {
+      let maxNum = 0
+      for (let i = 0; i < prices.length; i++) {
+        for (let j = i + 1; j < prices.length; j++) {
+          maxNum = Math.max(maxNum, prices[j] - prices[i])
+        }
+      }
+      return maxNum
+    }
+
+    var maxProfit = function (prices) {
+      let min = Infinity, max = 0
+
+      for (let i = 0; i < prices.length; i++) {
+        const price = prices[i]
+        min = Math.min(min, price)
+        max = Math.max(max, price - min)
+      }
+      return max
+    }
+
+    var maxProfit = function (prices) {
+      let len = prices.length
+      let dp = new Array(len).fill(0)
+      let min = prices[0]
+
+      for (let i = 1; i < len; i++) {
+        const price = prices[i]
+        min = Math.min(min, price)
+        dp[i] = Math.max(dp[i - 1], price - min)
+      }
+
+      return dp[len - 1]
+    }
+
+    // console.log(maxProfit([2, 9, 1, 4]))
+
+
 
   </script>
 </body>
