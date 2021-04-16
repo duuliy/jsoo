@@ -587,6 +587,55 @@
     // console.log(trie)
 
 
+    // 152. 乘积最大子数组
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+
+    //中等难度肯定超时，但是思路最简单
+    var maxProduct = function (nums) {
+      let len = nums.length
+      let max = 0
+
+      for (let i = 0; i < len; i++) {
+        let totalNum = nums[i]
+        for (let j = i + 1; j < len; j++) {
+          totalNum *= nums[j]
+          max = Math.max(max, totalNum)
+        }
+      }
+
+      return max
+    }
+
+    //dp[i]=Math.max(nums[i],dp[i-1]*nums[i]) 全正的情况
+    //包含正负：正不变，负的最大值是负的最多的，但是下一位是负的话，乘积为为最大值
+    //记录上一次的最大和最小值，乘当前值=>要么最大正或最大负，不然就是0
+
+    var maxProduct = function (nums) {
+      let len = nums.length
+      let dp = []
+      dp[0]= nums[0]
+      let prevMin = nums[0]
+      let prevMax = nums[0]
+      let temp1 = 0, temp2 = 0
+
+      for (let i = 1; i < len; i++) {
+        temp1=prevMin*nums[i]
+        temp2=prevMax*nums[i]
+        prevMin = Math.min(temp1, temp2, nums[i])
+        prevMax = Math.max(temp1, temp2, nums[i])
+        dp[i]=Math.max(dp[i-1], prevMax)
+      }
+
+      return Math.max(...dp)
+    }
+
+    // console.log(maxProduct([-2, 0, -1]))
+
+
+
 
 
   </script>
