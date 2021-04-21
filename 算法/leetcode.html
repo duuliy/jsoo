@@ -456,6 +456,37 @@
       return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
     }
 
+    // 704. 二分查找
+
+    /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number}
+   */
+    var search = function (nums, target) {
+      return nums.indexOf(target)
+    }
+
+    var search = function (nums, target) {
+      let left = 0
+      let right = nums.length - 1
+      while (left <= right) {
+        let middleIndex = Math.floor((left + right) / 2)
+        if (nums[middleIndex] === target) {
+          return middleIndex
+        }
+        if (nums[middleIndex] < target) {
+          left = middleIndex + 1
+        }
+        if (nums[middleIndex] > target) {
+          right = middleIndex - 1
+        }
+      }
+      return -1
+    }
+
+
+
 
   </script>
 </body>
