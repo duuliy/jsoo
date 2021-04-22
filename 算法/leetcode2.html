@@ -641,11 +641,26 @@
    * @param {number} targetSum
    * @return {number[][]}
    */
+
     var pathSum = function (root, targetSum) {
+      let queue = []
+      let results = []
 
+      const recursion = (node, result) => {
+        if (!node) return
+        result.push(node.val)
+
+        if (!node.right && !node.left) {
+          if (result.reduce((totle, v) => totle + v) === targetSum) results.push(result)
+        }else{
+          node.left && recursion(node.left, [...result])
+          node.right && recursion(node.right, [...result])
+        }
+      }
+
+      recursion(root, [])
+      return results
     }
-
-
 
 
 
