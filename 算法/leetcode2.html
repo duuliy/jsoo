@@ -706,9 +706,25 @@
    * @return {number[][]}
    */
     var levelOrder = function (root) {
+      if(!root) return []
+      let queue=[root]
+      let results=[]
 
+      while(queue.length){
+        const len= queue.length
+        let result=[]
+
+        for(let i=0;i< len;i++){
+          const node= queue.shift()
+          result.push(node.val)
+          node.left&& queue.push(node.left)
+          node.right && queue.push(node.right)
+        }
+        
+        results.push(result)
+      }
+      return results
     }
-
 
 
 
