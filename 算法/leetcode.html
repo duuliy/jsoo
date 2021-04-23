@@ -512,8 +512,11 @@
    * @return {void} Do not return anything, modify nums1 in-place instead.
    */
     var merge = function (nums1, m, nums2, n) {
-
+      // return nums1.filter(v=>v!==0).concat(nums2.filter(v => v !== 0)).sort()
+      return [...nums1.filter(v => v !== 0), ...nums2.filter(v => v !== 0)].sort()
     }
+
+
 
 
 
