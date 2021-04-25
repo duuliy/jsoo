@@ -701,30 +701,59 @@
 
     // 102. 二叉树的层序遍历
 
-    /**
+    /** bfs
    * @param {TreeNode} root
    * @return {number[][]}
    */
     var levelOrder = function (root) {
-      if(!root) return []
-      let queue=[root]
-      let results=[]
+      if (!root) return []
+      let queue = [root]
+      let results = []
 
-      while(queue.length){
-        const len= queue.length
-        let result=[]
+      while (queue.length) {
+        const len = queue.length
+        let result = []
 
-        for(let i=0;i< len;i++){
-          const node= queue.shift()
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
           result.push(node.val)
-          node.left&& queue.push(node.left)
+          node.left && queue.push(node.left)
           node.right && queue.push(node.right)
         }
-        
+
         results.push(result)
       }
       return results
     }
+
+    // 22. 括号生成
+
+    /**
+   * @param {number} n
+   * @return {string[]}
+   */
+  // start,end 左右括号的数量
+  // 保证不能以"）"开始的括号 start > end
+    var generateParenthesis = function (n) {
+      let results = []
+
+      const recursion=(start,end,prev)=>{
+        if (start < 0 || end < 0 || start > end) return
+        
+        if (start === 0 && end === 0) {
+          results.push(prev)
+          return
+        }
+
+        recursion(start-1, end, prev+'(')
+        recursion(start, end-1, prev+')')
+      }
+
+      recursion(n,n,'')
+      return results
+    }
+
+    console.log(generateParenthesis(1))
 
 
 
