@@ -517,7 +517,28 @@
     }
 
 
+    // 167. 两数之和 II - 输入有序数组
+    /**
+   * @param {number[]} numbers
+   * @param {number} target
+   * @return {number[]}
+   */
+    var twoSum = function (numbers, target) {
+      debugger
+      let left = 0
+      let right = numbers.length - 1
 
+      while (left < right) {
+        const val = numbers[left] + numbers[right] - target
+        if (val > 0) {
+          right--
+        } else if (val < 0) {
+          left++
+        } else {
+          return [left+1, right+1]  //题目要求下标按1 开始
+        }
+      }
+    }
 
 
 
