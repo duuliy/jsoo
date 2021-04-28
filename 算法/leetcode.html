@@ -551,15 +551,39 @@
       let left = 0
       let right = s.length - 1
 
-      while(left< right){
-        if(s[left]!==s[right]){
+      while (left < right) {
+        if (s[left] !== s[right]) {
           return false
-        }else{
+        } else {
           left++
           right--
         }
       }
       return true
+    }
+
+    // 350. 两个数组的交集 II
+    /**
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number[]}
+   */
+    var intersect = function (nums1, nums2) {
+      let result = []
+      const nums1Bigger = nums1.length - nums2.length
+      let bigNums, smallNums
+      nums1Bigger >= 0
+        ? (bigNums = nums1, smallNums = nums2)
+        : (bigNums = nums2, smallNums = nums1)
+
+      for (let i = 0; i < smallNums.length; i++) {
+        const index= bigNums.indexOf(smallNums[i])
+        if(index!==-1){
+          result.push(smallNums[i])
+          bigNums.splice(index,1)
+        }
+      }
+      return result
     }
 
 
