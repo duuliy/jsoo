@@ -579,8 +579,8 @@
       for (let i = 0; i < smallNums.length; i++) {
         const index= bigNums.indexOf(smallNums[i])
         if(index!==-1){
-          result.push(smallNums[i])
-          bigNums.splice(index,1)
+          result.push(smallNums[i]) 
+          bigNums.splice(index,1)  //取一个值去掉一个值
         }
       }
       return result
