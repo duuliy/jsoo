@@ -973,7 +973,7 @@
       let sum = 0
       let result = Infinity
 
-      while (left< nums.length ) {
+      while (left < nums.length) {
         if (sum < target) {
           sum += nums[++right]
         } else {
@@ -985,6 +985,31 @@
         }
       }
       return result === Infinity ? 0 : result
+    }
+
+
+    // 92. 反转链表 II
+
+    /**
+   * @param {ListNode} head
+   * @param {number} left
+   * @param {number} right
+   * @return {ListNode}
+   */
+    // current和prev的指针往下移动1位,current.next的指针向上移动2位到prev
+    var reverseBetween = function (head, left, right) {
+      let current = head
+      let prev = null
+
+      while (current) {
+        if (current.val > left&& current.val < right) {
+          const next = current.next
+          current.next = prev
+          prev = current
+          current = next
+        }
+      }
+      return prev
     }
 
 
