@@ -74,7 +74,7 @@
         }
       }
       return maxLength
-    };
+    }
 
     // 2. 两数相加
     /**
@@ -1002,7 +1002,7 @@
       let prev = null
 
       while (current) {
-        if (current.val > left&& current.val < right) {
+        if (current.val > left && current.val < right) {
           const next = current.next
           current.next = prev
           prev = current
@@ -1011,6 +1011,8 @@
       }
       return prev
     }
+
+
 
 
 

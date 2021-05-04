@@ -592,37 +592,65 @@
    * @return {ListNode}
    */
 
-   //不停的把curent的当前值翻转到prev上,curent又存储curent.next的值,最后返回pre
-   //不要用数组的形式想链表，得不到答案
+    //不停的把curent的当前值翻转到prev上,curent又存储curent.next的值,最后返回pre
+    //不要用数组的形式想链表，得不到答案
 
-  var reverseList = function (head) {
-    let prev = null // 创建这个变量作为反转链表的尾部
-    let curent = head // 这个变量用于不断的移动指针。
+    var reverseList = function (head) {
+      let prev = null // 创建这个变量作为反转链表的尾部
+      let curent = head // 这个变量用于不断的移动指针。
 
-    while (curent !== null) {
-      // 翻转之前需要先保存next节点，不然翻转之后找不到这个位置的元素了
-      let next = curent.next
-      // 当前节点next指针翻转指向pre前置节点
-      curent.next = prev
-      // 将pre 移动到 cur当前的位置
-      prev = curent
-      // 将cur 移动到 next的位置 执行下一次的循环
-      curent = next
+      while (curent !== null) {
+        // 翻转之前需要先保存next节点，不然翻转之后找不到这个位置的元素了
+        let next = curent.next
+        // 当前节点next指针翻转指向pre前置节点
+        curent.next = prev
+        // 将pre 移动到 cur当前的位置
+        prev = curent
+        // 将cur 移动到 next的位置 执行下一次的循环
+        curent = next
+      }
+      // 退出while循环的条件是 cur 为 null。只要明白一件事情
+      // pre 指向的是cur的前一个元素。所以翻转之后返回的应该是pre
+      return prev
     }
-    // 退出while循环的条件是 cur 为 null。只要明白一件事情
-    // pre 指向的是cur的前一个元素。所以翻转之后返回的应该是pre
-    return prev
-  }
 
-  // const obj={
-  //   val: 1,
-  //   next:{
-  //     val: 2,
-  //     next: {
-  //       val: 3
-  //     }
-  //   }
-  // }
+    // const obj={
+    //   val: 1,
+    //   next:{
+    //     val: 2,
+    //     next: {
+    //       val: 3
+    //     }
+    //   }
+    // }
+
+
+    // 237. 删除链表中的节点
+
+    /**
+   * @param {ListNode} node
+   * @return {void} Do not return anything, modify node in-place instead.
+   */
+
+    var deleteNode = function (node) {
+      node.val = node.next.val, node.next = node.next.next
+    }
+
+    //输入某个节点，否则题目没意义
+    var deleteNode = function (head, node) {
+      let virtual = {
+        next: head,
+      }
+      let curent= virtual
+      while (curent) {
+        if(curent.val===node.val){
+          virtual.val = virtual.next.val, virtual.next = virtual.next.next
+          return virtual
+        }
+        curent.val = curent.next.val, curent.next = curent.next.next
+      }
+      return virtual
+    }
 
 
 
