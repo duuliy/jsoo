@@ -1034,21 +1034,78 @@
    * @param {number} right
    * @return {ListNode}
    */
-    // current和prev的指针往下移动1位,current.next的指针向上移动2位到prev
-    var reverseBetween = function (head, left, right) {
-      let current = head
-      let prev = null
 
-      while (current) {
-        if (current.val > left && current.val < right) {
-          const next = current.next
-          current.next = prev
-          prev = current
-          current = next
+    var reverseBetween = function (head, left, right) {
+      let i = 1
+      let current = head
+      let curHead = null
+      let curHeadPre = null
+      let curEnd = null
+
+      const getRecursionImSaveEnd = (current) => {
+        if (i === left-1) {
+          curHeadPre = current
+        }
+
+        if (i === left) {
+          curHead = current
+        }
+
+        if (i === right) {
+          curEnd= current
+        }
+
+        i++
+
+        if (current.next) {
+          getRecursionImSaveEnd(current.next)
         }
       }
-      return prev
+      getRecursionImSaveEnd(current)
+
+      let saveEnd= curEnd.next
+      curEnd.next=null
+
+      const { reverMiddle, endNode } = reverse(curHead)
+      if(curHeadPre){
+        curHeadPre.next= reverMiddle
+      }else{
+        head = reverMiddle
+      }
+      endNode.next= saveEnd
+
+
+      function reverse(head) {
+        let prev = null
+        let cur = head
+        while (cur) {
+          let next = cur.next
+          cur.next = prev
+
+          prev = cur
+          cur = next
+        }
+        return { reverMiddle: prev, endNode: head }
+      }
+
+      return head
     }
+
+    // const obj = {
+    //   val: 1,
+    //   next: {
+    //     val: 2,
+    //     next: {
+    //       val: 3,
+    //       next: {
+    //         val: 4,
+    //         next: {
+    //           val: 5
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
 
 

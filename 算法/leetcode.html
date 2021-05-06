@@ -592,7 +592,7 @@
    * @return {ListNode}
    */
 
-    //不停的把curent的当前值翻转到prev上,curent又存储curent.next的值,最后返回pre
+    //不停的把curent的当前值翻转到prev上,curent又存储curent.next的值,最后返回pre!!!!!!!!!!
     //不要用数组的形式想链表，得不到答案
 
     var reverseList = function (head) {
@@ -601,13 +601,13 @@
 
       while (curent !== null) {
         // 翻转之前需要先保存next节点，不然翻转之后找不到这个位置的元素了
-        let next = curent.next
-        // 当前节点next指针翻转指向pre前置节点
+        let save = curent.next
+        // 每次把current的值存储到prev的上一层
         curent.next = prev
-        // 将pre 移动到 cur当前的位置
+        // 得到的新current赋值给prev 
         prev = curent
-        // 将cur 移动到 next的位置 执行下一次的循环
-        curent = next
+        // 将cur 移动到 next的位置储存的值 执行下一次的循环
+        curent = save
       }
       // 退出while循环的条件是 cur 为 null。只要明白一件事情
       // pre 指向的是cur的前一个元素。所以翻转之后返回的应该是pre
@@ -641,9 +641,9 @@
       let virtual = {
         next: head,
       }
-      let curent= virtual
+      let curent = virtual
       while (curent) {
-        if(curent.val===node.val){
+        if (curent.val === node.val) {
           virtual.val = virtual.next.val, virtual.next = virtual.next.next
           return virtual
         }
