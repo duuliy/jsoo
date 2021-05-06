@@ -1043,7 +1043,7 @@
       let curEnd = null
 
       const getRecursionImSaveEnd = (current) => {
-        if (i === left-1) {
+        if (i === left - 1) {
           curHeadPre = current
         }
 
@@ -1052,7 +1052,7 @@
         }
 
         if (i === right) {
-          curEnd= current
+          curEnd = current
         }
 
         i++
@@ -1063,16 +1063,16 @@
       }
       getRecursionImSaveEnd(current)
 
-      let saveEnd= curEnd.next
-      curEnd.next=null
+      let saveEnd = curEnd.next
+      curEnd.next = null
 
       const { reverMiddle, endNode } = reverse(curHead)
-      if(curHeadPre){
-        curHeadPre.next= reverMiddle
-      }else{
+      if (curHeadPre) {
+        curHeadPre.next = reverMiddle
+      } else {
         head = reverMiddle
       }
-      endNode.next= saveEnd
+      endNode.next = saveEnd
 
 
       function reverse(head) {
@@ -1106,6 +1106,39 @@
     //     }
     //   }
     // }
+
+    // 19. 删除链表的倒数第 N 个结点
+
+    /**
+   * @param {ListNode} head
+   * @param {number} n
+   * @return {ListNode}
+   */ //链表太恶心了，还是转数组吧
+    var removeNthFromEnd = function (head, n) {
+      let i = 1
+      let current = head
+      let arr=[]
+      const getArr = (current) => {
+        arr.unshift(current.val)
+        if (current.next) {
+          getArr(current.next)
+        }
+      }
+      getArr(current)
+      arr.splice(n-1, 1)
+
+      let _cur=null
+      for(let i=0;i< arr.length;i++){
+        _cur={
+          val: arr[i],
+          next: _cur
+        }
+      }
+      return _cur
+    
+    }
+
+
 
 
 
