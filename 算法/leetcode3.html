@@ -36,6 +36,118 @@
       return [minTime, sum + node.val];
     }
 
+
+    // 76. 最小覆盖子串
+    /** 滑动窗口
+   * @param {string} s
+   * @param {string} t
+   * @return {string}
+   */
+
+    //  1.大小写区分
+    //  2.重复字母
+    //  不出意外的超时了，遍历次数已经不能减少了，估计跟splice和indexOf有关，但是方法是对的
+    var minWindow = function (s, t) {
+      const sl = s.length
+      const tl = t.length
+      let left = 0
+      let right = -1
+      let saveStr = ''
+      let result = ''
+      let resultNum = Infinity
+
+      const getIfMetCondition = saveStr => {
+        let _saveArr = saveStr.split('')
+        for (let i = 0; i < tl; i++) {
+          const index = _saveArr.indexOf(t[i])
+          if (index === -1) {
+            return false
+          } else {
+            _saveArr.splice(index, 1)
+          }
+        }
+        return true
+      }
+
+      while (left <= sl - tl && right <= sl) {
+        if (getIfMetCondition(saveStr)) {
+          if (resultNum >= saveStr.length) {
+            result = saveStr
+            resultNum = saveStr.length
+          }
+          left++
+        } else {
+          right++
+        }
+        saveStr = s.slice(left, right)
+      }
+
+      return result
+    }
+
+    //改造,不止考滑动窗口了，还考对数据类型耗能得影响
+
+    function addCountToMap(map, str) {
+      if (!map[str]) {
+        map[str] = 1
+      } else {
+        map[str]++
+      }
+    }
+
+    function makeCountMap(strs) {
+      let map = {}
+      for (let i = 0; i < strs.length; i++) {
+        let letter = strs[i]
+        addCountToMap(map, letter)
+      }
+      return map
+    }
+
+    var minWindow = function (s, t) {
+      const sl = s.length
+      const tl = t.length
+      let left = 0
+      let right = -1
+      let saveStr = ''
+      let saveStrMap = {}
+      let result = ''
+      let resultNum = Infinity
+      let tMap = makeCountMap(t)
+
+      const getIfMetCondition = () => {
+        for (key in tMap) {
+          let targetCount = tMap[key]
+          let count = saveStrMap[key]
+          if (!count || count < targetCount) {
+            return false
+          }
+        }
+        return true
+      }
+
+      while (left <= sl - tl && right <= sl) {
+        if (getIfMetCondition()) {
+          if (resultNum >= saveStr.length) {
+            result = saveStr
+            resultNum = saveStr.length
+          }
+          saveStrMap[s[left]]--
+          left++
+        } else {
+          right++
+          addCountToMap(saveStrMap, s[right])
+        }
+        saveStr = s.slice(left, right + 1)
+      }
+
+      return result
+    }
+
+
+
+
+
   </script>
 </body>
 
