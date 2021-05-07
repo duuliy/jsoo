@@ -1117,7 +1117,7 @@
     var removeNthFromEnd = function (head, n) {
       let i = 1
       let current = head
-      let arr=[]
+      let arr = []
       const getArr = (current) => {
         arr.unshift(current.val)
         if (current.next) {
@@ -1125,19 +1125,76 @@
         }
       }
       getArr(current)
-      arr.splice(n-1, 1)
+      arr.splice(n - 1, 1)
 
-      let _cur=null
-      for(let i=0;i< arr.length;i++){
-        _cur={
+      let _cur = null
+      for (let i = 0; i < arr.length; i++) {
+        _cur = {
           val: arr[i],
           next: _cur
         }
       }
       return _cur
-    
     }
 
+    // 438. 找到字符串中所有字母异位词
+
+    /** 滑动窗口 
+   * @param {string} s
+   * @param {string} p
+   * @return {number[]}
+   */
+    var findAnagrams = function (s, p) {
+      function addCountToMap(map, str) {
+        if (!map[str]) {
+          map[str] = 1
+        } else {
+          map[str]++
+        }
+      }
+
+      function makeCountMap(strs) {
+        let map = {}
+        for (let i = 0; i < strs.length; i++) {
+          let letter = strs[i]
+          addCountToMap(map, letter)
+        }
+        return map
+      }
+
+      const sl = s.length
+      const pl = p.length
+      //异位特点窗口长度不变
+      let left = 0
+      let right = pl-1
+      let result=[]
+      let targetMap = makeCountMap(p)
+      let windowMap = makeCountMap(s.substring(left, right+1))
+
+      const getIfMetCondition = windowMap => {
+        for (key in targetMap) {
+          let targetCount = targetMap[key]
+          let count = windowMap[key]
+          if (!count || count < targetCount) {
+            return false
+          }
+        }
+        return true
+      }
+
+      while (left <= sl - pl && right < sl) {
+        if(getIfMetCondition(windowMap)){
+          result.push(left)
+        }
+        //左右一起滑
+          windowMap[s[left]]--
+          left++
+          right++
+          addCountToMap(windowMap,s[right])
+      }
+
+      return result
+    }
 
 
 

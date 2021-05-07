@@ -86,24 +86,6 @@
     }
 
     //改造,不止考滑动窗口了，还考对数据类型耗能得影响
-
-    function addCountToMap(map, str) {
-      if (!map[str]) {
-        map[str] = 1
-      } else {
-        map[str]++
-      }
-    }
-
-    function makeCountMap(strs) {
-      let map = {}
-      for (let i = 0; i < strs.length; i++) {
-        let letter = strs[i]
-        addCountToMap(map, letter)
-      }
-      return map
-    }
-
     var minWindow = function (s, t) {
       const sl = s.length
       const tl = t.length
@@ -114,6 +96,23 @@
       let result = ''
       let resultNum = Infinity
       let tMap = makeCountMap(t)
+
+      function addCountToMap(map, str) {
+        if (!map[str]) {
+          map[str] = 1
+        } else {
+          map[str]++
+        }
+      }
+
+      function makeCountMap(strs) {
+        let map = {}
+        for (let i = 0; i < strs.length; i++) {
+          let letter = strs[i]
+          addCountToMap(map, letter)
+        }
+        return map
+      }
 
       const getIfMetCondition = () => {
         for (key in tMap) {
