@@ -143,6 +143,56 @@
       return result
     }
 
+    // 239. 滑动窗口最大值
+
+    /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number[]}
+   */
+
+    //毕竟困难，正确方法超时能理解
+    var maxSlidingWindow = function (nums, k) {
+      let result = []
+      let left = 0
+      let right = k - 1
+
+      while (right < nums.length) {
+        const maxNum = nums.slice(left, right + 1).sort((a, b) => a - b)[k - 1]
+        result.push(maxNum)
+        left++
+        right++
+      }
+
+      return result
+    }
+
+    //改造
+    var maxSlidingWindow = function (nums, k) {
+      if (k === 0 || !nums.length) {
+        return []
+      }
+      function findMax(nums, left, right) {
+        let max = -Infinity
+        for (let i = left; i <= right; i++) {
+          max = Math.max(max, nums[i])
+        }
+        return max
+      }
+      let left = 0
+      let right = k - 1
+      let res = [findMax(nums, left, right)]
+
+      while (right < nums.length - 1) {
+        right++
+        left++
+        res.push(findMax(nums, left, right))
+      }
+
+      return res
+    }
+
+
 
 
 
