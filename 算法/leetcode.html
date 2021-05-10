@@ -118,7 +118,7 @@
 
     //20. 有效的括号 
 
-    /**  非常不稳定
+    /**  非常不稳定,栈和队列
  * @param {string} s
  * @return {boolean}
  */
@@ -129,10 +129,10 @@
       map.set("[", "]")
       map.set("{", "}")
       for (let i = 0; i < s.length; i++) {
-        if (map.has(s[i])) cache.push(s[i])
+        if (map.has(s[i])) cache.push(s[i]) //右括号进栈
         else {
           if (cache.length === 0) return false
-          if (map.get(cache[cache.length - 1]) === s[i]) cache.pop()
+          if (map.get(cache[cache.length - 1]) === s[i]) cache.pop()  //若是左括号，有左括号对应的右括号就删除
           else return false
         }
       }

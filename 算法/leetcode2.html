@@ -1166,10 +1166,10 @@
       const pl = p.length
       //异位特点窗口长度不变
       let left = 0
-      let right = pl-1
-      let result=[]
+      let right = pl - 1
+      let result = []
       let targetMap = makeCountMap(p)
-      let windowMap = makeCountMap(s.substring(left, right+1))
+      let windowMap = makeCountMap(s.substring(left, right + 1))
 
       const getIfMetCondition = windowMap => {
         for (key in targetMap) {
@@ -1183,18 +1183,50 @@
       }
 
       while (left <= sl - pl && right < sl) {
-        if(getIfMetCondition(windowMap)){
+        if (getIfMetCondition(windowMap)) {
           result.push(left)
         }
         //左右一起滑
-          windowMap[s[left]]--
-          left++
-          right++
-          addCountToMap(windowMap,s[right])
+        windowMap[s[left]]--
+        left++
+        right++
+        addCountToMap(windowMap, s[right])
       }
 
       return result
     }
+
+    // 150. 逆波兰表达式求值
+
+    /** 栈和队列
+   * @param {string[]} tokens
+   * @return {number}
+   */
+    var evalRPN = function (tokens) {
+      let stack = []
+      const opMap = {
+        '+': (a, b) => a + b,
+        '-': (a, b) => b - a,
+        '*': (a, b) => a * b,
+        '/': (a, b) => parseInt(b / a),
+      }
+
+      for (token of tokens) {
+        const op = opMap[token]
+        if (op) {
+          //并且转number
+          const a = parseInt(stack.pop())
+          const b = parseInt(stack.pop())
+          const res = op(a, b)
+          stack.push(res)
+        } else {
+          stack.push(token)
+        }
+      }
+      return stack[0]
+    }
+
+
 
 
 
