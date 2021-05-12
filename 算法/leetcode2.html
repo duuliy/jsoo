@@ -1260,6 +1260,52 @@
       return res
     }
 
+    // 199.二叉树的右视图
+
+    /** 
+   * @param {TreeNode} root
+   * @return {number[]}
+   */
+
+    //这题有点扯，跟着示例只取右边不对
+    var rightSideView = function (root) {
+      if (!root) return []
+      let queue = [root]
+      let result = []
+
+      while (queue.length) {
+        let len = queue.length
+
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+          result.push(node.val)
+          node.right && queue.push(node.right)
+        }
+      }
+      return result
+    }
+
+    //[1,2]的时候2在左，但是看得到
+    var rightSideView = function (root) {
+      if (!root) return []
+      let queue = [root]
+      let result = []
+
+      while (queue.length) {
+        let len = queue.length
+        let lastRight //取每行的最后一个
+
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+          node.left && queue.push(node.left)
+          node.right && queue.push(node.right)
+          if (node.val !== null) lastRight = node.val
+        }
+        result.push(lastRight)
+      }
+      return result
+    }
+
 
 
 
