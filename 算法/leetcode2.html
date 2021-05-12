@@ -1235,7 +1235,7 @@
     var simplifyPath = function (path) {
       let tokens = path.split("/")
       let stack = []
-      
+
       for (let index = 0; index < tokens.length; index++) {
         let token = tokens[index]
         if (token === "..") {
@@ -1259,6 +1259,7 @@
 
       return res
     }
+
 
 
 
