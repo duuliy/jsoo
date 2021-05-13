@@ -203,7 +203,7 @@
     };
 
     //257. 二叉树的所有路径
-    /**
+    /** dsf
    * @param {TreeNode} root
    * @return {string[]}
    */
@@ -650,6 +650,85 @@
         curent.val = curent.next.val, curent.next = curent.next.next
       }
       return virtual
+    }
+
+    // 104. 二叉树的最大深度
+    /** dsf
+   * @param {TreeNode} root
+   * @return {number}
+   */
+
+    //  dsf
+    var maxDepth = function (root) {
+      if (!root) return 0
+      let max = 0
+
+      const recursion = (node, depth) => {
+        if (!node) return
+        if (!node.left && !node.left) max = Math.max(max, depth)
+        node.left && recursion(node.left, depth + 1)
+        node.right && recursion(node.right, depth + 1)
+      }
+      recursion(root, 1)
+      return max
+    }
+
+    //  bsf
+    var maxDepth = function (root) {
+      if (!root) return 0
+      let queue = [root]
+      let depth = 0
+
+      while (queue.length) {
+        let len = queue.length
+        depth++
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+          node.left && queue.push(node.left)
+          node.right && queue.push(node.right)
+        }
+      }
+
+      return depth
+    }
+
+    // 111. 二叉树的最小深度
+    /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+
+    //  dsf
+    var minDepth = function (root) {
+      if (!root) return 0
+      let min = Infinity
+
+      const recursion = (node, depth) => {
+        if (!node) return
+        if (!node.left && !node.right) min = Math.min(min, depth)
+        node.left && recursion(node.left, depth + 1)
+        node.right && recursion(node.right, depth + 1)
+      }
+      recursion(root, 1)
+      return min === Infinity ? 0 : min
+    }
+
+    //  bsf
+    var minDepth = function (root) {
+      if (!root) return 0
+      let queue = [root]
+      let depth = 0
+
+      while (queue.length) {
+        let len = queue.length
+        depth++
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+          if (!node.left && !node.right) return depth
+          node.left && queue.push(node.left)
+          node.right && queue.push(node.right)
+        }
+      }
     }
 
 
