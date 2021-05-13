@@ -1306,9 +1306,42 @@
       return result
     }
 
+    // 24. 两两交换链表中的节点
 
+    /** 
+   * @param {ListNode} head
+   * @return {ListNode}
+   */
+    var swapPairs = function (head) {
+      if (!head) return null
+      let arr = []
+      const recursion = node => {
+        arr.unshift(node.val)
+        node.next && recursion(node.next)
+      }
+      recursion(head)
 
+      let last
+      const isEvenNumbers = arr.length % 2 === 0
+      let _arr = isEvenNumbers ? arr : (last = arr.shift(), arr)
 
+      for (let i = 0; i < _arr.length; i++) {
+        if (i % 2 === 0) {
+          [_arr[i], _arr[i + 1]] = [_arr[i + 1], _arr[i]]
+        }
+      }
+
+      !isEvenNumbers && (_arr.unshift(last))
+
+      let _cur = null
+      for (let i = 0; i < _arr.length; i++) {
+        _cur = {
+          val: arr[i],
+          next: _cur
+        }
+      }
+      return _cur
+    }
 
 
 
