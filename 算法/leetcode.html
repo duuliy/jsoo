@@ -768,33 +768,17 @@
       if (!root) return true
 
       const recursion=(left, right)=>{
-        if (!left && !right) return true 
-        if ((left && right == null) || (left == null && right)) return false
+        if (!left && !right) return true //叶子节点
+        if (!left || !right) return false
 
         if (left.val !== right.val) return false
-        return (recursion(left.left, right.right),recursion(left.right, right.left))
+        return recursion(left.left, right.right) && recursion(left.right, right.left) //如若前者false, 就没必要继续了, 结果全都没被false判断，则是true
+
       }
 
       return recursion(root.left, root.right)
     }
 
-    var isSymmetric = function (root) {
-        if (!root) return true
-        let helper = (left, right) => {
-          if (!left && !right) {
-            return true
-          }
-          if (!left || !right) {
-            return false
-          }
-          if (left.val === right.val) {
-            return helper(left.left, right.right) && helper(left.right, right.left)
-          } else {
-            return false
-          }
-        }
-        return helper(root, root)
-      }
 
 
 
