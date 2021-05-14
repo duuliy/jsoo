@@ -731,6 +731,71 @@
       }
     }
 
+    // 101. 对称二叉树 节点以及val 都是镜像对称
+
+    /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+
+   //bfs
+    var isSymmetric = function (root) {
+      if (!root) return true
+      let queue = [root.left, root.right]
+
+      while (queue.length) {
+        let len = queue.length
+
+        for (let i = 0; i < len; i+=2) {
+          const left = queue.shift()
+          const right = queue.shift()
+          if ((left && right == null) || (left == null && right)) return false
+          if (left && right) { 
+            if (left.val !== right.val) {
+              return false;
+            }
+            queue.push(left.left, right.right)
+            queue.push(left.right, right.left)
+          }
+        }
+      }
+      return true
+    }
+
+
+    //  dsf
+    var isSymmetric = function (root) {
+      if (!root) return true
+
+      const recursion=(left, right)=>{
+        if (!left && !right) return true 
+        if ((left && right == null) || (left == null && right)) return false
+
+        if (left.val !== right.val) return false
+        return (recursion(left.left, right.right),recursion(left.right, right.left))
+      }
+
+      return recursion(root.left, root.right)
+    }
+
+    var isSymmetric = function (root) {
+        if (!root) return true
+        let helper = (left, right) => {
+          if (!left && !right) {
+            return true
+          }
+          if (!left || !right) {
+            return false
+          }
+          if (left.val === right.val) {
+            return helper(left.left, right.right) && helper(left.right, right.left)
+          } else {
+            return false
+          }
+        }
+        return helper(root, root)
+      }
+
 
 
 
