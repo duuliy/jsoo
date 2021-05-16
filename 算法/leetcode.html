@@ -200,7 +200,7 @@
         }
       }
       return nums.length
-    };
+    }
 
     //257. 二叉树的所有路径
     /** dsf
@@ -738,7 +738,7 @@
    * @return {boolean}
    */
 
-   //bfs
+    //bfs
     var isSymmetric = function (root) {
       if (!root) return true
       let queue = [root.left, root.right]
@@ -746,11 +746,11 @@
       while (queue.length) {
         let len = queue.length
 
-        for (let i = 0; i < len; i+=2) {
+        for (let i = 0; i < len; i += 2) {
           const left = queue.shift()
           const right = queue.shift()
           if ((left && right == null) || (left == null && right)) return false
-          if (left && right) { 
+          if (left && right) {
             if (left.val !== right.val) {
               return false;
             }
@@ -767,7 +767,7 @@
     var isSymmetric = function (root) {
       if (!root) return true
 
-      const recursion=(left, right)=>{
+      const recursion = (left, right) => {
         if (!left && !right) return true //叶子节点
         if (!left || !right) return false
 
@@ -777,6 +777,85 @@
       }
 
       return recursion(root.left, root.right)
+    }
+
+
+    // 110. 平衡二叉树  ?
+
+    /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+
+   //1.bfs计算节点层级
+   //2.dfs 通过1计算每个节点层级差，超过1，则不是平衡
+   //以下简化计算，值得思考！！！
+    function getHeight(node) {
+      if (!node) return 0
+      return Math.max(getHeight(node.left), getHeight(node.right)) + 1
+    }
+
+    var isBalanced = function (root) {
+      if (!root) {
+        return true
+      }
+      let isSonBalnaced = Math.abs(getHeight(root.left) - getHeight(root.right)) <= 1
+      return isSonBalnaced && isBalanced(root.left) && isBalanced(root.right)
+    }
+
+
+    // 112. 路径总和
+
+    /**
+   * @param {TreeNode} root
+   * @param {number} targetSum
+   * @return {boolean}
+   */
+    var hasPathSum = function (root, targetSum) {
+      if (!root) return false
+      let boo = false
+
+      const recursion = (node, totalSum) => {
+        totalSum += node.val
+        if (!node.left && !node.right) {
+          if (totalSum === targetSum) {
+            boo = true
+            return
+          }
+        }
+        node.left && recursion(node.left, totalSum)
+        node.right && recursion(node.right, totalSum)
+      }
+
+      recursion(root, 0)
+      return boo
+    }
+
+    // 404. 左叶子之和
+
+    /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+
+    //只计算叶子节点，并且是左
+    var sumOfLeftLeaves = function (root) {
+      let queue = [root]
+      let leftSum = 0
+
+      while (queue.length) {
+        let len = queue.length
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+          if (node.left && !node.left.left && !node.left.right) {
+            leftSum += node.left.val
+          }
+          node.left && queue.push(node.left)
+          node.right && queue.push(node.right)
+        }
+      }
+
+      return leftSum
     }
 
 
