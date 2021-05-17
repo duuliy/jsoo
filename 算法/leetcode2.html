@@ -1343,6 +1343,29 @@
       return _cur
     }
 
+    // 129. 求根节点到叶节点数字之和
+
+    /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+    var sumNumbers = function (root) {
+      if (!root) return 0
+      let results = []
+
+      const recursion = (node, totalSum) => {
+        totalSum= totalSum + '' + node.val
+        if (!node.left && !node.right) {
+          results.push(totalSum)
+        }
+        node.left && recursion(node.left, totalSum)
+        node.right && recursion(node.right, totalSum)
+      }
+
+      recursion(root, 0)
+      return results.reduce((total,v)=> total+Number(v),0)
+    }
+
 
 
 

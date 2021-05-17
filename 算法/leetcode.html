@@ -787,9 +787,9 @@
    * @return {boolean}
    */
 
-   //1.bfs计算节点层级
-   //2.dfs 通过1计算每个节点层级差，超过1，则不是平衡
-   //以下简化计算，值得思考！！！
+    //1.bfs计算节点层级
+    //2.dfs 通过1计算每个节点层级差，超过1，则不是平衡
+    //以下简化计算，值得思考！！！
     function getHeight(node) {
       if (!node) return 0
       return Math.max(getHeight(node.left), getHeight(node.right)) + 1
@@ -857,6 +857,7 @@
 
       return leftSum
     }
+
 
 
 
