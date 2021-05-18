@@ -1354,7 +1354,7 @@
       let results = []
 
       const recursion = (node, totalSum) => {
-        totalSum= totalSum + '' + node.val
+        totalSum = totalSum + '' + node.val
         if (!node.left && !node.right) {
           results.push(totalSum)
         }
@@ -1363,7 +1363,40 @@
       }
 
       recursion(root, 0)
-      return results.reduce((total,v)=> total+Number(v),0)
+      return results.reduce((total, v) => total + Number(v), 0)
+    }
+
+    // 437. 路径总和 III
+    /**
+   * @param {TreeNode} root
+   * @param {number} targetSum
+   * @return {number}
+   */
+
+    // 把所有路径拿到,再取也不行,前面可能重复
+    // 以根,左,右分别为顶点开始计数（开始计数位置不会重复）, 向下递归
+    var pathSum = function (root, targetSum) {
+      if (!root) return 0
+
+      const countSum = (node) => {
+        let count = 0
+        let dfs = (node, sum) => {
+          if (!node) return
+
+          sum += node.val
+          console.log(sum, targetSum)
+          if (sum === targetSum) {
+            count += 1
+          }
+          node.left && dfs(node.left, sum)
+          node.right && dfs(node.right, sum)
+        }
+
+        dfs(node, 0)
+        return count
+      }
+
+      return countSum(root) + pathSum(root.left, targetSum) + pathSum(root.right, targetSum)
     }
 
 
