@@ -858,6 +858,28 @@
       return leftSum
     }
 
+    // 108. 将有序数组转换为二叉搜索树
+
+    /**
+   * @param {number[]} nums
+   * @return {TreeNode}
+   */
+
+    //讲白了，就是二分查找
+    var sortedArrayToBST = function (nums) {
+      let n = nums.length
+      if (!n) {
+        return null
+      }
+      let mid = Math.floor(n / 2)
+      let root = new TreeNode(nums[mid])
+
+      root.left = sortedArrayToBST(nums.slice(0, mid))
+      root.right = sortedArrayToBST(nums.slice(mid + 1, n))
+
+      return root
+    }
+
 
 
 
