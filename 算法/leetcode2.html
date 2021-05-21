@@ -1442,6 +1442,103 @@
     }
 
 
+    // 236. 二叉树的最近公共祖先
+
+    /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+
+    /**
+   * @param {TreeNode} root
+   * @param {TreeNode} p
+   * @param {TreeNode} q
+   * @return {TreeNode}
+   */
+
+    //1.p,q包含
+    //2.左右子树只有1个会包含p,q
+    // 我的答案跑起来对的，leetcode报错
+    var lowestCommonAncestor = function (root, p, q) {
+      let queue = [root]
+      let result
+
+      const getIsHas = (node) => {
+        if (!node) return
+        let _pBoo = false, _qBoo = false
+        const dfs = (node) => {
+          if (node.val === p) _pBoo = true
+          if (node.val === q) _qBoo = true
+          if(_pBoo && _qBoo) return true
+
+          node.left && dfs(node.left, _pBoo, _qBoo)
+          node.right && dfs(node.right, _pBoo, _qBoo)
+
+        }
+        dfs(node)
+        return _pBoo&&_qBoo
+      }
+
+      while (queue.length) {
+        let len = queue.length
+
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+
+          if (getIsHas(node)) result = node
+
+          node.left && queue.push(node.left)
+          node.right && queue.push(node.right)
+        }
+      }
+
+      return result
+    }
+
+    // 题解leetcode对的，跑起来错的
+  //  var lowestCommonAncestor = function (root, p, q) {
+  //     if (root == null || root == p || root == q) return root
+  //     const left = lowestCommonAncestor(root.left, p, q)
+  //     const right = lowestCommonAncestor(root.right, p, q)
+  //     if (left === null) return right
+  //     if (right === null) return left
+  //     return root
+  //   }
+
+    // const obj = {
+    //   val: 3,
+    //   left: {
+    //     val: 5,
+    //     left: {
+    //       val: 6
+    //     },
+    //     right: {
+    //       val: 2,
+    //       left: {
+    //         val: 7
+    //       },
+    //       right: {
+    //         val: 4
+    //       }
+    //     }
+    //   },
+    //   right: {
+    //     val: 1,
+    //     left: {
+    //       val: 0
+    //     },
+    //     right: {
+    //       val: 8
+    //     }
+    //   }
+    // }
+
+    // console.log(lowestCommonAncestor(obj, 0, 8))
+
+
 
   </script>
 </body>
