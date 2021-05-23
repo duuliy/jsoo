@@ -1472,14 +1472,14 @@
         const dfs = (node) => {
           if (node.val === p) _pBoo = true
           if (node.val === q) _qBoo = true
-          if(_pBoo && _qBoo) return true
+          if (_pBoo && _qBoo) return true
 
           node.left && dfs(node.left, _pBoo, _qBoo)
           node.right && dfs(node.right, _pBoo, _qBoo)
 
         }
         dfs(node)
-        return _pBoo&&_qBoo
+        return _pBoo && _qBoo
       }
 
       while (queue.length) {
@@ -1499,14 +1499,14 @@
     }
 
     // 题解leetcode对的，跑起来错的
-  //  var lowestCommonAncestor = function (root, p, q) {
-  //     if (root == null || root == p || root == q) return root
-  //     const left = lowestCommonAncestor(root.left, p, q)
-  //     const right = lowestCommonAncestor(root.right, p, q)
-  //     if (left === null) return right
-  //     if (right === null) return left
-  //     return root
-  //   }
+    //  var lowestCommonAncestor = function (root, p, q) {
+    //     if (root == null || root == p || root == q) return root
+    //     const left = lowestCommonAncestor(root.left, p, q)
+    //     const right = lowestCommonAncestor(root.right, p, q)
+    //     if (left === null) return right
+    //     if (right === null) return left
+    //     return root
+    //   }
 
     // const obj = {
     //   val: 3,
@@ -1537,6 +1537,31 @@
     // }
 
     // console.log(lowestCommonAncestor(obj, 0, 8))
+
+
+    //46. 全排列
+
+    /**  回溯
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+    var permute = function (nums) {
+      let results=[]
+
+      const flashBack=(nums,i,res)=>{
+        if(nums.length===1) return res.push(nums[0])
+        let _nums= nums.splice(i,1)
+        for (let i = 0; i < _nums.length; i++) {
+          return flashBack(_nums,i,res)
+        }
+      }
+
+      for (let i = 0; i < nums.length; i++) {
+        results.push(flashBack(nums,i,[]))
+      }
+
+      return results
+    }
 
 
 
