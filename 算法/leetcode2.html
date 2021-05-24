@@ -1545,20 +1545,32 @@
    * @param {number[]} nums
    * @return {number[][]}
    */
-    var permute = function (nums) {
-      let results=[]
 
-      const flashBack=(nums,i,res)=>{
-        if(nums.length===1) return res.push(nums[0])
-        let _nums= nums.splice(i,1)
-        for (let i = 0; i < _nums.length; i++) {
-          return flashBack(_nums,i,res)
+   //思路解析：
+   //1. [1, 2, 3] 可以分割为 3 和 permute([1, 2]) 的所有组合
+   //2. 递归1
+   //3. 结束条件：当nums为1, 只有1种组合
+   //4. 见下面
+    var permute = function (nums) {
+      let results = []
+
+      const recursion = (nums, res) => {
+        if (nums.length === 1) {
+          results.push([...res, ...nums])
+        }
+
+        for (let i = 0; i < nums.length; i++) {
+          const _num = nums[i]
+          const _nums = nums.slice(0, i).concat(nums.slice(i + 1))
+          //每次遍历, 保证剩下的数组是一样, 并且每个位置都要开头一次
+          res.push(_num)
+          recursion(_nums, res)
+          //开过头就删除, 避免同一个数组所加的res除开nums[i]前面的数与_nums有重复
+          res.pop()
         }
       }
 
-      for (let i = 0; i < nums.length; i++) {
-        results.push(flashBack(nums,i,[]))
-      }
+      recursion([...nums], [])
 
       return results
     }
