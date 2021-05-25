@@ -10,14 +10,84 @@
 
 <body>
   <script>
-    // 17. 电话号码的字母组合
+   // 17. 电话号码的字母组合
 
-    /**
-   * @param {string} digits
+    /**  回溯与递归
+   * @param {string} digits 
    * @return {string[]}
    */
-    var letterCombinations = function (digits) {
 
+    //暴力
+    var letterCombinations = function (digits) {
+      let results = []
+      const enume = {
+        '2': ['a', 'b', 'c'],
+        '3': ['d', 'e', 'f'],
+        '4': ['g', 'h', 'i'],
+        '5': ['j', 'k', 'l'],
+        '6': ['m', 'n', 'o'],
+        '7': ['p', 'q', 'r', 's'],
+        '8': ['t', 'u', 'v'],
+        '9': ['w', 'x', 'y', 'z'],
+      }
+      if (!digits) return results
+      if (digits.length === 1) return enume[digits]
+      const digitsArr = digits.split('').map(v => enume[v])
+      const len = digitsArr.length
+
+      const getCombination = (left, right) => {
+        let res = []
+        if (!left.length) return right
+        for (let i = 0; i < left.length; i++) {
+          for (let j = 0; j < right.length; j++) {
+            res.push(left[i] + right[j])
+          }
+        }
+        return res
+      }
+
+      for (let i = 0; i < len; i++) {
+        results = results.concat(getCombination(results, digitsArr[i]))
+      }
+
+      return results.filter(v => v.length === len)
+    }
+
+    //回溯与递归
+    var letterCombinations = function (digits) {
+      let results = []
+      const enume = {
+        '2': ['a', 'b', 'c'],
+        '3': ['d', 'e', 'f'],
+        '4': ['g', 'h', 'i'],
+        '5': ['j', 'k', 'l'],
+        '6': ['m', 'n', 'o'],
+        '7': ['p', 'q', 'r', 's'],
+        '8': ['t', 'u', 'v'],
+        '9': ['w', 'x', 'y', 'z'],
+      }
+      if (!digits) return results
+      if (digits.length === 1) return enume[digits]
+      const digitsArr = digits.split('').map(v => enume[v])
+      const len = digitsArr.length
+
+      const recursion = (arrs, res) => {
+        let _res = []
+        if (!res.length) res = arrs.shift()
+        const arr = arrs.shift()
+
+        for (let i = 0; i < res.length; i++) {
+          for (let j = 0; j < arr.length; j++) {
+            _res.push(res[i] + arr[j])
+          }
+        }
+        if (!arrs.length) return results = _res
+        else recursion(arrs, _res)
+      }
+
+      recursion(digitsArr, [])
+
+      return results
     }
 
   </script>
