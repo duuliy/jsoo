@@ -1575,6 +1575,119 @@
       return results
     }
 
+    // 47. 全排列 II
+
+    /** 回溯与递归
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+
+    //简单去重
+    var permuteUnique = function (nums) {
+      let results = new Set()
+
+      const recursion = (nums, res) => {
+        if (nums.length === 1) {
+          const _res = [...res, ...nums].join()
+          results.add(_res)
+        }
+
+        for (let i = 0; i < nums.length; i++) {
+          const _num = nums[i]
+          const _nums = nums.slice(0, i).concat(nums.slice(i + 1))
+          res.push(_num)
+          recursion(_nums, res)
+          res.pop()
+        }
+      }
+
+      recursion([...nums], [])
+
+      return [...results].map(v => v.split(',').map(Number))
+    }
+
+    // 每层同样的number为首尾的continue本层  剪枝
+    var permuteUnique = function (nums) {
+      let results = []
+
+      const recursion = (nums, res) => {
+        let dup = []
+        if (nums.length === 1) {
+          results.push([...res, ...nums])
+        }
+
+        for (let i = 0; i < nums.length; i++) {
+          const _num = nums[i]
+          if (dup.includes(_num)) continue
+          else dup.push(_num)
+          const _nums = nums.slice(0, i).concat(nums.slice(i + 1))
+          res.push(_num)
+          recursion(_nums, res)
+          res.pop()
+        }
+      }
+
+      recursion([...nums], [])
+
+      return results
+    }
+
+    // 77. 组合
+
+    /** 回溯与递归
+   * @param {number} n
+   * @param {number} k
+   * @return {number[][]}
+   */
+
+    //  输入: n = 4, k = 2
+    //
+    //   输出:
+    //   [
+    //     [2, 4],
+    //     [3, 4],
+    //     [2, 3],
+    //     [1, 2],
+    //     [1, 3],
+    //     [1, 4],
+    //   ]
+
+    // 1.第一层数组减少1个
+    // 2.第二层数组每个节点减少1个
+    // 3.总结规律：每次取值，数组都要减少一个
+    var combine = function (n, k) {
+      let results = []
+      let arr = new Array(n).fill(0).map((v, i) => i + 1)
+      const recursion = (k, arr, res) => {
+        if (k === 0) return results.push(res)
+        k--
+
+        while (arr.length) {
+          const num = arr.shift()
+          res.push(num)
+          recursion(k, [...arr], [...res])
+          res.pop()
+        }
+      }
+
+      recursion(k, arr, [])
+
+      return results
+    }
+
+    // 78. 子集
+
+    /**
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+    var subsets = function (nums) {
+
+    }
+
+
+
+
 
 
 
