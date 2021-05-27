@@ -1577,7 +1577,7 @@
 
     // 47. 全排列 II
 
-    /** 回溯与递归
+    /** 回溯与递归 + 剪枝
    * @param {number[]} nums
    * @return {number[][]}
    */
@@ -1634,7 +1634,7 @@
 
     // 77. 组合
 
-    /** 回溯与递归
+    /** 回溯与递归 + 变形回溯
    * @param {number} n
    * @param {number} k
    * @return {number[][]}
@@ -1655,6 +1655,7 @@
     // 1.第一层数组减少1个
     // 2.第二层数组每个节点减少1个
     // 3.总结规律：每次取值，数组都要减少一个
+    // 这里基本是这类题，我的万能模板 + 剪枝的更胜
     var combine = function (n, k) {
       let results = []
       let arr = new Array(n).fill(0).map((v, i) => i + 1)
@@ -1677,7 +1678,7 @@
 
     // 78. 子集
 
-    /**
+    /** 回溯与递归 + 变形回溯
    * @param {number[]} nums
    * @return {number[][]}
    */
@@ -1703,6 +1704,73 @@
 
       return results
     }
+
+    // 90. 子集 II
+
+    /**  回溯与递归 + 变形回溯 + 剪枝
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+
+   // 88ms,超85%
+    var subsetsWithDup = function (nums) {
+      let results = []
+
+      //debugger才得知4,1,4 不排序,会导致第二层开始，导致某些项不该继续递归但漏掉=>k为0添加到results
+      //此时是第一层到第二层的dup不会累计
+      nums.sort((a, b) => a - b) 
+      const recursion = (k, arr, res) => {
+        if (k === 0) return results.push(res)
+        let dup = new Set()
+        k--
+
+        while (arr.length) {
+          const num = arr.shift()
+          if (dup.has(num)) continue
+          else dup.add(num)
+          console.log(dup,num,arr)
+          res.push(num)
+          recursion(k, [...arr], [...res])
+          res.pop()
+        }
+      }
+
+      for (let i = 0; i <= nums.length; i++) {
+        recursion(i, [...nums], [])
+      }
+
+      return results
+    }
+
+
+    //另一种方式也要排序才行，但是效率差了很多 112ms，超12%
+    // var subsetsWithDup = function (nums) {
+    //   let results = []
+
+    //   nums.sort((a, b) => a - b)
+    //   const recursion = (k, arr, res) => {
+    //     if (k === 0) return results.push(res)
+    //     let dup = new Set()
+    //     k--
+
+    //     for (let i = 0; i < arr.length; i++) {
+    //       const num = arr[i]
+    //       if (dup.has(num)) continue
+    //       else dup.add(num)
+    //       const _arr = arr.slice(i+1)
+    //       res.push(num)
+    //       recursion(k, [..._arr], [...res])
+    //       res.pop()
+    //     }
+    //   }
+
+    //   for (let i = 0; i <= nums.length; i++) {
+    //     recursion(i, [...nums], [])
+    //   }
+
+    //   return results
+    // }
+
 
 
 
