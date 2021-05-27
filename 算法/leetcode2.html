@@ -1682,8 +1682,28 @@
    * @return {number[][]}
    */
     var subsets = function (nums) {
+      let results = []
+      let len = nums.length
 
+      const recursion = (k, arr, res) => {
+        if (k === 0) return results.push(res)
+        k--
+
+        while (arr.length) {
+          const num = arr.shift()
+          res.push(num)
+          recursion(k, [...arr], [...res])
+          res.pop()
+        }
+      }
+
+      for (let i = 0; i <= len; i++) {
+        recursion(i, [...nums], [])
+      }
+
+      return results
     }
+
 
 
 
