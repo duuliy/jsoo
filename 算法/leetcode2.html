@@ -1717,8 +1717,9 @@
       let results = []
 
       //debugger才得知4,1,4 不排序,会导致第二层开始，导致某些项不该继续递归但漏掉=>k为0添加到results
-      //此时是第一层到第二层的dup不会累计, 第二层横向也不会错, 但是网格组合就会有问题
-      //排序后相同的相连，不会出现414情况
+      // 414组合,第一层4和第一层4的第二层1，组合成4,1。第一层4和第二层的4也会组成4,4。第一层的1和第一层1和第二层4，组合成1,4。
+      // 排序后144, 第一层1和第二层的4，组合成1,4。第一层的1和第二层的第二个4组合之前，会被dup里面的第二层第一个4 continue出去。同理，第一层的4和第二层的4，组合成4，4.
+      // 排序后相同的相连，不会出现414情况，因为第一层到第二层的dup不会累计，而第一层的res和第二层除开第一个数之后的数会组合。
       nums.sort((a, b) => a - b) 
       const recursion = (k, arr, res) => {
         if (k === 0) return results.push(res)
@@ -1729,6 +1730,7 @@
           const num = arr.shift()
           if (dup.has(num)) continue
           else dup.add(num)
+          console.log(k, dup,num)
           res.push(num)
           recursion(k, [...arr], [...res])
           res.pop()
