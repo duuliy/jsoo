@@ -1665,9 +1665,9 @@
 
         while (arr.length) {
           const num = arr.shift()
-          res.push(num)
-          recursion(k, [...arr], [...res])
-          res.pop()
+          // res.push(num)
+          recursion(k, [...arr], [...res, num])
+          // res.pop()
         }
       }
 
@@ -1692,9 +1692,9 @@
 
         while (arr.length) {
           const num = arr.shift()
-          res.push(num)
-          recursion(k, [...arr], [...res])
-          res.pop()
+          // res.push(num)
+          recursion(k, [...arr], [...res, num])
+          // res.pop()
         }
       }
 
@@ -1720,7 +1720,7 @@
       // 414组合,第一层4和第一层4的第二层1，组合成4,1。第一层4和第二层的4也会组成4,4。第一层的1和第一层1和第二层4，组合成1,4。
       // 排序后144, 第一层1和第二层的4，组合成1,4。第一层的1和第二层的第二个4组合之前，会被dup里面的第二层第一个4 continue出去。同理，第一层的4和第二层的4，组合成4，4.
       // 排序后相同的相连，不会出现414情况，因为第一层到第二层的dup不会累计，而第一层的res和第二层除开第一个数之后的数会组合。
-      nums.sort((a, b) => a - b) 
+      nums.sort((a, b) => a - b)
       const recursion = (k, arr, res) => {
         if (k === 0) return results.push(res)
         let dup = new Set()
@@ -1730,10 +1730,9 @@
           const num = arr.shift()
           if (dup.has(num)) continue
           else dup.add(num)
-          console.log(k, dup,num)
-          res.push(num)
-          recursion(k, [...arr], [...res])
-          res.pop()
+          // res.push(num)
+          recursion(k, [...arr], [...res, num])
+          // res.pop()
         }
       }
 
@@ -1774,7 +1773,32 @@
     // }
 
 
+    // 39. 组合总和
 
+    /**
+   * @param {number[]} candidates
+   * @param {number} target
+   * @return {number[][]}
+   */
+
+    // 这题引入的新概念，之前的回溯模板不能解决, 找最小遍历例子，找到关键点
+    // 本层剪枝, 但是下一层的是上一层同样剪枝结果后的数组  关键点!!!
+    var combinationSum = function (candidates, target) {
+      let results = []
+
+      const recursion = (sum, curRes, index) => {
+        if (sum === target) return results.push(curRes)
+
+        for (let i = index; i < candidates.length; i++) {
+          if (sum + candidates[i] <= target) {
+            recursion(sum + candidates[i], [...curRes, candidates[i]], i)  // 这里是关键，每次从 i 开始
+          } else break
+        }
+      }
+
+      recursion(0, [], 0)
+      return results
+    }
 
 
 
