@@ -1808,8 +1808,23 @@
    * @return {number[][]}
    */
     var combinationSum2 = function (candidates, target) {
+      let results = []
 
+      const recursion = (arr, sum, curRes) => {
+        if (sum === target) return results.push(curRes)
+
+        while (arr.length) {
+          const num = arr.shift()
+          recursion([...arr], sum + num, [...curRes, num])
+        }
+      }
+
+      recursion(candidates, 0, [])
+
+      return results
     }
+
+    console.log(combinationSum2([2, 5, 2, 1, 2], 5))
 
 
 
