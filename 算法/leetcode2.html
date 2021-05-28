@@ -1782,7 +1782,7 @@
    */
 
     // 这题引入的新概念，之前的回溯模板不能解决, 找最小遍历例子，找到关键点
-    // 本层剪枝, 但是下一层的是上一层同样剪枝结果后的数组  关键点!!!
+    // 本层剪枝, 但是下一层的是上一层同样剪枝结果后的数组  关键点 垂直数组相等!!!
     var combinationSum = function (candidates, target) {
       let results = []
 
@@ -1791,8 +1791,8 @@
 
         for (let i = index; i < candidates.length; i++) {
           if (sum + candidates[i] <= target) {
-            recursion(sum + candidates[i], [...curRes, candidates[i]], i)  // 这里是关键，每次从 i 开始
-          } else break
+            recursion(sum + candidates[i], [...curRes, candidates[i]], i)  // 这里是关键，每次从 i 开始，既不能shift数组，也不能传完整数组
+          } else continue
         }
       }
 
@@ -1800,8 +1800,16 @@
       return results
     }
 
+    // 40. 组合总和 II
 
+    /**
+   * @param {number[]} candidates
+   * @param {number} target
+   * @return {number[][]}
+   */
+    var combinationSum2 = function (candidates, target) {
 
+    }
 
 
 
