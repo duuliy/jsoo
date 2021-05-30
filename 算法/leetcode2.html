@@ -1830,6 +1830,31 @@
       return results
     }
 
+    // 216. 组合总和 III
+    /**
+   * @param {number} k
+   * @param {number} n
+   * @return {number[][]}
+   */
+
+    //这种模版相对于arr.shift()更加灵活，多多体会并使用
+    var combinationSum3 = function (k, n) {
+      let results = []
+
+      const recursion = (index, sum, res) => {
+        if (sum > n || res.length > k) return void (0)
+        if (sum === n && res.length === k) return results.push(res)
+
+        for (let i = index; i <= 9; i++) {
+          recursion(i + 1, sum + i, [...res, i])
+        }
+      }
+
+      recursion(1, 0, [])
+      return results
+    }
+
+
 
 
 
