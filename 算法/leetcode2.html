@@ -1807,14 +1807,20 @@
    * @param {number} target
    * @return {number[][]}
    */
+
     var combinationSum2 = function (candidates, target) {
       let results = []
 
+      candidates.sort()
       const recursion = (arr, sum, curRes) => {
+        if (sum > target) return
         if (sum === target) return results.push(curRes)
+        let dup = new Set()
 
         while (arr.length) {
           const num = arr.shift()
+          if (dup.has(num)) continue  //排除横向的相同，但是向下的arr中没有排除同一个数，所以向下的arr第二个答案依然可以用重复的数
+          else dup.add(num)
           recursion([...arr], sum + num, [...curRes, num])
         }
       }
@@ -1824,7 +1830,6 @@
       return results
     }
 
-    console.log(combinationSum2([2, 5, 2, 1, 2], 5))
 
 
 
