@@ -1854,15 +1854,42 @@
       return results
     }
 
-    // 401. 二进制手表
+    // 79. 单词搜索
 
     /**
-   * @param {number} turnedOn
-   * @return {string[]}
+   * @param {character[][]} board
+   * @param {string} word
+   * @return {boolean}
    */
-    var readBinaryWatch = function (turnedOn) {
 
+   // 卧槽, 思维转化代码难
+    var exist = function (board, word) {
+      let boo = false
+      let row, col
+      const m = board.length
+      const n = board[0].length
+
+      const dfsCoordinate = (row, col, k) => {
+        if (row < 0 || col < 0 || row >= board.length || col >= board[0].length || board[row][col] !== word[k]) return false
+        if (k === word.length - 1) return boo=true
+        board[row][col] = '' // 标记下已经查找过的q
+        let res = dfsCoordinate(row - 1, col, k + 1) || dfsCoordinate(row + 1, col, k + 1) || dfsCoordinate(row, col - 1, k + 1) || dfsCoordinate(row, col + 1, k + 1)
+        board[row][col] = word[k]
+        return res
+      }
+
+
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+          if (board[i][j] === word[0]) {
+            dfsCoordinate(i,j,0)
+            if(boo) return boo
+          }
+        }
+      }
+      return boo
     }
+
 
 
 
