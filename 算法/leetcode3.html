@@ -288,10 +288,43 @@
    * @param {character[][]} board
    * @return {void} Do not return anything, modify board in-place instead.
    */
-    var solveSudoku = function (board) {
 
+    // 1-9
+    // 1. 横向不重复
+    // 2. 竖向不重复
+    // 3. 九宫格内不重复
+
+    var solveSudoku = function (board) {
+      let m= board.length
+      let n = board[0].length
+      
+      const getIsSudoku=(row, col, num)=>{
+
+        //1,2,3
+        if(true){
+          board[row][col]=num
+        }
+      }
+
+      const recursion = row => {
+        if (row === m) return
+        for (let col = 0; col < n; col++) {
+          if(!board[row][col]){
+            for (let i = 1; i <= 9; i++) {
+              getIsSudoku(row, col, i)
+            }
+          }
+        }
+      }
+
+      recursion(0)
+
+      return board
     }
 
+    const board = [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], [".", "9", "8", ".", ".", ".", ".", "6", "."], ["8", ".", ".", ".", "6", ".", ".", ".", "3"], ["4", ".", ".", "8", ".", "3", ".", ".", "1"], ["7", ".", ".", ".", "2", ".", ".", ".", "6"], [".", "6", ".", ".", ".", ".", "2", "8", "."], [".", ".", ".", "4", "1", "9", ".", ".", "5"], [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
+
+    console.log(solveSudoku(board))
 
 
 
