@@ -295,36 +295,51 @@
     // 3. 九宫格内不重复
 
     var solveSudoku = function (board) {
-      let m= board.length
+      let m = board.length
       let n = board[0].length
-      
-      const getIsSudoku=(row, col, num)=>{
 
-        //1,2,3
-        if(true){
-          board[row][col]=num
+      const getIsSudoku = (row, col, num) => {
+        for (let i = 0; i < m; i++) {
+          if (board[i][col] === num || board[row][i] === num) return false
         }
-      }
 
-      const recursion = row => {
-        if (row === m) return
-        for (let col = 0; col < n; col++) {
-          if(!board[row][col]){
-            for (let i = 1; i <= 9; i++) {
-              getIsSudoku(row, col, i)
-            }
+        const startRow = Math.floor(row / 3) * 3
+        const startCol = Math.floor(col / 3) * 3
+
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            if (board[startRow + i][startCol + j] === num) return false
           }
         }
+
+        return true
       }
 
-      recursion(0)
+      const recursion = (row, col) => {
+        if (col === n) {
+          row++
+          col = 0
+          if (row === m) return true
+        }
+        if (board[row][col] !== '.') return recursion(row, col + 1)
+
+        for (let i = 1; i <= 9; i++) {
+          if (!getIsSudoku(row, col, String(i))) continue
+          board[row][col] = String(i)
+          if(recursion(row, col + 1)){
+            return true  //基于board[row][col] = String(i), 成功数独则返回true
+          } else{
+            board[row][col] = '.'  //失败就还原
+          }
+        }
+        // return false  //根据题意  保证 输入数独仅有一个解，这里用不着false
+      }
+
+      recursion(0, 0)
 
       return board
     }
 
-    const board = [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], [".", "9", "8", ".", ".", ".", ".", "6", "."], ["8", ".", ".", ".", "6", ".", ".", ".", "3"], ["4", ".", ".", "8", ".", "3", ".", ".", "1"], ["7", ".", ".", ".", "2", ".", ".", ".", "6"], [".", "6", ".", ".", ".", ".", "2", "8", "."], [".", ".", ".", "4", "1", "9", ".", ".", "5"], [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
-
-    console.log(solveSudoku(board))
 
 
 
