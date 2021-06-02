@@ -192,6 +192,106 @@
       return res
     }
 
+    // 51. N 皇后
+
+    /**
+   * @param {number} n
+   * @return {string[][]}
+   */
+
+    // 1.row最多一个
+    // 2.col最多一个
+    // 3.斜线上最多1个
+
+    //推理等得到：对角线右上和左下的坐标和都为i+j, 对角线左上和右下的坐标差都为i-j
+    var solveNQueens = function (n) {
+      let results = []
+      let grid = new Array(n).fill('.').map(v => new Array(n).fill('.'))
+
+      const getIsQueuePosition = (row, col, grid) => {
+        const sum = row + col
+        const difference = row - col
+        for (let i = 0; i < row; i++) {
+          for (let j = 0; j < n; j++) {
+            if (grid[i][j] === 'Q' && (j == col || i + j === sum || i - j === difference)) {
+              return false
+            }
+          }
+        }
+        return true
+      }
+
+      const recursion = (row, grid) => {
+        if (row === n) {
+          //二维数组只能在这个改第一层
+          //如果最后在改, 第一层之间的grid下的子集会相互影响
+          const _grid = [...grid].map(v => v.join(''))
+          return results.push(_grid)
+        }
+        for (let col = 0; col < n; col++) {
+          if (getIsQueuePosition(row, col, [...grid])) {
+            grid[row][col] = 'Q'
+            recursion(row + 1, [...grid])
+            grid[row][col] = '.'
+          }
+        }
+      }
+
+      recursion(0, grid)
+      return results
+    }
+
+
+    // 52. N皇后 II
+
+    /**
+   * @param {number} n
+   * @return {number}
+   */
+    var totalNQueens = function (n) {
+      let num = 0
+      let grid = new Array(n).fill('.').map(v => new Array(n).fill('.'))
+
+      const getIsQueuePosition = (row, col, grid) => {
+        const sum = row + col
+        const difference = row - col
+        for (let i = 0; i < row; i++) {
+          for (let j = 0; j < n; j++) {
+            if (grid[i][j] === 'Q' && (j == col || i + j === sum || i - j === difference)) {
+              return false
+            }
+          }
+        }
+        return true
+      }
+
+      const recursion = (row, grid) => {
+        if (row === n) {
+          return num++
+        }
+        for (let col = 0; col < n; col++) {
+          if (getIsQueuePosition(row, col, [...grid])) {
+            grid[row][col] = 'Q'
+            recursion(row + 1, [...grid])
+            grid[row][col] = '.'
+          }
+        }
+      }
+
+      recursion(0, grid)
+      return num
+    }
+
+    // 37. 解数独
+
+    /**
+   * @param {character[][]} board
+   * @return {void} Do not return anything, modify board in-place instead.
+   */
+    var solveSudoku = function (board) {
+
+    }
+
 
 
 
