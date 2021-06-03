@@ -10,7 +10,7 @@
 
 <body>
   <script>
-   // 17. 电话号码的字母组合
+    // 17. 电话号码的字母组合
 
     /**  回溯与递归
    * @param {string} digits 
@@ -88,7 +88,27 @@
       recursion(digitsArr, [])
 
       return results
-    } 
+    }
+
+    // 120. 三角形最小路径和
+
+    /**  动规 
+   * @param {number[][]} triangle
+   * @return {number}
+   */
+
+    var minimumTotal = function (triangle) {
+      let len = triangle.length
+      if (!len) return 0
+      const dp = triangle[len - 1]
+
+      for (let i = len - 2; i >= 0; i--) {
+        for (let j = 0; j < triangle[i].length; j++) {
+          dp[j] = Math.min(dp[j], dp[j + 1]) + triangle[i][j]
+        }
+      }
+      return dp[0]
+    }
 
   </script>
 </body>
