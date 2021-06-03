@@ -97,6 +97,8 @@
    * @return {number}
    */
 
+    // 自底向上，暴力遍历每位数，下层相连2位取小加本层i位（累计倒数第二层开始每i位符合的值），每层遍历后dp少一位，直到顶层只有一位。
+    // 最小模型原则
     var minimumTotal = function (triangle) {
       let len = triangle.length
       if (!len) return 0
