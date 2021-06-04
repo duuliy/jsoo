@@ -112,6 +112,44 @@
       return dp[0]
     }
 
+    // 1027. 最长等差数列
+
+    /**  动规
+   * @param {number[]} nums
+   * @return {number}
+   */
+
+    //1. 后一个减前一个得到差
+    //2. 同样差的最多次数的等差数列
+    // 从后往前求 dp 的规划数组，对于每一项都要求从本项开始，一直循环到结尾，记录每个相对每个值的差的等差数列长度。
+
+    var longestArithSeqLength = function (nums) {
+      let len = nums.length
+      if (!len) return 0
+
+      let max = 0
+      let dp = new Array(len).fill(0).map(v => ({ 0: 0 })) //每个差出现的次数, 最小为0
+
+      for (let i = len - 2; i >= 0; i--) {
+        for (let j = i + 1; j < len; j++) {  
+          const diff = nums[j] - nums[i]   //j长度下有哪些差
+          //以下和循环分开理解，双循环是找j长度下有哪些差
+          const diffLen = (dp[j][diff] || 0) + 1  //j长度下，相同的差个数（外循环增个数）
+          const maxIDiff = Math.max(dp[i][diff] || 0, diffLen)  //前一个dp[i]和的dp[j] j是i+1的递增 谁大
+          dp[i][diff] = maxIDiff
+          max = Math.max(max, maxIDiff)
+        }
+      }
+
+      return max + 1 //2个差3个数
+    }
+
+
+
+
+
+
+
   </script>
 </body>
 
