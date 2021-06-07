@@ -144,6 +144,39 @@
     }
 
 
+    // 300. 最长递增子序列
+
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+
+    //dp[0] = 1
+    //dp[1] = 1, 2
+    //dp[3] = 1,2,3,4
+    //dp[i+1] = dp[i](不要nums[i]) 或 dp[i]+1 (要nums[i])
+    //dp[i] = Math.max(dp[i], dp[j] + 1)  dp[j]取内循环中最大值
+    var lengthOfLIS = function (nums) {
+      let len = nums.length
+      if (!len) return 0
+      const dp = []
+
+      dp[0] = 1
+      for (let i = 1; i < len; i++) {
+        dp[i] = 1
+        for (let j = 0; j < i; j++) {
+          if (nums[i] > nums[j]) {
+            dp[i] = Math.max(dp[i], dp[j] + 1) 
+          }
+        }
+      }
+
+      return Math.max(...dp)
+    }
+
+
+
+
   </script>
 </body>
 
