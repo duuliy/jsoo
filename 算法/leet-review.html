@@ -167,12 +167,40 @@
         dp[i] = 1
         for (let j = 0; j < i; j++) {
           if (nums[i] > nums[j]) {
-            dp[i] = Math.max(dp[i], dp[j] + 1) 
+            dp[i] = Math.max(dp[i], dp[j] + 1)
           }
         }
       }
 
       return Math.max(...dp)
+    }
+
+    // 376. 摆动序列
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+
+    // 1.连续正负差，1个或2个不相等 都算摆动
+    // 2.包含0不算
+    // 3.求最长子序
+    // 不必强用动规
+    var wiggleMaxLength = function (nums) {
+      if (nums.length === 1) return 1
+
+      let prediff = nums[1] - nums[0]
+      let max = prediff === 0 ? 1 : 2
+
+
+      for (let i = 1; i < nums.length - 1; i++) {
+        const diff = nums[i + 1] - nums[i]
+        if ((diff > 0 && prediff <= 0) || (diff < 0 && prediff >= 0)) {
+          max++
+          prediff = diff
+        }
+      }
+
+      return max
     }
 
 
