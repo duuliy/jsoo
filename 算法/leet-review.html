@@ -191,7 +191,6 @@
       let prediff = nums[1] - nums[0]
       let max = prediff === 0 ? 1 : 2
 
-
       for (let i = 1; i < nums.length - 1; i++) {
         const diff = nums[i + 1] - nums[i]
         if ((diff > 0 && prediff <= 0) || (diff < 0 && prediff >= 0)) {
@@ -201,6 +200,42 @@
       }
 
       return max
+    }
+
+    // 1143. 最长公共子序列
+    /**  动规
+   * @param {string} text1
+   * @param {string} text2
+   * @return {number}
+   */
+
+    //  以dp[i][j]结尾的的字符串网格公共子序列的个数
+    var longestCommonSubsequence = function (text1, text2) {
+      let len1 = text1.length
+      let len2 = text2.length
+
+      let dp = new Array(len1).fill(1).map(v => new Array(len2).fill(0))
+      const helper = (i, j) => {
+        if (i === len1 || j === len2) {
+          return 0
+        }
+
+        if (dp[i][j] !== 0) {//减少遍历次数
+          return dp[i][j]
+        }
+
+        if (text1.charAt(i) === text2.charAt(j)) {
+          dp[i][j] = 1 + helper(i + 1, j + 1)
+        } else {
+          dp[i][j] = Math.max(
+            helper(i + 1, j),
+            helper(i, j + 1)
+          )
+        }
+        return dp[i][j]
+      }
+
+      return helper(0, 0)
     }
 
 
