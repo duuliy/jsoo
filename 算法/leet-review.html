@@ -330,7 +330,24 @@
    * @return {number}
    */
     var findContentChildren = function (g, s) {
-      
+      let result = 0
+      let glen = g.length
+      let slen = s.length
+      const _g = g.sort((a, b) => a - b)
+      const _s = s.sort((a, b) => a - b)
+      let gIndex = 0
+      let sIndex = 0
+
+      while (gIndex < glen && sIndex < slen) {
+        if (_s[sIndex] >= _g[gIndex]) {
+          result++
+          sIndex++
+          gIndex++
+        } else {
+          sIndex++
+        }
+      }
+      return result
     }
 
 
