@@ -240,7 +240,7 @@
 
     // 474. 一和零 (01背包变种)
 
-    /**
+    /** 动规
    * @param {string[]} strs
    * @param {number} m
    * @param {number} n
@@ -295,6 +295,44 @@
       }
       return dp[m][n][len - 1]
     }
+
+    // 494. 目标和
+    /** 递归和回溯
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number}
+   */
+
+    var findTargetSumWays = function (nums, target) {
+      let len = nums.length - 1
+      let result = 0
+
+      const sum = (count, index) => {
+        if (index === len) {
+          if (count === target) result++
+          return
+        }
+        index++
+        sum(count - nums[index], index)
+        sum(count + nums[index], index)
+      }
+
+      sum(nums[0], 0)
+      sum(-nums[0], 0)
+
+      return result
+    }
+
+    // 455. 分发饼干
+    /**
+   * @param {number[]} g
+   * @param {number[]} s
+   * @return {number}
+   */
+    var findContentChildren = function (g, s) {
+      
+    }
+
 
 
 
