@@ -350,6 +350,42 @@
       return result
     }
 
+    // 435. 无重叠区间
+
+    /**
+   * @param {number[][]} intervals
+   * @return {number}
+   */
+    var eraseOverlapIntervals = function (intervals) {
+      let result = 0
+      const isOverlap = (i, j) => {
+        console.log(i, j)
+        let [a, b] = intervals[i]
+        let [c, d] = intervals[j]
+
+        if (b > c || b > d) {
+          let k = b > d ? i : j // 哪个区间大就删哪个, 由于排过序, 相等也删除的后面那个
+          intervals.splice(k, 1)
+          return true
+        }
+
+      }
+
+      intervals.sort((a, b) => a[0] - b[0])
+      for (let i = 0; i < intervals.length-1; i++) {
+        if (isOverlap(i, i + 1)) {
+          result++
+          i--
+        }
+      }
+
+      return result
+    }
+
+
+
+
+
 
 
 
