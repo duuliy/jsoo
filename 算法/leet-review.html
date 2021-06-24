@@ -371,7 +371,7 @@
       }
 
       intervals.sort((a, b) => a[0] - b[0])
-      for (let i = 0; i < intervals.length-1; i++) {
+      for (let i = 0; i < intervals.length - 1; i++) {
         if (isOverlap(i, i + 1)) {
           result++
           i--
@@ -380,6 +380,34 @@
 
       return result
     }
+
+    //  392. 判断子序列
+
+    /**
+   * @param {string} s
+   * @param {string} t
+   * @return {boolean}
+   */
+    //题目设定了t>s
+    var isSubsequence = function (s, t) {
+      let i = 0
+      let j = 0
+
+      while (i < s.length && j < t.length) {
+        if (s[i] === t[j]) {
+          i++
+          j++
+        } else {
+          j++
+        }
+      }
+      if(i=== s.length){
+        return true
+      }else{
+        return false
+      }
+    }
+
 
 
 
