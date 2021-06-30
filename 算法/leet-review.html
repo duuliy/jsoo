@@ -409,16 +409,50 @@
     }
 
     // 139. 单词拆分
-    /**
-   * @param {string} s
+    /** 动规和递归
+   * @param {string} s 
    * @param {string[]} wordDict
    * @return {boolean}
    */
 
-    //dp=
-    var wordBreak = function (s, wordDict) {
-      let dp=[]
+    const wordBreak = (s, wordDict) => {
+      const len = s.length;
+      const wordSet = new Set(wordDict);
+
+      const canBreak = (start) => {
+        if (start == len) {
+          return true;  
+        }
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i);   
+          if (wordSet.has(prefix) && canBreak(i)) {
+            return true;
+          } 
+        }
+        return false; 
+      }
+
+      return canBreak(0);
     }
+
+    // dp[i] = dp[j] && wordDict.has(s.substring(j, i))
+    var wordBreak = function (s, wordDict) {
+        if (!s || !s.length || !wordDict) return false;
+        wordSet = new Set(wordDict);
+        const dp = [...Array(s.length + 1)].map(i => false);
+        dp[0] = true;
+        for (let i = 1; i <= s.length; ++i) {
+          for (let j = 0; j < i; ++j) {
+            if (dp[j] && wordSet.has(s.substring(j, i))) {
+              dp[i] = true;
+              break;
+            }
+          }
+        }
+        return dp[s.length];
+      }
+
+
 
 
 
