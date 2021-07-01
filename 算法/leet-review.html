@@ -415,33 +415,39 @@
    * @return {boolean}
    */
 
-    const wordBreak = (s, wordDict) => {
-      const len = s.length;
+  //  "bb"
+  //   ["a", "b", "bbb", "bbbb"]
+  // 这题有点坑，这样是true，wordDict可以只用一部分。
+
+    var wordBreak = (s, wordDict) => {
+      const len = s.length
       const wordSet = new Set(wordDict);
 
-      const canBreak = (start) => {
+      const canBreak = start => {
         if (start == len) {
-          return true;  
+          return true; 
         }
         for (let i = start + 1; i <= len; i++) {
-          const prefix = s.slice(start, i);   
+          const prefix = s.slice(start, i);  
           if (wordSet.has(prefix) && canBreak(i)) {
-            return true;
+            return true
           } 
         }
-        return false; 
+        return false
       }
 
       return canBreak(0);
     }
 
-    // dp[i] = dp[j] && wordDict.has(s.substring(j, i))
+    // dp[i]  ==> 0到i是否能被拆分
+    // dp[i] = dp[j] && wordDict.has(s.substring(j, i)) ==> dp[j]为wordDict.has(s.substring(j, i)) 剩下的部分
     var wordBreak = function (s, wordDict) {
-        if (!s || !s.length || !wordDict) return false;
+        let len= s.length
+        if (!s || !len || !wordDict) return false;
         wordSet = new Set(wordDict);
-        const dp = [...Array(s.length + 1)].map(i => false);
+        const dp = [...Array(len + 1)].map(i => false);
         dp[0] = true;
-        for (let i = 1; i <= s.length; ++i) {
+        for (let i = 1; i <= len; ++i) {
           for (let j = 0; j < i; ++j) {
             if (dp[j] && wordSet.has(s.substring(j, i))) {
               dp[i] = true;
@@ -449,7 +455,7 @@
             }
           }
         }
-        return dp[s.length];
+        return dp[len];
       }
 
 
