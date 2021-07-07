@@ -415,9 +415,9 @@
    * @return {boolean}
    */
 
-  //  "bb"
-  //   ["a", "b", "bbb", "bbbb"]
-  // 这题有点坑，这样是true，wordDict可以只用一部分。
+    //  "bb"
+    //   ["a", "b", "bbb", "bbbb"]
+    // 这题有点坑，这样是true，wordDict可以只用一部分。
 
     //超时但正确
     var wordBreak = (s, wordDict) => {
@@ -426,13 +426,13 @@
 
       const canBreak = start => {
         if (start == len) {
-          return true; 
+          return true;
         }
         for (let i = start + 1; i <= len; i++) {
-          const prefix = s.slice(start, i);  
+          const prefix = s.slice(start, i);
           if (wordSet.has(prefix) && canBreak(i)) {
             return true
-          } 
+          }
         }
         return false
       }
@@ -443,25 +443,58 @@
     // dp[i]  ==> 0到i是否能被拆分
     // dp[i] = dp[j] && wordDict.has(s.substring(j, i)) ==> dp[j]为wordDict.has(s.substring(j, i)) 剩下的部分
     var wordBreak = function (s, wordDict) {
-        let len= s.length
-        if (!s || !len || !wordDict) return false;
-        wordSet = new Set(wordDict);
-        const dp =[]
-        dp[0] = true;
-        for (let i = 1; i <= len; ++i) {
-          for (let j = 0; j < i; ++j) {
-            if (!!dp[j] && wordSet.has(s.substring(j, i))) {
-              dp[i] = true;
-              break;
-            }
+      let len = s.length
+      if (!s || !len || !wordDict) return false;
+      wordSet = new Set(wordDict);
+      const dp = []
+      dp[0] = true;
+      for (let i = 1; i <= len; ++i) {
+        for (let j = 0; j < i; ++j) {
+          if (!!dp[j] && wordSet.has(s.substring(j, i))) {
+            dp[i] = true;
+            break;
           }
         }
-        return !!dp[len]
+      }
+      return !!dp[len]
+    }
+
+    // 17.13.恢复空格
+    /**
+   * @param {string[]} dictionary
+   * @param {string} sentence
+   * @return {number}
+   */
+
+    //dp[i] ===> 0-i 有多少个
+    //dp[i]=Math.min(dp[i-1]+1,dp[i-dictionary[j].length])
+    var respace = function (dictionary, sentence) {
+      let slen = sentence.length
+      let dp = [0]
+
+      for (let i = 1; i <= slen; i++) {
+        let min = dp[i - 1] + 1
+        for (let word of dictionary) {
+          if (sentence.substring(i - word.length, i) === word) {
+            min = Math.min(min, dp[i - word.length])
+          }
+        }
+        dp[i] = min
       }
 
+      return dp[slen]
+    }
 
 
+    // 212. 单词搜索 II
+    /**
+   * @param {character[][]} board
+   * @param {string[]} words
+   * @return {string[]}
+   */
+    var findWords = function (board, words) {
 
+    }
 
 
 
