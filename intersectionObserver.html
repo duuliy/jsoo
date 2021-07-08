@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>intersectionObserver可视窗口监听</title>
+  <style>
+    .wrap {
+      width: 100px;
+      height: 200px;
+      overflow-y: auto;
+      border: 1px solid red;
+    }
+
+    .cont {
+      width: 100px;
+      height: 300px;
+    }
+
+    .cont footer {
+      margin-top: 280px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class='wrap'>
+    <div class='cont'>
+      456
+      <footer class='scrollerFooter'>
+        底部
+      </footer>
+    </div>
+  </div>
+  <script>
+    var intersectionObserver = new IntersectionObserver(
+      function (entries) {
+        // 如果不可见，就返回
+        if (entries[0].intersectionRatio <= 0) return;
+        console.log('可见加载更多');
+      });
+
+    // 开始观察
+    intersectionObserver.observe(
+      document.querySelector('.scrollerFooter')
+    );
+
+    // // 开始观察
+    // intersectionObserver.observe(document.getElementById('example'));
+
+  //   // 停止观察
+  //   intersectionObserver.unobserve(element);
+
+  //   // 关闭观察器
+  //   intersectionObserver.disconnect();
+
+  </script>
+</body>
+
+</html>
