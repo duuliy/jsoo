@@ -460,7 +460,7 @@
     }
 
     // 17.13.恢复空格
-    /**
+    /**  动规
    * @param {string[]} dictionary
    * @param {string} sentence
    * @return {number}
@@ -487,14 +487,54 @@
 
 
     // 212. 单词搜索 II
-    /**
-   * @param {character[][]} board
-   * @param {string[]} words
-   * @return {string[]}
-   */
-    var findWords = function (board, words) {
+    /**  递归和回溯
+     * @param {character[][]} board
+     * @param {string[]} words
+     * @return {string[]}
+     */
 
+    //暴力。 前缀树可以优化以后看
+    var findWords = function (board, words) {
+      const clen = board.length
+      const rlen = board[0].length
+      let results = new Set()
+
+      const helper = (col, row, word, index) => {
+        if (!word[index]) {
+          results.add(word)
+        }
+        if (col < 0 || col >= clen || row < 0 || row >= rlen) {
+          return
+        }
+        const target = board[col][row]
+        if (target === word[index]) {
+          board[col][row] = '-'
+          helper(col + 1, row, word, index + 1)
+          helper(col - 1, row, word, index + 1)
+          helper(col, row + 1, word, index + 1)
+          helper(col, row - 1, word, index + 1)
+          board[col][row] = target
+        }
+      }
+
+      const getInitCoord = word => {
+        for (let i = 0; i < clen; i++) {
+          for (let j = 0; j < rlen; j++) {
+            if (board[i][j] === word[0]) {
+              helper(i, j, word, 0)
+            }
+          }
+        }
+      }
+
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i]
+        const coord = getInitCoord(word)
+      }
+
+      return [...results]
     }
+
 
 
 
