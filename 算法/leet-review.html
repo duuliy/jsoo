@@ -537,7 +537,68 @@
 
 
 
+    // 140. 单词拆分 II
 
+    /**  递归和动规
+   * @param {string} s
+   * @param {string[]} wordDict
+   * @return {string[]}
+   */
+
+    //超时但正确
+    var wordBreak = (s, wordDict) => {
+      let results = [], result = ''
+      const len = s.length
+      const wordSet = new Set(wordDict);
+
+      const canBreak = start => {
+        if (start == len) {
+          results.push(result.trim())
+          result = ''
+        }
+        for (let i = start + 1; i <= len; i++) {
+          const prefix = s.slice(start, i);
+          const boo = wordSet.has(prefix)
+          boo && (result += prefix + ' ')
+          if (boo && canBreak(i)) {
+            return true
+          }
+        }
+        return false
+      }
+
+      canBreak(0)
+      return results
+    }
+
+    //动规
+    var wordBreak = function (s, wordDict) {
+      const uniq = (arr) => Array.from(new Set(arr))
+
+      let uniqSChars = uniq(s.split(""))
+      let uniqWordDictChars = uniq(wordDict.join(""))
+      //去重s大于wordDict去重, 一定不能分割
+      if (uniqSChars.length > uniqWordDictChars.length) return []
+      
+      const len = s.length
+      const wordSet = new Set(wordDict);
+      const dp = []
+      dp[0] = ['']
+      for (let i = 1; i <= len; ++i) {
+        let res = []
+        for (let j = 0; j < i; ++j) {
+          const str = s.substring(j, i)
+          const boo = wordSet.has(str)
+          if (boo && dp[j] && dp[j].length) {
+            for (let prev of dp[j]) {
+              res.push(prev ? prev + " " + str : str)
+            }
+          }
+        }
+        dp[i] = res
+      }
+      return dp[len]
+    }
 
 
 
