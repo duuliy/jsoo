@@ -579,7 +579,7 @@
       let uniqWordDictChars = uniq(wordDict.join(""))
       //去重s大于wordDict去重, 一定不能分割
       if (uniqSChars.length > uniqWordDictChars.length) return []
-      
+
       const len = s.length
       const wordSet = new Set(wordDict);
       const dp = []
@@ -600,6 +600,41 @@
       return dp[len]
     }
 
+    // 240. 搜索二维矩阵 II
+
+    /**  双指针
+   * @param {number[][]} matrix
+   * @param {number} target
+   * @return {boolean}
+   */
+    var searchMatrix = function (matrix, target) {
+      const col = matrix.length - 1
+      const row = matrix[0].length - 1
+
+      const isBoo = rMatrix => {
+        let rLeft = 0, rRight = row
+        while (rLeft <= rRight) {
+          if (rMatrix[rLeft] === target || rMatrix[rRight] === target) {
+            return true
+          } else {
+            rLeft++
+            rRight--
+          }
+        }
+      }
+
+      let cIndexArr = []
+      for (let i = 0; i <= col; i++) {
+        const rMatrix = matrix[i]
+        if ((rMatrix[0] <= target) && (rMatrix[row] >= target)) {
+          if (isBoo(rMatrix)) return true
+        } else if (rMatrix[0] > target) {
+          break
+        }
+      }
+
+      return false
+    }
 
 
 
