@@ -636,6 +636,30 @@
       return false
     }
 
+    // 203. 移除链表元素
+
+    /**  链表
+   * @param {ListNode} head
+   * @param {number} val
+   * @return {ListNode}
+   */
+
+    var removeElements = function (head, val) {
+      let virtual = {
+        next: head,
+      }
+      let current = virtual
+      while (current) {
+        if (current.next && current.next.val === val) {
+          current.next = current.next.next
+        }else{
+          current = current.next
+        }
+      }
+
+      return virtual.next
+    }
+
 
 
   </script>
