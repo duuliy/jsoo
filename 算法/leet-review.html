@@ -661,15 +661,46 @@
     }
 
     // 524. 通过删除字母匹配到字典里最长单词
-    /**
-   * @param {string} s
-   * @param {string[]} dictionary
-   * @return {string}
-   */
+    /** 双指针
+     * @param {string} s
+     * @param {string[]} dictionary
+     * @return {string}
+     */
+
     var findLongestWord = function (s, dictionary) {
+      let result = ''
 
+      const isFindWord=str=>{
+        let sIndex=0; strIndex=0;
+
+        while(s[sIndex]){
+          if(s[sIndex]=== str[strIndex]){
+            sIndex++
+            strIndex++
+          }else{
+            sIndex++
+          }
+        }
+        return strIndex=== str.length
+      }
+
+      for (let i = 0; i < dictionary.length; i++) {
+        const str = dictionary[i]
+
+        if (result.length > str.length) {
+          continue
+        }
+
+        if (result.length === str.length && str > result) {
+          continue
+        }
+
+        if (isFindWord(str)) {
+          result= str
+        }
+      }
+      return result
     }
-
 
 
   </script>
