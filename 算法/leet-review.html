@@ -444,10 +444,10 @@
     // dp[i] = dp[j] && wordDict.has(s.substring(j, i)) ==> dp[j]为wordDict.has(s.substring(j, i)) 剩下的部分
     var wordBreak = function (s, wordDict) {
       let len = s.length
-      if (!s || !len || !wordDict) return false;
-      wordSet = new Set(wordDict);
+      if (!s || !len || !wordDict) return false
+      wordSet = new Set(wordDict)
       const dp = []
-      dp[0] = true;
+      dp[0] = true
       for (let i = 1; i <= len; ++i) {
         for (let j = 0; j < i; ++j) {
           if (!!dp[j] && wordSet.has(s.substring(j, i))) {
@@ -670,18 +670,18 @@
     var findLongestWord = function (s, dictionary) {
       let result = ''
 
-      const isFindWord=str=>{
-        let sIndex=0; strIndex=0;
+      const isFindWord = str => {
+        let sIndex = 0; strIndex = 0;
 
-        while(s[sIndex]){
-          if(s[sIndex]=== str[strIndex]){
+        while (s[sIndex]) {
+          if (s[sIndex] === str[strIndex]) {
             sIndex++
             strIndex++
-          }else{
+          } else {
             sIndex++
           }
         }
-        return strIndex=== str.length
+        return strIndex === str.length
       }
 
       for (let i = 0; i < dictionary.length; i++) {
@@ -696,10 +696,52 @@
         }
 
         if (isFindWord(str)) {
-          result= str
+          result = str
         }
       }
       return result
+    }
+
+    // 17.15.最长单词
+
+    /** 动规
+   * @param {string[]} words
+   * @return {string}
+   */
+    var longestWord = function (words) {
+      const wordBreak = (s, wordDict) => {
+        let len = s.length
+        if (!s || !len || !wordDict) return false
+        wordSet = new Set(wordDict)
+        const dp = []
+        dp[0] = true;
+        for (let i = 1; i <= len; ++i) {
+          for (let j = 0; j < i; ++j) {
+            if (!!dp[j] && wordSet.has(s.substring(j, i))) {
+              dp[i] = true
+              break
+            }
+          }
+        }
+        return !!dp[len]
+      }
+
+      words.sort((a, b) => {
+        let diff = b.length - a.length
+        if (diff !== 0) {
+          return diff
+        } else {
+          return a < b ? -1 : 1
+        }
+      })
+      for (let i = 0; i < words.length; i++) {
+        let word = words[i]
+        let rest = words.slice(0, i).concat(words.slice(i + 1))
+        if (wordBreak(word, rest)) {
+          return word
+        }
+      }
+      return ''
     }
 
 
