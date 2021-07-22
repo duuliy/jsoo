@@ -744,6 +744,61 @@
       return ''
     }
 
+    // 1306. 跳跃游戏 III
+    /**  bfs
+     * @param {number[]} arr
+     * @param {number} start
+     * @return {boolean}
+     */
+
+    // 不用bfs数据大的让你超时,QAQ
+    var canReach = function (arr, start) {
+      let result = false
+      let maxlen = arr.length
+
+      const helper = (start, visited) => {
+        visited[start] = true
+        const indexVal = arr[start]
+        if (indexVal === 0) {
+          result = true
+          return
+        }
+
+        const addVal = start + indexVal
+        const deleteVal = start - indexVal
+
+        if (addVal < maxlen && !visited[addVal]) helper(addVal, [...visited])
+        if (deleteVal > -1 && !visited[deleteVal]) helper(deleteVal, [...visited])
+        return
+      }
+
+      helper(start, [])
+      return result
+    }
+
+    var canReach = function (arr, start) {
+      let n = arr.length
+      let visited = []
+      let queue = [start]
+      while (queue.length) {
+        let index = queue.pop()
+        let val = arr[index]
+        if (val === 0) {
+          return true
+        }
+        let left = index - val
+        let right = index + val
+        if (left >= 0 && !visited[left]) {
+          queue.push(left)
+        }
+        if (right < n && !visited[right]) {
+          queue.push(right)
+        }
+        visited[index] = true
+      }
+      return false
+    }
+
 
   </script>
 </body>
