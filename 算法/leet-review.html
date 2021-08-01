@@ -846,7 +846,7 @@
       let m = matrix.length
       let n = matrix[0].length
       const dp = new Array(m).fill(0).map(() => new Array(n).fill(0))
-      let max = 0 
+      let max = 0
       //处理边界
       for (let i = 0; i < m; i++) {
         if (matrix[i][0] === '1') {
@@ -871,6 +871,39 @@
         }
       }
       return max * max
+    }
+
+    // 560. 和为K的子数组
+    /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number}
+   */
+    //超时
+    var subarraySum = function (nums, k) {
+      let result = 0
+      let len = nums.length
+
+      for (let i = 0; i < len; i++) {
+        let count = 0
+        for (let j = i; j < len; j++) {
+          count += nums[j]
+          if (count === k) {
+            result++
+          }
+        }
+      }
+
+      return result
+    }
+
+    // 1219. 黄金矿工
+    /**
+   * @param {number[][]} grid
+   * @return {number}
+   */
+    var getMaximumGold = function (grid) {
+
     }
 
 
