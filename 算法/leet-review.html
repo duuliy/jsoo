@@ -897,14 +897,34 @@
       return result
     }
 
-    // 1219. 黄金矿工
-    /**
-   * @param {number[][]} grid
-   * @return {number}
+    // 784. 字母大小写全排列
+    /** 递归与回溯
+   * @param {string} s
+   * @return {string[]}
    */
-    var getMaximumGold = function (grid) {
+    var letterCasePermutation = function (s) {
+      const resluts = []
+      const helper = (prev, rest) => {
+        if (prev.length === s.length) {
+          resluts.push(prev)
+          return
+        }
+        let char = rest[0]
+        const nextRest = rest.substring(1)
+        if ((char - 0) == char) {
+          helper(prev + char, nextRest)
+        } else {
+          const str = char.toUpperCase()
+          const _str = char.toLowerCase()
+          helper(prev + str, nextRest)
+          helper(prev + _str, nextRest)
+        }
+      }
 
+      helper('', s)
+      return resluts
     }
+
 
 
   </script>
