@@ -150,21 +150,20 @@
     // console.log(getCompressStr('aabbbcccccg'))
 
     //6.因式分解
-    const fenjie = num => {
-      let Arr = []
-      const list = new Array(Math.ceil(num / 2)).fill(1).map((v, i) => i + 2)
+    const fenjie = totle => {
+      const Arr = []
+      const len= Math.ceil(totle / 2)
 
-      const fn = (num) => {
-        for (let i = 0; i < list.length; i++) {
-          if (!(num % list[i])) {
-            Arr.push(list[i])
-            return fn(num / list[i])
+      const helper = (totle) => {
+        for (let i = 2; i < len; i++) {
+          if (!(totle % i)) {
+            Arr.push(i)
+            return helper(totle / i)
           }
         }
       }
 
-      fn(num)
-
+      helper(totle)
       return Arr
     }
 

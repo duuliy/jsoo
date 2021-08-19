@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var combine = function (n, k) {
+      const results = []
+      let arr = new Array(n).fill(0).map((v, i) => i + 1)
+
+      const helper = (arr, res) => {
+        if (res.length === k) {
+          results.push(res)
+        }
+        const len = arr.length
+
+        while(arr.length){
+          res.push(arr.shift())
+           helper([...arr], [...res])
+          res.pop()
+        }
+      }
+      helper(arr, [])
+      return results
+    }
+
+    console.log(combine(1,1))
+
+  </script>
+</body>
+
+</html>

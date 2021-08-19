@@ -1672,6 +1672,25 @@
       return results
     }
 
+    var combine = function (n, k) {
+        const results = []
+        let arr = new Array(n).fill(0).map((v, i) => i + 1)
+
+        const helper = (arr, res) => {
+          if (res.length === k) {
+            results.push(res)
+          }
+          const len = arr.length
+
+          while (arr.length) {
+            const num = arr.shift()
+            helper([...arr], [...res, num])
+          }
+        }
+        helper(arr, [])
+        return results
+      }
+
     // 78. 子集
 
     /** 回溯与递归 + 变形回溯
