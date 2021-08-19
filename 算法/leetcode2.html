@@ -1673,23 +1673,23 @@
     }
 
     var combine = function (n, k) {
-        const results = []
-        let arr = new Array(n).fill(0).map((v, i) => i + 1)
+      const results = []
+      let arr = new Array(n).fill(0).map((v, i) => i + 1)
 
-        const helper = (arr, res) => {
-          if (res.length === k) {
-            results.push(res)
-          }
-          const len = arr.length
-
-          while (arr.length) {
-            const num = arr.shift()
-            helper([...arr], [...res, num])
-          }
+      const helper = (arr, res) => {
+        if (res.length === k) {
+          results.push(res)
         }
-        helper(arr, [])
-        return results
+        const len = arr.length
+
+        while (arr.length) {
+          const num = arr.shift()
+          helper([...arr], [...res, num])
+        }
       }
+      helper(arr, [])
+      return results
+    }
 
     // 78. 子集
 
@@ -1905,6 +1905,61 @@
       return boo
     }
 
+    // 207. 课程表
+
+    /** 拓扑排序(了解)
+     * @param {number} numCourses
+     * @param {number[][]} prerequisites
+     * @return {boolean}
+     */
+
+     //构建有向无环图
+    class Graph {
+      constructor(noOfVertices) {
+        this.noOfVertices = noOfVertices; // 顶点数量
+        this.adjList = new Map(); // 邻接表
+      }
+
+      // 增加顶点
+      addVertex(v) {
+        this.adjList.set(v, []);
+      }
+
+      // 增加单向边
+      addEdge(v, w) {
+        this.adjList.get(v).push(w);
+      }
+
+      dfs() {
+        const visited = Array(this.noOfVertices).fill(false);
+        const vertices = this.adjList.keys();
+        console.log(vertices)
+        for (let v of vertices) {
+          if (!this.dfsUntil(v, visited)) return false;
+        }
+        return true;
+      }
+      dfsUntil(v, visited) {
+        if (visited[v]) return false
+        visited[v] = true
+
+        const neighs = this.adjList.get(v);
+        for (let neigh of neighs) {
+          if (!this.dfsUntil(neigh, visited)) return false;
+        }
+        visited[v] = false;
+        return true;
+      }
+    }
+
+    var canFinish = function (numCourses, prerequisites) {
+      var g = new Graph(numCourses)
+      for (var i = 0; i < numCourses; i++) {
+        g.addVertex(i)
+      }
+      prerequisites.forEach(([i, j]) => g.addEdge(i, j))
+      return g.dfs()
+    }
 
 
 

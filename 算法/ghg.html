@@ -10,27 +10,7 @@
 
 <body>
   <script>
-    var combine = function (n, k) {
-      const results = []
-      let arr = new Array(n).fill(0).map((v, i) => i + 1)
 
-      const helper = (arr, res) => {
-        if (res.length === k) {
-          results.push(res)
-        }
-        const len = arr.length
-
-        while(arr.length){
-          res.push(arr.shift())
-           helper([...arr], [...res])
-          res.pop()
-        }
-      }
-      helper(arr, [])
-      return results
-    }
-
-    console.log(combine(1,1))
 
   </script>
 </body>
