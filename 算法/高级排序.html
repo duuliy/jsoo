@@ -83,19 +83,20 @@
     //时间复杂度O(n log n)
     //空间复杂度O(log n)
     //以中间一个数为基数，分成左右，最大的排右边，无限执行此操作，最后剩余2个为一组，再合并数组
-    //阮一峰的快速算法，暴涨了空间复杂度，是因为用了splice，增加了额外内存，直接用arr[n]取值即可。。
+    //阮一峰的快速算法，暴涨了空间复杂度，是因为用了splice和concat,增加了额外内存。。
     //直接看代码还是很好理解
 
 
-    //直观打印
-    function qSort3(arr) {
-      if (arr.length == 0) {
-        return [];
+    //阮直观打印
+    function quickSort(arr) {
+      if (arr.length <= 1) {
+        return arr;
       }
       var left = [];
       var right = [];
-      var pivot = arr[0];
-      for (var i = 1; i < arr.length; i++) {  //每次循环把pivot放到正确的下标位置，越往后循环直接减半
+      const pivotIndex = Math.floor(arr.length / 2)
+      const pivot = arr.splice(pivotIndex, 1)[0]
+      for (var i = 0; i < arr.length; i++) {  //每次循环把pivot放到正确的下标位置，越往后循环直接减半
         console.log(" 基准值：" + pivot + " 当前元素：" + arr[i]);
         if (arr[i] < pivot) {
           console.log(" 移动 " + arr[i] + " 到左边 ");
@@ -105,7 +106,7 @@
           right.push(arr[i]);
         }
       }
-      return qSort3(left).concat(pivot, qSort3(right));
+      return quickSort(left).concat(pivot, quickSort(right));
     }
     var a = [];
     for (var i = 0; i < 10; ++i) {
@@ -113,7 +114,34 @@
     }
     console.log(a);
     console.log();
-    console.log(qSort3(a));
+    console.log(quickSort(a));
+
+    //节约了空间，但时间更长
+    var quickSort_New = function (arr, left, right) {
+      if (left >= right) return arr
+      var i = left, j = right, base = arr[left]
+
+      while (i < j) {
+        // 从右边起，寻找比基数小的数
+        while (i < j && arr[j] >= base) {
+          j--
+        }
+        if (i < j) arr[i] = arr[j]
+
+        // 从左边起，寻找比基数大的数
+        while (i < j && arr[i] <= base) {
+          i++
+        }
+        if (i < j) arr[j] = arr[i]
+
+      }
+
+      arr[i] = base;
+      quickSort_New(arr, left, i - 1)
+      quickSort_New(arr, i + 1, right)
+
+      return arr
+    }
 
 
     /*----------------------------------------------堆排序 ------------------------------------------------*/
