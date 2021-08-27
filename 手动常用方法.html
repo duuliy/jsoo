@@ -11,7 +11,7 @@
 <body>
   <button onclick='test(5555)'>按钮</button>
   <script>
-    const test =(val) => {
+    const test = (val) => {
       console.log(val)
     }
     //***********************实现一个new操作符***********************************/ 
@@ -104,7 +104,7 @@
       content.fn = this;
       let args = [...arguments].slice(1);
       let result = content.fn(...args);
-      delete content.fn; 
+      delete content.fn;
       return result;
     }
     var foo = {
@@ -112,10 +112,10 @@
     }
 
     function bar(name, age) {
-      this.name=name
-      this.age=age
+      this.name = name
+      this.age = age
     }
-    bar.call2( foo, 'black', '18' ) 
+    bar.call2(foo, 'black', '18')
     console.log(foo) // black 18 1
     // 一样效果
     // foo.fn=bar
@@ -228,8 +228,17 @@
       }
     }
 
+    //***********************实现一个reduce***********************************/ 
+    Array.prototype.reduce = function (fn, init) {
+      var arr = this   // this就是调用reduce方法的数组
+      var total = init || arr[0]   // 有初始值使用初始值
+      // 有初始值的话从0遍历， 否则从1遍历
+      for (var i = init ? 0 : 1; i < arr.length; i++) {
+        total = fn(total, arr[i], i, arr)
+      }
+      return total
+    }
 
-    
   </script>
 </body>
 
