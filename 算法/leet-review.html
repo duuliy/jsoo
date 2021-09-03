@@ -926,6 +926,66 @@
       return resluts
     }
 
+    // 718. 最长重复子数组
+
+    /** 动规比暴力难想,
+     * 吃亏：数组子串不能includes
+   * @param {number[]} nums1
+   * @param {number[]} nums2
+   * @return {number}
+   */
+
+    //暴力优化
+    var findLength = function (nums1, nums2) {
+      const len1 = nums1.length
+      const len2 = nums2.length
+      let max = 0
+
+      const getMaxLength = (i, j, index) => {
+        while (i + index < len1 && j + index < len2 && nums1[i + index] === nums2[j + index]) {
+          index++
+        }
+        return index
+      }
+
+      for (let i = 0; i < len1; i++) {
+        if (max > len1 - i) break; // 提前跳出
+        for (let j = 0; j < len2; j++) {
+          if (max > len2 - j) break; // 提前跳出
+          if (nums1[i] === nums2[j]) {
+            const _max = getMaxLength(i, j, 1)
+            if (_max > max) max = _max
+          }
+        }
+      }
+
+      return max
+    }
+
+    //动规
+    // dp[i][j] = dp[i + 1][j + 1] + 1 ,i和j起步往后数有多少位共有数组
+    var findLength = function (nums1, nums2) {
+      let dp = [], max = 0
+      const len1 = nums1.length
+      const len2 = nums2.length
+
+      for (let i = 0; i <=len1; i++) {
+        dp[i] = new Array(len2+1).fill(0);
+      }
+
+      for (let i = len1 - 1; i >= 0; i--) {
+        for (let j = len2 - 1; j >= 0; j--) {
+          if (nums1[i] === nums2[j]) {
+            dp[i][j] = dp[i + 1][j + 1] + 1
+            max = Math.max(max, dp[i][j])
+          }
+        }
+      }
+
+      return max
+    }
+
+
 
 
   </script>
