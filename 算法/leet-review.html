@@ -969,8 +969,8 @@
       const len1 = nums1.length
       const len2 = nums2.length
 
-      for (let i = 0; i <=len1; i++) {
-        dp[i] = new Array(len2+1).fill(0);
+      for (let i = 0; i <= len1; i++) {
+        dp[i] = new Array(len2 + 1).fill(0);
       }
 
       for (let i = len1 - 1; i >= 0; i--) {
@@ -979,6 +979,43 @@
             dp[i][j] = dp[i + 1][j + 1] + 1
             max = Math.max(max, dp[i][j])
           }
+        }
+      }
+
+      return max
+    }
+
+    // 1219. 黄金矿工
+
+    /**  回溯与递归
+ * @param {number[][]} grid
+ * @return {number}
+ */
+    //时间太多, 有点low，考虑cache.delete的形式做优化
+    var getMaximumGold = function (grid) {
+      const col = grid.length
+      const row = grid[0].length
+      let max = 0
+
+      const isBoundary = (i, j) => !(i < 0 || i >= col || j < 0 || j >= row)
+
+      const helper = (i, j, _max, cache) => {
+        cache = new Map(cache)
+        let isEnd = true
+        _max += grid[i][j]
+        cache.set(`${i}` + `${j}`, grid[i][j])
+
+        if (isBoundary(i + 1, j) && !cache.get(`${i + 1}` + `${j}`) && grid[i + 1][j] !== 0) (isEnd = false, helper(i + 1, j, _max, [...cache]))
+        if (isBoundary(i, j + 1) && !cache.get(`${i}` + `${j + 1}`) && grid[i][j + 1] !== 0) (isEnd = false, helper(i, j + 1, _max, [...cache]))
+        if (isBoundary(i - 1, j) && !cache.get(`${i - 1}` + `${j}`) && grid[i - 1][j] !== 0) (isEnd = false, helper(i - 1, j, _max, [...cache]))
+        if (isBoundary(i, j - 1) && !cache.get(`${i}` + `${j - 1}`) && grid[i][j - 1] !== 0) (isEnd = false, helper(i, j - 1, _max, [...cache]))
+
+        if (isEnd && _max > max) max = _max
+      }
+
+      for (let i = 0; i < col; i++) {
+        for (let j = 0; j < row; j++) {
+          if (grid[i][j] !== 0) helper(i, j, 0, [])
         }
       }
 
