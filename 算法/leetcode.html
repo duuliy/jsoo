@@ -634,7 +634,7 @@
     // 先用快慢指针的手法，让我们知道这个链表的中点是哪，然后从中点截断
     // 然后截断成为两个链表，把后面的链表翻转
     // 最后依次去判断这两个链表每一项是否相同
-    
+
     // 关键点：如何从中点截断这个链表, 方法如下，
     // 让一个指针每次走一步，另一个指针每次走两步，这样他们每次走的倍数就相差2倍。
     // 另一个指正到头时，第一个指针为中间。
@@ -649,7 +649,7 @@
       }
       prev.next = null;  // 断成两个链表
 
-       // 翻转后半段
+      // 翻转后半段
       let head2 = null;
       while (slow) {
         const tmp = slow.next;
@@ -658,7 +658,7 @@
         slow = tmp;
       }
 
-       // 比对
+      // 比对
       while (head && head2) {
         if (head.val != head2.val) {
           return false;
@@ -922,6 +922,21 @@
       root.right = sortedArrayToBST(nums.slice(mid + 1, n))
 
       return root
+    }
+
+    // 141. 环形链表
+    /** 环
+   * @param {ListNode} head
+   * @return {boolean}
+   */
+    var hasCycle = function (head) {
+      let traversingNode = head;
+      while (traversingNode) {
+        if (traversingNode.isVistitd) return true
+        traversingNode.isVistitd = true
+        traversingNode = traversingNode.next
+      }
+      return false;
     }
 
 
