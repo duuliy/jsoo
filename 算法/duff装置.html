@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>duff装置</title>
+</head>
+
+<body>
+  <script>
+    function test(num) {
+      var index = 0;
+      for (let i = 0; i < num; i++) {
+        index++
+      }
+      return index
+    }
+
+
+    //提高遍历效率duff(减少次数),有点像对撞指针
+    function test2(num) {
+      var index = 0;
+      var n=Math.ceil(num/8)
+      var caseTest= num%8
+      
+      do{
+        index++;
+        index++;
+        index++;
+        index++;
+        index++;
+        index++;
+        index++;
+        index++;
+      }while(--n>0)
+
+      return index
+    }
+  </script>
+</body>
+
+</html>
