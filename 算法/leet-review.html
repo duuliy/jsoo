@@ -1022,6 +1022,37 @@
       return max
     }
 
+    //优化后
+    var getMaximumGold = function (grid) {
+      const col = grid.length
+      const row = grid[0].length
+      let max = 0
+
+      const isBoundary = (i, j) => !(i < 0 || i >= col || j < 0 || j >= row) && grid[i][j] !== 0
+
+      const helper = (i, j, _max) => {
+        let isEnd = true, cache = grid[i][j]
+        _max += cache
+        grid[i][j] = 0
+
+        if (isBoundary(i + 1, j)) (isEnd = false, helper(i + 1, j, _max))
+        if (isBoundary(i, j + 1)) (isEnd = false, helper(i, j + 1, _max))
+        if (isBoundary(i - 1, j)) (isEnd = false, helper(i - 1, j, _max))
+        if (isBoundary(i, j - 1)) (isEnd = false, helper(i, j - 1, _max))
+        grid[i][j] = cache
+
+        if (isEnd && _max > max) max = _max
+      }
+
+      for (let i = 0; i < col; i++) {
+        for (let j = 0; j < row; j++) {
+          if (grid[i][j] !== 0) helper(i, j, 0)
+        }
+      }
+
+      return max
+    }
+
     // 62. 不同路径
     /**
    * @param {number} m
@@ -1062,13 +1093,11 @@
 
     // 980. 不同路径 III
 
-    /**
+    /**  回溯与递归
    * @param {number[][]} grid
    * @return {number}
    */
-    var uniquePathsIII = function (grid) {
 
-    }
 
 
 
