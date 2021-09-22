@@ -1097,6 +1097,55 @@
    * @param {number[][]} grid
    * @return {number}
    */
+    var uniquePathsIII = function (grid) {
+      let startI = 0
+      let startJ = 0
+      let totleZero = 0
+      const col = grid.length
+      const row = grid[0].length
+      let max = 0
+
+      for (let i = 0; i < col; i++) {
+        for (let j = 0; j < row; j++) {
+          if (grid[i][j] === 0) {
+            ++totleZero
+          }
+          if (grid[i][j] === 1) {
+            startI = i
+            startJ = j
+          }
+        }
+      }
+
+      const isBoundary = (i, j) => !(i < 0 || i >= col || j < 0 || j >= row) && ![-1, 1].includes(grid[i][j])
+
+      const helper = (i, j, totle) => {
+        let isChange = false
+
+        if (grid[i][j] === 2) {
+          if (totleZero === totle) {
+            max++
+          }
+          return
+        }
+
+        if (grid[i][j] === 0) {
+          isChange = true
+          totle++
+          grid[i][j] = -1
+        }
+
+        if (isBoundary(i + 1, j)) helper(i + 1, j, totle)
+        if (isBoundary(i, j + 1)) helper(i, j + 1, totle)
+        if (isBoundary(i - 1, j)) helper(i - 1, j, totle)
+        if (isBoundary(i, j - 1)) helper(i, j - 1, totle)
+        isChange && (grid[i][j] = 0)
+      }
+
+      helper(startI, startJ, 0)
+
+      return max
+    }
 
 
 
