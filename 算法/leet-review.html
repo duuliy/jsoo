@@ -1148,7 +1148,6 @@
     }
 
     // 931. 下降路径最小和
-
     /**  动态规划
    * @param {number[][]} matrix
    * @return {number}
@@ -1179,6 +1178,38 @@
       return Math.min(...dp[col - 1])
     }
 
+    // 73. 矩阵置零
+    /** 递归与回朔
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+
+    //比用数组存位置和标记-1效率更高
+    var setZeroes = function (matrix) {
+      const col = matrix.length
+      const row = matrix[0].length
+      const zeroCol = new Array(col).fill(false)
+      const zeroRow = new Array(row).fill(false)
+
+      for (let i = 0; i < col; i++) {
+        for (let j = 0; j < row; j++) {
+          if (matrix[i][j] === 0) {
+            zeroCol[i] = true
+            zeroRow[j] = true
+          }
+        }
+      }
+
+      for (let i = 0; i < col; i++) {
+        for (let j = 0; j < row; j++) {
+          if (zeroCol[i] || zeroRow[j]) {
+            matrix[i][j] = 0
+          }
+        }
+      }
+
+      return matrix
+    }
 
 
 
