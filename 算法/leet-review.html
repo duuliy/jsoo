@@ -1218,7 +1218,41 @@
    * @return {number[]}
    */
 
-   
+    //1.保存游过的所有位置。 2.上下左右找出空位·3.固定右下左上的顺序
+    var spiralOrder = function (matrix) {
+      let directIndex = 0
+      let count = 0 
+      const col = matrix.length
+      const row = matrix[0].length
+      const total = col * row
+      const result = []
+      const oldMatrix = new Array(col).fill(0).map(v => new Array(row).fill(false))
+      const isBoundary = (i, j) => !(i < 0 || i >= col || j < 0 || j >= row) && !oldMatrix[i][j]
+      const direct = [
+        [0, 1],
+        [1, 0],
+        [0, -1],
+        [-1, 0]
+      ]
+
+      const helper = (i, j) => {
+        count++
+        oldMatrix[i][j] = true
+        result.push(matrix[i][j])
+        if(count=== total) return
+        const _i = i + direct[directIndex][0]
+        const _j = j + direct[directIndex][1]
+        if(!isBoundary(_i, _j)){
+          directIndex === 3 ? (directIndex = 0) : directIndex += 1
+        }
+        i = i + direct[directIndex][0]
+        j = j + direct[directIndex][1]
+        helper(i, j)
+      }
+
+      helper(0, 0)
+      return result
+    }
 
 
 
