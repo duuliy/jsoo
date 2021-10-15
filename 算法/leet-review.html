@@ -1221,7 +1221,7 @@
     //1.保存游过的所有位置。 2.上下左右找出空位·3.固定右下左上的顺序
     var spiralOrder = function (matrix) {
       let directIndex = 0
-      let count = 0 
+      let count = 0
       const col = matrix.length
       const row = matrix[0].length
       const total = col * row
@@ -1239,10 +1239,10 @@
         count++
         oldMatrix[i][j] = true
         result.push(matrix[i][j])
-        if(count=== total) return
+        if (count === total) return
         const _i = i + direct[directIndex][0]
         const _j = j + direct[directIndex][1]
-        if(!isBoundary(_i, _j)){
+        if (!isBoundary(_i, _j)) {
           directIndex === 3 ? (directIndex = 0) : directIndex += 1
         }
         i = i + direct[directIndex][0]
@@ -1253,6 +1253,14 @@
       helper(0, 0)
       return result
     }
+
+    // 59. 螺旋矩阵 II
+
+    /**
+   * @param {number} n
+   * @return {number[][]}
+   */
+
 
 
 
