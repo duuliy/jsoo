@@ -1297,9 +1297,35 @@
    * @param {number} target
    * @return {number}
    */
+    // 1.使遍历的第一位数固定，用双指针确定剩下的2位数。2.不断更新最小差值得出解决
+    var threeSumClosest = function (nums, target) {
+      let diffMin = Infinity
+      let result
+      nums.sort((a, b) => a - b)
 
+      for (let i = 0; i < nums.length - 2; i++) {
+        let left = i + 1, right = nums.length - 1
 
+        while (right > left) {
+          const totle = nums[left] + nums[right] + nums[i]
+          const _diffMin = Math.abs(totle - target)
+          if (_diffMin < diffMin) {
+            diffMin = _diffMin
+            result = totle
+          }
 
+          if (totle > target) {
+            right--
+          } else if (totle < target) {
+            left++
+          } else {
+            return target
+          }
+        }
+      }
+
+      return result
+    }
 
 
   </script>
