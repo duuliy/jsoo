@@ -1333,7 +1333,34 @@
    * @param {number} high
    * @return {number[]}
    */
-    
+    //因为做了优化, 所以时间不长, 可以用'123456789', 滑动取值解题时间会更短
+    var sequentialDigits = function (low, high) {
+      const results = []
+      const minDigit = String(low).length
+      const maxDigit = String(high).length
+
+      const helper = (freq) => {
+        if (freq > maxDigit) return
+
+        for (let i = 1; i <= 10 - freq; i++) {
+          let str = String(i)
+          let index = 1
+          let j = i + 1
+          while (index < freq) {
+            index++
+            str += String(j)
+            j++
+          }
+          const num = Number(str)
+          if (num > high) return
+          if (num >= low && num <= high) results.push(num)
+        }
+        helper(freq += 1)
+      }
+
+      helper(minDigit)
+      return results
+    }
 
 
   </script>
