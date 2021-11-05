@@ -1369,7 +1369,27 @@
    * @return {number}
    */
 
-    
+    // 暴力超时
+    var lenLongestFibSubseq = function (arr) {
+      let max = 0
+      const len = arr.length
+      for (let i = 0; i < len - 2; i++) {
+        for (let j = i + 1; j < len - 1; j++) {
+          let n1 = arr[i]
+          let n2 = arr[j]
+          let count = 0;
+          let sum = n1 + n2;
+          while (arr.includes(sum)) {
+            n1 = n2;
+            n2 = sum;
+            sum = n1 + n2;
+            count += 1
+          }
+          if (max < count) max = count
+        }
+      }
+      return max < 1 ? 0 : max + 2
+    }
 
 
 
