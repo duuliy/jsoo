@@ -966,9 +966,19 @@
       return [...new Set(result)]
     }
 
+    //标签是递归，我递归个der
+    var divingBoard = function (shorter, longer, k) {
+      const result = []
+      if (k === 0) return []
+      if (shorter === longer) return [k * shorter]
+      for (let i = 0; i <= k; i++) {
+        const longerCount = k - i
+        const shorterCount = i
+        result.push(shorterCount * shorter + longerCount * longer)
+      }
 
-
-
+      return result
+    }
 
   </script>
 </body>
