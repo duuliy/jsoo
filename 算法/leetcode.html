@@ -939,6 +939,32 @@
       return false;
     }
 
+    // 跳水板
+
+    /**
+   * @param {number} shorter
+   * @param {number} longer
+   * @param {number} k
+   * @return {number[]}
+   */
+    //超时
+    var divingBoard = function (shorter, longer, k) {
+      const result = []
+      if (k === 0) return []
+      const helper = (k, totle) => {
+        if (k === 1) {
+          result.push(totle)
+          return
+        }
+        k--
+        helper(k, totle + shorter)
+        helper(k, totle + longer)
+      }
+
+      helper(k, shorter)
+      helper(k, longer)
+      return [...new Set(result)]
+    }
 
 
 
