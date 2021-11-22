@@ -1365,9 +1365,9 @@
     // 873. 最长的斐波那契子序列的长度
 
     /**
-   * @param {number[]} arr
-   * @return {number}
-   */
+     * @param {number[]} arr
+     * @return {number}
+     */
 
     // 暴力超时
     var lenLongestFibSubseq = function (arr) {
@@ -1391,6 +1391,53 @@
       return max < 1 ? 0 : max + 2
     }
 
+    var lenLongestFibSubseq = function (arr) {
+      const len = arr.length
+      const dp = Array.from({ length: len }, () => new Array(len).fill(2))
+      let res = 0
+
+      for (let i = 1; i < len; i++) {
+        for (let j = i + 1; j < len; j++) {
+          for (let k = 0; k < i; k++) {
+            if (arr[k] + arr[i] === arr[j]) {
+              dp[i][j] = Math.max(dp[k][i] + 1, dp[i][j])
+              res = Math.max(res, dp[i][j])
+            }
+          }
+        }
+      }
+      return res
+    }
+
+    // 72. 编辑距离
+    /** 困难
+     * @param {string} word1
+     * @param {string} word2
+     * @return {number}
+     */
+
+    //完全根据题意全遍历，然后+增删替，操作原数据得爆.
+    //转换思路，不完全根据题解，最后只求个数
+    var minDistance = function (word1, word2) {
+      const helper = (i, j) => {
+        // 因为递归传入的是上一次的(i -1, j - 1)，所以这里都需要 + 1
+        if (i === -1) return j + 1  // s1走完了，将s2剩下的插入s1,需要j + 1步
+        if (j === -1) return i + 1 // s2走完了，删除s1剩下的，需要i + 1步
+        if (word1[i] === word2[j]) {
+          // 什么都不做，i,j向前移动一位
+          return helper(i - 1, j - 1)
+        } else {
+          // 找出最小的
+          return Math.min(
+            helper(i, j - 1) + 1, // 插入，在word1[i]中插入和word2[j]一样的字符，相当于把word2向前移动1位，word1不动
+            helper(i - 1, j) + 1, // 删除，把word1[i]删除，相当于word1向前移动1位,word2不动
+            helper(i - 1, j - 1) + 1 // 替换操作，都向前移动1位
+          )
+        }
+      }
+      // 从后往前遍历，i, j 初始化指向最后一个索引
+      return helper(word1.length - 1, word2.length - 1)
+    }
 
 
   </script>
