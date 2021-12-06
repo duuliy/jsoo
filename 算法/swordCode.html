@@ -10,7 +10,35 @@
 
 <body>
   <script>
-    //后续忙完开始剑指
+    // 09. 用两个栈实现队列
+    var CQueue = function () {
+      this.stackA = []
+      this.stackB = []
+    }
+
+    /** 
+     * @param {number} value
+     * @return {void}
+     */
+    CQueue.prototype.appendTail = function (value) {
+      this.stackA.push(value)
+    }
+
+    /**
+     * @return {number}
+     */
+    CQueue.prototype.deleteHead = function () {
+      // 两个栈都没有元素
+      if (!this.stackA.length && !this.stackB.length) return -1;
+      // 删除栈没元素，从插入栈拿
+      if (!this.stackB.length) {
+        while (this.stackA.length) {
+          this.stackB.push(this.stackA.pop())
+        }
+      }
+      // 删除栈有元素，直接删
+      return this.stackB.pop()
+    }
   </script>
 </body>
 
