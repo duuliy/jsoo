@@ -616,6 +616,23 @@
       return prev
     }
 
+    //开心，自己的方法反转链表
+    var reverseList = function (head) {
+      let _curent = null
+      let curent = head
+
+      while (!!curent) {
+        const val = curent.val
+        curent = curent.next
+        const next = _curent
+        _curent = {
+          val,
+          next
+        }
+      }
+      return _curent
+    }
+
     // const obj={
     //   val: 1,
     //   next:{

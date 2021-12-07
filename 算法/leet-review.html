@@ -1365,9 +1365,9 @@
     // 873. 最长的斐波那契子序列的长度
 
     /**
-   * @param {number[]} arr
-   * @return {number}
-   */
+     * @param {number[]} arr
+     * @return {number}
+     */
 
     // 暴力超时
     var lenLongestFibSubseq = function (arr) {
@@ -1391,14 +1391,106 @@
       return max < 1 ? 0 : max + 2
     }
 
-    // 72. 编辑距离
-    /**
-   * @param {string} word1
-   * @param {string} word2
-   * @return {number}
-   */
-    var minDistance = function (word1, word2) {
+    var lenLongestFibSubseq = function (arr) {
+      const len = arr.length
+      const dp = Array.from({ length: len }, () => new Array(len).fill(2))
+      let res = 0
 
+      for (let i = 1; i < len; i++) {
+        for (let j = i + 1; j < len; j++) {
+          for (let k = 0; k < i; k++) {
+            if (arr[k] + arr[i] === arr[j]) {
+              dp[i][j] = Math.max(dp[k][i] + 1, dp[i][j])
+              res = Math.max(res, dp[i][j])
+            }
+          }
+        }
+      }
+      return res
+    }
+
+    // 72. 编辑距离
+    /** 困难
+     * @param {string} word1
+     * @param {string} word2
+     * @return {number}
+     */
+
+    //完全根据题意全遍历，然后+增删替，操作原数据得爆.
+    //转换思路，不完全根据题解，最后只求个数
+    var minDistance = function (word1, word2) {
+      const helper = (i, j) => {
+        // 因为递归传入的是上一次的(i -1, j - 1)，所以这里都需要 + 1
+        if (i === -1) return j + 1  // s1走完了，将s2剩下的插入s1,需要j + 1步
+        if (j === -1) return i + 1 // s2走完了，删除s1剩下的，需要i + 1步
+        if (word1[i] === word2[j]) {
+          // 什么都不做，i,j向前移动一位
+          return helper(i - 1, j - 1)
+        } else {
+          // 找出最小的
+          return Math.min(
+            helper(i, j - 1) + 1, // 插入，在word1[i]中插入和word2[j]一样的字符，相当于把word2向前移动1位，word1不动
+            helper(i - 1, j) + 1, // 删除，把word1[i]删除，相当于word1向前移动1位,word2不动
+            helper(i - 1, j - 1) + 1 // 替换操作，都向前移动1位
+          )
+        }
+      }
+      // 从后往前遍历，i, j 初始化指向最后一个索引
+      return helper(word1.length - 1, word2.length - 1)
+    }
+
+    //储存优化
+    var minDistance = function (word1, word2) {
+      // 建一个字典
+      const memo = new Map()
+      const dp = (i, j) => {
+        if (memo.has(i + '' + j)) return memo.get((i + '' + j))
+        if (i === -1) return j + 1  // s1走完了，将s2剩下的插入s1,需要j + 1步
+        if (j === -1) return i + 1 // s2走完了，删除s1剩下的，需要i + 1步
+        if (word1[i] === word2[j]) {
+          // 什么都不做，i,j向前移动一位
+          memo.set(i + '' + j, dp(i - 1, j - 1))
+        } else {
+          memo.set(i + '' + j, Math.min(
+            dp(i, j - 1) + 1, // 插入，在word1[i]中插入和word2[j]一样的字符，相当于把word2向前移动1位，word1不动
+            dp(i - 1, j) + 1, // 删除，把word1[i]删除，相当于word1向前移动1位,word2不动
+            dp(i - 1, j - 1) + 1 // 替换操作，都向前移动1位
+          ))
+        }
+        return memo.get(i + '' + j)
+      }
+      // 从后往前遍历，i, j 初始化指向最后一个索引
+      return dp(word1.length - 1, word2.length - 1)
+    }
+
+    //动规：dp[i][j] 表示以下标i-1为结尾的字符串word1，和以下标j-1为结尾的字符串word2，最近编辑距离为dp[i][j]。
+    function minDistance(word1, word2) {
+      const m = word1.length, n = word2.length;
+      // 我们要多添加一行一列，用来做base case
+      const dp = Array.from(Array(word1.length + 1), () => Array(word2.length + 1).fill(0));
+      // 添加一列，base case
+      for (let i = 1; i <= m; i++) {
+        dp[i][0] = i;
+      }
+      // 添加一行，base case
+      for (let i = 1; i <= n; i++) {
+        dp[0][i] = i;
+      }
+      // 因为我们补了一行/列base case,这里都从1开始
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          if (word1[i - 1] === word2[j - 1]) { // 相等，什么都不做
+            dp[i][j] = dp[i - 1][j - 1]
+          } else {
+            dp[i][j] = Math.min(
+              dp[i - 1][j] + 1, // s1删除操作
+              dp[i][j - 1] + 1, // s1插入操作
+              dp[i - 1][j - 1] + 1 // 替换
+            )
+          }
+        }
+      }
+      return dp[m][n]
     }
 
 

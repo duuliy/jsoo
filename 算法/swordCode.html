@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 09. 用两个栈实现队列
+    var CQueue = function () {
+      this.stackA = []
+      this.stackB = []
+    }
+
+    /** 
+     * @param {number} value
+     * @return {void}
+     */
+    CQueue.prototype.appendTail = function (value) {
+      this.stackA.push(value)
+    }
+
+    /**
+     * @return {number}
+     */
+    CQueue.prototype.deleteHead = function () {
+      // 两个栈都没有元素
+      if (!this.stackA.length && !this.stackB.length) return -1;
+      // 删除栈没元素，从插入栈拿
+      if (!this.stackB.length) {
+        while (this.stackA.length) {
+          this.stackB.push(this.stackA.pop())
+        }
+      }
+      // 删除栈有元素，直接删
+      return this.stackB.pop()
+    }
+
+    // 30. 包含min函数的栈
+
+    /**
+   * initialize your data structure here.
+   */
+    var MinStack = function () {
+      this.stack = []
+      this.minStack = []
+    }
+
+    /** 
+     * @param {number} x
+     * @return {void}
+     */
+    MinStack.prototype.push = function (x) {
+      this.stack.push(x)
+      if (!this.minStack.length || this.minStack[this.minStack.length - 1] >= x) {
+        this.minStack.push(x)
+      }
+    }
+
+    /**
+     * @return {void}
+     */
+    MinStack.prototype.pop = function () {
+      if (this.minStack[this.minStack.length - 1] === this.stack.pop()) {
+        this.minStack.pop()
+      }
+    }
+
+    /**
+     * @return {number}
+     */
+    MinStack.prototype.top = function () {
+      return this.stack[this.stack.length - 1]
+    }
+
+    /**
+     * @return {number}
+     */
+    MinStack.prototype.min = function () {
+      if (this.minStack.length == 0) {
+        return 1
+      }
+      return this.minStack[this.minStack.length - 1]
+    }
+
+
+
+  </script>
+</body>
+
+</html>
