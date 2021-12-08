@@ -87,6 +87,23 @@
       return this.minStack[this.minStack.length - 1]
     }
 
+    // 06. 从尾到头打印链表
+
+    /**
+   * @param {ListNode} head
+   * @return {number[]}
+   */
+   var reversePrint = function(head) {
+     let cur = head
+
+     while (cur) {
+       result.unshift(cur.val)
+       cur = cur.next
+     }
+
+     return result
+   }
+
 
 
   </script>
