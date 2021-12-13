@@ -63,7 +63,7 @@
     // console.log(sum55(2, 3, 4, 5));
     // console.log(sum55(2)(3)(4)(5));
 
-    //骚方法实现(看起来不错，实际跑不动):
+    //骚方法实现:
     const curry = fn => {
       const len = fn.length;
       const judge = (...args1) => args1.length >= len ?
@@ -73,6 +73,23 @@
 
     const plus = curry((a, b, c, d, e) => a + b + c + d + e);
     console.log(plus(1)(2)(3)(4)(5))
+    console.log(plus(1, 2, 3,4,5))
+
+    function curry3(fn) {
+      const length = fn.length
+      return function inner(...args) {
+        if (args.length >= length) {
+          return fn(...args)
+        } else {
+          return (...args2)=>inner(...[...args, ...args2])
+        }
+      }
+    }
+
+    const cur= curry3((a,b,c)=>a+b+c)
+    console.log(cur(1)(2)(3))
+    console.log(cur(1,2,3))
+
 
   </script>
 </body>
