@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拓展</title>
+</head>
+
+<body>
+  <script>
+    function PromiseAll(promiseArr) {
+      return new Promise((resolve, reject) => {
+        if (!Array.isArray(promiseArr)) {
+          return reject(new Error('只能传入数组'))
+        }
+        const len = promiseArr.length
+        const results = []
+        for (let i = 0; i < len; i++) {
+          const isPro = Object.prototype.toString.call(promiseArr[i]) === '[object Promise]'
+          //不是promise的的话包一层promise
+          const _promiseArr = isPro ? promiseArr[i] : Promise.resolve(promiseArr[i])
+          _promiseArr.then(res => {
+            const params = {
+              val: res,
+              order: i
+            }
+            results.push(params)
+
+            if (results.length === len) {
+              //需要按入参顺序返回
+              const _results = results.sort((a, b) => a.order - b.order).map(v => v.val)
+              resolve(_results)
+            }
+          })
+        }
+
+      })
+    }
+
+    const interface1 = new Promise((res, rej) => {
+      setTimeout(() => {
+        res(1)
+      }, 2000);
+    })
+
+    const interface2 = new Promise((res, rej) => {
+      setTimeout(() => {
+        res(2)
+      }, 1000);
+    })
+
+    const interface3 = new Promise((res, rej) => {
+      setTimeout(() => {
+        res(3)
+      }, 1000);
+    })
+
+    const fn4 = 4
+
+    const allResult = PromiseAll([interface1, interface2, interface3, fn4])
+      .then(res => {
+        console.log(res)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+
+
+  </script>
+</body>
+
+</html>
