@@ -103,13 +103,18 @@
       return result
     }
 
-    // 03.数组中重复的数字
+    // 53 - II. 0～n - 1中缺失的数字
+
     /**
    * @param {number[]} nums
    * @return {number}
    */
-    var findRepeatNumber = function (nums) {
-
+    var missingNumber = function (nums) {
+      nums.push('x')
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== i)
+          return i
+      }
     }
 
 
