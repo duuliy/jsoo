@@ -9,11 +9,12 @@
 </head>
 
 <body>
-  <button onclick='test(5555)'>按钮</button>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.11/lodash.js"></script>
+  <button onclick='test(55555555)'>按钮</button>
   <script>
-    const test = (val) => {
+    const test = throttle3((val) => {
       console.log(val)
-    }
+    }, 2000)
     //***********************实现一个new操作符***********************************/ 
     // 1.它创建了一个全新的对象。
     // 2.它会被执行 [[Prototype]]（也就是 __proto__）链接.
@@ -182,6 +183,7 @@
 
     // 可以理解为事件在一个管道中传输，加上这个节流阀以后，事件的流速就会减慢。
     // 实际上这个函数的作用就是如此，它可以将一个函数的调用频率限制在一定阈值内，例如 1s，那么 1s 内这个函数一定不会被调用两次
+    // 时间戳最后一次不打印
     function throttle(fn, wait) {
       let prev = 0;
       return function () {
@@ -190,6 +192,43 @@
         if (now - prev > wait) {
           fn.apply(this, args);
           prev = now; //关键步骤
+        }
+      }
+    }
+
+    //定时器最后一次打印，开始不打印
+    function throttle2(fn, delay) {
+      let timer = null
+      return function () {
+        const context = this
+        let args = arguments
+        console.log(timer)
+        if (!timer) {
+          timer = setTimeout(() => {
+            fn.apply(context, args)
+            clearTimeout(timer)
+            timer = null
+          }, delay)
+        }
+      }
+    }
+
+    //结合时间戳和定时器
+    function throttle3(fn, wait) {
+      let timer = null
+      let prev = 0
+
+      return function () {
+        const args = arguments
+        const that = this
+        const cur = Date.now()
+
+        clearTimeout(timer)
+        if (cur - prev > wait) {
+          fn.apply(this, args)
+          prev = cur
+        } else {
+          timer = setTimeout(() => fn.apply(that, args), wait)
         }
       }
     }
