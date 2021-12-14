@@ -169,7 +169,7 @@
 
     // console.log(fenjie(30))
 
-    //7.查找树路径 难
+    //7.查找树路径 
 
     const list = [
       { id: 6 },
@@ -290,6 +290,54 @@
     }
 
     // console.log(calcContinuousRanges([1, 2, 3, 5, 7, 8, 9, 11]))
+
+    // 42. 接雨水
+    /** 困难
+   * @param {number[]} height
+   * @return {number}
+   */
+    //按列求值
+    //暴力
+    var trap = function (height) {
+      let ans = 0
+      for(let i=0;i< height.length;i++){
+        let lMax = 0
+        let rMax = 0
+        for (let j = i; j >= 0; j--) {
+          lMax = Math.max(lMax, height[j])
+        }
+        for (let j = i; j < height.length; j++) {
+          rMax = Math.max(rMax, height[j])
+        }
+
+        res += Math.min(lMax, rMax) - height[i]
+      }
+      return ans
+    }
+
+    //双指针
+    var trap = function (height) {
+      let ans = 0
+      let left = 0, right = height.length - 1
+      let leftMax = 0, rightMax = 0
+      while (left < right) {
+        console.log(left,right)
+        leftMax = Math.max(leftMax, height[left])
+        rightMax = Math.max(rightMax, height[right])
+        if (leftMax < rightMax) {  //取矮的一边计算列的值，因为矮的一边决定能接多少
+          ans += leftMax - height[left]
+          left++
+        } else {
+          ans += rightMax - height[right]
+          right--
+        }
+      }
+      return ans
+    }
+
+
+    console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+
 
   </script>
 </body>
