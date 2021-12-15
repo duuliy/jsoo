@@ -170,6 +170,26 @@
       return false
     }
 
+    // 11. 旋转数组的最小数字
+
+    /**
+   * @param {number[]} numbers
+   * @return {number}
+   */
+    //二分
+    var minArray = function (numbers) {
+      let l = 0, r = numbers.length - 1
+
+      while (l < r) {
+        const mid = Math.floor((l + r) / 2)
+        if (numbers[mid] > numbers[r]) l = mid + 1
+        if (numbers[mid] < numbers[r]) r = mid
+        if(numbers[mid] === numbers[r])  r--
+      }
+      return numbers[l]
+    }
+
+
 
   </script>
 </body>
