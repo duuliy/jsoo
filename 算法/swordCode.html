@@ -124,10 +124,51 @@
      * @return {boolean}
      */
     var findNumberIn2DArray = function (matrix, target) {
+      if (!matrix.length) return false;
+      const colLen = matrix.length
+      const rowLen = matrix[0].length
+      let end = colLen - 1
 
+      for (let i = 0; i < colLen; i++) {
+        if (target < matrix[i][0]) {
+          end = i - 1
+          break
+        }
+        if (target === matrix[i][0]) {
+          return true
+        }
+      }
+
+      for (let i = 0; i <= end; i++) {
+        if (target <= matrix[i][rowLen - 1]) {
+          if (matrix[i].indexOf(target) !== -1) {
+            return true
+          }
+        }
+      }
+
+      return false
     }
 
-    
+    //从左下角开始找
+    var findNumberIn2DArray = function (matrix, target) {
+      if (!matrix.length) return false;
+      let l = matrix.length - 1
+      const rMax = matrix[0].length - 1
+      let r = 0
+
+      while (l >= 0 && r <= rMax) {
+        if (matrix[l][r] > target) {
+          l--
+        } else if (matrix[l][r] < target) {
+          r++
+        } else {
+          return true
+        }
+      }
+
+      return false
+    }
 
 
   </script>
