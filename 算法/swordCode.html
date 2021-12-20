@@ -181,13 +181,18 @@
       let l = 0, r = numbers.length - 1
 
       while (l < r) {
-        const mid = Math.floor((l + r) / 2)
-        if (numbers[mid] > numbers[r]) l = mid + 1
-        if (numbers[mid] < numbers[r]) r = mid
-        if(numbers[mid] === numbers[r])  r--
+        const mid = Math.floor((l + r) / 2) 
+        if (numbers[mid] > numbers[r]) {
+          l = mid + 1
+        }else if (numbers[mid] < numbers[r]){
+          r = mid
+        }else{
+          r--
+        }
       }
       return numbers[l]
     }
+
 
 
 
