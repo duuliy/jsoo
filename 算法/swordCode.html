@@ -201,13 +201,13 @@
      */
     var levelOrder = function (root) {
       if (!root) return []
-      let queue=[root]
-      let results=[]
+      let queue = [root]
+      let results = []
 
-      while(queue.length){
-        let len= queue.length
-        for(let i=0;i< len;i++){
-          const node= queue.shift()
+      while (queue.length) {
+        let len = queue.length
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
           results.push(node.val)
           node.left && queue.push(node.left)
           node.right && queue.push(node.right)
@@ -222,25 +222,51 @@
    * @param {TreeNode} root
    * @return {number[][]}
    */
-      var levelOrder = function (root) {
-        if (!root) return []
-        let queue = [root]
-        let results = []
+    var levelOrder = function (root) {
+      if (!root) return []
+      let queue = [root]
+      let results = []
 
-        while (queue.length) {
-          let len = queue.length
-          let result=[]
-          for (let i = 0; i < len; i++) {
-            const node = queue.shift()
-            result.push(node.val)
-            node.left && queue.push(node.left)
-            node.right && queue.push(node.right)
-          }
-          results.push(result)
+      while (queue.length) {
+        let len = queue.length
+        let result = []
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+          result.push(node.val)
+          node.left && queue.push(node.left)
+          node.right && queue.push(node.right)
         }
-        return results
+        results.push(result)
       }
+      return results
+    }
 
+    // 32 - III.从上到下打印二叉树 III
+    /**
+     * @param {TreeNode} root
+     * @return {number[][]}
+     */
+    var levelOrder = function (root) {
+      if (!root) return []
+      let queue = [root]
+      let results = []
+      let dir = true
+
+      while (queue.length) {
+        let len = queue.length
+        let result = []
+        for (let i = 0; i < len; i++) {
+          const node = queue.shift()
+          dir ? result.push(node.val) : result.unshift(node.val)
+          node.left && queue.push(node.left)
+          node.right && queue.push(node.right)
+
+        }
+        dir = !dir
+        results.push(result)
+      }
+      return results
+    }
 
 
   </script>
