@@ -268,6 +268,35 @@
       return results
     }
 
+    //  27. 二叉树的镜像
+
+    /**
+   * @param {TreeNode} root
+   * @return {TreeNode}
+   */
+    var mirrorTree = function (root) {
+      if (!root) return null
+
+      const left = mirrorTree(root.left)
+      const right = mirrorTree(root.right)
+      root.left = right
+      root.right = left
+      return root
+    }
+    var mirrorTree = function (root) {
+      const dfs=(node) =>{
+        if (node) {
+          [node.left, node.right] = [node.right, node.left]
+          node.left&&dfs(node.left)
+          node.right&&dfs(node.right)
+        }
+      }
+      dfs(root)
+      return root
+    }
+
+
+
 
   </script>
 </body>
