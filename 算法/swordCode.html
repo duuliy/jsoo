@@ -284,11 +284,11 @@
       return root
     }
     var mirrorTree = function (root) {
-      const dfs=(node) =>{
+      const dfs = (node) => {
         if (node) {
           [node.left, node.right] = [node.right, node.left]
-          node.left&&dfs(node.left)
-          node.right&&dfs(node.right)
+          node.left && dfs(node.left)
+          node.right && dfs(node.right)
         }
       }
       dfs(root)
@@ -297,6 +297,36 @@
 
     // 28. 对称的二叉树
     //参考leetcode
+
+    // 26. 树的子结构
+    /**
+   * @param {TreeNode} A
+   * @param {TreeNode} B
+   * @return {boolean}
+   */
+    //考虑dfs会匹配多次的情况，如果用单独的变量，会以最后一次为准
+    //所以只能动态helper的结果获得true,只要有一次，全局都是true
+    var isSubStructure = function (A, B) {
+      if (!B) return false
+      const valB = B.val
+
+      function dfs(node) {
+        if (!node) return false
+        if (node.val === valB && helper(node, B)) return true
+        return dfs(node.left) || dfs(node.right)
+      }
+
+      function helper(nodeA, nodeB) {
+        if (nodeA && nodeB) {
+          if (nodeA.val !== nodeB.val) return false
+          return helper(nodeA.left, nodeB.left) && helper(nodeA.right, nodeB.right)
+        }
+        if (!nodeA && nodeB) return false //只有左树没有，右树有才是false
+
+        return true
+      }
+      return dfs(A)
+    }
 
 
 
