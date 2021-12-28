@@ -306,6 +306,7 @@
    */
     //考虑dfs会匹配多次的情况，如果用单独的变量，会以最后一次为准
     //所以只能动态helper的结果获得true,只要有一次，全局都是true
+    //QAQ
     var isSubStructure = function (A, B) {
       if (!B) return false
       const valB = B.val
