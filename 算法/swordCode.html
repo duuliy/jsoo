@@ -343,6 +343,21 @@
       return dp[n]
     }
 
+    //  63. 股票的最大利润
+    /**
+     * @param {number[]} prices
+     * @return {number}
+     */
+    var maxProfit = function (prices) {
+      let dp = [0], min = prices[0], len = prices.length
+      if (len === 0) return 0
+      for (let i = 1; i < len; i++) {
+        min = Math.min(min, prices[i])
+        dp[i] = Math.max(prices[i] - min, dp[i - 1])
+      }
+      return dp[len - 1]
+    }
+
 
 
   </script>
