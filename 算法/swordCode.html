@@ -364,13 +364,33 @@
    * @return {number}
    */
     var maxSubArray = function (nums) {
-      let dp=[],len=nums.length
-      dp[0]=nums[0]
-      for(let i=1;i< len;i++){
-        dp[i]=Math.max(dp[i-1]+ nums[i], nums[i])
+      let dp = [], len = nums.length
+      dp[0] = nums[0]
+      for (let i = 1; i < len; i++) {
+        dp[i] = Math.max(dp[i - 1] + nums[i], nums[i])
       }
 
       return Math.max(...dp)
+    }
+
+
+    // 47. 礼物的最大价值
+    /**
+   * @param {number[][]} grid
+   * @return {number}
+   */
+    var maxValue = function (grid) {
+      let rowLen = grid[0].length, colLen = grid.length
+      let dp=new Array(colLen+1).fill(0).map(v=>new Array(rowLen+1).fill(0))
+
+      for (let i = 1; i <= colLen; i++) {
+        for (let j = 1; j <= rowLen; j++) {
+          const curVal= grid[i - 1][j - 1]
+          dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])+ curVal
+        }
+      }
+
+      return dp[colLen][rowLen]
     }
 
 
