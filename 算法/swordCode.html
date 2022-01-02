@@ -381,17 +381,67 @@
    */
     var maxValue = function (grid) {
       let rowLen = grid[0].length, colLen = grid.length
-      let dp=new Array(colLen+1).fill(0).map(v=>new Array(rowLen+1).fill(0))
+      let dp = new Array(colLen + 1).fill(0).map(v => new Array(rowLen + 1).fill(0))
 
       for (let i = 1; i <= colLen; i++) {
         for (let j = 1; j <= rowLen; j++) {
-          const curVal= grid[i - 1][j - 1]
-          dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])+ curVal
+          const curVal = grid[i - 1][j - 1]
+          dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]) + curVal
         }
       }
 
       return dp[colLen][rowLen]
     }
+
+    // 46. 把数字翻译成字符串
+
+    /**
+   * @param {number} num
+   * @return {number}
+   */
+    var translateNum = function (num) {
+      let nums = num.toString()
+      let n = nums.length
+      let dp = new Array(n)
+      dp[0] = 1
+      for (var i = 1; i < n; i++) {
+        if (nums[i - 1] == '2' && nums[i] < '6') {
+          dp[i] = dp[i - 1] + (i > 2 ? dp[i - 2] : 1)
+        }
+        else if (nums[i - 1] == '1') {
+          dp[i] = dp[i - 1] + (i > 2 ? dp[i - 2] : 1)
+        } else {
+          dp[i] = dp[i - 1]
+        }
+      }
+      return dp[n - 1]
+    }
+
+    // 48. 最长不含重复字符的子字符串
+
+    /**
+   * @param {string} s
+   * @return {number}
+   */
+    var lengthOfLongestSubstring = function (s) {
+      let len=s.length,max=0,l=0,r=0
+      const set = new Set()
+
+      while(r<len){
+        if(set.has(s[r])){
+          set.delete(s[l])
+          l++
+        }else{
+          set.add(s[r])
+          max = Math.max(max, r - l + 1)
+          r++
+        }
+      }
+
+      return max
+    }
+
+
 
 
 
