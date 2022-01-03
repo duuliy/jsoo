@@ -424,14 +424,14 @@
    * @return {number}
    */
     var lengthOfLongestSubstring = function (s) {
-      let len=s.length,max=0,l=0,r=0
+      let len = s.length, max = 0, l = 0, r = 0
       const set = new Set()
 
-      while(r<len){
-        if(set.has(s[r])){
+      while (r < len) {
+        if (set.has(s[r])) {
           set.delete(s[l])
           l++
-        }else{
+        } else {
           set.add(s[r])
           max = Math.max(max, r - l + 1)
           r++
@@ -439,6 +439,16 @@
       }
 
       return max
+    }
+
+    // 52. 两个链表的第一个公共节点
+    /**
+   * @param {ListNode} headA
+   * @param {ListNode} headB
+   * @return {ListNode}
+   */
+    var getIntersectionNode = function (headA, headB) {
+
     }
 
 
