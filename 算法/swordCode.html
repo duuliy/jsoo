@@ -464,6 +464,20 @@
       return null
     }
 
+    //浪漫相遇
+    // 如果链表一样长且有交点，则第一次遍历就能找到交点，返回
+    //   如果不一样长且有交点，则第二次遍历就能找到交点，返回
+    //   如果没有交点，则第二次遍历结束都是null，遍历结束，返回null
+    var getIntersectionNode = function (headA, headB) {
+      let rootA = headA, rootB = headB
+
+      while (rootA !== rootB) {
+        rootA = rootA ? rootA.next : headB
+        rootB = rootB ? rootB.next : headA
+      }
+
+      return rootA
+    }
 
 
 
