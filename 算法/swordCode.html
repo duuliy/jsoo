@@ -447,9 +447,23 @@
    * @param {ListNode} headB
    * @return {ListNode}
    */
+    //链表公共节点之后的值全都是相等,且长度相同
     var getIntersectionNode = function (headA, headB) {
+      const map = new Map()
+      let node = headA
+      while (node) {
+        map.set(node, true)
+        node = node.next
+      }
 
+      node = headB;
+      while (node) {
+        if (map.has(node)) return node
+        node = node.next
+      }
+      return null
     }
+
 
 
 
