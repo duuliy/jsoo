@@ -499,6 +499,30 @@
       return nums
     }
 
+    // 58 - I.翻转单词顺序
+    /**
+   * @param {string} s
+   * @return {string}
+   */
+    var reverseWords = function (s) {
+      s = s.trim().replace(/\s+/g, ' ').split(' ').reverse()
+      return s.join(' ')
+
+    }
+
+    var reverseWords = function (s) {
+        let arr = s.trim().replace(/\s+/g, ' ').split(' ')
+        let l = 0;
+        let r = arr.length - 1
+        while (l < r) {
+          [arr[l], arr[r]]=[arr[r], arr[l]]
+          l++
+          r--
+        }
+        return arr.join(' ')
+      }
+
+
 
 
 
