@@ -466,8 +466,8 @@
 
     //浪漫相遇
     // 如果链表一样长且有交点，则第一次遍历就能找到交点，返回
-    //   如果不一样长且有交点，则第二次遍历就能找到交点，返回
-    //   如果没有交点，则第二次遍历结束都是null，遍历结束，返回null
+    // 如果不一样长且有交点，则第二次遍历就能找到交点，返回
+    // 如果没有交点，则第二次遍历结束都是null，遍历结束，返回null
     var getIntersectionNode = function (headA, headB) {
       let rootA = headA, rootB = headB
 
@@ -477,6 +477,26 @@
       }
 
       return rootA
+    }
+
+    // 21. 调整数组顺序使奇数位于偶数前面
+    /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+    var exchange = function (nums) {
+      if (!nums || nums.length === 0) return nums
+      let left = 0, right = nums.length - 1
+
+      while (left !== right) {
+        if (nums[left] % 2 === 0) {
+          [nums[left], nums[right]] = [nums[right], nums[left]]
+          right--
+        } else {
+          left++
+        }
+      }
+      return nums
     }
 
 
