@@ -528,9 +528,37 @@
      * @param {string} word
      * @return {boolean}
     */
+   //超出时间限制 fack
     var exist = function (board, word) {
+      let isboo = false, colLen = board.length, rowLen = board[0].length, wlen = word.length
+      if (colLen === 0 && rowLen === 0) return
 
+      const helper = (col, row, index,) => {
+        if (row < 0 || col < 0 || row >= rowLen || col >= colLen || board[col][row] !== word[index]) return 
+        if (index === wlen - 1) return isboo = true
+        board[col][row]=''
+
+        helper(col + 1, row, index+1)
+        helper(col - 1, row, index+1)
+        helper(col, row + 1, index+1)
+        helper(col, row - 1, index+1)
+        board[col][row] = word[index]
+      }
+      helper(0, 0, 0)
+
+      for (let i = 0; i < colLen; i++) {
+        for (let j = 0; j < rowLen; j++) {
+          if (board[i][j] === word[0]) {
+            helper(i, j, 0)
+            if (isboo) return isboo
+          }
+        }
+      }
+
+      return isboo
     }
+
+
 
 
 
