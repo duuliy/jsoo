@@ -511,16 +511,26 @@
     }
 
     var reverseWords = function (s) {
-        let arr = s.trim().replace(/\s+/g, ' ').split(' ')
-        let l = 0;
-        let r = arr.length - 1
-        while (l < r) {
-          [arr[l], arr[r]]=[arr[r], arr[l]]
-          l++
-          r--
-        }
-        return arr.join(' ')
+      let arr = s.trim().replace(/\s+/g, ' ').split(' ')
+      let l = 0;
+      let r = arr.length - 1
+      while (l < r) {
+        [arr[l], arr[r]] = [arr[r], arr[l]]
+        l++
+        r--
       }
+      return arr.join(' ')
+    }
+
+    // 12. 矩阵中的路径
+    /**
+     * @param {character[][]} board
+     * @param {string} word
+     * @return {boolean}
+    */
+    var exist = function (board, word) {
+
+    }
 
 
 
