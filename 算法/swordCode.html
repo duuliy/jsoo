@@ -528,20 +528,20 @@
      * @param {string} word
      * @return {boolean}
     */
-   //超出时间限制 fack
+    //超出时间限制 fack
     var exist = function (board, word) {
       let isboo = false, colLen = board.length, rowLen = board[0].length, wlen = word.length
       if (colLen === 0 && rowLen === 0) return
 
       const helper = (col, row, index,) => {
-        if (row < 0 || col < 0 || row >= rowLen || col >= colLen || board[col][row] !== word[index]) return 
+        if (row < 0 || col < 0 || row >= rowLen || col >= colLen || board[col][row] !== word[index]) return
         if (index === wlen - 1) return isboo = true
-        board[col][row]=''
+        board[col][row] = ''
 
-        helper(col + 1, row, index+1)
-        helper(col - 1, row, index+1)
-        helper(col, row + 1, index+1)
-        helper(col, row - 1, index+1)
+        helper(col + 1, row, index + 1)
+        helper(col - 1, row, index + 1)
+        helper(col, row + 1, index + 1)
+        helper(col, row - 1, index + 1)
         board[col][row] = word[index]
       }
       helper(0, 0, 0)
@@ -556,6 +556,45 @@
       }
 
       return isboo
+    }
+
+    // 13. 机器人的运动范围
+
+    /**
+   * @param {number} m
+   * @param {number} n
+   * @param {number} k
+   * @return {number}
+   */
+    //是否k的计算方式（递归计算，是否要缓存）
+    //围绕k的几种情况的格子
+    //1.k大于m,n。最大mn
+    //2.等于
+    //3.小于=>利用计算获取
+
+    var movingCount = function (m, n, k) {
+      let count = 0
+      const grid = Array.from({ length: m }, () => new Array(n).fill(1))
+      const isArrive = (x, y) => {
+        let total = 0
+        for (let num of x + '' + y) {
+          total += +num
+        }
+        return total
+      }
+
+      const helper = (i, j) => {
+        if (i < 0 || j < 0 || i > m - 1 || j > n - 1 || grid[i][j] === 0 || isArrive(i, j)>k) return
+        count++
+        grid[i][j] = 0
+        helper(i + 1, j)
+        helper(i - 1, j)
+        helper(i, j + 1)
+        helper(i, j - 1)
+      }
+
+      helper(0, 0)
+      return count
     }
 
 
