@@ -623,16 +623,49 @@
     const kthLargest = (root, k) => {
       // 遍历顺序(访问右节点在前)：右-根-左
       const unInOrder = node => {
-        if (!node) return;
-        unInOrder(node.right);
-        res.push(node.val);
-        unInOrder(node.left);
+        if (!node) return
+        unInOrder(node.right)
+        res.push(node.val)
+        unInOrder(node.left)
       };
-      const res = [];
-      unInOrder(root, res);
+      const res = []
+      unInOrder(root, res)
       // 得到从大到小排序的数组
-      return res[k - 1];
-    };
+      return res[k - 1]
+    }
+
+    // 36. 二叉搜索树与双向链表
+    /**
+   * @param {Node} root
+   * @return {Node}
+   */
+    //左根右中序遍历，获取从小到大，然后转双链表
+    var treeToDoublyList = function (root) {
+     if (!root) return null
+      let head = null
+      let pre = null
+
+      function helper(node) {
+        if (!node) return
+        helper(node.left)
+
+        // 中序遍历
+        if (!pre) { 
+          head = node
+        } else {
+          pre.right = node
+          node.left = pre
+        }
+        pre = node
+        helper(node.right)
+      }
+      helper(root)
+
+      head.left = pre
+      pre.right = head
+      return head
+
+    }
 
 
 
