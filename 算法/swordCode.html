@@ -597,6 +597,45 @@
       return count
     }
 
+    // 54. 二叉搜索树的第k大节点
+    /**
+   * @param {TreeNode} root
+   * @param {number} k
+   * @return {number}
+   */
+    // 二叉搜索树 右根左从大到小，以此顺序遍历获得从大到小的排列的顺序,当k=0,获得目标值
+    var kthLargest = function (root, k) {
+      let node = root, res
+      const helper = (node) => {
+        if (!node) return
+        helper(node.right)
+        k--
+        if (k === 0) {
+          res = node.val
+          return
+        }
+        helper(node.left)
+      }
+      helper(node)
+      return res
+    }
+
+    const kthLargest = (root, k) => {
+      // 遍历顺序(访问右节点在前)：右-根-左
+      const unInOrder = node => {
+        if (!node) return;
+        unInOrder(node.right);
+        res.push(node.val);
+        unInOrder(node.left);
+      };
+      const res = [];
+      unInOrder(root, res);
+      // 得到从大到小排序的数组
+      return res[k - 1];
+    };
+
+
+
 
 
 
