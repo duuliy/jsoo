@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //最多2个请求同时并发
+    class Scheduler {
+      constructor(max) {
+        this.queue = []
+        this.max = max
+      }
+      async add(promiseCreator) {
+        this.queue.push(promiseCreator)
+      }
+
+      helper() {
+        if (!this.queue.length) return void (0)
+        this.queue.shift()().then(() => {
+          this.helper()
+        })
+      }
+
+      start() {
+        for (let i = 0; i < this.max; i++) {
+          this.helper()
+        }
+      }
+    }
+
+    const timeout = (time) => new Promise(resolve => setTimeout(resolve, time))
+    const scheduler = new Scheduler(2)
+    const addTask = (time, val) => {
+      scheduler.add(() => timeout(time).then(() => console.log(val)))
+    }
+
+    // addTask(1000, '1')
+    // addTask(500, '2')
+    // addTask(300, '3')
+    // addTask(400, '4')
+    // scheduler.start()
+
+
+    let queue = []
+    const limit = 2
+    let count = 0
+
+    const interface = (cont) => {
+      return () => new Promise((res, rej) => {
+        setTimeout(() => {
+          console.log(cont)
+          res()
+        }, 500)
+      })
+    }
+
+    const main = () => {
+      for (let i = 0; i < 10; i++) {
+        queue.push(interface(i))
+      }
+
+      const helper = () => {
+        // debugger
+        if (count > limit || !queue.length) return void (0)
+        count++
+        // console.log(queue.shift())
+        queue.shift()().then(() => {
+          count--
+          helper()
+        })
+      }
+
+      for (let i = 0; i < limit; i++) {
+        helper()
+      }
+
+    }
+
+    // main()
+
+    //上面的达到了效果但是总觉得有点讨巧,2根管道依次执行异步,也最简单。
+
+    const interface2 = (cont) => new Promise((res, rej) => {
+      setTimeout(() => {
+        res(cont)
+      }, 500)
+    })
+
+
+    const main2 = () => {
+      const helper = async (fn) => {
+        // debugger
+        if (count >= limit) {
+          await new Promise((resolve) => {
+            queue.push(resolve)
+          })
+        }
+        count++
+        await fn()
+        count--
+        console.log(queue)
+        if (queue.length > 0) {
+          queue.shift()()
+        }
+      }
+
+      //当第一个helper内部(上下文) await fn()没执行完，第二个helper就进入了,直到遍历完for
+      for (let i = 0; i < 10; i++) {
+        helper(() => {
+          return interface2(i).then(res => {
+            console.log(res)
+          })
+        })
+      }
+    }
+
+    main2()
+
+    //上面通过promise来控制异步，同步时,先执行前2个fn的setTimeOut，然后把queue加8个微任务。 当遍历完成，开始执行等待的队列上下文，顺序为:
+    //fn的then =>释放queue.shift()=>0=>fn的then =>释放queue.shift()=>1=> !!! 由于第三个开始要等待await newPromise的返回值，所以没在之前的
+    //队列里面执行fn的setTimeOut，所以这里要等待500ms才会打印2，由于i 0和1释放了2个queue里面的微任务queue.shift()() , 所以2和3中的2已经在0的时候
+    //执行了fn的setTimeOut, 然而0和1结束之后, 只需要等待3的fn的setTimeOut => 后续遍历依照上诉逻辑
+
+
+    class Scheduler {
+      constructor(maxNum) {
+        this.taskList = []
+        this.count = 0;
+        this.maxNum = maxNum
+      }
+      async add(promiseCreator) {
+        if (this.count >= this.maxNum) {
+          await new Promise((resolve) => {
+            this.taskList.push(resolve)
+          })
+        }
+        this.count++;
+        const result = await promiseCreator()
+        this.count--;
+        if (this.taskList.length > 0) {
+          this.taskList.shift()()
+        }
+        return result;
+      }
+    }
+
+    const timeout = (time) => new Promise(resolve => {
+      setTimeout(resolve, time)
+    })
+    const scheduler = new Scheduler(2)
+    const addTask = (time, val) => {
+      scheduler.add(() => {
+        return timeout(time).then(() => {
+          console.log(val)
+        })
+      })
+    }
+    addTask(1000, '1')
+    addTask(500, '2')
+    addTask(300, '3')
+    addTask(400, '4')
+
+
+  </script>
+</body>
+
+</html>
