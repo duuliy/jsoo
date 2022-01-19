@@ -687,6 +687,23 @@
     }
 
 
+    //  64. 求1 + 2 +…+n
+
+    /**
+   * @param {number} n
+   * @return {number}
+   */
+    //笑死了这个题
+    var sumNums = function (n) {
+      return new Array(n).fill(1).map((v,i)=>i+1).reduce((t,v)=>t+v)
+    }
+
+    var sumNums = function (n) {
+        // 用&&运算加递归
+        return n && n + sumNums(n - 1)
+    }
+
+
 
 
 
