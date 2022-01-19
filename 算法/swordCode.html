@@ -679,6 +679,12 @@
       return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
     }
 
+    var isBalanced = function (root) {
+      if (!root) return 1
+      const left = maxDepth(root.left)
+      const rigtht = maxDepth(root.right)
+      return Math.abs(left - rigtht) < 2 && isBalanced(root.left) && isBalanced(root.right)
+    }
 
 
 
