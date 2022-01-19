@@ -641,7 +641,7 @@
    */
     //左根右中序遍历，获取从小到大，然后转双链表
     var treeToDoublyList = function (root) {
-     if (!root) return null
+      if (!root) return null
       let head = null
       let pre = null
 
@@ -650,7 +650,7 @@
         helper(node.left)
 
         // 中序遍历
-        if (!pre) { 
+        if (!pre) {
           head = node
         } else {
           pre.right = node
@@ -666,6 +666,19 @@
       return head
 
     }
+
+    // 55 - II. 平衡二叉树
+
+    /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+    //二叉树最大深度
+    var maxDepth = function (root) {
+      if (!root) return 0;
+      return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
+    }
+
 
 
 
