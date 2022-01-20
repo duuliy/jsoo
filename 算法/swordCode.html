@@ -695,14 +695,38 @@
    */
     //笑死了这个题
     var sumNums = function (n) {
-      return new Array(n).fill(1).map((v,i)=>i+1).reduce((t,v)=>t+v)
+      return new Array(n).fill(1).map((v, i) => i + 1).reduce((t, v) => t + v)
     }
 
     var sumNums = function (n) {
-        // 用&&运算加递归
-        return n && n + sumNums(n - 1)
+      // 用&&运算加递归
+      return n && n + sumNums(n - 1)
     }
 
+    // 68 - I.二叉搜索树的最近公共祖先
+    /**
+     * @param {TreeNode} root
+     * @param {TreeNode} p
+     * @param {TreeNode} q
+     * @return {TreeNode}
+     */
+    var lowestCommonAncestor = function (root, p, q) {
+
+      if (!root) return
+      if (p.val === q.val) return q
+
+      const dfs = (node) => {
+        if (node.val < p.val && node.val < q.val) {
+          return dfs(node.right)
+        } else if (node.val > p.val && node.val > q.val) {
+          return dfs(node.left)
+        } else {
+          return node
+        }
+      }
+
+      return dfs(root)
+    }
 
 
 
