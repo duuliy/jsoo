@@ -755,6 +755,75 @@
       return dfs(root)
     }
 
+    //  07.重建二叉树
+    /**
+   * @param {number[]} preorder
+   * @param {number[]} inorder
+   * @return {TreeNode}
+   */
+
+    //  要想办法确定根节点，前序遍历是根左右，中序遍历是左根右，所以前序序列中第一个元素就是根节点，
+    //  在中序序列中查找根节点所在位置，找到了位置，此位置之前的就是左子树，
+    //  此位置之后的就是右子树，递归即可
+
+    //前序
+    // const dfsQ = (node) => {
+    //   if (!node) return
+    //   res.push(node.val)
+
+    //   node.left && dfs(node.left)
+    //   node.right && dfs(node.right)
+    // }
+
+    //中序
+    // const dfsL = (node) => {
+    //   if (!node) return
+
+    //   node.left && dfs(node.left)
+    //   res.push(node.val)
+    //   node.right && dfs(node.right)
+    // }
+
+
+    var buildTree = function (preOrder, inOrder) {
+      function build(preOrder, preStart, preEnd, inOrder, inStart, inEnd) {
+        if (preStart > preEnd) {
+          return null;
+        }
+
+        let rootVal = preOrder[preStart]
+        let index = inOrder.indexOf(rootVal)
+        let leftSize = index - inStart  // 左子树个数
+        let root = new TreeNode(rootVal)
+        // 递归构造左右子树
+        root.left = build(
+          preOrder,
+          preStart + 1,
+          preStart + leftSize,
+          inOrder,
+          inStart,
+          index - 1
+        )
+        root.right = build(
+          preOrder,
+          preStart + leftSize + 1,
+          preEnd,
+          inOrder,
+          index + 1,
+          inEnd
+        )
+        return root
+      }
+
+      return build(
+        preOrder,
+        0,
+        preOrder.length - 1,
+        inOrder,
+        0,
+        inOrder.length - 1
+      )
+    }
 
 
 
