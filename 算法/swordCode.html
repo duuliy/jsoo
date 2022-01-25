@@ -832,10 +832,10 @@
      * @return {number}
      */
 
-     //直接递归肯定通不过
-     //所以假设我们要求一个数的32次方，
-     //如果我们已经知道了它的16次方，那么只要在16次方的基础上再平方一次就ok了；而16次方是8次方的平方
-     //所以有了以下奇偶方式，奇直接递归变偶数，偶数用巧方法
+    //直接递归肯定通不过
+    //所以假设我们要求一个数的32次方，
+    //如果我们已经知道了它的16次方，那么只要在16次方的基础上再平方一次就ok了；而16次方是8次方的平方
+    //所以有了以下奇偶方式，奇直接递归变偶数，偶数用巧方法
     var myPow = function (x, n) {
       // 递归出口
       if (n === 0) return 1;
@@ -847,6 +847,31 @@
       return myPow(x * x, n / 2);
     }
 
+
+    //  33. 二叉搜索树的后序遍历序列
+    /**
+     * @param {number[]} postorder
+     * @return {boolean}
+     */
+
+     //难
+     //后续最后遍历根,i到根都应该是右树，所以都比根大
+    var verifyPostorder = postorder => {
+        const len = postorder.length
+        if (len <= 1) return true
+        // 后序遍历，最后一个是根节点
+        const root = postorder[len - 1]
+        // 找到第一个大于根节点的位置i
+        let i = 0
+        while (postorder[i] < root) i++
+        // 从i开始，判断i右边到根节点之间的元素，是否都大于根节点值,大于的话说明
+        const res = postorder.slice(i, len - 1).every(x => x > root)
+        // 若否，直接返回false
+        // 若是，递归判断左右子树
+        return res
+          ? verifyPostorder(postorder.slice(0, i)) && verifyPostorder(postorder.slice(i, len - 1))
+          : false
+      }
 
 
 
