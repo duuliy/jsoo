@@ -825,6 +825,27 @@
       )
     }
 
+    // 16. 数值的整数次方
+    /**
+     * @param {number} x
+     * @param {number} n
+     * @return {number}
+     */
+
+     //直接递归肯定通不过
+     //所以假设我们要求一个数的32次方，
+     //如果我们已经知道了它的16次方，那么只要在16次方的基础上再平方一次就ok了；而16次方是8次方的平方
+     //所以有了以下奇偶方式，奇直接递归变偶数，偶数用巧方法
+    var myPow = function (x, n) {
+      // 递归出口
+      if (n === 0) return 1;
+      // n小于0，特殊情况
+      if (n < 0) return 1 / myPow(x, -n);
+      // n奇数
+      if (n % 2) return x * myPow(x, n - 1);
+      // n偶数
+      return myPow(x * x, n / 2);
+    }
 
 
 
