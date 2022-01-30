@@ -14,7 +14,7 @@
   <script>
     const test = throttle3((val) => {
       console.log(val)
-    }, 2000)
+    }, 2000) 
     //***********************实现一个new操作符***********************************/ 
     // 1.它创建了一个全新的对象。
     // 2.它会被执行 [[Prototype]]（也就是 __proto__）链接.
@@ -118,6 +118,8 @@
     }
     bar.call2(foo, 'black', '18')
     console.log(foo) // black 18 1
+
+    
     // 一样效果
     // foo.fn=bar
     // foo.fn('black', '18')
@@ -268,7 +270,7 @@
     }
 
     //***********************实现一个reduce***********************************/ 
-    Array.pro2totype.reduce = function (fn, init) {
+    Array.prototype.reduce = function (fn, init) {
       var arr = this   // this就是调用reduce方法的数组
       var total = init || arr[0]   // 有初始值使用初始值
       // 有初始值的话从0遍历， 否则从1遍历
