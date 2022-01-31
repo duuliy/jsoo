@@ -620,7 +620,7 @@
       return res
     }
 
-    const kthLargest = (root, k) => {
+    var kthLargest = (root, k) => {
       // 遍历顺序(访问右节点在前)：右-根-左
       const unInOrder = node => {
         if (!node) return
@@ -854,24 +854,77 @@
      * @return {boolean}
      */
 
-     //难
-     //后续最后遍历根,i到根都应该是右树，所以都比根大
+    //难
+    //后续最后遍历根,i到根都应该是右树，所以都比根大
     var verifyPostorder = postorder => {
-        const len = postorder.length
-        if (len <= 1) return true
-        // 后序遍历，最后一个是根节点
-        const root = postorder[len - 1]
-        // 找到第一个大于根节点的位置i
-        let i = 0
-        while (postorder[i] < root) i++
-        // 从i开始，判断i右边到根节点之间的元素，是否都大于根节点值,大于的话说明
-        const res = postorder.slice(i, len - 1).every(x => x > root)
-        // 若否，直接返回false
-        // 若是，递归判断左右子树
-        return res
-          ? verifyPostorder(postorder.slice(0, i)) && verifyPostorder(postorder.slice(i, len - 1))
-          : false
+      const len = postorder.length
+      if (len <= 1) return true
+      // 后序遍历，最后一个是根节点
+      const root = postorder[len - 1]
+      // 找到第一个大于根节点的位置i
+      let i = 0
+      while (postorder[i] < root) i++
+      // 从i开始，判断i右边到根节点之间的元素，是否都大于根节点值,大于的话说明
+      const res = postorder.slice(i, len - 1).every(x => x > root)
+      // 若否，直接返回false
+      // 若是，递归判断左右子树
+      return res
+        ? verifyPostorder(postorder.slice(0, i)) && verifyPostorder(postorder.slice(i, len - 1))
+        : false
+    }
+
+
+    // 15. 二进制中1的个数
+    /**
+     * @param {number} n - a positive integer
+     * @return {number}
+     */
+    var hammingWeight = function (n) {
+      const str = n.toString(2)
+      let res = 0
+      for (let i of str) {
+        if (i == 1) res++
       }
+
+      return res
+    }
+
+    //10进制转2进制
+    function dec2bin(decnum) {
+      let arr = []
+      while (decnum > 0) {
+        arr.unshift(decnum % 2)
+        decnum = Math.floor(decnum / 2)
+      }
+
+      return arr
+    }
+
+    var hammingWeight = function (n) {
+      let res = 0
+      while (n > 0) {
+        if (n % 2 == 1) res++
+        n = Math.floor(n / 2)
+      }
+
+      return res
+    }
+
+    //位运算
+    var hammingWeight = function (n) {
+      let count = 0;
+      while (n) {
+        // 先判断整数二进制表示中最后边一位是不是1
+        if (n & 1) {
+          count++;
+        }
+        // 把输入的整数右移一位，此时原来从右边数起的第二位被移到了最右边
+        n = n >>> 1
+      }
+      return count
+    }
+
+
 
 
 
