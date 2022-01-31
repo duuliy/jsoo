@@ -940,6 +940,30 @@
       return a
     }
 
+    // 56 - I.数组中数字出现的次数
+    /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+    var singleNumbers = function (nums) {
+      let obj={},res=[]
+      for(let i=0;i<nums.length;i++){
+        if(!obj[nums[i]]){
+          obj[nums[i]]=1
+        }else{
+          obj[nums[i]] = 2
+        }
+      }
+
+      for(v in obj){
+        if(obj[v]===1){
+          res.push(v)
+        }
+      }
+
+      return res
+    }
+
 
 
 
