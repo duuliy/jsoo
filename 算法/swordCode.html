@@ -1047,7 +1047,21 @@
       return res
     }
 
+    // 62. 圆圈中最后剩下的数字
+    /**
+     * @param {number} n
+     * @param {number} m
+     * @return {number}
+     */
 
+     //约瑟夫公式
+    var lastRemaining = function (n, m) {
+      let ans = 0
+      for (let i = 2; i <= n; i++) {
+        ans = (ans + m) % i
+      }
+      return ans
+    }
 
 
 
