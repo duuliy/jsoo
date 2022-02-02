@@ -987,7 +987,67 @@
       return res
     }
 
-    // 14 - I.剪绳子
+    // 57 - II.和为s的连续正数序列
+
+    /**
+   * @param {number} target
+   * @return {number[][]}
+   */
+
+    //滑动窗口
+    var findContinuousSequence = function (target) {
+      const res = []
+
+      const idx = Math.ceil(target / 2) + 1
+      let l = 1, r = 2
+
+      while (l < idx && r < idx) {
+        let total = 0, ans = []
+        for (let i = l; i <= r; i++) {
+          total += i
+          ans.push(i)
+        }
+        if (total < target) {
+          r++
+        } else if (total > target) {
+          l++
+        } else {
+          res.push(ans)
+          l++
+          r = l + 1
+        }
+      }
+
+      return res
+    }
+
+    var findContinuousSequence = function (target) {
+      const res = []
+      const idx = Math.ceil(target / 2) + 1
+      let l = 1, r = 2, total = 3
+
+      while (l < idx && r < idx) {
+        if (total < target) {
+          r++
+          total += r
+        } else if (total > target) {
+          total -= l
+          l++
+        } else {
+          let ans = []
+          for (let i = l; i <= r; i++) {
+            ans.push(i)
+          }
+          res.push(ans)
+          total -= l
+          l++
+        }
+      }
+
+      return res
+    }
+
+
 
 
 
