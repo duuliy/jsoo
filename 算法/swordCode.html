@@ -1054,7 +1054,7 @@
      * @return {number}
      */
 
-     //约瑟夫公式
+    //约瑟夫公式
     var lastRemaining = function (n, m) {
       let ans = 0
       for (let i = 2; i <= n; i++) {
@@ -1062,6 +1062,44 @@
       }
       return ans
     }
+
+    // 29. 顺时针打印矩阵
+    /**
+   * @param {number[][]} matrix
+   * @return {number[]}
+   */
+    //QAQ,这叫简单？？？
+    var spiralOrder = function (matrix) {
+      if (!matrix.length || !matrix[0].length) {
+        return []
+      }
+      let res = [], directIdx = 0, rLen = matrix.length, lLen = matrix[0].length, count = 0, total = rLen * lLen
+      const isBoundary = (r, l) => r < 0 || r >= rLen || l < 0 || l >= lLen || matrix[r][l] === '-1'
+      const direct = [
+        [0, 1],
+        [1, 0],
+        [0, -1],
+        [-1, 0]
+      ]
+
+      const helper = (r, l) => {
+        count++
+        if (count > total) return void (0)
+        res.push(matrix[r][l])
+        matrix[r][l] = '-1'
+        const _r = r + direct[directIdx][0]
+        const _l = l + direct[directIdx][1]
+        if (isBoundary(_r, _l)) {
+          directIdx = directIdx === 3 ? 0 : directIdx + 1
+        }
+
+        helper(r + direct[directIdx][0], l + direct[directIdx][1])
+      }
+
+      helper(0, 0)
+      return res
+    }
+
 
 
 
