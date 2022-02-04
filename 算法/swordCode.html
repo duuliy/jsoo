@@ -1177,6 +1177,42 @@
       return result
     }
 
+    //  59 - II.队列的最大值
+
+    var MaxQueue = function () {
+      this.queue = []
+      this.deque = []
+    }
+
+    /**
+     * @return {number}
+     */
+    MaxQueue.prototype.max_value = function () {
+      if (this.queue.length == 0) return -1
+      return this.deque[0]
+    }
+
+    /** 
+     * @param {number} value
+     * @return {void}
+     */
+    MaxQueue.prototype.push_back = function (value) {
+      this.queue.push(value)
+      while (this.deque[this.deque.length - 1] < value) this.deque.pop()
+      this.deque.push(value)
+    }
+
+    /**
+     * @return {number}
+     */
+    MaxQueue.prototype.pop_front = function () {
+      if (this.queue.length == 0) return -1
+      let val = this.queue.shift()
+      if (val == this.deque[0]) this.deque.shift()
+      return val
+    }
+
+
 
 
 
