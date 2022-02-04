@@ -1132,6 +1132,51 @@
       return num <= min ? min : num >= max ? max : num
     }
 
+    // 59 - I.滑动窗口的最大值
+
+    /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number[]}
+   */
+
+    //正确居然没超时，接下来优化,记录最大值的下标和最大值对比取值。
+    var maxSlidingWindow = function (nums, k) {
+      let len = nums.length, l = 0, r = k - 1, res = []
+      if (len <= 0 || k === 0) return []
+      while (r < len) {
+        const num = nums.slice(l, r + 1).sort((a, b) => b - a)[0]
+        res.push(num)
+        l++, r++
+      }
+
+      return res
+    }
+
+    //队列优化
+    var maxSlidingWindow = function (nums, k) {
+      const window = []
+      const result = []
+      for (let i = 0; i < nums.length; i++) {
+        // 删除队列中小于当前元素的值，保证队列单调递减，队首是最大元素。
+        while (window.length && nums[i] > nums[window[window.length - 1]]) {
+          window.pop()
+        }
+        // 加入新元素
+        window.push(i)
+        // 不在窗口中时，将队首移出
+        if (window[0] < i - k + 1) {
+          window.shift()
+        }
+        // 此时窗口已形成，可以开始移动
+        if (i >= k - 1) {
+          // 将当前窗口中的最大元素计入结果
+          result.push(nums[window[0]])
+        }
+      }
+      return result
+    }
+
 
 
 
