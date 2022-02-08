@@ -1212,6 +1212,52 @@
       return val
     }
 
+    // 38. 字符串的排列
+    /**
+   * @param {string} s
+   * @return {string[]}
+   */
+    var permutation = function (s) {
+      const res = new Set(), len = s.length
+
+      const helper = (str, strs) => {
+        if (str.length === len) {
+          res.add(str)
+        }
+
+        for (let i = 0; i < strs.length; i++) {
+          helper(str + strs[i], strs.slice(0, i) + strs.slice(i + 1, strs.length))
+        }
+      }
+
+      helper('', s)
+      return [...res]
+    }
+
+    var permutation = function (s) {
+      const res = [], len = s.length
+
+      const helper = (str, strs) => {
+        let dup=[]
+        if (str.length === len) {
+          res.push(str)
+        }
+
+        for (let i = 0; i < strs.length; i++) {
+          const _str= strs[i]
+          if(!dup.includes(_str)) {
+            dup.push(_str)
+            helper(str + _str, strs.slice(0, i) + strs.slice(i + 1, strs.length))
+          }
+        }
+      }
+
+      helper('', s)
+      return res
+    }
+
+    console.log(permutation('aab'))
+
 
 
 
