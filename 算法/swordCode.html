@@ -1238,14 +1238,14 @@
       const res = [], len = s.length
 
       const helper = (str, strs) => {
-        let dup=[]
+        let dup = []
         if (str.length === len) {
           res.push(str)
         }
 
         for (let i = 0; i < strs.length; i++) {
-          const _str= strs[i]
-          if(!dup.includes(_str)) {
+          const _str = strs[i]
+          if (!dup.includes(_str)) {
             dup.push(_str)
             helper(str + _str, strs.slice(0, i) + strs.slice(i + 1, strs.length))
           }
@@ -1255,6 +1255,29 @@
       helper('', s)
       return res
     }
+
+    // 49. 丑数
+    /**
+   * @param {number} n
+   * @return {number}
+   */
+    var nthUglyNumber = function (n) {
+      const dp = new Array(n + 1).fill(1)
+      let accu2 = 1,accu3 = 1,accu5 = 1
+      for (let i = 2; i <= n; i++) {
+        // 后面的丑数一定是由前面的丑数*2、*3、*5得到的
+        let num2 = dp[accu2] * 2
+          num3 = dp[accu3] * 3
+          num5 = dp[accu5] * 5
+        // 谁最小就先存谁并且对应的指针往后移
+        dp[i] = Math.min(...[num2, num3, num5])
+        if (dp[i] === num2) accu2++
+        if (dp[i] === num3) accu3++
+        if (dp[i] === num5) accu5++
+      }
+      return dp[n]
+    }
+
 
 
 
