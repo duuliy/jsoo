@@ -1263,12 +1263,12 @@
    */
     var nthUglyNumber = function (n) {
       const dp = new Array(n + 1).fill(1)
-      let accu2 = 1,accu3 = 1,accu5 = 1
+      let accu2 = 1, accu3 = 1, accu5 = 1
       for (let i = 2; i <= n; i++) {
         // 后面的丑数一定是由前面的丑数*2、*3、*5得到的
         let num2 = dp[accu2] * 2
-          num3 = dp[accu3] * 3
-          num5 = dp[accu5] * 5
+        num3 = dp[accu3] * 3
+        num5 = dp[accu5] * 5
         // 谁最小就先存谁并且对应的指针往后移
         dp[i] = Math.min(...[num2, num3, num5])
         if (dp[i] === num2) accu2++
@@ -1277,6 +1277,29 @@
       }
       return dp[n]
     }
+
+    //  51. 数组中的逆序对
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+    //传统思路就是遍历，每次找前面有多少个比cur大的val
+    //但是有没有点面熟，就是cur跟前面的数交换值
+
+    //超时
+    var reversePairs = function (nums) {
+      let count=0
+      for(let i=0;i<nums.length;i++){
+        for(let j = 0; j < i; j++){
+          if(nums[j]>nums[i]){
+            count++
+          }
+        }
+      }
+      return count
+    }
+
+    
 
 
 
