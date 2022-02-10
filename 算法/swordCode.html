@@ -1315,15 +1315,15 @@
       }
 
       function merge(left, right) {
-        const lenL= left.length, lenR = right.length
-        let cur = 0,l = 0,r = 0, temp = new Array(lenL+ lenR)
+        const lenL = left.length, lenR = right.length
+        let cur = 0, l = 0, r = 0, temp = new Array(lenL + lenR)
         while (l < left.length && r < right.length) {
           if (right[r] >= left[l]) temp[cur++] = left[l++]
           else {
             temp[cur++] = right[r++]
             // 如果左边元素大于右边元素，那就出现了序列对了
             // 由于左右两边都是有序的，左边当前元素及之后的元素都会跟右边构建逆序对
-            count += lenL- l //关键点
+            count += lenL - l //关键点
           }
         }
         while (l < left.length) temp[cur++] = left[l++]
@@ -1336,7 +1336,27 @@
       return count
     }
 
-    
+    // 44. 数字序列中某一位的数字
+    /**
+   * @param {number} n
+   * @return {number}
+   */
+    var findNthDigit = function (n) {
+      let digit = 1,
+        start = 1,
+        count = 9
+      while (n > count) {
+        n -= count
+        digit += 1
+        start *= 10
+        count = digit * start * 9
+      }
+      let num = start + Math.floor((n - 1) / digit)
+      return num.toString().charAt((n - 1) % digit) - 0
+    }
+
+
+
 
 
 
