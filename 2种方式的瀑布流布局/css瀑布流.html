@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>纯css瀑布流</title>
+  <style>
+    .textBox {
+      width: 500px;
+      margin: 100px auto;
+      column-count: 4;
+      column-gap: 10%;
+    }
+
+    .hBox {
+      break-inside: avoid;
+      width: 130px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="textBox">
+      <div class="hBox" style="height:70px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:80px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:185px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:62px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:90px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:100px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:75px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:162px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:88px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:97px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:86px;lineHeight:70px">555</div>
+      <div class="hBox" style="height:100px;lineHeight:70px">555</div>
+    </div>
+  </div>
+
+</body>
+
+</html>
