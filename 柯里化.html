@@ -73,7 +73,7 @@
 
     const plus = curry((a, b, c, d, e) => a + b + c + d + e);
     console.log(plus(1)(2)(3)(4)(5))
-    console.log(plus(1, 2, 3,4,5))
+    console.log(plus(1, 2, 3, 4, 5))
 
     function curry3(fn) {
       const length = fn.length
@@ -81,14 +81,15 @@
         if (args.length >= length) {
           return fn(...args)
         } else {
-          return (...args2)=>inner(...[...args, ...args2])
+          return (...args2) => inner(...[...args, ...args2])
         }
       }
     }
 
-    const cur= curry3((a,b,c)=>a+b+c)
+    const cur = curry3((a, b, c) => a + b + c)
     console.log(cur(1)(2)(3))
-    console.log(cur(1,2,3))
+    console.log(cur(1, 2, 3))
+    console.log(cur(1, 2)(3))
 
 
   </script>
