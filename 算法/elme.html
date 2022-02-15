@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.算出两个数组的补集，数组只包含字符串和数字
+    // 补集：如果 b 是 a 的子集，返回存在于 a 不存在于 b 的元素集合，反之返回空集合
+    function findComplementarySet(a, b) {
+      let bMap = {}
+      let res = []
+      for (let i = 0; i < b.length; i++) {
+        bMap[b[i]] = true
+      }
+      for (let i = 0; i < a.length; i++) {
+        if (!bMap[a[i]]) {
+          res.push(a[i])
+        }
+      }
+      if (res.length === a.length) return []
+      return res
+    }
+
+    // console.log(findComplementarySet(['a', 6, 'b', 3], ['b']).sort())
+    // [
+    //   3,
+    //   6,
+    //   'a',
+    // ]
+    // console.log(findComplementarySet([1, 11, 111], [2]))
+    // []
+
+
+
+    // 2. * 实现一个函数生成器，接收一个原函数和一组 index，生成一个新函数
+    //     * 调用新函数时，按照 index 数组中定义的顺序将参数传入原函数中
+
+    function createRearFunc(func, indexes) {
+      return (a, b, c) => {
+        return func(a, b, c).map((v, i) => ({ val: v, key: indexes[i] })).sort((a, b) => a.key - b.key).map(v => v.val)
+      }
+    }
+
+    const originalFunc = function (a, b, c) {
+      return [a, b, c]
+    }
+    const f = createRearFunc(originalFunc, [2, 0, 1])
+    f('foo', 'bar', 'fiz')
+    // console.log(f('foo', 'bar', 'fiz'))
+    //['bar', 'fiz', 'foo']
+
+
+    /**
+ * 3.给定一组文件路径，找出它们共同的的父级目录
+ *
+ * --- 说明 ---
+ *
+ * - 如果不存在共同的父级目录，返回 `null`
+ */
+
+    function findParentDirectory(paths) {
+      let res = '', idx = 1
+      const arr = paths.map(v => v.split('/'))
+
+      const helper = () => {
+        if (arr[0].length === idx) return res
+
+        let boo = true
+        for (let i = 0; i < arr.length - 1; i++) {
+          if (arr[i][idx] !== arr[i + 1][idx]) {
+            boo = false
+          }
+        }
+
+        if (boo) {
+          res = res + '/' + arr[0][idx]
+          idx++
+          helper()
+        } else {
+          return
+        }
+      }
+
+      helper()
+      if (!res) return null
+      return res
+    }
+
+    // console.log(findParentDirectory(['/home/admin/vue', '/home/admin/react']))
+
+    // console.log(findParentDirectory([
+    //   '/home/admin/react/src',
+    //   '/home/admin/react',
+    //   '/home/admin/react/src/index.js',
+    // ]))
+
+    // console.log(findParentDirectory(['/usr/bin', '/etc/config']))
+
+    /**
+     * 4.给出一组异步任务方法，和允许同时执行的个数，实现一个方法，用于并发执行异步任务
+     *
+     * --- 说明 ---
+     *
+     * - 当有任务执行完毕后，自动补充任务，始终保持正在执行的任务有 `concurrency` 个
+     * - 返回 { resolved: [], rejected: [] }
+     *
+     */
+    const tasks = [
+      () => new Promise((resolve) => setTimeout(resolve, 1000)),
+      () => Promise.resolve('foo'),
+      () => fetch('https://codesandbox.io'),
+      () => Promise.reject(new Error('tttttttttttttt')),
+      () => 'bar',
+      () =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.src =
+            'https://gw.alipayobjects.com/mdn/member_frontWeb/afts/img/A*h7o9Q4g2KiUAAAAAAAAAAABkARQnAQ';
+          img.onload = resolve;
+          img.width = 0;
+          img.height = 0;
+          document.body.append(img);
+        }),
+    ]
+
+    async function parallel(tasks, concurrency) {
+      let resolved = [], rejected = [], count=0, queue=[]
+
+      const helper=async (fn)=>{
+
+        if (count >= concurrency) {
+          await new Promise((resolve) => {
+            queue.push(resolve)
+          })
+        }
+        count++
+        await Promise.allSettled([fn()]).then(res => {
+          console.log(666)
+          if (res[0].status === "fulfilled") {
+            resolved.push(1)
+          } else if (res[0].status === "rejected") {
+            rejected.push(1)
+          }
+        })
+        count--
+        if (queue.length > 0) {
+          queue.shift()()
+        }
+      }
+
+      for (let i = 0; i < tasks.length; i++) {
+        await helper(tasks[i])
+      }
+
+      return { resolved, rejected }
+    }
+
+    async function doTest() {
+      const { resolved, rejected } = await parallel(tasks)
+      console.log(resolved.length)
+      console.log(rejected.length)
+    }
+    doTest()
+
+
+    /**
+   * 5.重新排列一个字符串，使得每个相邻字符都不同，列出所有情况
+   *
+   * --- 说明 ---
+   * - 字符串只包含小写字母或者数字
+   */
+
+    function reorganize(s) {
+      const sLength = s.length;
+      if (sLength === 1) return s; // 长度为1，直接返回本身
+      const map = new Map();
+      // 对每个字符串进行计数
+      for (let i = 0; i < s.length; i++) {
+        map.set(s[i], (map.get(s[i]) || 0) + 1);
+      }
+      // 对字符串进行排序，生成新的排序好的字符串，最大的排在最前面
+      const array = Array.from(map);
+      array.sort((a, b) => b[1] - a[1]);
+      const length = array[0][1];
+      if (length > sLength - length + 1) return '';
+      let sSorted = "";
+      for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array[i][1]; j++) {
+          sSorted = `${sSorted}${array[i][0]}`;
+        }
+      }
+      // 以重复率最大值对排序好的字符串进行分隔
+      const arrayStr = [];
+      for (let i = 0; i < sLength;) {
+        arrayStr.push(sSorted.slice(i, i + length));
+        i = i + length;
+      }
+      // 重组字符串，每次按顺序取出一个字符。
+      let result = '';
+      let arrayLength = arrayStr.length;
+      for (let i = 0; i < length; i++) {
+        for (let j = 0; j < arrayLength; j++) {
+          if (arrayStr[j][i]) {
+            result = `${result}${arrayStr[j][i]}`
+          } else {
+            arrayLength--; // 优化数组长度，说明这一个字符串已经取完了。下次无须再取
+          }
+        }
+      }
+      return result;
+
+    }
+
+    // console.log(reorganize('aabb'))// ['abab', 'baba']
+    // console.log(reorganize('aaabbbb').sort())// ['bababab']
+    // console.log(reorganize('aabbbc').sort())// [
+    //   'ababcb',
+    //     'abcbab',
+    //     'bababc',
+    //     'babacb',
+    //     'babcab',
+    //     'babcba',
+    //     'bacbab',
+    //     'bcabab',
+    //     'bcbaba',
+    //     'cbabab',
+    // ]
+    // console.log(reorganize('1bbbbb').sort())// []
+
+  </script>
+</body>
+
+</html>
