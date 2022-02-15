@@ -204,7 +204,7 @@
       return function () {
         const context = this
         let args = arguments
-        console.log(timer)
+
         if (!timer) {
           timer = setTimeout(() => {
             fn.apply(context, args)
