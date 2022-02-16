@@ -12,18 +12,20 @@
   <script>
     // 1.算出两个数组的补集，数组只包含字符串和数字
     // 补集：如果 b 是 a 的子集，返回存在于 a 不存在于 b 的元素集合，反之返回空集合
+    //错了！
     function findComplementarySet(a, b) {
-      let bMap = {}
+      let map = {}
       let res = []
       for (let i = 0; i < b.length; i++) {
-        bMap[b[i]] = true
+        map[b[i]] = 1
       }
       for (let i = 0; i < a.length; i++) {
-        if (!bMap[a[i]]) {
+        if (map[a[i]]) map[a[i]]++
+        if (!map[a[i]]) {
           res.push(a[i])
         }
       }
-      if (res.length === a.length) return []
+      if (Object.values(map).indexOf(1) !== -1) return []
       return res
     }
 
@@ -78,16 +80,14 @@
         for (let i = 0; i < arr.length - 1; i++) {
           if (arr[i][idx] !== arr[i + 1][idx]) {
             boo = false
+            break
           }
         }
 
-        if (boo) {
-          res = res + '/' + arr[0][idx]
-          idx++
-          helper()
-        } else {
-          return
-        }
+        if (!boo) return
+        res = res + '/' + arr[0][idx]
+        idx++
+        helper()
       }
 
       helper()
@@ -168,16 +168,16 @@
       const resolved = [], rejected = []
       let idx = 0
 
-      const helper=async(resolve)=>{
-        if(idx>= tasks.length){
+      const helper = async (resolve) => {
+        if (idx >= tasks.length) {
           resolve({
             resolved: resolved.sort((a, b) => a.index - b.index),
             rejected: rejected.sort((a, b) => a.index - b.index)
           })
-          return void(0)
+          return void (0)
         }
 
-         try {
+        try {
           const result = await tasks[idx]()
           resolved.push({ status: 'fulfiled', index: idx, result })
         } catch (err) {
@@ -196,7 +196,7 @@
     }
 
     async function doTest() {
-      const { resolved, rejected } = await parallel(tasks,2)
+      const { resolved, rejected } = await parallel(tasks, 2)
       console.log(resolved.length)
       console.log(rejected.length)
     }
@@ -211,50 +211,32 @@
    * - 字符串只包含小写字母或者数字
    */
 
-    function reorganize(s) {
-      const sLength = s.length;
-      if (sLength === 1) return s; // 长度为1，直接返回本身
-      const map = new Map();
-      // 对每个字符串进行计数
-      for (let i = 0; i < s.length; i++) {
-        map.set(s[i], (map.get(s[i]) || 0) + 1);
-      }
-      // 对字符串进行排序，生成新的排序好的字符串，最大的排在最前面
-      const array = Array.from(map);
-      array.sort((a, b) => b[1] - a[1]);
-      const length = array[0][1];
-      if (length > sLength - length + 1) return '';
-      let sSorted = "";
-      for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[i][1]; j++) {
-          sSorted = `${sSorted}${array[i][0]}`;
+    const reorganize = (s) => {
+      const len = s.length, res = new Set()
+
+      const helper = (str, s) => {
+        let dup = [], _len = str.length
+        if (_len === len) {
+          res.add(str)
+          return
         }
-      }
-      // 以重复率最大值对排序好的字符串进行分隔
-      const arrayStr = [];
-      for (let i = 0; i < sLength;) {
-        arrayStr.push(sSorted.slice(i, i + length));
-        i = i + length;
-      }
-      // 重组字符串，每次按顺序取出一个字符。
-      let result = '';
-      let arrayLength = arrayStr.length;
-      for (let i = 0; i < length; i++) {
-        for (let j = 0; j < arrayLength; j++) {
-          if (arrayStr[j][i]) {
-            result = `${result}${arrayStr[j][i]}`
-          } else {
-            arrayLength--; // 优化数组长度，说明这一个字符串已经取完了。下次无须再取
+
+        for (let i = 0; i < s.length; i++) {
+          const _str = s[i]
+          if (_str !== str[_len - 1]) {
+            helper(str + _str, s.slice(0, i) + s.slice(i + 1))
           }
         }
       }
-      return result;
 
+      helper('', s)
+      return [...res]
     }
 
     // console.log(reorganize('aabb'))// ['abab', 'baba']
     // console.log(reorganize('aaabbbb').sort())// ['bababab']
-    // console.log(reorganize('aabbbc').sort())// [
+    // console.log(reorganize('aabbbc').sort())
+    // [
     //   'ababcb',
     //     'abcbab',
     //     'bababc',
