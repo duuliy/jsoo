@@ -42,8 +42,11 @@
     //     * 调用新函数时，按照 index 数组中定义的顺序将参数传入原函数中
 
     function createRearFunc(func, indexes) {
-      return (a, b, c) => {
-        return func(a, b, c).map((v, i) => ({ val: v, key: indexes[i] })).sort((a, b) => a.key - b.key).map(v => v.val)
+      return function (...args) {
+        let _args = []
+        indexes.forEach((v, i) => _args[v] = args[i])
+        return func(..._args)
+        // return func(a, b, c).map((v, i) => ({ val: v, key: indexes[i] })).sort((a, b) => a.key - b.key).map(v => v.val)
       }
     }
 
@@ -119,54 +122,86 @@
       () => 'bar',
       () =>
         new Promise((resolve) => {
-          const img = new Image();
+          const img = new Image()
           img.src =
             'https://gw.alipayobjects.com/mdn/member_frontWeb/afts/img/A*h7o9Q4g2KiUAAAAAAAAAAABkARQnAQ';
-          img.onload = resolve;
-          img.width = 0;
-          img.height = 0;
-          document.body.append(img);
+          img.onload = resolve
+          img.width = 0
+          img.height = 0
+          document.body.append(img)
         }),
     ]
 
+    //这个方法太偷懒
+    // async function parallel(tasks, concurrency) {
+    //   let resolved = [], rejected = [], count=0, queue=[]
+
+    //   const helper=async (fn)=>{
+
+    //     if (count >= concurrency) {
+    //       await new Promise((resolve) => {
+    //         queue.push(resolve)
+    //       })
+    //     }
+    //     count++
+    //     await Promise.allSettled([fn()]).then(res => {
+    //       if (res[0].status === "fulfilled") {
+    //         resolved.push(1)
+    //       } else if (res[0].status === "rejected") {
+    //         rejected.push(1)
+    //       }
+    //     })
+    //     count--
+    //     if (queue.length > 0) {
+    //       queue.shift()()
+    //     }
+    //   }
+
+    //   for (let i = 0; i < tasks.length; i++) {
+    //     await helper(tasks[i])
+    //   }
+
+    //   return { resolved, rejected }
+    // }
+
     async function parallel(tasks, concurrency) {
-      let resolved = [], rejected = [], count=0, queue=[]
+      const resolved = [], rejected = []
+      let idx = 0
 
-      const helper=async (fn)=>{
-
-        if (count >= concurrency) {
-          await new Promise((resolve) => {
-            queue.push(resolve)
+      const helper=async(resolve)=>{
+        if(idx>= tasks.length){
+          resolve({
+            resolved: resolved.sort((a, b) => a.index - b.index),
+            rejected: rejected.sort((a, b) => a.index - b.index)
           })
+          return void(0)
         }
-        count++
-        await Promise.allSettled([fn()]).then(res => {
-          console.log(666)
-          if (res[0].status === "fulfilled") {
-            resolved.push(1)
-          } else if (res[0].status === "rejected") {
-            rejected.push(1)
-          }
-        })
-        count--
-        if (queue.length > 0) {
-          queue.shift()()
+
+         try {
+          const result = await tasks[idx]()
+          resolved.push({ status: 'fulfiled', index: idx, result })
+        } catch (err) {
+          rejected.push({ status: 'rejected', index: idx, err })
         }
+        idx++
+        helper(resolve)
       }
 
-      for (let i = 0; i < tasks.length; i++) {
-        await helper(tasks[i])
-      }
+      return new Promise(resolve => {
+        for (let i = 0; i < concurrency; i++) {
+          helper(resolve)
+        }
+      })
 
-      return { resolved, rejected }
     }
 
     async function doTest() {
-      const { resolved, rejected } = await parallel(tasks)
+      const { resolved, rejected } = await parallel(tasks,2)
       console.log(resolved.length)
       console.log(rejected.length)
     }
-    doTest()
+
+    // doTest()
 
 
     /**
