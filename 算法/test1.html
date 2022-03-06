@@ -300,7 +300,7 @@
     //暴力
     var trap = function (height) {
       let ans = 0
-      for(let i=0;i< height.length;i++){
+      for (let i = 0; i < height.length; i++) {
         let lMax = 0
         let rMax = 0
         for (let j = i; j >= 0; j--) {
@@ -321,7 +321,7 @@
       let left = 0, right = height.length - 1
       let leftMax = 0, rightMax = 0
       while (left < right) {
-        console.log(left,right)
+        console.log(left, right)
         leftMax = Math.max(leftMax, height[left])
         rightMax = Math.max(rightMax, height[right])
         if (leftMax < rightMax) {  //取矮的一边计算列的值，因为矮的一边决定能接多少
@@ -334,6 +334,28 @@
       }
       return ans
     }
+
+    //等分数组 [1,2,3,4,5]  , 1,2,3,4,...
+    const splitArrImAverage = (arr, column) => {
+      let rest = arr.length % column, // 是否能整除
+        restUsed = rest, // 剩下不能整除的个数
+        partLength = Math.floor(arr.length / column),
+        result = []
+      for (let i = 0; i < arr.length; i += partLength) {
+        let end = partLength + i, add = false
+        if (rest !== 0 && restUsed) { // 不能被整除且有剩下个数
+          end++
+          restUsed-- // 剩下的数分配一个
+          add = true
+        }
+
+        result.push(arr.slice(i, end)) 
+        if (add) i++
+      }
+      return result
+    }
+    //[1,2,3,4,5,6,7,8,9,10] ,3
+    //[1,2,3,4],[5,6,7],[8,9,10]
 
 
 
