@@ -22,15 +22,15 @@
       for (let i = 0; i < len; i++) {
         const cur = nums[i]
         if (cur > 0) break
-        if (cur === nums[i - 1]) continue
+        if (cur === nums[i - 1]) continue //去重
         let left = i + 1, right = len - 1
 
         while (left < right) {
           const sum = cur + nums[left] + nums[right]
           if (sum === 0) {
             res.push([cur, nums[left], nums[right]])
-            while (left < right && nums[left] === nums[left + 1]) left++
-            while (left < right && nums[right] === nums[right - 1]) right--
+            while (left < right && nums[left] === nums[left + 1]) left++ //去重
+            while (left < right && nums[right] === nums[right - 1]) right-- //去重
             left++, right--
           } else if (sum < 0) left++
           else if (sum > 0) right--
