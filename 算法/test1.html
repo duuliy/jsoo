@@ -335,6 +335,11 @@
       return ans
     }
 
+    /** 等分数组
+   * 
+   * 
+   */
+
     //等分数组 [1,2,3,4,5]  , 1,2,3,4,...
     const splitArrImAverage = (arr, column) => {
       let rest = arr.length % column, // 是否能整除
@@ -349,13 +354,17 @@
           add = true
         }
 
-        result.push(arr.slice(i, end)) 
+        result.push(arr.slice(i, end))
         if (add) i++
       }
       return result
     }
     //[1,2,3,4,5,6,7,8,9,10] ,3
     //[1,2,3,4],[5,6,7],[8,9,10]
+
+
+
+
 
 
 
