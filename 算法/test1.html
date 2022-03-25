@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
+  <title>面试题</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="">
@@ -363,26 +363,59 @@
     //[1,2,3,4],[5,6,7],[8,9,10]
 
 
-  /** 抽奖函数
-    * 
-    * 
-    */
+    /** 抽奖函数
+      * 
+      * 
+      */
     let peoples = [
       { n: 'p1', w: 1 },
       { n: 'p2', w: 100 },
       { n: 'p3', w: 100 }
     ]
 
-    var rand =(p)=>{
-      const total=p.reduce((t,c)=>{
-        c.start=t
+    var rand = (p) => {
+      const total = p.reduce((t, c) => {
+        c.start = t
         t += c.w
-        c.end=t
+        c.end = t
         return t
-      },0)
-      const random= Math.round(Math.random() * total)
-      const tar=p.find(c=>c.start< random&& c.end>random)
+      }, 0)
+      const random = Math.round(Math.random() * total)
+      const tar = p.find(c => c.start < random && c.end > random)
       return tar.n
+    }
+
+
+    /** 异步加法
+      * 
+      * 
+      */
+    function asyncAdd(a, b, cb) {
+      setTimeout(() => {
+        cb(null, a + b)
+      }, Math.random() * 1000)
+    }
+    async function total() {
+      const res1 = await sum(1, 2, 3, 4, 5, 6, 4)
+      const res2 = await sum(1, 2, 3, 4, 5, 6, 4)
+      console.log(res1, res2)
+      return [res1, res2]
+    }
+    total()
+    // 实现下sum函数。注意不能使用加法，在sum中借助asyncAdd完成加法。尽可能的优化这个方法的时间。
+    async function sum(...rest) {
+      let t = 0
+      for (let i = 0; i < rest.length; i++) {
+        await new Promise((resolve, reject) => {
+          const cb = async (x, c) => {
+            resolve(c)
+          }
+          asyncAdd(t, rest[i], cb)
+        }).then(res => {
+          t = res
+        })
+      }
+      return t
     }
 
 
