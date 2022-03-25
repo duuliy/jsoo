@@ -299,7 +299,7 @@
     //按列求值
     //暴力
     var trap = function (height) {
-      let ans = 0
+      let res = 0
       for (let i = 0; i < height.length; i++) {
         let lMax = 0
         let rMax = 0
@@ -312,7 +312,7 @@
 
         res += Math.min(lMax, rMax) - height[i]
       }
-      return ans
+      return res
     }
 
     //双指针
