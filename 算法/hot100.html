@@ -92,6 +92,36 @@
       return -1
     }
 
+    // 34. 在排序数组中查找元素的第一个和最后一个位置
+    /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number}
+   */
+
+    /**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+
+    //按道理需要二分法，但是不想搞位运算，所以偷懒了
+    var searchRange = function (nums, target) {
+      if (!nums.length) return [-1, -1]
+
+      let res = []
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === target) {
+          res.push(i)
+        }
+      }
+
+      if (res.length) {
+        return [res[0], res[res.length - 1]]
+      } else {
+        return [-1, -1]
+      }
+    }
 
 
 
