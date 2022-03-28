@@ -123,6 +123,24 @@
       }
     }
 
+    // 面试题 08.04.幂集
+    /**
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+    var subsets = function (nums) {
+      const res = []
+
+      const dfs = (path, index) => {
+        res.push(path)
+        for (let i = index; i < nums.length; i++) {
+          dfs([...path, nums[i]], i + 1)
+        }
+      }
+
+      dfs([], 0)
+      return res
+    }
 
 
 
