@@ -440,7 +440,20 @@
       return res
     }
 
+    var getMaxBottle = (money) => {
+      const initB = Math.floor(money / 2)
+      let temp = initB, top = initB, res = initB
 
+      while (temp > 1 || top > 3) {
+        const _temp = Math.floor(temp / 2)
+        const _top = Math.floor(top / 4)
+        res = res + _temp + _top
+        temp = temp % 2 + _temp + _top
+        top = top % 4 + _temp + _top
+      }
+      console.log(res)
+      return res
+    }
 
 
 
