@@ -142,6 +142,28 @@
       return res
     }
 
+    // 448. 找到所有数组中消失的数字
+
+    /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+    var findDisappearedNumbers = function (nums) {
+      const res = []
+      const len= nums.length
+      const obj={}
+
+      for(let i=0;i< len;i++){
+        obj[nums[i]]=true
+      }
+
+      for(let i = 1; i <= len; i++){
+        if(!obj[i]) res.push(i)
+      }
+
+      return res
+    }
+
 
 
   </script>
