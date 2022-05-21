@@ -150,17 +150,37 @@
    */
     var findDisappearedNumbers = function (nums) {
       const res = []
-      const len= nums.length
-      const obj={}
+      const len = nums.length
+      const obj = {}
 
-      for(let i=0;i< len;i++){
-        obj[nums[i]]=true
+      for (let i = 0; i < len; i++) {
+        obj[nums[i]] = true
       }
 
-      for(let i = 1; i <= len; i++){
-        if(!obj[i]) res.push(i)
+      for (let i = 1; i <= len; i++) {
+        if (!obj[i]) res.push(i)
       }
 
+      return res
+    }
+
+    // 94. 二叉树的中序遍历
+
+    /**
+   * @param {TreeNode} root
+   * @return {number[]}
+   */
+    var inorderTraversal = function (root) {
+      const res = []
+
+      const helper = (node) => {
+        if (!node) return void (0)
+        node.left && helper(node.left)
+        res.push(node.val)
+        node.right && helper(node.right)
+      }
+
+      helper(root)
       return res
     }
 
