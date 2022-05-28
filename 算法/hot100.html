@@ -184,6 +184,31 @@
       return res
     }
 
+    // 169. 多数元素
+
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+    var majorityElement = function (nums) {
+      let count = 1
+      const len = nums.length
+      if (len === 1) return nums[0]
+      const target = Math.floor(len / 2)
+      nums.sort((a, b) => (a - b))
+
+      for (let i = 1; i < len; i++) {
+        if (nums[i - 1] === nums[i]) {
+          count++
+          console.log(count, target)
+          if (count > target) return nums[i]
+        } else {
+          count = 1
+        }
+      }
+    }
+
+
 
 
   </script>
