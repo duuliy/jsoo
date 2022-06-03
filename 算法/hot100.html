@@ -150,18 +150,33 @@
    */
     var findDisappearedNumbers = function (nums) {
       const res = []
-      const len= nums.length
-      const obj={}
+      const len = nums.length
+      const obj = {}
 
-      for(let i=0;i< len;i++){
-        obj[nums[i]]=true
+      for (let i = 0; i < len; i++) {
+        obj[nums[i]] = true
       }
 
-      for(let i = 1; i <= len; i++){
-        if(!obj[i]) res.push(i)
+      for (let i = 1; i <= len; i++) {
+        if (!obj[i]) res.push(i)
       }
 
       return res
+    }
+
+    // 226. 翻转二叉树
+    /**
+   * @param {TreeNode} root
+   * @return {TreeNode}
+   */
+    var invertTree = function (root) {
+       if (!root) return null
+      root.left && invertTree(root.left)
+      root.right && invertTree(root.right);
+      const lemp= root.right
+      root.right= root.left
+      root.left = lemp
+      return root
     }
 
 
