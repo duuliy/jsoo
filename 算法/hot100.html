@@ -237,17 +237,62 @@
      */
     //需要用dfs 去靠的思路解法
     var diameterOfBinaryTree = function (root) {
-      let ans = 1 
+      let ans = 1
       const dfs = (node) => {
         if (!node) return 0
-        let L = dfs(node.left) 
-        let R = dfs(node.right) 
+        let L = dfs(node.left)
+        let R = dfs(node.right)
         ans = Math.max(ans, L + R + 1)
-        return Math.max(L, R) + 1 
+        return Math.max(L, R) + 1
       }
       dfs(root)
       return ans - 1 // 根据题意 -1
     }
+
+    // 155. 最小栈
+    var MinStack = function () {
+      this.stack = [];
+      this.min = []
+      return this
+    }
+
+    /** 
+     * @param {number} val
+     * @return {void}
+     */
+    MinStack.prototype.push = function (val) {
+      this.stack.unshift(val)
+      if(!this.min.length){
+        this.min.unshift(val)
+      }else{
+        const min= Math.min(val, this.min[0])
+        this.min.unshift(min)
+      }
+    }
+
+    /**
+     * @return {void}
+     */
+    MinStack.prototype.pop = function () {
+      if(!this.stack.length) return void(0)
+      this.stack.shift()
+      this.min.shift()
+    }
+
+    /**
+     * @return {number}
+     */
+    MinStack.prototype.top = function () {
+      return this.stack[0]
+    }
+
+    /**
+     * @return {number}
+     */
+    MinStack.prototype.getMin = function () {
+      return this.min[0]
+    }
+
 
 
 
