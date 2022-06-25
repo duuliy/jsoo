@@ -262,10 +262,10 @@
      */
     MinStack.prototype.push = function (val) {
       this.stack.unshift(val)
-      if(!this.min.length){
+      if (!this.min.length) {
         this.min.unshift(val)
-      }else{
-        const min= Math.min(val, this.min[0])
+      } else {
+        const min = Math.min(val, this.min[0])
         this.min.unshift(min)
       }
     }
@@ -274,7 +274,7 @@
      * @return {void}
      */
     MinStack.prototype.pop = function () {
-      if(!this.stack.length) return void(0)
+      if (!this.stack.length) return void (0)
       this.stack.shift()
       this.min.shift()
     }
@@ -291,6 +291,26 @@
      */
     MinStack.prototype.getMin = function () {
       return this.min[0]
+    }
+
+    // 160. 相交链表
+    /**
+   * @param {ListNode} headA
+   * @param {ListNode} headB
+   * @return {ListNode}
+   */
+    var getIntersectionNode = function (headA, headB) {
+      if (!headA || !headB) return null
+      let mapA = new Map();
+      while (headA) {
+        mapA.set(headA, headA.val);
+        headA = headA.next;
+      }
+      while (headB) {
+        if (mapA.has(headB)) return headB
+        headB = headB.next;
+      }
+      return null
     }
 
 
