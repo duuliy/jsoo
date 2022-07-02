@@ -345,6 +345,30 @@
       return true
     }
 
+    // 338. 比特位计数
+
+    /**
+   * @param {number} n
+   * @return {number[]}
+   */
+    //最直观
+    var countBits = function (n) {
+      let ans = []
+      for (let i = 0; i <= n; i++) {
+        ans.push(i.toString(2).replace(/0/g, '').length)
+      }
+      return ans
+    }
+
+    //位运算 
+    var countBits = function (num) {
+      let arr = new Array(num + 1).fill(0);
+      for (let i = 1; i < arr.length; i++) {
+        arr[i] = arr[i & (i - 1)] + 1 
+      }
+      return arr
+    }
+
 
 
 
