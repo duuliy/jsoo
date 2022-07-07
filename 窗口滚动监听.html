@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>无限滚动例子</title>
+</head>
+
+<body>
+  <div id="example">
+    <!-- list -->
+  </div>
+  <script>
+    const option={
+      threshold: [0, 0.25, 0.5, 0.75, 1]  //决定了什么时候触发回调函数
+      //用户可以自定义这个数组。比如，[0, 0.25, 0.5, 0.75, 1]就表示当目标元素 0%、25%、50%、75%、100% 可见时，会触发回调函数
+    }
+
+    var io = new IntersectionObserver(entries => {
+      const item = entries[0]
+
+      // item下的属性
+      // time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
+      // target：被观察的目标元素，是一个 DOM 节点对象
+      // rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null
+      // boundingClientRect：目标元素的矩形区域的信息
+      // intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
+      // intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
+
+      //监听为list有剩余部分 返回undefined
+      if (item.intersectionRatio <= 0) return void (0)
+
+      //触底翻页
+      setPage(++page)
+    }, option)
+
+    // 开始观察
+    io.observe(document.getElementById('example'));
+
+    // 停止观察,暂停
+    io.unobserve(element);
+
+    // 关闭观察器，避免全局污染，内存泄漏
+    io.disconnect();
+
+
+  </script>
+</body>
+
+</html>
