@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>部门没做，是因为在其他地方已经做过了</title>
 </head>
 
 <body>
@@ -364,10 +364,57 @@
     var countBits = function (num) {
       let arr = new Array(num + 1).fill(0);
       for (let i = 1; i < arr.length; i++) {
-        arr[i] = arr[i & (i - 1)] + 1 
+        arr[i] = arr[i & (i - 1)] + 1
       }
       return arr
     }
+
+    // 62. 不同路径
+    /**
+   * @param {number} m
+   * @param {number} n
+   * @return {number}
+   */
+
+    //正确但超时
+    var uniquePaths = function (m, n) {
+      let res = 0
+
+      const helper = (i, j) => {
+        if (i > n || j > m) return
+        if (i === n && j === m) {
+          return res++
+        }
+        helper(i + 1, j)
+        helper(i, j + 1)
+
+      }
+
+      helper(1, 1)
+      return res
+    }
+
+    var uniquePaths = function (m, n) {
+      const dp = new Array(m).fill(0).map(() => new Array(n).fill(0))
+
+      for (let j = 0; j < m; j++) {
+        dp[j][0] = 1
+      }
+
+      for (let i = 0; i < n; i++) {
+        dp[0][i] = 1
+      }
+
+
+      for (let j = 1; j < m; j++) {
+        for (let i = 1; i < n; i++) {
+          dp[j][i] = dp[j][i - 1] + dp[j - 1][i]
+        }
+      }
+
+      return dp[m - 1][n - 1]
+    }
+
 
 
 
