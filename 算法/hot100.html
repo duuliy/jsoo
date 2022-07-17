@@ -415,6 +415,28 @@
       return dp[m - 1][n - 1]
     }
 
+    // 48. 旋转图像
+    /**
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+    // => [i, j] = [j, len - 1 - i] 向下取
+    //没有翻转存储，直接用骚方法，但是没产生新数组2
+    var rotate = function (matrix) {
+      const len = matrix.length
+      if (len < 2) return void (0)
+      for (let i = 0; i < len; i++) {
+        const temp = []
+        for (let j = 0; j < len; j++) {
+          temp.push(matrix[len - 1 - j][i])  //反转向上取
+        }
+        matrix.push(temp)
+      }
+      matrix.splice(0, len)
+      return matrix
+    }
+
+
 
 
 
