@@ -436,6 +436,56 @@
       return matrix
     }
 
+    // 114. 二叉树展开为链表
+    /**
+   * @param {TreeNode} root
+   * @return {void} Do not return anything, modify root in-place instead.
+   */
+    // 题意很垃圾，可以忽略
+    var flatten = function (root) {
+      while (root) {
+        if (!root.left) {
+          root = root.right;
+        } else {
+          let temp = root.left;
+          // 找到左节点的最右树节点
+          while (temp.right) temp = temp.right;
+          // 将树的右节点接在左节点的最右树节点上
+          temp.right = root.right;
+          // 右节点替换为左节点
+          root.right = root.left;
+          // 左节点的值置为null
+          root.left = null;
+          // 开始下一次遍历
+          root = root.right;
+        }
+      }
+    }
+
+    // 739. 每日温度
+    /**
+   * @param {number[]} temperatures
+   * @return {number[]}
+   */
+    var dailyTemperatures = function (temperatures) {
+      const answer = [], len = temperatures.length
+
+      for (let i = 0; i < len; i++) {
+        const temperature = temperatures[i]
+        for (let j = i + 1; j < len; j++) {
+          const _temperature = temperatures[j]
+          if (_temperature > temperature) {
+            answer.push(j - i)
+            break;
+          } else {
+            j === len - 1 && answer.push(0)
+          }
+        }
+      }
+      answer.push(0)
+      return answer
+    }
+
 
 
 
