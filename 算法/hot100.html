@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>部门没做，是因为在其他地方已经做过了</title>
+  <title>部分没做，是因为在其他地方已经做过了</title>
 </head>
 
 <body>
@@ -485,6 +485,53 @@
       answer.push(0)
       return answer
     }
+
+    //128. 最长连续序列
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+    var longestConsecutive = function (nums) {
+      let _nums = [...new Set(nums)]
+      _nums.sort((a, b) => a - b)
+      let l = 0, r = 1, len = _nums.length, res = 0
+      while (l < r && r <= len) {
+        if (_nums[r] - _nums[r - 1] === 1) {
+          r++
+        } else {
+          const _res = r - l
+          res = Math.max(res, _res)
+          l = r
+          r = l + 1
+        }
+      }
+      return res
+    }
+
+    //提高思维写法
+    var longestConsecutive = function (nums) {
+      nums.sort((a, b) => a - b)
+      let l = 0, r = 1, len = nums.length, res = 0, cache = 0
+      console.log(nums)
+      while (l < r && r <= len) {
+        if (nums[r] - nums[r - 1] === 1) {
+          r++
+        } else if (nums[r] === nums[r - 1]) {
+          r++
+          cache++
+        } else {
+          console.log(l, r)
+          const _res = r - l - cache
+          cache = 0
+          res = Math.max(res, _res)
+          l = r
+          r = l + 1
+        }
+      }
+      return res
+    }
+
+
 
 
 
