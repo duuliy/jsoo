@@ -531,6 +531,24 @@
       return res
     }
 
+    // 55. 跳跃游戏
+    /**
+   * @param {number[]} nums
+   * @return {boolean}
+   */
+    var canJump = function (nums) {
+      let lastIdx = nums.length - 1
+
+      for (let i = nums.length - 2; i >= 0; i--) {
+        if (nums[i] + i >= lastIdx) {
+          lastIdx = i;
+        }
+      }
+
+      return lastIdx === 0
+    }
+
+
 
 
 
