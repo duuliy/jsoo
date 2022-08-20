@@ -577,6 +577,38 @@
       return res
     }
 
+    // 200. 岛屿数量
+
+    /**
+   * @param {character[][]} grid
+   * @return {number}
+   */
+    var numIslands = function (grid) {
+      let res = 0
+      const cLen = grid.length, rLen = grid[0].length
+
+      const helper = (c, r) => {
+        if (c >= cLen || r >= rLen || r < 0 || c < 0 || grid[c][r] === '0') return void (0)
+        grid[c][r] = '0'
+
+        helper(c, r + 1)
+        helper(c, r - 1)
+        helper(c + 1, r)
+        helper(c - 1, r)
+      }
+
+      for (let i = 0; i < cLen; i++) {
+        for (let j = 0; j < rLen; j++) {
+          if (grid[i][j] === '1') {
+            helper(i, j)
+            res++
+          }
+        }
+      }
+
+      return res
+    }
+
 
 
 
