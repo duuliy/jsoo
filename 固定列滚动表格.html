@@ -3,21 +3,25 @@
 <head>
   <meta charset="utf-8">
   <style>
-    .wrap{
-     /* width: 1200px;
+    .wrap {
+      /* width: 1200px;
      overflow-x: auto;
      border: 1px solid black; */
     }
+
     .container {
       display: flex;
       /* width: 100%; */
       max-height: 500px;
       /* overflow-x: auto; */
-        width: 1200px;
-     overflow-x: auto;
-     border: 1px solid black;
+      width: 1200px;
+       /* //内容有多宽，盒子就有多宽，不会顾及父级盒子有多宽，只满足自己的需求 */
+      /* width: max-content; */
+      overflow-x: auto;
+      border: 1px solid black;
     }
-    .container>div{
+
+    .container>div {
       /* display: inline-block; */
       min-width: 40%;
       /* max-width: 40%; */
@@ -50,16 +54,16 @@
       background: black;
     } */
 
-    .cont3{
+    .cont3 {
       position: sticky;
       right: 0;
     }
 
-    .cont3 h4{
+    .cont3 h4 {
       background: white;
     }
 
-    .cont3 .content{
+    .cont3 .content {
       background: black;
     }
   </style>
@@ -67,20 +71,20 @@
 
 <body>
   <!-- <div class="wrap"> -->
-    <div class="container">
-      <div class="cont1">
-        <h4>苹果</h4>
-        <div class="content">1</div>
-      </div>
-      <div>
-        <h4>香蕉</h4>
-        <div class="content">2</div>
-      </div>
-      <div class="cont3">
-        <h4>葡萄</h4>
-        <div class="content">3</div>
-      </div>
+  <div class="container">
+    <div class="cont1">
+      <h4>苹果</h4>
+      <div class="content">1</div>
     </div>
+    <div>
+      <h4>香蕉</h4>
+      <div class="content">2</div>
+    </div>
+    <div class="cont3">
+      <h4>葡萄</h4>
+      <div class="content">3</div>
+    </div>
+  </div>
   <!-- </div> -->
 </body>
 
