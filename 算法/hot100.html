@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>部分没做，是因为在其他地方已经做过了</title>
 </head>
 
 <body>
@@ -364,10 +364,256 @@
     var countBits = function (num) {
       let arr = new Array(num + 1).fill(0);
       for (let i = 1; i < arr.length; i++) {
-        arr[i] = arr[i & (i - 1)] + 1 
+        arr[i] = arr[i & (i - 1)] + 1
       }
       return arr
     }
+
+    // 62. 不同路径
+    /**
+   * @param {number} m
+   * @param {number} n
+   * @return {number}
+   */
+
+    //正确但超时
+    var uniquePaths = function (m, n) {
+      let res = 0
+
+      const helper = (i, j) => {
+        if (i > n || j > m) return
+        if (i === n && j === m) {
+          return res++
+        }
+        helper(i + 1, j)
+        helper(i, j + 1)
+
+      }
+
+      helper(1, 1)
+      return res
+    }
+
+    var uniquePaths = function (m, n) {
+      const dp = new Array(m).fill(0).map(() => new Array(n).fill(0))
+
+      for (let j = 0; j < m; j++) {
+        dp[j][0] = 1
+      }
+
+      for (let i = 0; i < n; i++) {
+        dp[0][i] = 1
+      }
+
+
+      for (let j = 1; j < m; j++) {
+        for (let i = 1; i < n; i++) {
+          dp[j][i] = dp[j][i - 1] + dp[j - 1][i]
+        }
+      }
+
+      return dp[m - 1][n - 1]
+    }
+
+    // 48. 旋转图像
+    /**
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+    // => [i, j] = [j, len - 1 - i] 向下取
+    //没有翻转存储，直接用骚方法，但是没产生新数组2
+    var rotate = function (matrix) {
+      const len = matrix.length
+      if (len < 2) return void (0)
+      for (let i = 0; i < len; i++) {
+        const temp = []
+        for (let j = 0; j < len; j++) {
+          temp.push(matrix[len - 1 - j][i])  //反转向上取
+        }
+        matrix.push(temp)
+      }
+      matrix.splice(0, len)
+      return matrix
+    }
+
+    // 114. 二叉树展开为链表
+    /**
+   * @param {TreeNode} root
+   * @return {void} Do not return anything, modify root in-place instead.
+   */
+    // 题意很垃圾，可以忽略
+    var flatten = function (root) {
+      while (root) {
+        if (!root.left) {
+          root = root.right;
+        } else {
+          let temp = root.left;
+          // 找到左节点的最右树节点
+          while (temp.right) temp = temp.right;
+          // 将树的右节点接在左节点的最右树节点上
+          temp.right = root.right;
+          // 右节点替换为左节点
+          root.right = root.left;
+          // 左节点的值置为null
+          root.left = null;
+          // 开始下一次遍历
+          root = root.right;
+        }
+      }
+    }
+
+    // 739. 每日温度
+    /**
+   * @param {number[]} temperatures
+   * @return {number[]}
+   */
+    var dailyTemperatures = function (temperatures) {
+      const answer = [], len = temperatures.length
+
+      for (let i = 0; i < len; i++) {
+        const temperature = temperatures[i]
+        for (let j = i + 1; j < len; j++) {
+          const _temperature = temperatures[j]
+          if (_temperature > temperature) {
+            answer.push(j - i)
+            break;
+          } else {
+            j === len - 1 && answer.push(0)
+          }
+        }
+      }
+      answer.push(0)
+      return answer
+    }
+
+    //128. 最长连续序列
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+    var longestConsecutive = function (nums) {
+      let _nums = [...new Set(nums)]
+      _nums.sort((a, b) => a - b)
+      let l = 0, r = 1, len = _nums.length, res = 0
+      while (l < r && r <= len) {
+        if (_nums[r] - _nums[r - 1] === 1) {
+          r++
+        } else {
+          const _res = r - l
+          res = Math.max(res, _res)
+          l = r
+          r = l + 1
+        }
+      }
+      return res
+    }
+
+    //提高思维写法
+    var longestConsecutive = function (nums) {
+      nums.sort((a, b) => a - b)
+      let l = 0, r = 1, len = nums.length, res = 0, cache = 0
+      console.log(nums)
+      while (l < r && r <= len) {
+        if (nums[r] - nums[r - 1] === 1) {
+          r++
+        } else if (nums[r] === nums[r - 1]) {
+          r++
+          cache++
+        } else {
+          console.log(l, r)
+          const _res = r - l - cache
+          cache = 0
+          res = Math.max(res, _res)
+          l = r
+          r = l + 1
+        }
+      }
+      return res
+    }
+
+    // 55. 跳跃游戏
+    /**
+   * @param {number[]} nums
+   * @return {boolean}
+   */
+    var canJump = function (nums) {
+      let lastIdx = nums.length - 1
+
+      for (let i = nums.length - 2; i >= 0; i--) {
+        if (nums[i] + i >= lastIdx) {
+          lastIdx = i;
+        }
+      }
+
+      return lastIdx === 0
+    }
+
+    // 238. 除自身以外数组的乘积
+
+    /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+
+    //用全积和除法最简单，但是题目要求不能用
+    //分别用前缀积乘以后缀积的到答案
+    var productExceptSelf = function (nums) {
+      const len = nums.length
+      const res = new Array(len)
+      let totle = 1
+
+      for (let i = 0; i < len; i++) {
+        res[i] = totle
+        totle *= nums[i]
+      }
+
+      totle = 1
+
+      for (let i = len - 1; i > -1; i--) {
+        res[i] *= totle
+        totle *= nums[i]
+      }
+
+      return res
+    }
+
+    // 200. 岛屿数量
+
+    /**
+   * @param {character[][]} grid
+   * @return {number}
+   */
+    var numIslands = function (grid) {
+      let res = 0
+      const cLen = grid.length, rLen = grid[0].length
+
+      const helper = (c, r) => {
+        if (c >= cLen || r >= rLen || r < 0 || c < 0 || grid[c][r] === '0') return void (0)
+        grid[c][r] = '0'
+
+        helper(c, r + 1)
+        helper(c, r - 1)
+        helper(c + 1, r)
+        helper(c - 1, r)
+      }
+
+      for (let i = 0; i < cLen; i++) {
+        for (let j = 0; j < rLen; j++) {
+          if (grid[i][j] === '1') {
+            helper(i, j)
+            res++
+          }
+        }
+      }
+
+      return res
+    }
+
+
+
+
+
+
 
 
 
