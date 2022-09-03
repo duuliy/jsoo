@@ -641,6 +641,41 @@
     }
 
 
+    // 287. 寻找重复数
+
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+    //1.暴力 2.set，map 3.
+    var findDuplicate = function (nums) {
+      nums.sort((a, b) => a - b)
+      for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] === nums[i + 1]) {
+          return nums[i]
+        }
+      }
+    }
+
+    //4.Floyd判圈算法，理解于环
+    var findDuplicate = function (nums) {
+      let fast = 0, slow = 0
+
+      while (true) {
+        slow = nums[slow]
+        fast = nums[nums[fast]]  //跑2n
+        if (slow === fast) {
+          let _slow = 0
+          while (nums[_slow] !== nums[slow]) {
+            slow = nums[slow]
+            _slow = nums[_slow]
+          }
+          return nums[slow]
+        }
+      }
+    }
+
+
 
 
 
