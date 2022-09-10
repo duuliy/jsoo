@@ -675,6 +675,42 @@
       }
     }
 
+    // 347. 前 K 个高频元素
+
+    /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number[]}
+   */
+    //太容易想到了，这周偷个懒
+    var topKFrequent = function (nums, k) {
+      let arr = [...new Set(nums)]
+      let conut = 0
+      let rest = []
+      let m = new Map()
+      for (let i = 0; i < arr.length; i++) {
+        nums.forEach(element => {
+          if (element == arr[i]) {
+            conut++
+          }
+        });
+        m.set(arr[i], conut)
+        conut = 0
+      }
+
+      let arr2 = Array.from(m)
+      arr2.sort(function (a, b) {
+        return b[1] - a[1]
+      })
+      for (let i = 0; i < k; i++) {
+
+        rest.push(arr2[i][0])
+
+      }
+
+      return rest
+    };
+
 
 
 
