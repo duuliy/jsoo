@@ -709,7 +709,27 @@
       }
 
       return rest
-    };
+    }
+
+    // 49. 字母异位词分组
+
+    /**
+   * @param {string[]} strs
+   * @return {string[][]}
+   */
+    var groupAnagrams = function (strs) {
+      const map = new Map()
+      for (let str of strs) {
+        let arr = Array.from(str)
+        arr.sort()
+        let s = arr.toString()
+        let list = map.get(s) ? map.get(s) : new Array()
+        list.push(str)
+        map.set(s, list)
+      }
+      return Array.from(map.values())
+    }
+
 
 
 
