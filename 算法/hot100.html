@@ -730,6 +730,28 @@
       return Array.from(map.values())
     }
 
+    // 581. 最短无序连续子数组
+
+    /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+    var findUnsortedSubarray = function (nums) {
+      const len = nums.length
+      if (len === 1) return 0
+      let copySort = Array.from(nums).sort((a, b) => a - b)
+      let max = -Infinity
+      let min = Infinity
+      for (let i = 0; i < len; i++) {
+        if (nums[i] !== copySort[i]) {
+          max = Math.max(max, i)
+          min = Math.min(min, i)
+        }
+      }
+      const targetLen = max - min + 1
+      return targetLen > 0 ? targetLen : 0
+    }
+
 
 
 
