@@ -752,6 +752,27 @@
       return targetLen > 0 ? targetLen : 0
     }
 
+    // 647. 回文子串
+
+    /**
+   * @param {string} s
+   * @return {number}
+   */
+
+    //暴力+isPalindrome 估计超时
+    //左指针顺序累加，右指针逆序累加，相等则为回文串
+    var countSubstrings = function (s) {
+      let count = 0;
+      for (let i = 0; i < s.length; i++) {
+        let l = '', r = ''
+        for (let j = i; j < s.length; j++) {
+          l = l + s[j], r = s[j] + r // 分别按顺序和逆序累加字符串
+          if (l === r) count++
+        }
+      }
+      return count
+    }
+
 
 
 
