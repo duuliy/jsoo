@@ -799,6 +799,25 @@
       return res
     }
 
+    // 406. 根据身高重建队列
+
+    /**
+   * @param {number[][]} people
+   * @return {number[][]}
+   */
+    // 身高按降序排列，同一高度按k升序排列(反向理解题意) [7,0],[7,1],[6,1],[5,0],[5,2],[4,4]
+    // 遍历people，把这个人插入到k索引的对应位置（高的在前面，后面的就不影响current，所以可以对应的插入） [5,0],[7,0],[5,2],[6,1],[4,4],[7,1]
+    var reconstructQueue = function (people) {
+      if (!people || !people.length) return []
+      people.sort((a, b) => a[0] === b[0] ? a[1] - b[1] : b[0] - a[0])
+
+      const res = []
+      people.forEach(item => res.splice(item[1], 0, item))
+      return res
+    }
+
+
+
 
 
 
