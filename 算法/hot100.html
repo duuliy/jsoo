@@ -817,6 +817,42 @@
     }
 
 
+    // 621. 任务调度器
+    /**
+   * @param {character[]} tasks
+   * @param {number} n
+   * @return {number}
+   */
+
+    // 重点：画图建立数学模型
+    // A B C
+    // A B C
+    // A B 冷却
+    // A B 
+    
+    //先排个数最多的任务A，在A的冷却时间内插入其他任务
+    //如图 得到 (arr[0] - 1) * (n + 1) 最后一行不需要冷却
+    //在加上最后一行的AB, (arr[0] - 1) * (n + 1) + maxCount
+
+    //但是此时如果有3个D，则会不满足上述模型，而取tasks.length
+
+    var leastInterval = function (tasks, n) {
+      if (n < 1) return tasks.length
+      let map = new Map()
+      for (let task of tasks) {
+        map.set(task, map.has(task) ? map.get(task) + 1 : 1)
+      }
+      let counts = Array.from(map).map(item => item[1]).sort((a, b) => b - a)
+      let maxCount = 0
+      for (let count of counts) {
+        if (count === counts[0]) maxCount++ //数学模型得到最后一行的个数
+        else break
+      }
+      let sum = (counts[0] - 1) * (n + 1) + maxCount;
+      return sum > tasks.length ? sum : tasks.length;
+    }
+
+
 
 
 
