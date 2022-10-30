@@ -829,7 +829,7 @@
     // A B C
     // A B 冷却
     // A B 
-    
+
     //先排个数最多的任务A，在A的冷却时间内插入其他任务
     //如图 得到 (arr[0] - 1) * (n + 1) 最后一行不需要冷却
     //在加上最后一行的AB, (arr[0] - 1) * (n + 1) + maxCount
@@ -851,6 +851,35 @@
       let sum = (counts[0] - 1) * (n + 1) + maxCount;
       return sum > tasks.length ? sum : tasks.length;
     }
+
+
+    // 394. 字符串解码
+    /**
+   * @param {string} s
+   * @return {string}
+   */
+    //先抛开递归来思考
+    var decodeString = function (s) {
+      let stack = []
+      let res = ''
+      let num = 0
+      for (let c of s) {
+        if (c === '[') {
+          stack.push([num, res]);  //这里不带; 不能[num, res] = [0, '']
+          num = 0
+          res = ''
+        } else if (c === ']') {
+          const [preNum, preRes]= stack.pop()
+          res = preRes + res.repeat(preNum)
+        } else if (!isNaN(c)) {
+          num = num * 10 + parseInt(c)  //多位数进位
+        } else {
+          res += c
+        }
+      }
+      return res
+    }
+
 
 
 
