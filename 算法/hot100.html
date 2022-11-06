@@ -858,7 +858,7 @@
    * @param {string} s
    * @return {string}
    */
-    //先抛开递归来思考
+    //先抛开递归方式，用栈来思考
     var decodeString = function (s) {
       let stack = []
       let res = ''
@@ -869,7 +869,7 @@
           num = 0
           res = ''
         } else if (c === ']') {
-          const [preNum, preRes]= stack.pop()
+          const [preNum, preRes] = stack.pop()
           res = preRes + res.repeat(preNum)
         } else if (!isNaN(c)) {
           num = num * 10 + parseInt(c)  //多位数进位
@@ -878,6 +878,34 @@
         }
       }
       return res
+    }
+
+    // 31. 下一个排列 （NO）
+    /**
+   * @param {number[]} nums
+   * @return {void} Do not return anything, modify nums in-place instead.
+   */
+
+    //双指针，这题除开暴力，属于难想，只能推断从右到左的前提 去靠剩下的变换
+    //1.指针依靠后向前，找到倒序最大值的前一位 
+    //2.指针依靠后向前，大于1的第一个数字，交换1，2的数字
+    //3.升序排列1之后的数组 （剩下的数组一最小组合返回值）
+    var nextPermutation = function (nums) {
+      const n = nums.length - 1
+      let i = n - 1
+      while (i >= 0 && nums[i] >= nums[i + 1]) i--
+
+      if (i >= 0) { //如果i=0 说明已经是最大的排序，需要返回全数组的升序
+        let j = n
+        while (j >= 0 && nums[i] >= nums[j]) j--
+        [nums[i], nums[j]] = [nums[j], nums[i]]
+      }
+
+      let l = i + 1, r = n
+      while (l < r) {
+        [nums[l], nums[r]] = [nums[r], nums[l]]
+        l++, r--
+      }
     }
 
 
