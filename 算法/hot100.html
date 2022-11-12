@@ -908,6 +908,24 @@
       }
     }
 
+    // 96. 不同的二叉搜索树
+    /**
+     * @param {number} n
+     * @return {number}
+    */
+
+    //很像斐波那契
+    var numTrees = function (n) {
+        if (n == 0 || n == 1) {
+        return 1
+      }
+      let num = 0
+      for (let i = 0; i <= n - 1; i++) {
+        num += numTrees(i) * numTrees(n - i - 1)
+      }
+      return num
+    }
+
 
 
 
