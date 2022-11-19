@@ -916,7 +916,7 @@
 
     //很像斐波那契
     var numTrees = function (n) {
-        if (n == 0 || n == 1) {
+      if (n == 0 || n == 1) {
         return 1
       }
       let num = 0
@@ -924,6 +924,26 @@
         num += numTrees(i) * numTrees(n - i - 1)
       }
       return num
+    }
+
+    // 538. 把二叉搜索树转换为累加树
+    /**
+     * @param {TreeNode} root
+     * @return {TreeNode}
+     */
+    var convertBST = function (root) {
+      let totle = 0
+
+      const helper = (node) => {
+        if (!node) return void (0)
+        node.right && helper(node.right)
+        node.val = totle + node.val
+        totle = node.val
+        node.left && helper(node.left)
+      }
+
+      helper(root)
+      return root
     }
 
 
