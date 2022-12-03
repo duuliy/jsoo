@@ -975,7 +975,7 @@
    * @param {TreeNode} root
    * @return {boolean}
    */
-  
+
     var isValidBST = function (root) {
       const helper = (root, lower, upper) => {
         if (root === null) {
@@ -988,6 +988,30 @@
       }
 
       return helper(root, -Infinity, Infinity)
+    }
+
+    // 148. 排序链表
+    /**
+   * @param {ListNode} head
+   * @return {ListNode}
+   */
+    //转数组吧,虽然超时 归并太麻烦了.
+    var sortList = function (head) {
+      let res = [], node = head, _node = null
+      while (node) {
+        res.push(node.val)
+        node = node.next
+      }
+
+      res.sort((a, b) => b - a)
+      while (res.length) {
+        _node = {
+          val: res.shift(),
+          next: _node
+        }
+      }
+
+      return _node
     }
 
 
