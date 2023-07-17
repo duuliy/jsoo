@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gif上面 加水印 加canvas截图</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/gif.js/0.2.0/gif.js"></script>
+<script src="gif.worker.js"></script>
+<script src="libgif.js"></script>
+<style>
+  .gg{
+    margin: 50px;
+    color: red;
+    background-color: rgba(0,0,0,0);
+    /*background-color: rgba(0,0,0,1);*/
+    z-index:1;
+    position: relative;
+  }
+</style>
+<body>
+<div class="gg" id="capture">
+  8888888
+</div>
+</body>
+
+<script>
+  const getGifWorker = () => {
+    const blob = new Blob([gifWorkerContent])
+    return window.URL.createObjectURL(blob)
+  }
+    
+  var input = document.createElement('input');
+  input.setAttribute('type', 'file');
+  input.addEventListener('change', function (e) {
+    console.time('gifaddtext');
+    preLoadGif(input.files[0]);
+  });
+  document.body.appendChild(input);
+
+
+  preLoadGif= function (gifSource) {
+    html2canvas(document.querySelector("#capture"),{
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null  //不要背景图
+    }).then(canvas3 => {
+      var gifImg = document.createElement('img');
+      var reader = new FileReader();
+      reader.readAsDataURL(gifSource);
+      reader.onloadend = function (e) {
+        var objUrl = e.target.result;
+        // gif库需要img标签配置下面两个属性
+        var img = new Image();
+        img.src = objUrl;
+        img.onload = function () {
+          var width = this.width;
+          var height = this.height;
+          // 新建gif实例
+          var rub = new SuperGif({ gif: gifImg } );
+          var gif = new GIF({
+            workers: 10, // 启用worker数。
+            quality: 10, // 图像质量
+            width: width,
+            height: height,
+            dither: false,
+            repeat: 0,
+            background: '#fff',
+            // transparent: true,
+            workerScript: getGifWorker()
+            // workerScript:'./gif.worker.js'
+          });
+          rub.load(function () {
+            console.log(rub.get_length())
+            for (var i = 1; i <= rub.get_length(); i++) {
+              // 遍历gif实例的每一帧
+              rub.move_to(i);
+              var canvas = rub.get_canvas();
+              // 通过源码可以看到lib gif 是可以获取到每一帧的延迟的，为了方便，修改了源码481行，在每一帧都返回图片的数据
+              // var delay = canvas.frames[i - 1].delay;
+              var canvas2 = document.createElement('canvas');
+              canvas2.width = width;
+              canvas2.height = height;
+              var context = canvas2.getContext("2d");
+              canvas.fillStyle = 'rgba(255, 255, 255, 1)'
+              context.drawImage(canvas, 0, 0, canvas2.width, canvas2.height);
+              context.drawImage(canvas3, 0, 50, canvas3.width, canvas3.height);
+              context.font = '28px bold 黑体';
+              context.fillStyle = 'rgba(255, 0, 0, 1)';
+              context.textAlign = 'center';
+              context.fillText('添加文字'+ i, 80, 50);
+              // context.clearColor = 'rgba(0, 0, 0, 0)'
+              gif.addFrame(context, {copy: true, delay: 5});
+            }
+            gif.on('finished', function(blob) {
+              console.timeEnd('gifaddtext');
+              console.log('生成成功！');
+              window.open(URL.createObjectURL(blob));
+              
+              // const a = document.createElement('a')
+              // a.href = URL.createObjectURL(blob)
+              // a.download = `MMC_Pww.gif`
+              // a.click()
+            });
+
+            gif.render();
+            
+          });
+        }
+        gifImg.setAttribute('rel:animated_src', objUrl)
+        gifImg.setAttribute('rel:auto_play', '0')
+        gifImg.style.display = 'none';
+        document.body.appendChild(gifImg);
+      }
+    })
+  }
+</script>
+</html>
