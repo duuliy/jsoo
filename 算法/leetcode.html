@@ -848,9 +848,10 @@
    * @return {boolean}
    */
 
-    //1.bfs计算节点层级
-    //2.dfs 通过1计算每个节点层级差，超过1，则不是平衡
-    //以下简化计算，值得思考！！！
+    //dfs
+    //左右节点的层级差，超过1，则不是平衡
+    //递归得到左右层级
+    //注意，当最高层级左右子节点位平衡二叉树，不代表 子树的左右层级差不超过1，所以需要继续递归。
     function getHeight(node) {
       if (!node) return 0
       return Math.max(getHeight(node.left), getHeight(node.right)) + 1
