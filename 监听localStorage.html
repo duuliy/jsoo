@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //监听localStorage，同源，并且不同页面才能监听成功
+        window.addEventListener('storage', handleStorage)
+
+
+        //在相同页面出发需要dispatchEvent
+        const eventStorage = new Event('storage')
+        eventStorage.key = 'test'
+        eventStorage.newValue = 666
+        window.dispatchEvent(eventStorage)
+    </script>
+</body>
+
+</html>
