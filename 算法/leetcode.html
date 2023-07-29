@@ -998,6 +998,23 @@
       return result
     }
 
+    var divingBoard = function (shorter, longer, k) {
+      const result = []
+      if (k === 0) return []
+      if (shorter === longer) return [shorter * k]
+
+      const helper = (i) => {
+        if (i > k) return
+        const longerCount = i
+        const shorterCount = k - i
+        result.push(shorterCount * shorter + longerCount * longer)
+        helper(++i)
+      }
+
+      helper(0)
+      return result
+    }
+
   </script>
 </body>
 
