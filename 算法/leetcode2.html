@@ -100,7 +100,7 @@
     };
 
 
-    //5.最长回文数
+    //5.最长回文子串
     /**
      * @param {string} s
      * @return {string}
@@ -308,7 +308,7 @@
     }
 
 
-    // 198. 打家劫舍 提交很多次，打脑壳
+    // 198. 打家劫舍
     /**  动规
      * @param {number[]} nums
      * @return {number}
@@ -488,7 +488,7 @@
 
     //  dp[120] = Math.min(dp[119] + 1, dp[118] + 1, dp[115] + 1); coint=1,2,5
     // dp[i] = Math.min(dp[i - coin] + 1, dp[i - coin] + 1, ...)
-    const coinChange = (coins, amount) => {
+    var coinChange = (coins, amount) => {
       let dp = new Array(amount + 1).fill(Infinity)
       dp[0] = 0
 
@@ -499,6 +499,22 @@
       }
       return dp[amount] === Infinity ? -1 : dp[amount]
     }
+
+    //更易理解
+    var coinChange = function (coins, amount) {
+      let dp = new Array(amount + 1).fill(Infinity);
+      dp[0] = 0;
+
+      for (let i = 1; i <= amount; i++) {
+        for (let coin of coins) {
+          if (i - coin >= 0) {
+            dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+          }
+        }
+      }
+
+      return dp[amount] === Infinity ? -1 : dp[amount];
+    };
 
     //208. 实现 Trie (前缀树)  实际就是单向链表
 
