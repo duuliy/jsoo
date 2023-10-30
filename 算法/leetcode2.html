@@ -1047,6 +1047,7 @@
    * @return {ListNode}
    */
 
+   //注意引用类型特点，变量赋值另一个变量，变量改变不影响变量，但是变量的引用改变，另一个变量会改变。链表玩的就是引用，搞清楚这个，下面19就很简单了
     var reverseBetween = function (head, left, right) {
       let i = 1
       let current = head
