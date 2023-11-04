@@ -1126,7 +1126,9 @@
    * @param {ListNode} head
    * @param {number} n
    * @return {ListNode}
-   */ //链表太恶心了，还是转数组吧
+   */
+    //链表太恶心了，还是转数组吧
+    //可以用快慢指针，2慢=快，快index-慢index-Nindex=慢头正数位置来处理
     var removeNthFromEnd = function (head, n) {
       let i = 1
       let current = head
