@@ -999,7 +999,7 @@
       return result === Infinity ? 0 : result
     }
 
-    // 416. 分割等和子集(01背包变种) 难，没吃透
+    // 416. 分割等和子集(01背包变种)
 
     /**  动规
    * @param {number[]} nums
@@ -1010,7 +1010,7 @@
       const isGetBoo = total % 2 === 0
       if (!isGetBoo) return false
 
-      let sum = total / 2
+      let sum = total / 2 //背包重量
       let n = nums.length
 
       // 初始化二维数组 (n + 1)行，(sum/2 + 1)列
@@ -1038,6 +1038,27 @@
       return dp[n][sum]
     }
 
+    // 更易理解的01背包
+    // 重量和物品价值相等
+    // dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
+    var canPartition = function (nums) {
+      const total = (nums.reduce((p, v) => p + v));
+      const isGetBoo = total % 2 === 0
+      if (!isGetBoo) return false //有余数代表不能均分为二
+      let sum = total / 2 //背包重量
+
+      const dp = Array(sum + 1).fill(0);
+      for (let i = 0; i < nums.length; i++) {
+        for (let j = sum; j >= nums[i]; j--) { //j >= nums[i] 背包必须比物品大
+          dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
+          if (dp[j] === sum) {
+            return true;
+          }
+        }
+      }
+      return dp[sum] === sum; // 当背包装满dp[sum] 的价值 等于 数组一半的重量，代表ok
+    };
+
     // 92. 反转链表 II
 
     /**
@@ -1047,7 +1068,7 @@
    * @return {ListNode}
    */
 
-   //注意引用类型特点，变量赋值另一个变量，变量改变不影响变量，但是变量的引用改变，另一个变量会改变。链表玩的就是引用，搞清楚这个，下面19就很简单了
+    //注意引用类型特点，变量赋值另一个变量，变量改变不影响变量，但是变量的引用改变，另一个变量会改变。链表玩的就是引用，搞清楚这个，下面19就很简单了
     var reverseBetween = function (head, left, right) {
       let i = 1
       let current = head
