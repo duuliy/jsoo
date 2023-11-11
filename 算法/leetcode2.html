@@ -1180,6 +1180,27 @@
    * @param {string} p
    * @return {number[]}
    */
+
+  //  p排序后对比和获取p所有排列均超时
+   var findAnagrams = function (s, p) {
+      const _p = p.split('').sort().join('')
+      const res = []
+      let left = 0, right = p.length - 1, sl = s.length
+
+      while (right < sl) {
+        const str = s.substring(left, right + 1).split('').sort().join('')
+        console.log(str)
+        if (str === _p) {
+          res.push(left)
+        }
+        left++
+        right++
+      }
+
+      return res
+    }
+
+    //map比较好想,只有str和p中相同字母数量一样是异位词
     var findAnagrams = function (s, p) {
       function addCountToMap(map, str) {
         if (!map[str]) {
@@ -1230,6 +1251,40 @@
       }
 
       return result
+    }
+
+    //技巧：由小写字母组成，两字母则unicode之差不会大于26
+    //时间比map更优秀，遍历更少。但是charCodeAt内存开销会更大
+    var findAnagrams = function (s, p) {
+      const sLen = s.length, pLen = p.length;
+
+      if (sLen < pLen) {
+        return [];
+      }
+
+      const ans = [];
+      const sCount = new Array(26).fill(0);
+      const pCount = new Array(26).fill(0);
+      for (let i = 0; i < pLen; ++i) {
+        ++sCount[s[i].charCodeAt() - 'a'.charCodeAt()];
+        ++pCount[p[i].charCodeAt() - 'a'.charCodeAt()];
+      }
+      const _pCountStr = pCount.toString()
+
+      if (sCount.toString() === _pCountStr) {
+        ans.push(0);
+      }
+
+      for (let i = 0; i < sLen - pLen; ++i) {
+        --sCount[s[i].charCodeAt() - 'a'.charCodeAt()]; //滑动窗口还原left位置
+        ++sCount[s[i + pLen].charCodeAt() - 'a'.charCodeAt()];
+
+        if (sCount.toString() === _pCountStr) {
+          ans.push(i + 1); //i(left)位置还原,所以是i+1开始
+        }
+      }
+
+      return ans;
     }
 
     // 150. 逆波兰表达式求值
