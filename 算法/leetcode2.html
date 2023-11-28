@@ -1297,18 +1297,17 @@
       let stack = []
       const opMap = {
         '+': (a, b) => a + b,
-        '-': (a, b) => b - a,
+        '-': (a, b) => a - b,
         '*': (a, b) => a * b,
-        '/': (a, b) => parseInt(b / a),
+        '/': (a, b) => a / b,
       }
 
       for (token of tokens) {
         const op = opMap[token]
         if (op) {
-          //并且转number
           const a = parseInt(stack.pop())
           const b = parseInt(stack.pop())
-          const res = op(a, b)
+          const res = parseInt(op(b, a))
           stack.push(res)
         } else {
           stack.push(token)
