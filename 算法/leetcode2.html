@@ -1323,31 +1323,19 @@
    * @return {string}
    */
     var simplifyPath = function (path) {
-      let tokens = path.split("/")
+      const arr = path.split('/')
       let stack = []
 
-      for (let index = 0; index < tokens.length; index++) {
-        let token = tokens[index]
-        if (token === "..") {
-          if (stack.length > 0) {
-            stack.pop()
-          }
-        } else if (!(token === "") && !(token === ".")) {
-          stack.push(token)
+      for (let i = 0; i < arr.length; i++) {
+        const item = arr[i]
+        if (item === '..') {
+          stack?.length && stack.pop()
+        } else if (!(item === '.' || item === '')) {
+          stack.push(item)
         }
       }
 
-      let res = "/"
-
-      for (let token of stack) {
-        res += `${token}/`
-      }
-
-      if (res !== "/") {
-        res = res.substr(0, res.length - 1)
-      }
-
-      return res
+      return '/' + stack.join('/')
     }
 
     // 199.二叉树的右视图
