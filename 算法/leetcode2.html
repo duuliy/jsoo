@@ -1423,6 +1423,18 @@
       return _cur
     }
 
+    //上一个算法真挺牛逼，硬写还能通过提测，这次虽然时间更少，但是内存消耗更高了
+    //链表重点还是引用
+    var swapPairs = function (head) {
+      if (head === null || head.next === null) {
+        return head;
+      }
+      const newHead = head.next;
+      head.next = swapPairs(newHead.next);
+      newHead.next = head;
+      return newHead;
+    };
+
     // 129. 求根节点到叶节点数字之和
 
     /**
