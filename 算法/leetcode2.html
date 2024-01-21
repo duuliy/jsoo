@@ -1660,6 +1660,7 @@
           recursion(_nums, res)
           //开过头就删除, 避免同一个数组所加的res除开nums[i]前面的数与_nums有重复
           res.pop()
+          // recursion(_nums,[...res, nums[i]]) //或者直接解构，运行时间更短
         }
       }
 
