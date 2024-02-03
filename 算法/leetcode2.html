@@ -1778,7 +1778,6 @@
         if (res.length === k) {
           results.push(res)
         }
-        const len = arr.length
 
         while (arr.length) {
           const num = arr.shift()
@@ -1786,6 +1785,24 @@
         }
       }
       helper(arr, [])
+      return results
+    }
+
+    var combine = function (n, k) {
+      const results = []
+
+      const helper = (_n, res) => {
+        if (res.length === k) {
+          results.push(res)
+        }
+
+        for (let i = _n; i > 0; i--) {
+          res.push(i)
+          helper(i-1, [...res])
+          res.pop()
+        }
+      }
+      helper(n, [])
       return results
     }
 
