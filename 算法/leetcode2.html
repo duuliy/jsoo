@@ -1798,7 +1798,7 @@
 
         for (let i = _n; i > 0; i--) {
           res.push(i)
-          helper(i-1, [...res])
+          helper(i - 1, [...res])
           res.pop()
         }
       }
@@ -1812,6 +1812,8 @@
    * @param {number[]} nums
    * @return {number[][]}
    */
+
+    //优化
     var subsets = function (nums) {
       let results = []
       let len = nums.length
@@ -1822,18 +1824,30 @@
 
         while (arr.length) {
           const num = arr.shift()
-          // res.push(num)
-          recursion(k, [...arr], [...res, num])
-          // res.pop()
+          recursion(k, arr.slice(), res.concat(num))
         }
       }
 
       for (let i = 0; i <= len; i++) {
-        recursion(i, [...nums], [])
+        recursion(i, nums.slice(), [])
       }
 
       return results
     }
+
+    //时间复杂度优，合并两次循环
+    var subsets = function (nums) {
+      const res = []
+
+      const recursion = (arr, start) => {
+        res.push([...arr])
+        for (let i = start; i < nums.length; i++) {
+          recursion([...arr, nums[i]], i + 1)
+        }
+      }
+      recursion([], 0)
+      return res
+    };
 
     // 90. 子集 II
 
