@@ -1916,6 +1916,23 @@
     //   return results
     // }
 
+    var subsetsWithDup = function (nums) {
+      const res = []
+      nums.sort((a, b) => a - b)
+      const recursion = (arr, start) => {
+        let dp = {}
+        res.push([...arr])
+        for (let i = start; i < nums.length; i++) {
+          if (!dp[nums[i]]) {
+            dp[nums[i]] = 1
+            recursion([...arr, nums[i]], i + 1, dp)
+          }
+        }
+      }
+      recursion([], 0)
+      return res
+    };
+
 
     // 39. 组合总和
 
