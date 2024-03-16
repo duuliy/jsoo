@@ -1992,6 +1992,28 @@
       return results
     }
 
+    var combinationSum2 = function (candidates, target) {
+      let results = []
+
+      candidates.sort()
+      const recursion = (sum, curRes, index) => {
+        if (sum > target) return
+        if (sum === target) return results.push(curRes)
+        let sameArr = []
+
+        for (let i = index; i < candidates.length; i++) {
+          if (sameArr.includes(candidates[i])) continue
+          else {
+            sameArr.push(candidates[i])
+            recursion(sum + candidates[i], [...curRes, candidates[i]], i + 1)
+          }
+        }
+      }
+
+      recursion(0, [], 0)
+      return results
+    };
+
     // 216. 组合总和 III
     /**  回溯与递归
    * @param {number} k
