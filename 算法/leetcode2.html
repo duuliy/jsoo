@@ -2073,6 +2073,35 @@
       return boo
     }
 
+    //新理解
+    var exist = function (board, word) {
+      let boo = false
+      const m = board.length
+      const n = board[0].length
+
+      const dfsCoordinate = (col, row, k) => {
+        if (col < 0 || row < 0 || col >= m || row >= n || board[col][row] !== word[k]) return false
+        if (k === word.length - 1) return boo = true
+        board[col][row] = ''
+        const _k = k + 1
+        dfsCoordinate(col + 1, row, _k)
+        dfsCoordinate(col, row + 1, _k)
+        dfsCoordinate(col - 1, row, _k)
+        dfsCoordinate(col, row - 1, _k)
+        board[col][row] = word[k]
+      }
+
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+          if (board[i][j] === word[0]) {
+            dfsCoordinate(i, j, 0)
+            if (boo) return boo
+          }
+        }
+      }
+      return boo
+    };
+
 
     // 207. 课程表
 
@@ -2102,7 +2131,6 @@
       dfs() {
         const visited = Array(this.noOfVertices).fill(false);
         const vertices = this.adjList.keys();
-        console.log(vertices)
         for (let v of vertices) {
           if (!this.dfsUntil(v, visited)) return false;
         }
