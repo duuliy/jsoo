@@ -48,7 +48,7 @@
 
     //  1.大小写区分
     //  2.重复字母
-    //  不出意外的超时了，遍历次数已经不能减少了，估计跟splice和indexOf有关，但是方法是对的
+    //  不出意外的超时了，遍历次数已经不能减少了，跟splice和indexOf有关，但是方法是对的
     var minWindow = function (s, t) {
       const sl = s.length
       const tl = t.length
@@ -87,7 +87,7 @@
       return result
     }
 
-    //改造,不止考滑动窗口了，还考对数据类型耗能得影响
+    //改造,不止考滑动窗口了，还考对数据类型耗能得影响, 或者改成map
     var minWindow = function (s, t) {
       const sl = s.length
       const tl = t.length
