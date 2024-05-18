@@ -194,8 +194,27 @@
       return res
     }
 
+    //学习=>单调队列(拆成滑动窗口还不行QAQ)
+    var maxSlidingWindow = function (nums, k) {
+      const ans = []
+      const q = []
+      for (let i = 0; i < nums.length; i++) {
+        while (q.length && nums[q[q.length - 1]] <= nums[i]) {
+          q.pop()
+        }
+        q.push(i)
+        if (i - q[0] >= k) {
+          q.shift()
+        }
+        if (i >= k - 1) {
+          ans.push(nums[q[0]])
+        }
+      }
+      return ans
+    }
+
     // 51. N 皇后
- 
+
     /**  回溯与递归
    * @param {number} n
    * @return {string[][]}
@@ -328,9 +347,9 @@
         for (let i = 1; i <= 9; i++) {
           if (!getIsSudoku(row, col, String(i))) continue
           board[row][col] = String(i)
-          if(recursion(row, col + 1)){
+          if (recursion(row, col + 1)) {
             return true  //基于board[row][col] = String(i), 成功数独则返回true
-          } else{
+          } else {
             board[row][col] = '.'  //失败就还原
           }
         }
