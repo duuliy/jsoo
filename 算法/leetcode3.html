@@ -234,7 +234,7 @@
         const difference = row - col
         for (let i = 0; i < row; i++) {
           for (let j = 0; j < n; j++) {
-            if (grid[i][j] === 'Q' && (j == col || i + j === sum || i - j === difference)) {
+            if (grid[i][j] === 'Q' && (j === col || i + j === sum || i - j === difference)) {
               return false
             }
           }
