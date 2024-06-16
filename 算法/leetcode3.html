@@ -270,7 +270,7 @@
    * @return {number}
    */
 
-   //
+    //和I 一样，暴力轮询，关键点在对角线
     var totalNQueens = function (n) {
       let num = 0
       let grid = new Array(n).fill('.').map(v => new Array(n).fill('.'))
@@ -316,6 +316,7 @@
     // 1. 横向不重复
     // 2. 竖向不重复
     // 3. 九宫格内不重复
+    // 4. 根据题意  保证 输入数独仅有一个解,所以不需要回说
 
     var solveSudoku = function (board) {
       let m = board.length
@@ -355,7 +356,6 @@
             board[row][col] = '.'  //失败就还原
           }
         }
-        // return false  //根据题意  保证 输入数独仅有一个解，这里用不着false
       }
 
       recursion(0, 0)
