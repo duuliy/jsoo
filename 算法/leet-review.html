@@ -112,6 +112,9 @@
       return dp[0]
     }
 
+
+    //自上而下需要二维dp
+
     // 1027. 最长等差数列
 
     /**  动规
@@ -156,7 +159,7 @@
     //dp[3] = 1,2,3,4
     //dp[i+1] = dp[i](不要nums[i]) 或 dp[i]+1 (要nums[i])
     //dp[i] = Math.max(dp[i], dp[j] + 1)  dp[j]取内循环中最大值
-    // dp[i] 表示以 nums[i] 这个数结尾的最长递增子序列的长度
+    // dp[i] 表示以 nums[i] 这个数结尾的最长递增子序列的长度 !!! (为什么要这么定义，划重点？目前没找到为什么，问就是子序列系列问题的一个套路公式)
     var lengthOfLIS = function (nums) {
       let len = nums.length
       if (!len) return 0
