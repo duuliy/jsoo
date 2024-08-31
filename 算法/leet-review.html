@@ -145,7 +145,7 @@
 
       return max + 1 //2个差3个数
     }
-    
+
     // 测试暴力双编辑得所有差值数量取最大跟以上dp时间差
 
 
@@ -309,8 +309,8 @@
    * @param {number} target
    * @return {number}
    */
-    
-   //用dp思路还是有点无厘头
+
+    //用dp思路还是有点无厘头
     var findTargetSumWays = function (nums, target) {
       let len = nums.length - 1
       let result = 0
@@ -389,6 +389,25 @@
       }
 
       return result
+    }
+
+    var eraseOverlapIntervals = function (intervals) {
+      if (!intervals.length) {
+        return 0;
+      }
+
+      intervals.sort((a, b) => a[1] - b[1]);
+
+      const n = intervals.length;
+      let right = intervals[0][1];
+      let ans = 1;
+      for (let i = 1; i < n; ++i) {
+        if (intervals[i][0] >= right) {
+          ++ans;
+          right = intervals[i][1];
+        }
+      }
+      return n - ans;
     }
 
     //  392. 判断子序列
