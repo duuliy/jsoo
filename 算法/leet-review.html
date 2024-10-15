@@ -450,7 +450,7 @@
     //   ["a", "b", "bbb", "bbbb"]
     // 这题有点坑，这样是true，wordDict可以只用一部分。
 
-    //超时但正确
+    //超时但正确,等于全匹配，但是有重
     var wordBreak = (s, wordDict) => {
       const len = s.length
       const wordSet = new Set(wordDict);
