@@ -490,33 +490,6 @@
       return !!dp[len]
     }
 
-    // 17.13.恢复空格
-    /**  动规
-   * @param {string[]} dictionary
-   * @param {string} sentence
-   * @return {number}
-   */
-
-    //dp[i] ===> 0-i 有多少个
-    //dp[i]=Math.min(dp[i-1]+1,dp[i-dictionary[j].length])
-    var respace = function (dictionary, sentence) {
-      let slen = sentence.length
-      let dp = [0]
-
-      for (let i = 1; i <= slen; i++) {
-        let min = dp[i - 1] + 1
-        for (let word of dictionary) {
-          if (sentence.substring(i - word.length, i) === word) {
-            min = Math.min(min, dp[i - word.length])
-          }
-        }
-        dp[i] = min
-      }
-
-      return dp[slen]
-    }
-
-
     // 212. 单词搜索 II
     /**  递归和回溯
      * @param {character[][]} board
