@@ -516,7 +516,9 @@
       return dp[amount] === Infinity ? -1 : dp[amount];
     };
 
-    //208. 实现 Trie (前缀树)  实际就是单向链表
+    //208. 实现 Trie (前缀树)  
+    // 也称为字典树，一个节点的所有子孙都有相同的前缀，也就是这个节点对应的字符串。
+    // 常用于单词搜索，减少遍历次数
 
     let TrieNode = function () {
       this.next = {}
