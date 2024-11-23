@@ -497,7 +497,7 @@
      * @return {string[]}
      */
 
-    //暴力。 前缀树可以优化以后看
+    //暴力
     var findWords = function (board, words) {
       const clen = board.length
       const rlen = board[0].length
@@ -538,6 +538,10 @@
 
       return [...results]
     }
+
+    // 初步思路：
+    //优化：前缀树把words装入，回溯board每个字母去前缀树对比，直到isEnd=true，加入res
+    // 此方法主要节约了word中的 “前缀相同字母”的查找时间
 
 
 

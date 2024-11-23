@@ -518,7 +518,7 @@
 
     //208. 实现 Trie (前缀树)  
     // 也称为字典树，一个节点的所有子孙都有相同的前缀，也就是这个节点对应的字符串。
-    // 常用于单词搜索，减少遍历次数
+    // 常用于单词搜索，减少遍历次数,见下面注释例子
 
     let TrieNode = function () {
       this.next = {}
@@ -543,11 +543,12 @@
       for (let i = 0; i < word.length; i++) {
         let { next } = node
         let trieNode = next[word[i]]
+
         if (!trieNode) {
           trieNode = new TrieNode()
           next[[word[i]]] = trieNode
-
         }
+
         node = trieNode
 
         if (i === word.length - 1) {
@@ -596,9 +597,10 @@
 
     // const trie = new Trie()
     // trie.insert("apple")
+    // trie.insert("appcc"); //注意这里要插入两个以上方便理解，否则容易认为 “长得像链表” ！！！
+    // console.log(trie)
     // trie.search("apple")
     // trie.startsWith("app")
-    // console.log(trie)
 
 
     // 152. 乘积最大子数组
