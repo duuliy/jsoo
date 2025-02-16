@@ -542,6 +542,7 @@
 
     //优化：前缀树把words装入，回溯board每个字母去前缀树对比，直到isEnd=true，加入res
     // 此方法主要节约了word中的 “前缀相同字母”的查找时间
+    // 其实转换成map思路也可优化
 
     var findWords = (board, words) => {
 
