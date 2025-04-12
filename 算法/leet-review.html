@@ -602,29 +602,28 @@
    * @return {string[]}
    */
 
-    //超时但正确
     var wordBreak = (s, wordDict) => {
-      let results = [], result = ''
+      const results = []
       const len = s.length
       const wordSet = new Set(wordDict);
 
-      const canBreak = start => {
+      const canBreak = (start, result) => {
         if (start == len) {
           results.push(result.trim())
-          result = ''
+          return
         }
         for (let i = start + 1; i <= len; i++) {
           const prefix = s.slice(start, i);
           const boo = wordSet.has(prefix)
-          boo && (result += prefix + ' ')
-          if (boo && canBreak(i)) {
-            return true
+          if(wordSet.has(prefix)) {
+            result += prefix + ' '
+            canBreak(i, result)
+            result = result.slice(0, -prefix.length - 1)
           }
         }
-        return false
       }
 
-      canBreak(0)
+      canBreak(0,'')
       return results
     }
 
