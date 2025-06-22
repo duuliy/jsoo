@@ -733,6 +733,24 @@
       return virtual.next
     }
 
+    //递归
+    var removeElements = function (head, val) {
+        let ret = new ListNode(0, head)
+        let current = ret
+        const helper = (cur) => {
+          if (!cur) return cur
+          if (cur?.next?.val === val) {
+            cur.next = cur.next.next
+            helper(cur)
+          } else {
+            cur?.next && helper(cur.next)
+          }
+        }
+
+        helper(current)
+        return ret.next
+      }
+
     // 524. 通过删除字母匹配到字典里最长单词
     /** 双指针
      * @param {string} s
