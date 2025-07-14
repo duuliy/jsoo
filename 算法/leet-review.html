@@ -759,12 +759,13 @@
      */
 
     var findLongestWord = function (s, dictionary) {
+      const sLength = s.length
       let result = ''
 
       const isFindWord = str => {
         let sIndex = 0; strIndex = 0;
 
-        while (s[sIndex]) {
+        while (sIndex < sLength) {
           if (s[sIndex] === str[strIndex]) {
             sIndex++
             strIndex++
