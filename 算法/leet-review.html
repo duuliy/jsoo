@@ -800,6 +800,8 @@
    * @param {string[]} words
    * @return {string}
    */
+
+    // 难度不低于hard
     var longestWord = function (words) {
       const wordBreak = (s, wordDict) => {
         let len = s.length
@@ -809,6 +811,7 @@
         dp[0] = true;
         for (let i = 1; i <= len; ++i) {
           for (let j = 0; j < i; ++j) {
+            //当dp[j]里面有wordDict的词典的词时，并且剩余的dp[i]-dp[j](s.substring(j, i))也有词典的词，当dp[len]时，证明符合题意要求值
             if (!!dp[j] && wordSet.has(s.substring(j, i))) {
               dp[i] = true
               break
@@ -818,6 +821,7 @@
         return !!dp[len]
       }
 
+      //大到小排序
       words.sort((a, b) => {
         let diff = b.length - a.length
         if (diff !== 0) {
@@ -830,6 +834,7 @@
         let word = words[i]
         let rest = words.slice(0, i).concat(words.slice(i + 1))
         if (wordBreak(word, rest)) {
+          //因为有上面的排序，所以当最大值符合时则满足题意的答案
           return word
         }
       }
