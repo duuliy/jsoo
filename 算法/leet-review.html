@@ -848,31 +848,6 @@
      * @return {boolean}
      */
 
-    // 不用bfs数据大的让你超时,QAQ
-    var canReach = function (arr, start) {
-      let result = false
-      let maxlen = arr.length
-
-      const helper = (start, visited) => {
-        visited[start] = true
-        const indexVal = arr[start]
-        if (indexVal === 0) {
-          result = true
-          return
-        }
-
-        const addVal = start + indexVal
-        const deleteVal = start - indexVal
-
-        if (addVal < maxlen && !visited[addVal]) helper(addVal, [...visited])
-        if (deleteVal > -1 && !visited[deleteVal]) helper(deleteVal, [...visited])
-        return
-      }
-
-      helper(start, [])
-      return result
-    }
-
     var canReach = function (arr, start) {
       let n = arr.length
       let visited = []
