@@ -735,21 +735,21 @@
 
     //递归
     var removeElements = function (head, val) {
-        let ret = new ListNode(0, head)
-        let current = ret
-        const helper = (cur) => {
-          if (!cur) return cur
-          if (cur?.next?.val === val) {
-            cur.next = cur.next.next
-            helper(cur)
-          } else {
-            cur?.next && helper(cur.next)
-          }
+      let ret = new ListNode(0, head)
+      let current = ret
+      const helper = (cur) => {
+        if (!cur) return cur
+        if (cur?.next?.val === val) {
+          cur.next = cur.next.next
+          helper(cur)
+        } else {
+          cur?.next && helper(cur.next)
         }
-
-        helper(current)
-        return ret.next
       }
+
+      helper(current)
+      return ret.next
+    }
 
     // 524. 通过删除字母匹配到字典里最长单词
     /** 双指针
@@ -849,27 +849,21 @@
      */
 
     var canReach = function (arr, start) {
-      let n = arr.length
-      let visited = []
-      let queue = [start]
-      while (queue.length) {
-        let index = queue.pop()
-        let val = arr[index]
-        if (val === 0) {
-          return true
+      let ans = false
+      const dfs = (i, steps) => {
+        if (arr[i] === 0) {
+          ans = true
         }
-        let left = index - val
-        let right = index + val
-        if (left >= 0 && !visited[left]) {
-          queue.push(left)
+        if (ans || i < 0 || i > arr.length - 1 || steps.has(i)) {
+          return
         }
-        if (right < n && !visited[right]) {
-          queue.push(right)
-        }
-        visited[index] = true
+        steps.add(i)
+        dfs(i + arr[i], steps)
+        dfs(i - arr[i], steps)
       }
-      return false
-    }
+      dfs(start, new Set())
+      return ans
+    };
 
     // 08.08 有重复字符串的排列组合
 
