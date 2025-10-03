@@ -883,7 +883,7 @@
         let visited = {}
         for (let i = 0; i < rest.length; i++) {
           let char = rest[i]
-          if (visited[char]) {
+          if (visited[char]) { //因为下一轮的helper以rest--只取剩余部分，所以这里只需要对本轮重复的进行continue即可
             continue
           }
           visited[char] = true
