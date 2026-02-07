@@ -1170,7 +1170,30 @@
       return result
     }
 
+    // 优化方法：递归 + 记忆化缓存
+    var uniquePaths = function (m, n) {
+      // 创建记忆化缓存
+      const memo = Array(m + 1).fill().map(() => Array(n + 1).fill(-1))
+
+      const helper = (i, j) => {
+        if (i === m && j === n) return 1
+        if (i > m || j > n) return 0
+        
+        // 如果缓存中有值，直接返回
+        if (memo[i][j] !== -1) return memo[i][j]
+        
+        const right = helper(i, j + 1)
+        const down = helper(i + 1, j)
+        memo[i][j] = right + down    // 计算路径数：向右走的路径数 + 向下走的路径数
+        
+        return memo[i][j]
+      }
+
+      return helper(1, 1)
+    }
+
     //画图： dp[m][n]=dp[i - 1][j] + dp[i][j - 1];
+    // 到达(m,n)的路径数 = 到达上方(m-1,n)的路径数 + 到达左方(m,n-1)的路径数, 第一性原理规律
     var uniquePaths = function (m, n) {
       const dp = new Array(m).fill(0).map(() => new Array(n).fill(0));
       for (let i = 0; i < m; i++) {
