@@ -1273,6 +1273,7 @@
    * @return {number}
    */
 
+    //到达位置 (i, j) 的最小路径和 = 当前位置的值 + 从上一行能到达当前位置的三个候选位置中的 最小值
     //dp[i][j] = matrix[i][j] + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i - 1][j + 1])
     var minFallingPathSum = function (matrix) {
       const col = matrix.length
