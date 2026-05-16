@@ -1306,6 +1306,7 @@
    */
 
     //比用数组存位置和标记-1效率更高
+    //因为题目要求原地算法，所以引入zeroCol/zeroRow数组来记录是否需要置零
     var setZeroes = function (matrix) {
       const col = matrix.length
       const row = matrix[0].length
