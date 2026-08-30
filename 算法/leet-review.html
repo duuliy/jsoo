@@ -1340,7 +1340,6 @@
    * @return {number[]}
    */
 
-    // 很经典
     //1.保存游过的所有位置。 2.上下左右找出空位·3.固定右下左上的顺序
     var spiralOrder = function (matrix) {
       let directIndex = 0
@@ -1374,6 +1373,29 @@
       }
 
       helper(0, 0)
+      return result
+    }
+
+    //优化版：按层模拟（迭代），无需标记矩阵，空间 O(1)
+    var spiralOrderOptimized = function (matrix) {
+      if (!matrix.length || !matrix[0].length) return []
+      const result = []
+      let top = 0, bottom = matrix.length - 1
+      let left = 0, right = matrix[0].length - 1
+      while (top <= bottom && left <= right) {
+        for (let j = left; j <= right; j++) result.push(matrix[top][j])
+        top++
+        for (let i = top; i <= bottom; i++) result.push(matrix[i][right])
+        right--
+        if (top <= bottom) {
+          for (let j = right; j >= left; j--) result.push(matrix[bottom][j])
+          bottom--
+        }
+        if (left <= right) {
+          for (let i = bottom; i >= top; i--) result.push(matrix[i][left])
+          left++
+        }
+      }
       return result
     }
 
