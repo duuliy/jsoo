@@ -1377,7 +1377,7 @@
     }
 
     //优化版：按层模拟（迭代），无需标记矩阵，空间 O(1)
-    var spiralOrderOptimized = function (matrix) {
+    var spiralOrder2 = function (matrix) {
       if (!matrix.length || !matrix[0].length) return []
       const result = []
       let top = 0, bottom = matrix.length - 1
@@ -1406,11 +1406,10 @@
    * @return {number[][]}
    */
     var generateMatrix = function (n) {
-      let directIndex = 0
-      let count = 0
       const total = n * n
       const matrix = new Array(n).fill(0).map(v => new Array(n).fill(0))
       const isBoundary = (i, j) => !(i < 0 || i >= n || j < 0 || j >= n) && !matrix[i][j]
+      let directIndex = 0
       const direct = [
         [0, 1],
         [1, 0],
@@ -1418,25 +1417,29 @@
         [-1, 0]
       ]
 
-      const helper = (i, j, num) => {
-        matrix[i][j] = num
-
-        if (num === total) return
+      const helper = (i, j, v) => {
+        matrix[i][j] = v
+        if (v >= total) return
         const _i = i + direct[directIndex][0]
         const _j = j + direct[directIndex][1]
+
         if (!isBoundary(_i, _j)) {
           directIndex === 3 ? (directIndex = 0) : directIndex += 1
+          i = i + direct[directIndex][0]
+          j = j + direct[directIndex][1]
+
+          helper(i, j, v += 1)
+        } else {
+          helper(_i, _j, v += 1)
         }
-        i = i + direct[directIndex][0]
-        j = j + direct[directIndex][1]
-        helper(i, j, num += 1)
       }
 
       helper(0, 0, 1)
-      return matrix
-    }
 
-    // 16. 最接近的三数之和
+      return matrix
+    };
+
+   // 16. 最接近的三数之和
     /** 
    * @param {number[]} nums
    * @param {number} target
